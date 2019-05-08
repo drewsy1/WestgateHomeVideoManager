@@ -1,0 +1,104 @@
+﻿@model WestgateHomeVideoManager.Models.Clip
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Clip</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ClipNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClipNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClipTimeStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClipTimeStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClipTimeEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClipTimeEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClipVidTimeStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClipVidTimeStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClipVidTimeEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClipVidTimeEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClipVidTimeLength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClipVidTimeLength)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClipReviewer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClipReviewer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CameraOperator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CameraOperator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Chapter.ChapterLength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chapter.ChapterLength)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

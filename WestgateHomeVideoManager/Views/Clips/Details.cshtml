@@ -1,0 +1,98 @@
+﻿@model WestgateHomeVideoManager.Models.Clip
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Clip</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ClipNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClipNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClipTimeStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClipTimeStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClipTimeEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClipTimeEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClipVidTimeStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClipVidTimeStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClipVidTimeEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClipVidTimeEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClipVidTimeLength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClipVidTimeLength)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClipReviewer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClipReviewer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CameraOperator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CameraOperator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Chapter.ChapterLength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chapter.ChapterLength)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ClipID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

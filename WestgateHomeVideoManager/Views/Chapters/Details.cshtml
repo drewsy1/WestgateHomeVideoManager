@@ -1,0 +1,42 @@
+﻿@model WestgateHomeVideoManager.Models.Chapter
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Chapter</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ChapterNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChapterNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChapterLength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChapterLength)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Source.SourceLabel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Source.SourceLabel)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ChapterID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

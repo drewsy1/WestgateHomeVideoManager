@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -126,9 +134,41 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ChaptersController.cs" />
+    <Compile Include="Controllers\ClipsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Chapter.cs">
+      <DependentUpon>HomeVideoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Clip.cs">
+      <DependentUpon>HomeVideoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HomeVideoDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomeVideoDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HomeVideoDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomeVideoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HomeVideoDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomeVideoDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Source.cs">
+      <DependentUpon>HomeVideoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TagsCollection.cs">
+      <DependentUpon>HomeVideoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TagsPeople.cs">
+      <DependentUpon>HomeVideoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -141,8 +181,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\HomeVideoDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HomeVideoDB.edmx</DependentUpon>
+      <LastGenOutput>HomeVideoDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\HomeVideoDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HomeVideoDB.edmx</DependentUpon>
+      <LastGenOutput>HomeVideoDB.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\HomeVideoDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HomeVideoDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\HomeVideoDB.edmx.diagram">
+      <DependentUpon>HomeVideoDB.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -155,7 +212,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -169,10 +228,19 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Clips\Create.cshtml" />
+    <Content Include="Views\Clips\Delete.cshtml" />
+    <Content Include="Views\Clips\Details.cshtml" />
+    <Content Include="Views\Clips\Edit.cshtml" />
+    <Content Include="Views\Clips\Index.cshtml" />
+    <Content Include="Views\Chapters\Create.cshtml" />
+    <Content Include="Views\Chapters\Delete.cshtml" />
+    <Content Include="Views\Chapters\Details.cshtml" />
+    <Content Include="Views\Chapters\Edit.cshtml" />
+    <Content Include="Views\Chapters\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -186,6 +254,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
