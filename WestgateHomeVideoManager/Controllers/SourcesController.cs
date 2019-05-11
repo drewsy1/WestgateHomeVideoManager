@@ -9,117 +9,109 @@ using System.Web.Mvc;
 using WestgateHomeVideoManager.Models;
 using EntityState = System.Data.Entity.EntityState;
 
-namespace WestgateHomeVideoManager.Controllers
+namespace WestgateHomeVideoManager.Views
 {
-    public class ChaptersController : Controller
+    public class SourcesController : Controller
     {
         private HomeVideoDBEntities db = new HomeVideoDBEntities();
 
-        // GET: Chapters
+        // GET: Sources
         public ActionResult Index()
         {
-            var chapters = db.Chapters.Include(c => c.Source);
-            return View(chapters.ToList());
+            return View(db.Sources.ToList());
         }
 
-        // GET: Chapters/Details/5
+        // GET: Sources/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Chapter chapter = db.Chapters.Find(id);
-            if (chapter == null)
+            Source source = db.Sources.Find(id);
+            if (source == null)
             {
                 return HttpNotFound();
             }
-
-            SelectList chapterClipsList = new SelectList(chapter.Clips, "ClipID", "ClipID");
-            ViewBag.ChapterClips = chapterClipsList;
-            return View(chapter);
+            return View(source);
         }
 
-        // GET: Chapters/Create
+        // GET: Sources/Create
         public ActionResult Create()
         {
-            ViewBag.SourceID = new SelectList(db.Sources, "SourceID", "SourceLabel");
             return View();
         }
 
-        // POST: Chapters/Create
+        // POST: Sources/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ChapterID,ChapterNumber,SourceID,ChapterLength")] Chapter chapter)
+        public ActionResult Create([Bind(Include = "SourceID,SourceLabel,SourceDateBurned,SourceDateRipped")] Source source)
         {
             if (ModelState.IsValid)
             {
-                db.Chapters.Add(chapter);
+                db.Sources.Add(source);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.SourceID = new SelectList(db.Sources, "SourceID", "SourceLabel", chapter.SourceID);
-            return View(chapter);
+            return View(source);
         }
 
-        // GET: Chapters/Edit/5
+        // GET: Sources/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Chapter chapter = db.Chapters.Find(id);
-            if (chapter == null)
+            Source source = db.Sources.Find(id);
+            if (source == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.SourceID = new SelectList(db.Sources, "SourceID", "SourceLabel", chapter.SourceID);
-            return View(chapter);
+            return View(source);
         }
 
-        // POST: Chapters/Edit/5
+        // POST: Sources/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ChapterID,ChapterNumber,SourceID,ChapterLength")] Chapter chapter)
+        public ActionResult Edit([Bind(Include = "SourceID,SourceLabel,SourceDateBurned,SourceDateRipped")] Source source)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(chapter).State = EntityState.Modified;
+                db.Entry(source).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.SourceID = new SelectList(db.Sources, "SourceID", "SourceLabel", chapter.SourceID);
-            return View(chapter);
+            return View(source);
         }
 
-        // GET: Chapters/Delete/5
+        // GET: Sources/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Chapter chapter = db.Chapters.Find(id);
-            if (chapter == null)
+            Source source = db.Sources.Find(id);
+            if (source == null)
             {
                 return HttpNotFound();
             }
-            return View(chapter);
+            return View(source);
         }
 
-        // POST: Chapters/Delete/5
+        // POST: Sources/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Chapter chapter = db.Chapters.Find(id);
-            db.Chapters.Remove(chapter);
+            Source source = db.Sources.Find(id);
+            db.Sources.Remove(source);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

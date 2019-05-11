@@ -12,17 +12,16 @@ namespace WestgateHomeVideoManager.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Clip
+    public partial class DVD_Chapter_Clip
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Clip()
-        {
-            this.TagsCollections = new HashSet<TagsCollection>();
-            this.TagsPeoples = new HashSet<TagsPeople>();
-        }
-    
+        public int SourceID { get; set; }
+        public string SourceLabel { get; set; }
+        public Nullable<System.DateTime> SourceDateBurned { get; set; }
+        public Nullable<System.DateTime> SourceDateRipped { get; set; }
+        public int ChapterID { get; set; }
+        public Nullable<int> ChapterNumber { get; set; }
+        public string ChapterLength { get; set; }
         public int ClipID { get; set; }
-        public Nullable<int> ChapterID { get; set; }
         public Nullable<int> ClipNumber { get; set; }
         public Nullable<System.DateTime> ClipTimeStart { get; set; }
         public Nullable<System.DateTime> ClipTimeEnd { get; set; }
@@ -32,14 +31,5 @@ namespace WestgateHomeVideoManager.Models
         public string ClipReviewer { get; set; }
         public string CameraOperator { get; set; }
         public string Description { get; set; }
-        public ICollection<TagsPeople> TagsPeoplesAll { get; set; }
-        public int[] SelectedTagsPeople { get; set; }
-
-        public virtual Chapter Chapter { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TagsCollection> TagsCollections { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TagsPeople> TagsPeoples { get; set; }
-        
     }
 }

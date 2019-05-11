@@ -1,4 +1,6 @@
-﻿@model WestgateHomeVideoManager.Models.Clip
+﻿@using MvcCheckBoxList.Model
+@using WestgateHomeVideoManager.Models
+@model WestgateHomeVideoManager.Models.Clip
 
 @{
     ViewBag.Title = "Details";
@@ -88,6 +90,19 @@
 
         <dd>
             @Html.DisplayFor(model => model.Chapter.ChapterLength)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.TagsPeoples)
+        </dt>
+        <dd>
+
+            @Html.CheckBoxListFor(model => model.SelectedTagsPeople,
+                model => model.TagsPeoplesAll,
+                x => x.PeopleID,
+                x => x.PeopleName,
+                model => model.TagsPeoples,
+                new HtmlListInfo(HtmlTag.table, 3))
         </dd>
 
     </dl>

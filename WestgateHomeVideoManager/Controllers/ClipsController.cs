@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WebGrease.Css.Extensions;
 using WestgateHomeVideoManager.Models;
+using EntityState = System.Data.Entity.EntityState;
 
 namespace WestgateHomeVideoManager.Controllers
 {
@@ -33,6 +35,31 @@ namespace WestgateHomeVideoManager.Controllers
             {
                 return HttpNotFound();
             }
+
+            clip.TagsPeoplesAll = db.TagsPeoples.ToArray();
+            clip.SelectedTagsPeople = clip.TagsPeoples.Select(x => x.PeopleID).ToArray();
+
+            //SelectList selectedPeopleTags = new SelectList(clip.TagsPeoples, "PeopleID","PeopleName");
+            //SelectList availablePeopleTags = new SelectList(unselectedTagsPeoples, "PeopleID", "PeopleName");
+
+            //List<PersonTag> peopleTags = new List<PersonTag>();
+
+            //db.TagsPeoples.ForEach(person =>
+            //{
+            //    peopleTags.Add(
+            //        new PersonTag()
+            //        {
+            //            PersonId = person.PeopleID,
+            //            PersonName = person.PeopleName,
+            //            PersonObject = person,
+            //            Checked = clip.TagsPeoples.Contains(person)
+            //        }
+            //    );
+            //});
+
+            //ViewBag.selectedPeopleTags = selectedPeopleTags;
+            //ViewBag.availablePeopleTags = availablePeopleTags;
+
             return View(clip);
         }
 

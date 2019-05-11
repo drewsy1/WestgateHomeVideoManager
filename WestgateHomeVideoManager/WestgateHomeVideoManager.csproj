@@ -52,8 +52,12 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcCheckBoxList, Version=1.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcCheckBoxList.1.4.5\lib\net45\MvcCheckBoxList.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -146,6 +150,15 @@
     <Compile Include="Models\Clip.cs">
       <DependentUpon>HomeVideoDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Clip_Collections.cs">
+      <DependentUpon>HomeVideoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Clip_People.cs">
+      <DependentUpon>HomeVideoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DVD_Chapter_Clip.cs">
+      <DependentUpon>HomeVideoDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HomeVideoDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -161,6 +174,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HomeVideoDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\PersonTag.cs" />
     <Compile Include="Models\Source.cs">
       <DependentUpon>HomeVideoDB.tt</DependentUpon>
     </Compile>
@@ -171,6 +185,7 @@
       <DependentUpon>HomeVideoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controllers\SourcesController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -238,6 +253,12 @@
     <Content Include="Views\Chapters\Details.cshtml" />
     <Content Include="Views\Chapters\Edit.cshtml" />
     <Content Include="Views\Chapters\Index.cshtml" />
+    <Content Include="Views\Sources\Create.cshtml" />
+    <Content Include="Views\Sources\Delete.cshtml" />
+    <Content Include="Views\Sources\Details.cshtml" />
+    <Content Include="Views\Sources\Edit.cshtml" />
+    <Content Include="Views\Sources\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Clip.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

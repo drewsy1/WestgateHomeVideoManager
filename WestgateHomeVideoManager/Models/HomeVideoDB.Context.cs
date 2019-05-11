@@ -30,5 +30,8 @@ namespace WestgateHomeVideoManager.Models
         public virtual DbSet<Source> Sources { get; set; }
         public virtual DbSet<TagsCollection> TagsCollections { get; set; }
         public virtual DbSet<TagsPeople> TagsPeoples { get; set; }
+        public virtual DbSet<Clip_Collections> Clip_Collections { get; set; }
+        public virtual DbSet<Clip_People> Clip_People { get; set; }
+        public virtual DbSet<DVD_Chapter_Clip> DVD_Chapter_Clip { get; set; }
     }
 }

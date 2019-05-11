@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HomeVideoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HomeVideoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Chapter">
           <Key>
             <PropertyRef Name="ChapterID" />
@@ -72,6 +72,68 @@ warning 6002: The table/view 'HomeVideoDB.dbo.Clip_TagsPeople' does not have a p
           </Key>
           <Property Name="PeopleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PeopleName" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HomeVideoDB.dbo.Clip_Collections' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Clip_Collections">
+          <Key>
+            <PropertyRef Name="SourceID" />
+            <PropertyRef Name="ChapterID" />
+            <PropertyRef Name="ClipID" />
+            <PropertyRef Name="CollectionsID" />
+          </Key>
+          <Property Name="SourceID" Type="int" Nullable="false" />
+          <Property Name="SourceLabel" Type="nvarchar" MaxLength="20" />
+          <Property Name="ChapterID" Type="int" Nullable="false" />
+          <Property Name="ChapterNumber" Type="int" />
+          <Property Name="ClipID" Type="int" Nullable="false" />
+          <Property Name="ClipNumber" Type="int" />
+          <Property Name="CollectionsID" Type="int" Nullable="false" />
+          <Property Name="CollectionsText" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HomeVideoDB.dbo.Clip_People' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Clip_People">
+          <Key>
+            <PropertyRef Name="SourceID" />
+            <PropertyRef Name="ChapterID" />
+            <PropertyRef Name="ClipID" />
+            <PropertyRef Name="PeopleID" />
+          </Key>
+          <Property Name="SourceID" Type="int" Nullable="false" />
+          <Property Name="SourceLabel" Type="nvarchar" MaxLength="20" />
+          <Property Name="ChapterID" Type="int" Nullable="false" />
+          <Property Name="ChapterNumber" Type="int" />
+          <Property Name="ClipID" Type="int" Nullable="false" />
+          <Property Name="ClipNumber" Type="int" />
+          <Property Name="PeopleID" Type="int" Nullable="false" />
+          <Property Name="PeopleName" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HomeVideoDB.dbo.DVD_Chapter_Clip' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DVD_Chapter_Clip">
+          <Key>
+            <PropertyRef Name="SourceID" />
+            <PropertyRef Name="ChapterID" />
+            <PropertyRef Name="ClipID" />
+          </Key>
+          <Property Name="SourceID" Type="int" Nullable="false" />
+          <Property Name="SourceLabel" Type="nvarchar" MaxLength="20" />
+          <Property Name="SourceDateBurned" Type="datetime" />
+          <Property Name="SourceDateRipped" Type="datetime" />
+          <Property Name="ChapterID" Type="int" Nullable="false" />
+          <Property Name="ChapterNumber" Type="int" />
+          <Property Name="ChapterLength" Type="nchar" MaxLength="12" />
+          <Property Name="ClipID" Type="int" Nullable="false" />
+          <Property Name="ClipNumber" Type="int" />
+          <Property Name="ClipTimeStart" Type="datetime" />
+          <Property Name="ClipTimeEnd" Type="datetime" />
+          <Property Name="ClipVidTimeStart" Type="nchar" MaxLength="12" />
+          <Property Name="ClipVidTimeEnd" Type="nchar" MaxLength="12" />
+          <Property Name="ClipVidTimeLength" Type="nchar" MaxLength="12" />
+          <Property Name="ClipReviewer" Type="nchar" MaxLength="30" />
+          <Property Name="CameraOperator" Type="nchar" MaxLength="30" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <Association Name="FK_Chapter_DVD">
           <End Role="Source" Type="Self.Source" Multiplicity="0..1" />
@@ -163,6 +225,51 @@ warning 6002: The table/view 'HomeVideoDB.dbo.Clip_TagsPeople' does not have a p
     [Clip_TagsPeople].[PeopleID] AS [PeopleID]
     FROM [dbo].[Clip_TagsPeople] AS [Clip_TagsPeople]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="Clip_Collections" EntityType="Self.Clip_Collections" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Clip_Collections].[SourceID] AS [SourceID], 
+    [Clip_Collections].[SourceLabel] AS [SourceLabel], 
+    [Clip_Collections].[ChapterID] AS [ChapterID], 
+    [Clip_Collections].[ChapterNumber] AS [ChapterNumber], 
+    [Clip_Collections].[ClipID] AS [ClipID], 
+    [Clip_Collections].[ClipNumber] AS [ClipNumber], 
+    [Clip_Collections].[CollectionsID] AS [CollectionsID], 
+    [Clip_Collections].[CollectionsText] AS [CollectionsText]
+    FROM [dbo].[Clip_Collections] AS [Clip_Collections]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Clip_People" EntityType="Self.Clip_People" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Clip_People].[SourceID] AS [SourceID], 
+    [Clip_People].[SourceLabel] AS [SourceLabel], 
+    [Clip_People].[ChapterID] AS [ChapterID], 
+    [Clip_People].[ChapterNumber] AS [ChapterNumber], 
+    [Clip_People].[ClipID] AS [ClipID], 
+    [Clip_People].[ClipNumber] AS [ClipNumber], 
+    [Clip_People].[PeopleID] AS [PeopleID], 
+    [Clip_People].[PeopleName] AS [PeopleName]
+    FROM [dbo].[Clip_People] AS [Clip_People]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DVD_Chapter_Clip" EntityType="Self.DVD_Chapter_Clip" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DVD_Chapter_Clip].[SourceID] AS [SourceID], 
+    [DVD_Chapter_Clip].[SourceLabel] AS [SourceLabel], 
+    [DVD_Chapter_Clip].[SourceDateBurned] AS [SourceDateBurned], 
+    [DVD_Chapter_Clip].[SourceDateRipped] AS [SourceDateRipped], 
+    [DVD_Chapter_Clip].[ChapterID] AS [ChapterID], 
+    [DVD_Chapter_Clip].[ChapterNumber] AS [ChapterNumber], 
+    [DVD_Chapter_Clip].[ChapterLength] AS [ChapterLength], 
+    [DVD_Chapter_Clip].[ClipID] AS [ClipID], 
+    [DVD_Chapter_Clip].[ClipNumber] AS [ClipNumber], 
+    [DVD_Chapter_Clip].[ClipTimeStart] AS [ClipTimeStart], 
+    [DVD_Chapter_Clip].[ClipTimeEnd] AS [ClipTimeEnd], 
+    [DVD_Chapter_Clip].[ClipVidTimeStart] AS [ClipVidTimeStart], 
+    [DVD_Chapter_Clip].[ClipVidTimeEnd] AS [ClipVidTimeEnd], 
+    [DVD_Chapter_Clip].[ClipVidTimeLength] AS [ClipVidTimeLength], 
+    [DVD_Chapter_Clip].[ClipReviewer] AS [ClipReviewer], 
+    [DVD_Chapter_Clip].[CameraOperator] AS [CameraOperator], 
+    [DVD_Chapter_Clip].[Description] AS [Description]
+    FROM [dbo].[DVD_Chapter_Clip] AS [DVD_Chapter_Clip]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Chapter_DVD" Association="Self.FK_Chapter_DVD">
             <End Role="Source" EntitySet="Source" />
             <End Role="Chapter" EntitySet="Chapter" />
@@ -188,8 +295,7 @@ warning 6002: The table/view 'HomeVideoDB.dbo.Clip_TagsPeople' does not have a p
             <End Role="Clip_TagsPeople" EntitySet="Clip_TagsPeople" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HomeVideoDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -303,7 +409,66 @@ warning 6002: The table/view 'HomeVideoDB.dbo.Clip_TagsPeople' does not have a p
             <End Role="Clip" EntitySet="Clips" />
             <End Role="TagsPeople" EntitySet="TagsPeoples" />
           </AssociationSet>
+          <EntitySet Name="Clip_Collections" EntityType="HomeVideoDBModel.Clip_Collections" />
+          <EntitySet Name="Clip_People" EntityType="HomeVideoDBModel.Clip_People" />
+          <EntitySet Name="DVD_Chapter_Clip" EntityType="HomeVideoDBModel.DVD_Chapter_Clip" />
         </EntityContainer>
+        <EntityType Name="Clip_Collections">
+          <Key>
+            <PropertyRef Name="SourceID" />
+            <PropertyRef Name="ChapterID" />
+            <PropertyRef Name="ClipID" />
+            <PropertyRef Name="CollectionsID" />
+          </Key>
+          <Property Name="SourceID" Type="Int32" Nullable="false" />
+          <Property Name="SourceLabel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ChapterID" Type="Int32" Nullable="false" />
+          <Property Name="ChapterNumber" Type="Int32" />
+          <Property Name="ClipID" Type="Int32" Nullable="false" />
+          <Property Name="ClipNumber" Type="Int32" />
+          <Property Name="CollectionsID" Type="Int32" Nullable="false" />
+          <Property Name="CollectionsText" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Clip_People">
+          <Key>
+            <PropertyRef Name="SourceID" />
+            <PropertyRef Name="ChapterID" />
+            <PropertyRef Name="ClipID" />
+            <PropertyRef Name="PeopleID" />
+          </Key>
+          <Property Name="SourceID" Type="Int32" Nullable="false" />
+          <Property Name="SourceLabel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ChapterID" Type="Int32" Nullable="false" />
+          <Property Name="ChapterNumber" Type="Int32" />
+          <Property Name="ClipID" Type="Int32" Nullable="false" />
+          <Property Name="ClipNumber" Type="Int32" />
+          <Property Name="PeopleID" Type="Int32" Nullable="false" />
+          <Property Name="PeopleName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DVD_Chapter_Clip">
+          <Key>
+            <PropertyRef Name="SourceID" />
+            <PropertyRef Name="ChapterID" />
+            <PropertyRef Name="ClipID" />
+          </Key>
+          <Property Name="SourceID" Type="Int32" Nullable="false" />
+          <Property Name="SourceLabel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SourceDateBurned" Type="DateTime" Precision="3" />
+          <Property Name="SourceDateRipped" Type="DateTime" Precision="3" />
+          <Property Name="ChapterID" Type="Int32" Nullable="false" />
+          <Property Name="ChapterNumber" Type="Int32" />
+          <Property Name="ChapterLength" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="ClipID" Type="Int32" Nullable="false" />
+          <Property Name="ClipNumber" Type="Int32" />
+          <Property Name="ClipTimeStart" Type="DateTime" Precision="3" />
+          <Property Name="ClipTimeEnd" Type="DateTime" Precision="3" />
+          <Property Name="ClipVidTimeStart" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="ClipVidTimeEnd" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="ClipVidTimeLength" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="ClipReviewer" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="CameraOperator" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -379,6 +544,57 @@ warning 6002: The table/view 'HomeVideoDB.dbo.Clip_TagsPeople' does not have a p
               <ScalarProperty Name="PeopleID" ColumnName="PeopleID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Clip_Collections">
+            <EntityTypeMapping TypeName="HomeVideoDBModel.Clip_Collections">
+              <MappingFragment StoreEntitySet="Clip_Collections">
+                <ScalarProperty Name="CollectionsText" ColumnName="CollectionsText" />
+                <ScalarProperty Name="CollectionsID" ColumnName="CollectionsID" />
+                <ScalarProperty Name="ClipNumber" ColumnName="ClipNumber" />
+                <ScalarProperty Name="ClipID" ColumnName="ClipID" />
+                <ScalarProperty Name="ChapterNumber" ColumnName="ChapterNumber" />
+                <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+                <ScalarProperty Name="SourceLabel" ColumnName="SourceLabel" />
+                <ScalarProperty Name="SourceID" ColumnName="SourceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clip_People">
+            <EntityTypeMapping TypeName="HomeVideoDBModel.Clip_People">
+              <MappingFragment StoreEntitySet="Clip_People">
+                <ScalarProperty Name="PeopleName" ColumnName="PeopleName" />
+                <ScalarProperty Name="PeopleID" ColumnName="PeopleID" />
+                <ScalarProperty Name="ClipNumber" ColumnName="ClipNumber" />
+                <ScalarProperty Name="ClipID" ColumnName="ClipID" />
+                <ScalarProperty Name="ChapterNumber" ColumnName="ChapterNumber" />
+                <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+                <ScalarProperty Name="SourceLabel" ColumnName="SourceLabel" />
+                <ScalarProperty Name="SourceID" ColumnName="SourceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DVD_Chapter_Clip">
+            <EntityTypeMapping TypeName="HomeVideoDBModel.DVD_Chapter_Clip">
+              <MappingFragment StoreEntitySet="DVD_Chapter_Clip">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CameraOperator" ColumnName="CameraOperator" />
+                <ScalarProperty Name="ClipReviewer" ColumnName="ClipReviewer" />
+                <ScalarProperty Name="ClipVidTimeLength" ColumnName="ClipVidTimeLength" />
+                <ScalarProperty Name="ClipVidTimeEnd" ColumnName="ClipVidTimeEnd" />
+                <ScalarProperty Name="ClipVidTimeStart" ColumnName="ClipVidTimeStart" />
+                <ScalarProperty Name="ClipTimeEnd" ColumnName="ClipTimeEnd" />
+                <ScalarProperty Name="ClipTimeStart" ColumnName="ClipTimeStart" />
+                <ScalarProperty Name="ClipNumber" ColumnName="ClipNumber" />
+                <ScalarProperty Name="ClipID" ColumnName="ClipID" />
+                <ScalarProperty Name="ChapterLength" ColumnName="ChapterLength" />
+                <ScalarProperty Name="ChapterNumber" ColumnName="ChapterNumber" />
+                <ScalarProperty Name="ChapterID" ColumnName="ChapterID" />
+                <ScalarProperty Name="SourceDateRipped" ColumnName="SourceDateRipped" />
+                <ScalarProperty Name="SourceDateBurned" ColumnName="SourceDateBurned" />
+                <ScalarProperty Name="SourceLabel" ColumnName="SourceLabel" />
+                <ScalarProperty Name="SourceID" ColumnName="SourceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
