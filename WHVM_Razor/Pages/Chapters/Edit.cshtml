@@ -1,0 +1,45 @@
+﻿@page
+@model WHVM_Razor.Pages.Chapters.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Chapter</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Chapter.ChapterId" />
+            <div class="form-group">
+                <label asp-for="Chapter.ChapterNumber" class="control-label"></label>
+                <input asp-for="Chapter.ChapterNumber" class="form-control" />
+                <span asp-validation-for="Chapter.ChapterNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Chapter.SourceId" class="control-label"></label>
+                <select asp-for="Chapter.SourceId" class="form-control" asp-items="ViewBag.SourceId"></select>
+                <span asp-validation-for="Chapter.SourceId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Chapter.ChapterLength" class="control-label"></label>
+                <input asp-for="Chapter.ChapterLength" class="form-control" />
+                <span asp-validation-for="Chapter.ChapterLength" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
