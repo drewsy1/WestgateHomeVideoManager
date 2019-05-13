@@ -21,18 +21,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="Source.SourceDateBurned" class="control-label"></label>
-                <div class="input-group date" id="datetimepickerSourceDateBurned" data-target-input="nearest">
-                    <input type="text" asp-for="Source.SourceDateBurned" class="form-control datetimepicker-input" data-target="#datetimepickerSourceDateBurned" />
-                    <div class="input-group-append" data-target="#datetimepickerSourceDateBurned" data-toggle="datetimepicker">
+                <div class="input-group date" id="dateTimePicker_SourceDateBurned" data-target-input="nearest">
+                    <input type="text" asp-for="Source.SourceDateBurned" class="form-control datetimepicker-input" data-target="#dateTimePicker_SourceDateBurned" />
+                    <div class="input-group-append" data-target="#dateTimePicker_SourceDateBurned" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fas fa-calendar"></i></div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label asp-for="Source.SourceDateRipped" class="control-label"></label>
-                <div class="input-group date" id="datetimepickerSourceDateRipped" data-target-input="nearest">
-                    <input type="text" asp-for="Source.SourceDateRipped" class="form-control datetimepicker-input" data-target="#datetimepickerSourceDateRipped" />
-                    <div class="input-group-append" data-target="#datetimepickerSourceDateRipped" data-toggle="datetimepicker">
+                <div class="input-group date" id="dateTimePicker_SourceDateRipped" data-target-input="nearest">
+                    <input type="text" asp-for="Source.SourceDateRipped" class="form-control datetimepicker-input" data-target="#dateTimePicker_SourceDateRipped" />
+                    <div class="input-group-append" data-target="#dateTimePicker_SourceDateRipped" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fas fa-calendar"></i></div>
                     </div>
                 </div>
@@ -40,12 +40,6 @@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
-            <script type="text/javascript">
-                $(function() {
-                    $('#datetimepickerSourceDateBurned').datetimepicker({ format: 'h:mm:ss A' });
-                    //$('#datetimepickerSourceDateRipped').datetimepicker();
-                });
-            </script>
         </form>
     </div>
     
