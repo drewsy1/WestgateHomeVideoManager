@@ -21,21 +21,35 @@
             </div>
             <div class="form-group">
                 <label asp-for="Source.SourceDateBurned" class="control-label"></label>
-                <input asp-for="Source.SourceDateBurned" class="form-control" />
-                <span asp-validation-for="Source.SourceDateBurned" class="text-danger"></span>
+                <div class="input-group date" id="datetimepickerSourceDateBurned" data-target-input="nearest">
+                    <input type="text" asp-for="Source.SourceDateBurned" class="form-control datetimepicker-input" data-target="#datetimepickerSourceDateBurned" />
+                    <div class="input-group-append" data-target="#datetimepickerSourceDateBurned" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="Source.SourceDateRipped" class="control-label"></label>
-                <input asp-for="Source.SourceDateRipped" class="form-control" />
-                <span asp-validation-for="Source.SourceDateRipped" class="text-danger"></span>
+                <div class="input-group date" id="datetimepickerSourceDateRipped" data-target-input="nearest">
+                    <input type="text" asp-for="Source.SourceDateRipped" class="form-control datetimepicker-input" data-target="#datetimepickerSourceDateRipped" />
+                    <div class="input-group-append" data-target="#datetimepickerSourceDateRipped" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
+            <script type="text/javascript">
+                $(function() {
+                    $('#datetimepickerSourceDateBurned').datetimepicker({ format: 'h:mm:ss A' });
+                    //$('#datetimepickerSourceDateRipped').datetimepicker();
+                });
+            </script>
         </form>
     </div>
+    
 </div>
-
 <div>
     <a asp-page="./Index">Back to List</a>
 </div>
