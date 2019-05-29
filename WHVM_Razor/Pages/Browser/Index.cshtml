@@ -1,0 +1,48 @@
+﻿@page
+@model WHVM_Razor.Pages.Browser.IndexModel
+
+@{
+    ViewData["Title"] = "Browser";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Source[0].SourceLabel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Source[0].SourceDateBurned)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Source[0].SourceDateRipped)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Source) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SourceLabel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SourceDateBurned)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SourceDateRipped)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.SourceId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.SourceId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.SourceId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

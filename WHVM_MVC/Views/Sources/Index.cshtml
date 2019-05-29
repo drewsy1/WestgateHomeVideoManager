@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WHVM_MVC.Models.Source>
+
+@{
+    ViewData["Title"] = "Index";
+    List<SourceFormat> SourceFormats = ViewBag.SourceFormats;
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="accordion" id="accordianSources">
+    <div class="card">
+        <div class="card-header" id="table-Header">
+            <div class="row">
+                <div class="col-1">
+                    <h4>ID</h4>
+                </div>
+                <div class="col-6">
+                    <h4>Label</h4>
+                </div>
+                <div class="col-6"></div>
+            </div>
+        </div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="card">
+            <div class="card-header" id="Source@(item.SourceId)-Header">
+                <div class="row">
+                    <div class="col-1">
+                        <a class="text-left" data-toggle="collapse" href="#" data-target="#Source@(item.SourceId)-Collapse" aria-expanded="false" aria-controls="Source@(item.SourceId)-Collapse">
+                            @(item.SourceId)
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a class="text-left" data-toggle="collapse" href="#" data-target="#Source@(item.SourceId)-Collapse" aria-expanded="false" aria-controls="Source@(item.SourceId)-Collapse">
+                            @(item.SourceLabel)
+                        </a>
+                    </div>
+                    <div class="col-1">
+                        <a class="text-left" data-toggle="collapse" href="#" data-target="#Source@(item.SourceId)-Collapse" aria-expanded="false" aria-controls="Source@(item.SourceId)-Collapse">
+
+                            @(
+                                SourceFormats.First(c => c.SourceFormatId == item.SourceFormatId).SourceFormatText
+                            )
+                        </a>
+                    </div>
+                    <div class="col-6"></div>
+                </div>
+            </div>
+
+            <div id="Source@(item.SourceId)-Collapse" class="collapse" aria-labelledby="Source@(item.SourceId)-Header" data-parent="#accordianSources">
+                <div class="card-body">
+                    @await Html.PartialAsync("_EditNested", item)
+                </div>
+            </div>
+        </div>
+    }
+</div>
