@@ -22,8 +22,8 @@ namespace WHVM_MVC.Models
         public virtual DbSet<TagsCollections> TagsCollections { get; set; }
         public virtual DbSet<TagsPeople> TagsPeople { get; set; }
 
-        // Unable to generate entity type for table 'dbo.Clip_TagsCollections'. Please see the warning messages.
         // Unable to generate entity type for table 'dbo.Clip_TagsPeople'. Please see the warning messages.
+        // Unable to generate entity type for table 'dbo.Clip_TagsCollections'. Please see the warning messages.
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -60,7 +60,9 @@ namespace WHVM_MVC.Models
                     .HasName("UQ_Clip_ChapterID_ClipNumber")
                     .IsUnique();
 
-                entity.Property(e => e.ClipId).HasColumnName("ClipID");
+                entity.Property(e => e.ClipId)
+                    .HasColumnName("ClipID")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.CameraOperator).HasMaxLength(30);
 
@@ -96,7 +98,9 @@ namespace WHVM_MVC.Models
                     .HasName("UQ_Source_SourceLabel")
                     .IsUnique();
 
-                entity.Property(e => e.SourceId).HasColumnName("SourceID");
+                entity.Property(e => e.SourceId)
+                    .HasColumnName("SourceID")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.SourceDateBurned).HasColumnType("datetime");
 
@@ -107,6 +111,11 @@ namespace WHVM_MVC.Models
                 entity.Property(e => e.SourceFormatId).HasColumnName("SourceFormatID");
 
                 entity.Property(e => e.SourceLabel).HasMaxLength(30);
+
+                entity.HasOne(d => d.SourceFormat)
+                    .WithMany(p => p.Source)
+                    .HasForeignKey(d => d.SourceFormatId)
+                    .HasConstraintName("FK_Source_SourceFormat");
             });
 
             modelBuilder.Entity<SourceFormat>(entity =>
@@ -114,6 +123,8 @@ namespace WHVM_MVC.Models
                 entity.Property(e => e.SourceFormatId)
                     .HasColumnName("SourceFormatID")
                     .ValueGeneratedNever();
+
+                entity.Property(e => e.SourceFormatLogoPath).HasMaxLength(30);
 
                 entity.Property(e => e.SourceFormatText).HasMaxLength(10);
             });
