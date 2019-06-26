@@ -15,5 +15,6 @@ namespace WHVM_MVC.Models
         public string SourceFormatLogoPath { get; set; }
 
         public virtual ICollection<Source> Source { get; set; }
+        public static List<SourceFormat> AllFormats;
     }
 }

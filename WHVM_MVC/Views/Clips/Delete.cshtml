@@ -66,10 +66,16 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Chapter)
+            @Html.DisplayNameFor(model => model.ClipFilePath)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Chapter.ChapterId)
+            @Html.DisplayFor(model => model.ClipFilePath)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Source)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Source.SourceId)
         </dd>
     </dl>
     

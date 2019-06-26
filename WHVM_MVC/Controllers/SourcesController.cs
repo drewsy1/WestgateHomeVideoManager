@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WHVM_MVC.Models;
 
@@ -10,20 +12,18 @@ namespace WHVM_MVC.Controllers
     public class SourcesController : Controller
     {
         private readonly HomeVideoDBContext _context;
-        private List<SourceFormat> _sourceFormats;
 
         public SourcesController(HomeVideoDBContext context)
         {
             _context = context;
+            SourceFormat.AllFormats = _context.SourceFormat.ToList();
         }
 
         // GET: Sources
         public async Task<IActionResult> Index()
         {
-            var homeVideoDbContext = _context.Source.Include(c => c.Chapter);
-            _sourceFormats = _context.SourceFormat.ToList();
-            ViewBag.SourceFormats = _sourceFormats;
-            return View(await homeVideoDbContext.ToListAsync());
+            var homeVideoDBContext = _context.Source.Include(s => s.SourceFormat);
+            return View(await homeVideoDBContext.ToListAsync());
         }
 
         // GET: Sources/Details/5
@@ -35,6 +35,7 @@ namespace WHVM_MVC.Controllers
             }
 
             var source = await _context.Source
+                .Include(s => s.SourceFormat)
                 .FirstOrDefaultAsync(m => m.SourceId == id);
             if (source == null)
             {
@@ -47,6 +48,7 @@ namespace WHVM_MVC.Controllers
         // GET: Sources/Create
         public IActionResult Create()
         {
+            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormat, "SourceFormatId", "SourceFormatId");
             return View();
         }
 
@@ -55,7 +57,7 @@ namespace WHVM_MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SourceId,SourceLabel,SourceDateBurned,SourceDateRipped,SourceFormatId")] Source source)
+        public async Task<IActionResult> Create([Bind("SourceId,SourceLabel,SourceDateBurned,SourceDateRipped,SourceFormatId,SourceFilePath")] Source source)
         {
             if (ModelState.IsValid)
             {
@@ -63,55 +65,8 @@ namespace WHVM_MVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormat, "SourceFormatId", "SourceFormatId", source.SourceFormatId);
             return View(source);
-        }
-
-        // GET: Sources/_EditNested/5
-        public async Task<IActionResult> _EditNested(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            
-
-            var source = await _context.Source.FindAsync(id);
-            if (source == null)
-            {
-                return NotFound();
-            }
-            return RedirectToAction(nameof(Index));
-        }
-
-        // POST: Sources/_EditNested/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> _EditNested(int id, [Bind("SourceId,SourceLabel,SourceDateBurned,SourceDateRipped,SourceFormatId")] Source source)
-        {
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(source);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!SourceExists(source.SourceId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return RedirectToAction(nameof(Index));
         }
 
         // GET: Sources/Edit/5
@@ -127,6 +82,7 @@ namespace WHVM_MVC.Controllers
             {
                 return NotFound();
             }
+            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormat, "SourceFormatId", "SourceFormatId", source.SourceFormatId);
             return View(source);
         }
 
@@ -135,7 +91,7 @@ namespace WHVM_MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SourceId,SourceLabel,SourceDateBurned,SourceDateRipped,SourceFormatId")] Source source)
+        public async Task<IActionResult> Edit(int id, [Bind("SourceId,SourceLabel,SourceDateBurned,SourceDateRipped,SourceFormatId,SourceFilePath")] Source source)
         {
             if (id != source.SourceId)
             {
@@ -162,6 +118,7 @@ namespace WHVM_MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormat, "SourceFormatId", "SourceFormatId", source.SourceFormatId);
             return View(source);
         }
 
@@ -174,6 +131,7 @@ namespace WHVM_MVC.Controllers
             }
 
             var source = await _context.Source
+                .Include(s => s.SourceFormat)
                 .FirstOrDefaultAsync(m => m.SourceId == id);
             if (source == null)
             {

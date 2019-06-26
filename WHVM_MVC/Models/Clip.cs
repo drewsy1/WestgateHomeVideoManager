@@ -6,7 +6,7 @@ namespace WHVM_MVC.Models
     public partial class Clip
     {
         public int ClipId { get; set; }
-        public int? ChapterId { get; set; }
+        public int? SourceId { get; set; }
         public int? ClipNumber { get; set; }
         public DateTime? ClipTimeStart { get; set; }
         public DateTime? ClipTimeEnd { get; set; }
@@ -18,6 +18,6 @@ namespace WHVM_MVC.Models
         public string Description { get; set; }
         public string ClipFilePath { get; set; }
 
-        public virtual Chapter Chapter { get; set; }
+        public virtual Source Source { get; set; }
     }
 }

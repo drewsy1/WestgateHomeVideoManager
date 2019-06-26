@@ -40,7 +40,10 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Chapter)
+                @Html.DisplayNameFor(model => model.ClipFilePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Source)
             </th>
             <th></th>
         </tr>
@@ -76,7 +79,10 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Chapter.ChapterId)
+                @Html.DisplayFor(modelItem => item.ClipFilePath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Source.SourceId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ClipId">Edit</a> |

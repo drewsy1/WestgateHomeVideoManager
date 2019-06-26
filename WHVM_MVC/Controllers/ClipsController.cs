@@ -21,7 +21,7 @@ namespace WHVM_MVC.Controllers
         // GET: Clips
         public async Task<IActionResult> Index()
         {
-            var homeVideoDBContext = _context.Clip.Include(c => c.Chapter);
+            var homeVideoDBContext = _context.Clip.Include(c => c.Source);
             return View(await homeVideoDBContext.ToListAsync());
         }
 
@@ -34,7 +34,7 @@ namespace WHVM_MVC.Controllers
             }
 
             var clip = await _context.Clip
-                .Include(c => c.Chapter)
+                .Include(c => c.Source)
                 .FirstOrDefaultAsync(m => m.ClipId == id);
             if (clip == null)
             {
@@ -47,7 +47,7 @@ namespace WHVM_MVC.Controllers
         // GET: Clips/Create
         public IActionResult Create()
         {
-            ViewData["ChapterId"] = new SelectList(_context.Chapter, "ChapterId", "ChapterId");
+            ViewData["SourceId"] = new SelectList(_context.Source, "SourceId", "SourceId");
             return View();
         }
 
@@ -56,7 +56,7 @@ namespace WHVM_MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClipId,ChapterId,ClipNumber,ClipTimeStart,ClipTimeEnd,ClipVidTimeStart,ClipVidTimeEnd,ClipVidTimeLength,ClipReviewer,CameraOperator,Description")] Clip clip)
+        public async Task<IActionResult> Create([Bind("ClipId,SourceId,ClipNumber,ClipTimeStart,ClipTimeEnd,ClipVidTimeStart,ClipVidTimeEnd,ClipVidTimeLength,ClipReviewer,CameraOperator,Description,ClipFilePath")] Clip clip)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace WHVM_MVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ChapterId"] = new SelectList(_context.Chapter, "ChapterId", "ChapterId", clip.ChapterId);
+            ViewData["SourceId"] = new SelectList(_context.Source, "SourceId", "SourceId", clip.SourceId);
             return View(clip);
         }
 
@@ -81,7 +81,7 @@ namespace WHVM_MVC.Controllers
             {
                 return NotFound();
             }
-            ViewData["ChapterId"] = new SelectList(_context.Chapter, "ChapterId", "ChapterId", clip.ChapterId);
+            ViewData["SourceId"] = new SelectList(_context.Source, "SourceId", "SourceId", clip.SourceId);
             return View(clip);
         }
 
@@ -90,7 +90,7 @@ namespace WHVM_MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClipId,ChapterId,ClipNumber,ClipTimeStart,ClipTimeEnd,ClipVidTimeStart,ClipVidTimeEnd,ClipVidTimeLength,ClipReviewer,CameraOperator,Description")] Clip clip)
+        public async Task<IActionResult> Edit(int id, [Bind("ClipId,SourceId,ClipNumber,ClipTimeStart,ClipTimeEnd,ClipVidTimeStart,ClipVidTimeEnd,ClipVidTimeLength,ClipReviewer,CameraOperator,Description,ClipFilePath")] Clip clip)
         {
             if (id != clip.ClipId)
             {
@@ -117,7 +117,7 @@ namespace WHVM_MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ChapterId"] = new SelectList(_context.Chapter, "ChapterId", "ChapterId", clip.ChapterId);
+            ViewData["SourceId"] = new SelectList(_context.Source, "SourceId", "SourceId", clip.SourceId);
             return View(clip);
         }
 
@@ -130,7 +130,7 @@ namespace WHVM_MVC.Controllers
             }
 
             var clip = await _context.Clip
-                .Include(c => c.Chapter)
+                .Include(c => c.Source)
                 .FirstOrDefaultAsync(m => m.ClipId == id);
             if (clip == null)
             {

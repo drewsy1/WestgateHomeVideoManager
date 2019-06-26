@@ -15,7 +15,6 @@ namespace WHVM_MVC.Models
         {
         }
 
-        public virtual DbSet<Chapter> Chapter { get; set; }
         public virtual DbSet<Clip> Clip { get; set; }
         public virtual DbSet<Source> Source { get; set; }
         public virtual DbSet<SourceFormat> SourceFormat { get; set; }
@@ -34,43 +33,17 @@ namespace WHVM_MVC.Models
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
-            modelBuilder.Entity<Chapter>(entity =>
-            {
-                entity.HasIndex(e => new { e.SourceId, e.ChapterNumber })
-                    .HasName("UQ_Chapter_SourceID_ChapterNumber")
-                    .IsUnique();
-
-                entity.Property(e => e.ChapterId).HasColumnName("ChapterID");
-
-                entity.Property(e => e.ChapterFilePath).HasMaxLength(300);
-
-                entity.Property(e => e.ChapterLength).HasColumnType("time(3)");
-
-                entity.Property(e => e.SourceId).HasColumnName("SourceID");
-
-                entity.HasOne(d => d.Source)
-                    .WithMany(p => p.Chapter)
-                    .HasForeignKey(d => d.SourceId)
-                    .HasConstraintName("FK_Chapter_Source");
-            });
-
             modelBuilder.Entity<Clip>(entity =>
             {
-                entity.HasIndex(e => new { e.ChapterId, e.ClipNumber })
-                    .HasName("UQ_Clip_ChapterID_ClipNumber")
-                    .IsUnique();
-
                 entity.Property(e => e.ClipId)
                     .HasColumnName("ClipID")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.CameraOperator).HasMaxLength(30);
-
-                entity.Property(e => e.ChapterId).HasColumnName("ChapterID");
+                entity.Property(e => e.CameraOperator).HasMaxLength(50);
 
                 entity.Property(e => e.ClipFilePath).HasMaxLength(300);
 
-                entity.Property(e => e.ClipReviewer).HasMaxLength(30);
+                entity.Property(e => e.ClipReviewer).HasMaxLength(50);
 
                 entity.Property(e => e.ClipTimeEnd).HasColumnType("datetime");
 
@@ -86,10 +59,12 @@ namespace WHVM_MVC.Models
 
                 entity.Property(e => e.Description).HasMaxLength(250);
 
-                entity.HasOne(d => d.Chapter)
+                entity.Property(e => e.SourceId).HasColumnName("SourceID");
+
+                entity.HasOne(d => d.Source)
                     .WithMany(p => p.Clip)
-                    .HasForeignKey(d => d.ChapterId)
-                    .HasConstraintName("FK_Clip_Chapter");
+                    .HasForeignKey(d => d.SourceId)
+                    .HasConstraintName("FK_Clip_Source");
             });
 
             modelBuilder.Entity<Source>(entity =>
