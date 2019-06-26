@@ -1,23 +1,21 @@
 ﻿@model IEnumerable<WHVM_MVC.Models.Source>
 
 @{
-    ViewData["Title"] = "Index";
+    Layout = "_ModelLayout";
 }
 
-<h1>Index</h1>
-
-<p>
+<div>
     <a asp-action="Create">Create New</a>
-</p>
+</div>
 <table id="dtSources" class="table table-striped" data-order='[[0, "asc"]]' width="100%">
     <thead>
-    <tr>
-        <th style="width: 4%" scope="col">#</th>
-        <th style="width: 5%" scope="col"></th>
-        <th scope="col">Label</th>
-        <th style="width: 13%" scope="col">Date Burned</th>
-        <th style="width: 13%" scope="col">Date Ripped</th>
-    </tr>
+        <tr>
+            <th style="width: 4%" scope="col">#</th>
+            <th style="width: 5%" scope="col"></th>
+            <th scope="col">Label</th>
+            <th style="width: 13%" scope="col">Date Burned</th>
+            <th style="width: 13%" scope="col">Date Ripped</th>
+        </tr>
     </thead>
     <tbody>
     @foreach (var item in Model)
