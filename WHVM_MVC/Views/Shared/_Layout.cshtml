@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WHVM_MVC</title>
+    <title>@(ViewContext.RouteData.Values["controller"].ToString()) - @(ViewContext.RouteData.Values["action"].ToString()) - WHVM_MVC</title>
 
     <environment include="Development">
         <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.css" />
