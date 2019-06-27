@@ -6,27 +6,28 @@
 
 <div>
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.SourceLabel)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SourceLabel)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.SourceDateBurned)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SourceDateBurned)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.SourceDateRipped)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SourceDateRipped)
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.SourceId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+@section ActionButtons
+    {
+    <a asp-action="Edit" asp-route-id="@Model.SourceId" class="btn btn-primary" title="Edit" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+    <button onclick="goBack()" class="btn btn-secondary" title="Cancel" data-toggle="tooltip"><i class="fas fa-times"></i></button>
+}

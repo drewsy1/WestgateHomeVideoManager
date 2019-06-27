@@ -3,19 +3,24 @@
 }
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col">
-            <h1>@(ViewContext.RouteData.Values["controller"].ToString())</h1>
-            
+    <div class="card">
+        <div class="card-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h4 style="margin: 0">@(ViewContext.RouteData.Values["controller"].ToString())</h4>
+                </div>
+                <div class="col-auto"><div class="btn btn-primary invisible">_</div></div>
+                <div class="col-auto">
+                    @if (IsSectionDefined("ActionButtons"))
+                    {
+                        @RenderSection("ActionButtons")
+                    }
+
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <h4>@(ViewContext.RouteData.Values["action"].ToString())</h4>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
+        <div class="card-body">
+            <!--<h5 class="card-title">@(ViewContext.RouteData.Values["action"].ToString())</h5>-->
             @RenderBody()
         </div>
     </div>

@@ -4,7 +4,7 @@
     Layout = "_ModelLayout";
 }
 
-<form asp-action="Create">
+<form id="CreateSource" asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="SourceId" />
     <div class="form-group">
@@ -44,14 +44,13 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-    </div>
 </form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@section ActionButtons
+{
+    <button type="submit" value="Save" form="CreateSource" class="btn btn-primary" title="Save" data-toggle="tooltip"><i class="fas fa-save"></i></button>
+    <button onclick="goBack()" class="btn btn-danger" title="Cancel" data-toggle="tooltip"><i class="fas fa-times"></i></button>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

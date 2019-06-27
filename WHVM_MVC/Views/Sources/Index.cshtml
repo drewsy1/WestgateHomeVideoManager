@@ -4,18 +4,15 @@
     Layout = "_ModelLayout";
 }
 
-<div>
-    <a asp-action="Create">Create New</a>
-</div>
 <table id="dtSources" class="table table-striped" data-order='[[0, "asc"]]' width="100%">
     <thead>
-        <tr>
-            <th style="width: 4%" scope="col">#</th>
-            <th style="width: 5%" scope="col"></th>
-            <th scope="col">Label</th>
-            <th style="width: 13%" scope="col">Date Burned</th>
-            <th style="width: 13%" scope="col">Date Ripped</th>
-        </tr>
+    <tr>
+        <th style="width: 4%" scope="col">#</th>
+        <th style="width: 5%" scope="col"></th>
+        <th scope="col">Label</th>
+        <th style="width: 14%" scope="col">Date Burned</th>
+        <th style="width: 14%" scope="col">Date Ripped</th>
+    </tr>
     </thead>
     <tbody>
     @foreach (var item in Model)
@@ -29,7 +26,7 @@
                     <img src="@(currentSourceFormat.SourceFormatLogoPath)" class="img-fluid" data-toggle="tooltip" style="max-height: 1rem" title="@(currentSourceFormat.SourceFormatText)" alt="@(currentSourceFormat.SourceFormatText)" />
                 </div>
             </td>
-            <td><a asp-action="Edit" asp-route-id="@item.SourceId">@Html.DisplayFor(modelItem => item.SourceLabel)</a></td>
+            <td><a asp-action="Details" asp-route-id="@item.SourceId">@Html.DisplayFor(modelItem => item.SourceLabel)</a></td>
 
             <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateBurned)).ToString("F"))">@(((DateTime)(item.SourceDateBurned)).ToString("d"))</div></td>
             <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateRipped)).ToString("F"))">@(((DateTime)(item.SourceDateRipped)).ToString("d"))</div></td>
@@ -38,12 +35,20 @@
     </tbody>
 </table>
 
+@section ActionButtons
+{
+    <a asp-action="Create" class="btn btn-primary" title="New" data-toggle="tooltip"><i class="fas fa-plus"></i></a>
+}
+
 @section Scripts
 {
     <script>
-        $(document).ready(function () {
-            $('#dtSources').DataTable();
+        var table;
+        $(document).ready(function() {
+            table = $('#dtSources').DataTable();
+
         });
-        $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
+
+        
     </script>
 }
