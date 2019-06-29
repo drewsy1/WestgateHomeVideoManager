@@ -1,54 +1,79 @@
-﻿@model IEnumerable<WHVM_MVC.Models.Source>
+﻿@using Microsoft.AspNetCore.Routing
+@model IEnumerable<WHVM_MVC.Models.Source>
 
 @{
     Layout = "_ModelLayout";
 }
 
+<div class="modal fade" id="sourcesModal" tabindex="-1" role="dialog" aria-labelledby="sourcesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <table id="dtSources" class="table table-striped" data-order='[[0, "asc"]]' width="100%">
     <thead>
-    <tr>
-        <th style="width: 4%" scope="col">#</th>
-        <th style="width: 5%" scope="col"></th>
-        <th scope="col">Label</th>
-        <th style="width: 14%" scope="col">Date Burned</th>
-        <th style="width: 14%" scope="col">Date Ripped</th>
-    </tr>
+        <tr>
+            <th style="width: 5%" scope="col">#</th>
+            <th scope="col">Label</th>
+            <th style="width: 16%" scope="col">Date Burned</th>
+            <th style="width: 16%" scope="col">Date Ripped</th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
-    {
-        SourceFormat currentSourceFormat = SourceFormat.AllFormats.First(c => c.SourceFormatId == item.SourceFormatId);
+        @foreach (var item in Model)
+        {
+            SourceFormat currentSourceFormat = SourceFormat.AllFormats.First(c => c.SourceFormatId == item.SourceFormatId);
 
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.SourceId)</td>
-            <td>
-                <div>
-                    <img src="@(currentSourceFormat.SourceFormatLogoPath)" class="img-fluid" data-toggle="tooltip" style="max-height: 1rem" title="@(currentSourceFormat.SourceFormatText)" alt="@(currentSourceFormat.SourceFormatText)" />
-                </div>
-            </td>
-            <td><a asp-action="Details" asp-route-id="@item.SourceId">@Html.DisplayFor(modelItem => item.SourceLabel)</a></td>
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.SourceId)</td>
+                <td><span class="badge badge-secondary">@currentSourceFormat.SourceFormatText</span> <a href="#" id="sourcesModalBtn" data-target="#sourcesModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("DetailsModalActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id",@item.SourceId}})')">@Html.DisplayFor(modelItem => item.SourceLabel)</a></td>
 
-            <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateBurned)).ToString("F"))">@(((DateTime)(item.SourceDateBurned)).ToString("d"))</div></td>
-            <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateRipped)).ToString("F"))">@(((DateTime)(item.SourceDateRipped)).ToString("d"))</div></td>
-        </tr>
-    }
+                <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateBurned)).ToString("F"))">@(((DateTime)(item.SourceDateBurned)).ToString("d"))</div></td>
+                <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateRipped)).ToString("F"))">@(((DateTime)(item.SourceDateRipped)).ToString("d"))</div></td>
+            </tr>
+        }
+
     </tbody>
 </table>
 
 @section ActionButtons
-{
+    {
     <a asp-action="Create" class="btn btn-primary" title="New" data-toggle="tooltip"><i class="fas fa-plus"></i></a>
 }
 
 @section Scripts
-{
+    {
     <script>
         var table;
-        $(document).ready(function() {
+        $(document).ready(function () {
             table = $('#dtSources').DataTable();
-
         });
+    </script>
+    <script type="text/javascript">
+        var detailViewID;
+        function SetDetailViewID(id) {
+            detailViewID = id;
+        }
 
-        
+        $('#pageCardBody').on('shown.bs.modal',
+            '.modal',
+            function (e) {
+                $('#sourcesModal .modal-content')
+                    .load(detailViewID);
+            });
+
+        $('#pageCardBody').on('hidden.bs.modal',
+            '.modal',
+            function (e) {
+                $('#sourcesModal .modal-content')
+                    .empty();
+            });
     </script>
 }

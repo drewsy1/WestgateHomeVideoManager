@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +44,35 @@ namespace WHVM_MVC.Controllers
             }
 
             return View(source);
+        }
+
+        public IActionResult DetailsModalActionResult(int? id)
+        {
+            ViewBag.modelId = id;
+
+            Source CurrentSource = _context.Source.FirstOrDefault(m => m.SourceId == id);
+
+            ViewBag.modelSourceFormat = SourceFormat.AllFormats.FirstOrDefault(c => c.SourceFormatId == CurrentSource.SourceFormatId);
+
+            string[] modalTitleParts =
+            {
+                "<div class=\"badge badge-secondary\">",
+                (string) ViewBag.modelSourceFormat.SourceFormatText,
+                "</div > ",
+                CurrentSource.SourceLabel
+            };
+
+            ViewBag.modalTitle = new HtmlString(string.Join("", modalTitleParts));
+
+            ViewBag.modelDataDictionary = new Dictionary<string, object>
+            {
+                {"ID", id },
+                {"Label", CurrentSource.SourceLabel},
+                {"Date Burned", CurrentSource.SourceDateBurned},
+                {"Date Ripped", CurrentSource.SourceDateRipped},
+                {"Format", ViewBag.modelSourceFormat.SourceFormatText}
+            };
+            return PartialView("_DetailsModal", _context.Source.FirstOrDefault(m => m.SourceId == id));
         }
 
         // GET: Sources/Create
