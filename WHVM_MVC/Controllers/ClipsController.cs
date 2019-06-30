@@ -21,8 +21,8 @@ namespace WHVM_MVC.Controllers
         // GET: Clips
         public async Task<IActionResult> Index()
         {
-            var homeVideoDBContext = _context.Clip.Include(c => c.Source);
-            return View(await homeVideoDBContext.ToListAsync());
+            var homeVideoDbContext = _context.Clip;
+            return View(await homeVideoDbContext.ToListAsync());
         }
 
         // GET: Clips/Details/5

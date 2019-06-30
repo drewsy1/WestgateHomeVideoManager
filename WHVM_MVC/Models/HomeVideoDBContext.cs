@@ -26,7 +26,7 @@ namespace WHVM_MVC.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+            optionsBuilder.UseLazyLoadingProxies();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -35,9 +35,7 @@ namespace WHVM_MVC.Models
 
             modelBuilder.Entity<Clip>(entity =>
             {
-                entity.Property(e => e.ClipId)
-                    .HasColumnName("ClipID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.ClipId).HasColumnName("ClipID");
 
                 entity.Property(e => e.CameraOperator).HasMaxLength(50);
 
@@ -62,20 +60,14 @@ namespace WHVM_MVC.Models
                 entity.Property(e => e.SourceId).HasColumnName("SourceID");
 
                 entity.HasOne(d => d.Source)
-                    .WithMany(p => p.Clip)
+                    .WithMany(p => p.Clips)
                     .HasForeignKey(d => d.SourceId)
                     .HasConstraintName("FK_Clip_Source");
             });
 
             modelBuilder.Entity<Source>(entity =>
             {
-                entity.HasIndex(e => e.SourceLabel)
-                    .HasName("UQ_Source_SourceLabel")
-                    .IsUnique();
-
-                entity.Property(e => e.SourceId)
-                    .HasColumnName("SourceID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.SourceId).HasColumnName("SourceID");
 
                 entity.Property(e => e.SourceDateBurned).HasColumnType("datetime");
 

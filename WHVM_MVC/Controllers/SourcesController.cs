@@ -23,8 +23,8 @@ namespace WHVM_MVC.Controllers
         // GET: Sources
         public async Task<IActionResult> Index()
         {
-            var homeVideoDBContext = _context.Source.Include(s => s.SourceFormat);
-            return View(await homeVideoDBContext.ToListAsync());
+            var homeVideoDbContext = _context.Source;
+            return View(await homeVideoDbContext.ToListAsync());
         }
 
         // GET: Sources/Details/5
@@ -36,7 +36,6 @@ namespace WHVM_MVC.Controllers
             }
 
             var source = await _context.Source
-                .Include(s => s.SourceFormat)
                 .FirstOrDefaultAsync(m => m.SourceId == id);
             if (source == null)
             {

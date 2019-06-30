@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WHVM_MVC.Models
 {
@@ -7,9 +8,10 @@ namespace WHVM_MVC.Models
     {
         public Source()
         {
-            Clip = new HashSet<Clip>();
+            Clips = new HashSet<Clip>();
         }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SourceId { get; set; }
         public string SourceLabel { get; set; }
         public DateTime? SourceDateBurned { get; set; }
@@ -18,6 +20,6 @@ namespace WHVM_MVC.Models
         public string SourceFilePath { get; set; }
 
         public virtual SourceFormat SourceFormat { get; set; }
-        public virtual ICollection<Clip> Clip { get; set; }
+        public virtual ICollection<Clip> Clips { get; set; }
     }
 }
