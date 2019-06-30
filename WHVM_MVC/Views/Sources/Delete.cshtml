@@ -26,9 +26,18 @@
         </dd>
     </dl>
     
+    <h1><b>Are you <i>sure</i> that you want to delete @(Model.SourceLabel)?</b></h1>
+    <p class="lead">This cannot be reversed.</p>
+    
     <form asp-action="Delete">
+        
         <input type="hidden" asp-for="SourceId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a class="btn btn-secondary" asp-action="Index">Back to List</a>
     </form>
+
+    @section ActionButtons
+    {
+        <button onclick="goBack()" class="btn btn-secondary" title="Cancel" data-toggle="tooltip"><i class="fas fa-times"></i></button>
+    }
 </div>
