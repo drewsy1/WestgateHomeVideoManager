@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -64,7 +62,6 @@ namespace WHVM_MVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SourceId"] = new SelectList(_context.Source, "SourceId", "SourceId", clip.SourceId);
             return View(clip);
         }
 
@@ -81,7 +78,6 @@ namespace WHVM_MVC.Controllers
             {
                 return NotFound();
             }
-            ViewData["SourceId"] = new SelectList(_context.Source, "SourceId", "SourceId", clip.SourceId);
             return View(clip);
         }
 
@@ -117,7 +113,6 @@ namespace WHVM_MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SourceId"] = new SelectList(_context.Source, "SourceId", "SourceId", clip.SourceId);
             return View(clip);
         }
 
