@@ -1,12 +1,14 @@
 ﻿@using System.Net
 @using Microsoft.AspNetCore.Html
-
-<div class="modal-header d-flex align-items-center">
+@using Microsoft.AspNetCore.Routing
+<div class="modal-content">
+<div id=#sourcesModalNested class="modal-header d-flex align-items-center">
     <div class="p-0"></div>
     <div class="p-0"><h4 class="modal-title">@ViewBag.modalTitle</h4></div>
     <div class="p-0 ml-auto">
         <a asp-action="Edit" asp-route-id="@ViewBag.modelId" class="btn btn-primary" title="Edit" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-        <a asp-action="Delete" asp-route-id="@ViewBag.modelId" class="btn btn-danger" title="Delete" data-toggle="tooltip"><i class="fas fa-trash"></i></a>
+        <a asp-action="Delete" id="deleteModalBtn" asp-route-id="@ViewBag.modelId" class="btn btn-danger" title="Delete" data-toggle="tooltip"><i class="fas fa-trash"></i></a>
+        <a href="#" class="btn btn-danger" id="deleteModalBtnNested" data-target="#deleteModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("DeleteModalActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id",@Model.SourceId}})')" title="Delete" data-toggle="tooltip"><i class="fas fa-trash"></i></a>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close" title="Close" data-toggle="tooltip">
             <i class="fas fa-times"></i>
         </button>
@@ -26,5 +28,5 @@
             </dl>
         }
     }
-
+</div>
 </div>

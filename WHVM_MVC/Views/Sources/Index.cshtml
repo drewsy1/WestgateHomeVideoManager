@@ -5,8 +5,17 @@
     Layout = "_ModelLayout";
 }
 
+<style>
+    .modal:nth-of-type(even) {
+        z-index: 1052 !important;
+    }
+    .modal-backdrop:nth-of-type(odd) {
+        z-index: 1051 !important;
+    }
+</style>
+
 <div class="modal fade" id="sourcesModal" tabindex="-1" role="dialog" aria-labelledby="sourcesModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="progress">
@@ -17,13 +26,29 @@
     </div>
 </div>
 
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <table id="dtSources" class="table table-striped" data-order='[[0, "asc"]]' width="100%">
     <thead>
         <tr>
             <th style="width: 5%" scope="col">#</th>
             <th scope="col">Label</th>
-            <th style="width: 16%" scope="col">Date Burned</th>
-            <th style="width: 16%" scope="col">Date Ripped</th>
+            <th style="width: 10%" scope="col">Clips</th>
+            <th style="width: 13%" scope="col">Date Burned</th>
+            <th style="width: 13%" scope="col">Date Ripped</th>
+            <th style="width: 8%" scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -31,13 +56,17 @@
         {
             SourceFormat currentSourceFormat = SourceFormat.AllFormats.First(c => c.SourceFormatId == item.SourceFormatId);
 
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.SourceId)</td>
-                <td><span class="badge badge-secondary">@currentSourceFormat.SourceFormatText</span> <a href="#" id="sourcesModalBtn" data-target="#sourcesModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("DetailsModalActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id",@item.SourceId}})')">@Html.DisplayFor(modelItem => item.SourceLabel)</a></td>
-
-                <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateBurned)).ToString("F"))">@(((DateTime)(item.SourceDateBurned)).ToString("d"))</div></td>
-                <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateRipped)).ToString("F"))">@(((DateTime)(item.SourceDateRipped)).ToString("d"))</div></td>
-            </tr>
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.SourceId)</td>
+            <td><span class="badge badge-secondary">@currentSourceFormat.SourceFormatText</span> <a href="#" id="sourcesModalBtn" data-target="#sourcesModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("DetailsModalActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id",@item.SourceId}})')">@Html.DisplayFor(modelItem => item.SourceLabel)</a></td>
+            <td>@(Html.DisplayFor(modelItem => item.Clips.Count))</td>
+            <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateBurned)).ToString("F"))">@(((DateTime)(item.SourceDateBurned)).ToString("d"))</div></td>
+            <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateRipped)).ToString("F"))">@(((DateTime)(item.SourceDateRipped)).ToString("d"))</div></td>
+            <td class="text-right">
+                <a asp-action="Edit" asp-route-id="@(item.SourceId)" title="Edit" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+                <a href="#" class="text-danger" id="deleteModalBtn" data-target="#deleteModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("DeleteModalActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id",@item.SourceId}})')" title="Delete" data-toggle="tooltip"><i class="fas fa-trash"></i></a>
+            </td>
+        </tr>
         }
 
     </tbody>
@@ -58,22 +87,43 @@
     </script>
     <script type="text/javascript">
         var detailViewID;
+        var detailViewData;
         function SetDetailViewID(id) {
             detailViewID = id;
         }
 
         $('#pageCardBody').on('shown.bs.modal',
-            '.modal',
+            '#sourcesModal',
             function (e) {
-                $('#sourcesModal .modal-content')
-                    .load(detailViewID);
+                $.get(detailViewID,
+                    function(data) {
+                        $('#sourcesModal .modal-content').replaceWith(data);
+                        $('#deleteModalBtn').hide();
+                    });
             });
 
         $('#pageCardBody').on('hidden.bs.modal',
-            '.modal',
+            '#sourcesModal',
             function (e) {
                 $('#sourcesModal .modal-content')
-                    .empty();
+                    .replaceWith('<div class="modal-content"><div class="modal-body"><div class="progress"><div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div></div></div>')
+            });
+
+        $('#pageCardBody').on('shown.bs.modal',
+            '#deleteModal',
+            function (e) {
+                $.get(detailViewID,
+                    function(data) {
+                        $('#deleteModal .modal-content').replaceWith(data);
+                    });
+
+            });
+
+        $('#pageCardBody').on('hidden.bs.modal',
+            '#deleteModal',
+            function (e) {
+                $('#deleteModal .modal-content')
+                    .replaceWith('<div class="modal-content"><div class="modal-body"><div class="progress"><div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div></div></div>')
             });
     </script>
 }

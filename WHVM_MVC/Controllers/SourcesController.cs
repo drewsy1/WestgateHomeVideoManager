@@ -180,6 +180,35 @@ namespace WHVM_MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult DeleteModalActionResult(int? id)
+        {
+            ViewBag.modelId = id;
+
+            Source currentSource = _context.Source.FirstOrDefault(m => m.SourceId == id);
+
+            ViewBag.modelSourceFormat = SourceFormat.AllFormats.FirstOrDefault(c => c.SourceFormatId == currentSource?.SourceFormatId);
+
+            string[] modalTitleParts =
+            {
+                "<div class=\"badge badge-secondary\">",
+                (string) ViewBag.modelSourceFormat.SourceFormatText,
+                "</div > ",
+                currentSource?.SourceLabel
+            };
+
+            ViewBag.modalTitle = new HtmlString(string.Join("", modalTitleParts));
+
+            ViewBag.modelDataDictionary = new Dictionary<string, object>
+            {
+                {"ID", id },
+                {"Label", currentSource?.SourceLabel},
+                {"Date Burned", currentSource?.SourceDateBurned},
+                {"Date Ripped", currentSource?.SourceDateRipped},
+                {"Format", ViewBag.modelSourceFormat.SourceFormatText}
+            };
+            return PartialView("_DeleteModal", _context.Source.FirstOrDefault(m => m.SourceId == id));
+        }
+
         private bool SourceExists(int id)
         {
             return _context.Source.Any(e => e.SourceId == id);
