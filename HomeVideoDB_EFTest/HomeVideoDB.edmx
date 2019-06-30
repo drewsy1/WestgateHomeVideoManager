@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HomeVideoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clip">
+          <Key>
+            <PropertyRef Name="ClipID" />
+          </Key>
+          <Property Name="ClipID" Type="int" Nullable="false" />
+          <Property Name="SourceID" Type="int" Nullable="false" />
+          <Property Name="ClipNumber" Type="int" />
+          <Property Name="ClipTimeStart" Type="datetime" />
+          <Property Name="ClipTimeEnd" Type="datetime" />
+          <Property Name="ClipVidTimeStart" Type="time" Precision="3" />
+          <Property Name="ClipVidTimeEnd" Type="time" Precision="3" />
+          <Property Name="ClipVidTimeLength" Type="time" Precision="3" StoreGeneratedPattern="Computed" />
+          <Property Name="ClipReviewer" Type="nvarchar" MaxLength="50" />
+          <Property Name="CameraOperator" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="ClipFilePath" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HomeVideoDB.dbo.Clip_TagsCollections' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Clip_TagsCollections">
+          <Key>
+            <PropertyRef Name="ClipID" />
+            <PropertyRef Name="CollectionsID" />
+          </Key>
+          <Property Name="ClipID" Type="int" Nullable="false" />
+          <Property Name="CollectionsID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HomeVideoDB.dbo.Clip_TagsPeople' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Clip_TagsPeople">
+          <Key>
+            <PropertyRef Name="ClipID" />
+            <PropertyRef Name="PeopleID" />
+          </Key>
+          <Property Name="ClipID" Type="int" Nullable="false" />
+          <Property Name="PeopleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Source">
+          <Key>
+            <PropertyRef Name="SourceID" />
+          </Key>
+          <Property Name="SourceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SourceLabel" Type="nvarchar" MaxLength="30" />
+          <Property Name="SourceDateBurned" Type="datetime" />
+          <Property Name="SourceDateRipped" Type="datetime" />
+          <Property Name="SourceFormatID" Type="int" />
+          <Property Name="SourceFilePath" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="SourceFormat">
+          <Key>
+            <PropertyRef Name="SourceFormatID" />
+          </Key>
+          <Property Name="SourceFormatID" Type="int" Nullable="false" />
+          <Property Name="SourceFormatText" Type="nvarchar" MaxLength="10" />
+          <Property Name="SourceFormatLogoPath" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="TagsCollections">
+          <Key>
+            <PropertyRef Name="CollectionsID" />
+          </Key>
+          <Property Name="CollectionsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CollectionsText" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TagsPeople">
+          <Key>
+            <PropertyRef Name="PeopleID" />
+          </Key>
+          <Property Name="PeopleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PeopleName" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK_Clip_Source">
+          <End Role="Source" Type="Self.Source" Multiplicity="1" />
+          <End Role="Clip" Type="Self.Clip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Source">
+              <PropertyRef Name="SourceID" />
+            </Principal>
+            <Dependent Role="Clip">
+              <PropertyRef Name="SourceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clip_TagsCollections_Clip">
+          <End Role="Clip" Type="Self.Clip" Multiplicity="1" />
+          <End Role="Clip_TagsCollections" Type="Self.Clip_TagsCollections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clip">
+              <PropertyRef Name="ClipID" />
+            </Principal>
+            <Dependent Role="Clip_TagsCollections">
+              <PropertyRef Name="ClipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clip_TagsCollections_TagsCollections">
+          <End Role="TagsCollections" Type="Self.TagsCollections" Multiplicity="1" />
+          <End Role="Clip_TagsCollections" Type="Self.Clip_TagsCollections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TagsCollections">
+              <PropertyRef Name="CollectionsID" />
+            </Principal>
+            <Dependent Role="Clip_TagsCollections">
+              <PropertyRef Name="CollectionsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clip_TagsPeople_Clip">
+          <End Role="Clip" Type="Self.Clip" Multiplicity="1" />
+          <End Role="Clip_TagsPeople" Type="Self.Clip_TagsPeople" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clip">
+              <PropertyRef Name="ClipID" />
+            </Principal>
+            <Dependent Role="Clip_TagsPeople">
+              <PropertyRef Name="ClipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clip_TagsPeople_TagsPeople">
+          <End Role="TagsPeople" Type="Self.TagsPeople" Multiplicity="1" />
+          <End Role="Clip_TagsPeople" Type="Self.Clip_TagsPeople" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TagsPeople">
+              <PropertyRef Name="PeopleID" />
+            </Principal>
+            <Dependent Role="Clip_TagsPeople">
+              <PropertyRef Name="PeopleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Source_SourceFormat">
+          <End Role="SourceFormat" Type="Self.SourceFormat" Multiplicity="0..1" />
+          <End Role="Source" Type="Self.Source" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SourceFormat">
+              <PropertyRef Name="SourceFormatID" />
+            </Principal>
+            <Dependent Role="Source">
+              <PropertyRef Name="SourceFormatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HomeVideoDBModelStoreContainer">
+          <EntitySet Name="Clip" EntityType="Self.Clip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Source" EntityType="Self.Source" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SourceFormat" EntityType="Self.SourceFormat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TagsCollections" EntityType="Self.TagsCollections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TagsPeople" EntityType="Self.TagsPeople" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clip_TagsCollections" EntityType="Self.Clip_TagsCollections" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Clip_TagsCollections].[ClipID] AS [ClipID], 
+    [Clip_TagsCollections].[CollectionsID] AS [CollectionsID]
+    FROM [dbo].[Clip_TagsCollections] AS [Clip_TagsCollections]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Clip_TagsPeople" EntityType="Self.Clip_TagsPeople" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Clip_TagsPeople].[ClipID] AS [ClipID], 
+    [Clip_TagsPeople].[PeopleID] AS [PeopleID]
+    FROM [dbo].[Clip_TagsPeople] AS [Clip_TagsPeople]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Clip_Source" Association="Self.FK_Clip_Source">
+            <End Role="Source" EntitySet="Source" />
+            <End Role="Clip" EntitySet="Clip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clip_TagsCollections_Clip" Association="Self.FK_Clip_TagsCollections_Clip">
+            <End Role="Clip" EntitySet="Clip" />
+            <End Role="Clip_TagsCollections" EntitySet="Clip_TagsCollections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clip_TagsCollections_TagsCollections" Association="Self.FK_Clip_TagsCollections_TagsCollections">
+            <End Role="TagsCollections" EntitySet="TagsCollections" />
+            <End Role="Clip_TagsCollections" EntitySet="Clip_TagsCollections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clip_TagsPeople_Clip" Association="Self.FK_Clip_TagsPeople_Clip">
+            <End Role="Clip" EntitySet="Clip" />
+            <End Role="Clip_TagsPeople" EntitySet="Clip_TagsPeople" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clip_TagsPeople_TagsPeople" Association="Self.FK_Clip_TagsPeople_TagsPeople">
+            <End Role="TagsPeople" EntitySet="TagsPeople" />
+            <End Role="Clip_TagsPeople" EntitySet="Clip_TagsPeople" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Source_SourceFormat" Association="Self.FK_Source_SourceFormat">
+            <End Role="SourceFormat" EntitySet="SourceFormat" />
+            <End Role="Source" EntitySet="Source" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HomeVideoDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clip">
+          <Key>
+            <PropertyRef Name="ClipID" />
+          </Key>
+          <Property Name="ClipID" Type="Int32" Nullable="false" />
+          <Property Name="SourceID" Type="Int32" Nullable="false" />
+          <Property Name="ClipNumber" Type="Int32" />
+          <Property Name="ClipTimeStart" Type="DateTime" Precision="3" />
+          <Property Name="ClipTimeEnd" Type="DateTime" Precision="3" />
+          <Property Name="ClipVidTimeStart" Type="Time" Precision="3" />
+          <Property Name="ClipVidTimeEnd" Type="Time" Precision="3" />
+          <Property Name="ClipVidTimeLength" Type="Time" annotation:StoreGeneratedPattern="Computed" Precision="3" />
+          <Property Name="ClipReviewer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CameraOperator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ClipFilePath" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Source" Relationship="Self.FK_Clip_Source" FromRole="Clip" ToRole="Source" />
+          <NavigationProperty Name="TagsCollections" Relationship="Self.Clip_TagsCollections" FromRole="Clip" ToRole="TagsCollections" />
+          <NavigationProperty Name="TagsPeoples" Relationship="Self.Clip_TagsPeople" FromRole="Clip" ToRole="TagsPeople" />
+        </EntityType>
+        <EntityType Name="Source">
+          <Key>
+            <PropertyRef Name="SourceID" />
+          </Key>
+          <Property Name="SourceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SourceLabel" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SourceDateBurned" Type="DateTime" Precision="3" />
+          <Property Name="SourceDateRipped" Type="DateTime" Precision="3" />
+          <Property Name="SourceFormatID" Type="Int32" />
+          <Property Name="SourceFilePath" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clips" Relationship="Self.FK_Clip_Source" FromRole="Source" ToRole="Clip" />
+          <NavigationProperty Name="SourceFormat" Relationship="Self.FK_Source_SourceFormat" FromRole="Source" ToRole="SourceFormat" />
+        </EntityType>
+        <EntityType Name="SourceFormat">
+          <Key>
+            <PropertyRef Name="SourceFormatID" />
+          </Key>
+          <Property Name="SourceFormatID" Type="Int32" Nullable="false" />
+          <Property Name="SourceFormatText" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SourceFormatLogoPath" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sources" Relationship="Self.FK_Source_SourceFormat" FromRole="SourceFormat" ToRole="Source" />
+        </EntityType>
+        <EntityType Name="TagsCollection">
+          <Key>
+            <PropertyRef Name="CollectionsID" />
+          </Key>
+          <Property Name="CollectionsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CollectionsText" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Clips" Relationship="Self.Clip_TagsCollections" FromRole="TagsCollections" ToRole="Clip" />
+        </EntityType>
+        <EntityType Name="TagsPeople">
+          <Key>
+            <PropertyRef Name="PeopleID" />
+          </Key>
+          <Property Name="PeopleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PeopleName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Clips" Relationship="Self.Clip_TagsPeople" FromRole="TagsPeople" ToRole="Clip" />
+        </EntityType>
+        <Association Name="FK_Clip_Source">
+          <End Role="Source" Type="Self.Source" Multiplicity="1" />
+          <End Role="Clip" Type="Self.Clip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Source">
+              <PropertyRef Name="SourceID" />
+            </Principal>
+            <Dependent Role="Clip">
+              <PropertyRef Name="SourceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Source_SourceFormat">
+          <End Role="SourceFormat" Type="Self.SourceFormat" Multiplicity="0..1" />
+          <End Role="Source" Type="Self.Source" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SourceFormat">
+              <PropertyRef Name="SourceFormatID" />
+            </Principal>
+            <Dependent Role="Source">
+              <PropertyRef Name="SourceFormatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Clip_TagsCollections">
+          <End Role="Clip" Type="Self.Clip" Multiplicity="*" />
+          <End Role="TagsCollections" Type="Self.TagsCollection" Multiplicity="*" />
+        </Association>
+        <Association Name="Clip_TagsPeople">
+          <End Role="Clip" Type="Self.Clip" Multiplicity="*" />
+          <End Role="TagsPeople" Type="Self.TagsPeople" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="HomeVideoDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clips" EntityType="Self.Clip" />
+          <EntitySet Name="Sources" EntityType="Self.Source" />
+          <EntitySet Name="SourceFormats" EntityType="Self.SourceFormat" />
+          <EntitySet Name="TagsCollections" EntityType="Self.TagsCollection" />
+          <EntitySet Name="TagsPeoples" EntityType="Self.TagsPeople" />
+          <AssociationSet Name="FK_Clip_Source" Association="Self.FK_Clip_Source">
+            <End Role="Source" EntitySet="Sources" />
+            <End Role="Clip" EntitySet="Clips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Source_SourceFormat" Association="Self.FK_Source_SourceFormat">
+            <End Role="SourceFormat" EntitySet="SourceFormats" />
+            <End Role="Source" EntitySet="Sources" />
+          </AssociationSet>
+          <AssociationSet Name="Clip_TagsCollections" Association="Self.Clip_TagsCollections">
+            <End Role="Clip" EntitySet="Clips" />
+            <End Role="TagsCollections" EntitySet="TagsCollections" />
+          </AssociationSet>
+          <AssociationSet Name="Clip_TagsPeople" Association="Self.Clip_TagsPeople">
+            <End Role="Clip" EntitySet="Clips" />
+            <End Role="TagsPeople" EntitySet="TagsPeoples" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HomeVideoDBModelStoreContainer" CdmEntityContainer="HomeVideoDBEntities">
+          <EntitySetMapping Name="Clips">
+            <EntityTypeMapping TypeName="HomeVideoDBModel.Clip">
+              <MappingFragment StoreEntitySet="Clip">
+                <ScalarProperty Name="ClipID" ColumnName="ClipID" />
+                <ScalarProperty Name="SourceID" ColumnName="SourceID" />
+                <ScalarProperty Name="ClipNumber" ColumnName="ClipNumber" />
+                <ScalarProperty Name="ClipTimeStart" ColumnName="ClipTimeStart" />
+                <ScalarProperty Name="ClipTimeEnd" ColumnName="ClipTimeEnd" />
+                <ScalarProperty Name="ClipVidTimeStart" ColumnName="ClipVidTimeStart" />
+                <ScalarProperty Name="ClipVidTimeEnd" ColumnName="ClipVidTimeEnd" />
+                <ScalarProperty Name="ClipVidTimeLength" ColumnName="ClipVidTimeLength" />
+                <ScalarProperty Name="ClipReviewer" ColumnName="ClipReviewer" />
+                <ScalarProperty Name="CameraOperator" ColumnName="CameraOperator" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ClipFilePath" ColumnName="ClipFilePath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sources">
+            <EntityTypeMapping TypeName="HomeVideoDBModel.Source">
+              <MappingFragment StoreEntitySet="Source">
+                <ScalarProperty Name="SourceID" ColumnName="SourceID" />
+                <ScalarProperty Name="SourceLabel" ColumnName="SourceLabel" />
+                <ScalarProperty Name="SourceDateBurned" ColumnName="SourceDateBurned" />
+                <ScalarProperty Name="SourceDateRipped" ColumnName="SourceDateRipped" />
+                <ScalarProperty Name="SourceFormatID" ColumnName="SourceFormatID" />
+                <ScalarProperty Name="SourceFilePath" ColumnName="SourceFilePath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SourceFormats">
+            <EntityTypeMapping TypeName="HomeVideoDBModel.SourceFormat">
+              <MappingFragment StoreEntitySet="SourceFormat">
+                <ScalarProperty Name="SourceFormatID" ColumnName="SourceFormatID" />
+                <ScalarProperty Name="SourceFormatText" ColumnName="SourceFormatText" />
+                <ScalarProperty Name="SourceFormatLogoPath" ColumnName="SourceFormatLogoPath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TagsCollections">
+            <EntityTypeMapping TypeName="HomeVideoDBModel.TagsCollection">
+              <MappingFragment StoreEntitySet="TagsCollections">
+                <ScalarProperty Name="CollectionsID" ColumnName="CollectionsID" />
+                <ScalarProperty Name="CollectionsText" ColumnName="CollectionsText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TagsPeoples">
+            <EntityTypeMapping TypeName="HomeVideoDBModel.TagsPeople">
+              <MappingFragment StoreEntitySet="TagsPeople">
+                <ScalarProperty Name="PeopleID" ColumnName="PeopleID" />
+                <ScalarProperty Name="PeopleName" ColumnName="PeopleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Clip_TagsCollections" TypeName="HomeVideoDBModel.Clip_TagsCollections" StoreEntitySet="Clip_TagsCollections">
+            <EndProperty Name="Clip">
+              <ScalarProperty Name="ClipID" ColumnName="ClipID" />
+            </EndProperty>
+            <EndProperty Name="TagsCollections">
+              <ScalarProperty Name="CollectionsID" ColumnName="CollectionsID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Clip_TagsPeople" TypeName="HomeVideoDBModel.Clip_TagsPeople" StoreEntitySet="Clip_TagsPeople">
+            <EndProperty Name="Clip">
+              <ScalarProperty Name="ClipID" ColumnName="ClipID" />
+            </EndProperty>
+            <EndProperty Name="TagsPeople">
+              <ScalarProperty Name="PeopleID" ColumnName="PeopleID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

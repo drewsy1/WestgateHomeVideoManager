@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6f52e663b74a4d2796ec3e8f8b3c3903" Name="Diagram1">
+        <EntityTypeShape EntityType="HomeVideoDBModel.Clip" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeVideoDBModel.Source" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeVideoDBModel.SourceFormat" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeVideoDBModel.TagsCollection" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeVideoDBModel.TagsPeople" Width="1.5" PointX="7.5" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="HomeVideoDBModel.FK_Clip_Source" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeVideoDBModel.FK_Source_SourceFormat" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeVideoDBModel.Clip_TagsCollections" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeVideoDBModel.Clip_TagsPeople" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
