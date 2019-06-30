@@ -48,16 +48,16 @@ namespace WHVM_MVC.Controllers
         {
             ViewBag.modelId = id;
 
-            Source CurrentSource = _context.Source.FirstOrDefault(m => m.SourceId == id);
+            Source currentSource = _context.Source.FirstOrDefault(m => m.SourceId == id);
 
-            ViewBag.modelSourceFormat = SourceFormat.AllFormats.FirstOrDefault(c => c.SourceFormatId == CurrentSource.SourceFormatId);
+            ViewBag.modelSourceFormat = SourceFormat.AllFormats.FirstOrDefault(c => c.SourceFormatId == currentSource?.SourceFormatId);
 
             string[] modalTitleParts =
             {
                 "<div class=\"badge badge-secondary\">",
                 (string) ViewBag.modelSourceFormat.SourceFormatText,
                 "</div > ",
-                CurrentSource.SourceLabel
+                currentSource?.SourceLabel
             };
 
             ViewBag.modalTitle = new HtmlString(string.Join("", modalTitleParts));
@@ -65,9 +65,9 @@ namespace WHVM_MVC.Controllers
             ViewBag.modelDataDictionary = new Dictionary<string, object>
             {
                 {"ID", id },
-                {"Label", CurrentSource.SourceLabel},
-                {"Date Burned", CurrentSource.SourceDateBurned},
-                {"Date Ripped", CurrentSource.SourceDateRipped},
+                {"Label", currentSource?.SourceLabel},
+                {"Date Burned", currentSource?.SourceDateBurned},
+                {"Date Ripped", currentSource?.SourceDateRipped},
                 {"Format", ViewBag.modelSourceFormat.SourceFormatText}
             };
             return PartialView("_DetailsModal", _context.Source.FirstOrDefault(m => m.SourceId == id));
