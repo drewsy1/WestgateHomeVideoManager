@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.0.48" />
     <PackageReference Include="TagHelperSamples.Bootstrap" Version="2.0.49" />
+    <PackageReference Include="taglib" Version="2.1.0" />
   </ItemGroup>
 
 </Project>
