@@ -38,8 +38,6 @@
     </div>
 </div>
 
-
-
 <table id="dtSources" class="table table-striped" data-order='[[0, "asc"]]' width="100%">
     <thead>
         <tr>
@@ -73,57 +71,18 @@
 </table>
 
 @section ActionButtons
-    {
+{
     <a asp-action="Create" class="btn btn-primary" title="New" data-toggle="tooltip"><i class="fas fa-plus"></i></a>
 }
 
 @section Scripts
-    {
+{
     <script>
         var table;
         $(document).ready(function () {
             table = $('#dtSources').DataTable();
         });
     </script>
-    <script type="text/javascript">
-        var detailViewID;
-        var detailViewData;
-        function SetDetailViewID(id) {
-            detailViewID = id;
-        }
 
-        $('#pageCardBody').on('shown.bs.modal',
-            '#sourcesModal',
-            function (e) {
-                $.get(detailViewID,
-                    function(data) {
-                        $('#sourcesModal .modal-content').replaceWith(data);
-                        $('#deleteModalBtn').hide();
-                    });
-            });
-
-        $('#pageCardBody').on('hidden.bs.modal',
-            '#sourcesModal',
-            function (e) {
-                $('#sourcesModal .modal-content')
-                    .replaceWith('<div class="modal-content"><div class="modal-body"><div class="progress"><div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div></div></div>')
-            });
-
-        $('#pageCardBody').on('shown.bs.modal',
-            '#deleteModal',
-            function (e) {
-                $.get(detailViewID,
-                    function(data) {
-                        $('#deleteModal .modal-content').replaceWith(data);
-                    });
-
-            });
-
-        $('#pageCardBody').on('hidden.bs.modal',
-            '#deleteModal',
-            function (e) {
-                $('#deleteModal .modal-content')
-                    .replaceWith('<div class="modal-content"><div class="modal-body"><div class="progress"><div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div></div></div>')
-            });
-    </script>
+    <script type="text/javascript" src="~/js/ModelIndexModals.js"></script>
 }
