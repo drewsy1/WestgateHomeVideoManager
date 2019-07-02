@@ -1,5 +1,6 @@
 ﻿@using System.Net
 @using Microsoft.AspNetCore.Html
+@using Microsoft.AspNetCore.Routing
 
 <div class="modal-content">
 <div class="modal-header d-flex align-items-center">
@@ -12,6 +13,9 @@
     </div>
 </div>
 <div class="modal-body">
-    Test
+    <b>Are you <i>sure</i> that you want to delete @(Model.SourceLabel)?</b>
+    <p>This cannot be reversed.</p>
+    <a href="#" class="btn btn-danger" id="deleteConfirmBtn" onclick="$.post('@(Url.Action("Delete", ViewContext.RouteData.Values["controller"].ToString()))', {id: '@(Model.SourceId)'})" title="Delete" data-toggle="tooltip">Delete</a>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Cancel" title="Cancel" data-toggle="tooltip">Cancel</button>
 </div>
 </div>
