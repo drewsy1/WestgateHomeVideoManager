@@ -59,21 +59,21 @@
                 <td>@(Html.DisplayFor(modelItem => item.SourceId))</td>
                 <td class="text-truncate">
                     <div class="d-flex">
-                        <span class="badge badge-secondary align-self-center mr-1">@currentSourceFormat.SourceFormatText</span>
-                        <a href="#" id="sourcesModalBtn" data-target="#sourcesModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("DetailsModalActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id",@item.SourceId}})')"><span class="text-truncate">@Html.DisplayFor(modelItem => item.SourceLabel)</span></a>
+                        <span class="badge badge-secondary align-self-center mr-1">@(item.SourceFormat.SourceFormatText)</span>
+                        <a href="#" id="sourcesModalBtn" data-target="#sourcesModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("ModalBtnActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id",@item.SourceId}})')">
+                            <span class="text-truncate">
+                                @(Html.DisplayFor(modelItem => item.SourceLabel))
+                            </span>
+                        </a>
                         <a asp-action="Details" asp-route-id="@(item.SourceId)" title="Details" data-toggle="tooltip" class="ml-auto text-info px-1"><i class="fas fa-info-circle"></i></a>
                         <a asp-action="Edit" asp-route-id="@(item.SourceId)" title="Edit" data-toggle="tooltip" class="text-primary px-1"><i class="fas fa-edit"></i></a>
-                        <a href="#" id="deleteModalBtn" data-target="#deleteModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("DeleteModalActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id",@item.SourceId}})')" title="Delete" data-toggle="tooltip" class="text-danger px-1"><i class="fas fa-trash"></i></a>
+                        <span data-toggle="modal" data-target="#deleteModal"></span>
+                        <a href="#" id="deleteModalBtn" onclick="SetDetailViewID('@Url.Action("ModalBtnActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id",@item.SourceId},{"modalName","_DeleteModal"}})')" title="Delete" data-toggle="tooltip" class="text-danger px-1"><i class="fas fa-trash"></i></a>
                     </div>
                 </td>
                 <td>@(Html.DisplayFor(modelItem => item.Clips.Count))</td>
                 <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateBurned)).ToString("F"))">@(((DateTime)(item.SourceDateBurned)).ToString("d"))</div></td>
                 <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateRipped)).ToString("F"))">@(((DateTime)(item.SourceDateRipped)).ToString("d"))</div></td>
-                <!--<td class="text-right">
-                    <a asp-action="Details" asp-route-id="@(item.SourceId)" title="Details" data-toggle="tooltip" class="text-info"><i class="fas fa-info-circle"></i></a>
-                    <a asp-action="Edit" asp-route-id="@(item.SourceId)" title="Edit" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-                    <a href="#" class="text-danger" id="deleteModalBtn" data-target="#deleteModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("DeleteModalActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id",@item.SourceId}})')" title="Delete" data-toggle="tooltip"><i class="fas fa-trash"></i></a>
-                </td>-->
             </tr>
             }
 

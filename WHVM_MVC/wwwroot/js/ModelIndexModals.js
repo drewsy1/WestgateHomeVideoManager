@@ -55,20 +55,23 @@ function ajaxPost(url, data) {
     });
 }
 
-$('#pageCardBody').on('shown.bs.modal',
+$('main').on('shown.bs.modal',
     function (event) {
         //console.log("Showing modal");
         $.get(detailViewID,
             function (data) {
-                $(event.target).find('.modal-content').replaceWith(data);
+                var modalData = $(event.target).find('.modal-content');
+                modalData.replaceWith(data);
 
-                if ($('#deleteModalBtn').length) {
-                    $('#deleteModalBtn').remove();
+                var deleteModalBtn = $('#detailsModalNested #deleteModalBtn')
+
+                if (deleteModalBtn.length) {
+                    deleteModalBtn.remove();
                 }
             });
     });
 
-$('#pageCardBody').on('hidden.bs.modal',
+$('main').on('hidden.bs.modal',
     function (event) {
         //console.log("Hiding modal");
         $(event.target).find('.modal-content').replaceWith(progressBar.clone());

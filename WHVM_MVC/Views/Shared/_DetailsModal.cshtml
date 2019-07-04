@@ -1,36 +1,58 @@
-﻿@using System.Net
-@using Microsoft.AspNetCore.Html
-@using Microsoft.AspNetCore.Routing
+﻿@using Microsoft.AspNetCore.Routing
+
 <div class="modal-content">
-<div id=#sourcesModalNested class="modal-header d-flex align-items-center">
-    <div class="p-0 flex-grow-1 mr-auto"><h4 class="modal-title">@ViewBag.modalTitle</h4></div>
-    <div class="p-0" id="deleteModalActionButtons">
-        <a asp-action="Details"  asp-route-id="@ViewBag.modelId" class="btn btn-info btn-sm" title="Details" data-toggle="tooltip"><i class="fas fa-info"></i></a>
-        <a asp-action="Edit" asp-route-id="@ViewBag.modelId" class="btn btn-primary btn-sm" title="Edit" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-        <a asp-action="Delete" id="deleteModalBtn" asp-route-id="@ViewBag.modelId" class="btn btn-danger btn-sm" title="Delete" data-toggle="tooltip"><i class="fas fa-trash"></i></a>
-        <a href="#" class="btn btn-danger btn-sm" id="deleteModalBtnNested" data-target="#deleteModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("DeleteModalActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id", @Model.SourceId}})')" title="Delete"><i class="fas fa-trash"></i></a>
-        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" aria-label="Close" title="Close" data-toggle="tooltip">
-            <i class="fas fa-times"></i>
-        </button>
+    <div id="detailsModalNested" class="modal-header d-flex align-items-center">
+        @{
+            if(ViewBag.Controller == "Sources")
+            {
+                <div class="p-0">
+                    <span class="badge badge-secondary align-self-center mr-1" data-toggle="tooltip" title="@ViewBag.modelDataDictionary["Format"]">
+                            @ViewBag.modelDataDictionary["Format"]
+                    </span>
+                </div>
+            }
+        }
+        <div class="p-0 d-inline-block text-truncate">
+            <h4 class="m-0 text-truncate" data-toggle="tooltip" title="@(ViewBag.modelDataDictionary["Label"])">
+                @(ViewBag.modelDataDictionary["Label"])
+            </h4>
+        </div>
+        <div class="p-0 ml-auto mr-1">
+            <a asp-action="Details"  asp-route-id="@ViewBag.modelDataDictionary["ID"]" class="btn btn-info btn-sm" title="Details" data-toggle="tooltip"><i class="fas fa-info"></i></a>
+        </div>
+        <div class="p-0 mx-1">
+            <a asp-action="Edit" asp-route-id="@ViewBag.modelDataDictionary["ID"]" class="btn btn-primary btn-sm" title="Edit" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+        </div>
+        <div class="p-0 mx-1">
+            <span data-toggle="modal" data-target="#deleteModal">
+                <a asp-action="Delete" id="deleteModalBtn" asp-route-id="@ViewBag.modelDataDictionary["ID"]" class="btn btn-danger btn-sm" title="Delete" data-toggle="tooltip"><i class="fas fa-trash"></i></a>
+                <a href="#" class="btn btn-danger btn-sm" id="deleteModalBtnNested" title="Delete" data-toggle="tooltip" onclick="SetDetailViewID('@(Url.Action("ModalBtnActionResult", (string) (ViewBag.Controller), new RouteValueDictionary {{"id", ViewBag.modelDataDictionary["ID"]}, {"modalName", "_DeleteModal"}}))')"><i class="fas fa-trash"></i></a>
+            </span>
+        </div>
+        <div class="p-0 mx-1">
+            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" aria-label="Close" title="Close" data-toggle="tooltip">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    <div class="modal-body">
+        <dl class="row">
+            @{
+                foreach (var (key, value) in (Dictionary<string, object>)ViewBag.modelDataDictionary)
+                {
+                    <dt class="col-4">
+                            @key
+                        </dt>
+                    <dd class="col-8">
+                        @value
+                    </dd>
+                }
+            }
+        </dl>
     </div>
 </div>
-<div class="modal-body">
-    <dl class="row">
-    @{
-        foreach (var (key, value) in (Dictionary<string, object>)ViewBag.modelDataDictionary)
-        {
-                <dt class="col-sm-3">
-                    @key
-                </dt>
-                <dd class="col-sm-8">
-                    @value
-                </dd>
-        }
-    }
-    </dl>
-</div>
-</div>
+
 
 <script>
-    $("#deleteModalActionButtons").children().each(function () {$(this).css({"width": ($(this).height()+10) + "px"})})
+    $("#detailsModalNested .btn").each(function () {$(this).css({"width": ($(this).height()+10) + "px"})})
 </script>

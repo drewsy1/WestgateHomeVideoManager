@@ -45,34 +45,31 @@ namespace WHVM_MVC.Controllers
             return View(source);
         }
 
-        public IActionResult DetailsModalActionResult(int? id)
+        public IActionResult ModalBtnActionResult(int? id, string modalName = "_DetailsModal")
         {
             ViewBag.modelId = id;
 
-            Source currentSource = _context.Source.FirstOrDefault(m => m.SourceId == id);
+            var currentSource = _context.Source.FirstOrDefault(m => m.SourceId == id);
+            _context.Entry(currentSource).Reference(s => s.SourceFormat).Load();
 
             ViewBag.modelSourceFormat =
                 SourceFormat.AllFormats.FirstOrDefault(c => c.SourceFormatId == currentSource?.SourceFormatId);
 
-            string[] modalTitleParts =
-            {
-                "<div class=\"badge badge-secondary\">",
-                (string) ViewBag.modelSourceFormat.SourceFormatText,
-                "</div > ",
-                currentSource?.SourceLabel
-            };
+            ViewBag.modelID = id;
+            ViewBag.modelLabel = currentSource?.SourceLabel;
+            ViewBag.modelDateBurned = currentSource?.SourceDateBurned;
+            ViewBag.modelDateRipped = currentSource?.SourceDateRipped;
+            ViewBag.modelFormat = currentSource?.SourceFormat.SourceFormatText;
+            ViewBag.modelController = "Sources";
 
-            ViewBag.modalTitle = new HtmlString(string.Join("", modalTitleParts));
-
-            ViewBag.modelDataDictionary = new Dictionary<string, object>
-            {
-                {"ID", id},
-                {"Label", currentSource?.SourceLabel},
-                {"Date Burned", currentSource?.SourceDateBurned},
-                {"Date Ripped", currentSource?.SourceDateRipped},
-                {"Format", ViewBag.modelSourceFormat.SourceFormatText}
-            };
-            return PartialView("_DetailsModal", _context.Source.FirstOrDefault(m => m.SourceId == id));
+            ViewBag.modelDataDictionary = new Dictionary<string, object>();
+            ViewBag.modelDataDictionary.Add("ID", id);
+            ViewBag.modelDataDictionary.Add("Label", currentSource?.SourceLabel);
+            ViewBag.modelDataDictionary.Add("Date Burned", currentSource?.SourceDateBurned);
+            ViewBag.modelDataDictionary.Add("Date Ripped", currentSource?.SourceDateRipped);
+            ViewBag.modelDataDictionary.Add("Format", currentSource?.SourceFormat.SourceFormatText);
+            ViewBag.Controller = "Sources";
+            return PartialView(modalName, currentSource);
         }
 
         // GET: Sources/Create
@@ -194,36 +191,6 @@ namespace WHVM_MVC.Controllers
 
             if(returnJson) return Json(Url.Action("Index", "Sources"));
             return RedirectToAction(nameof(Index));
-        }
-
-        public IActionResult DeleteModalActionResult(int? id)
-        {
-            ViewBag.modelId = id;
-
-            Source currentSource = _context.Source.FirstOrDefault(m => m.SourceId == id);
-
-            ViewBag.modelSourceFormat =
-                SourceFormat.AllFormats.FirstOrDefault(c => c.SourceFormatId == currentSource?.SourceFormatId);
-
-            string[] modalTitleParts =
-            {
-                "<div class=\"badge badge-secondary\">",
-                (string) ViewBag.modelSourceFormat.SourceFormatText,
-                "</div > ",
-                currentSource?.SourceLabel
-            };
-
-            ViewBag.modalTitle = new HtmlString(string.Join("", modalTitleParts));
-
-            ViewBag.modelDataDictionary = new Dictionary<string, object>
-            {
-                {"ID", id},
-                {"Label", currentSource?.SourceLabel},
-                {"Date Burned", currentSource?.SourceDateBurned},
-                {"Date Ripped", currentSource?.SourceDateRipped},
-                {"Format", ViewBag.modelSourceFormat.SourceFormatText}
-            };
-            return PartialView("_DeleteModal", _context.Source.FirstOrDefault(m => m.SourceId == id));
         }
 
         private bool SourceExists(int id)
