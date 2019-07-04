@@ -43,21 +43,33 @@ function CreateModal(id, isLarge) {
     return modal;
 }
 
+function ajaxPost(url, data) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        headers: { 'RequestVerificationToken': antiforgeryToken },
+        success: function(data){
+            window.location.replace(data);
+        }
+    });
+}
+
 $('#pageCardBody').on('shown.bs.modal',
     function (event) {
-        console.log("Showing modal");
+        //console.log("Showing modal");
         $.get(detailViewID,
             function (data) {
                 $(event.target).find('.modal-content').replaceWith(data);
 
                 if ($('#deleteModalBtn').length) {
-                    $('#deleteModalBtn').hide();
+                    $('#deleteModalBtn').remove();
                 }
             });
     });
 
 $('#pageCardBody').on('hidden.bs.modal',
     function (event) {
-        console.log("Hiding modal");
+        //console.log("Hiding modal");
         $(event.target).find('.modal-content').replaceWith(progressBar.clone());
     });

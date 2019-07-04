@@ -1,33 +1,105 @@
-﻿@model WHVM_MVC.Models.Source
+﻿@using Microsoft.AspNetCore.Routing
+@model WHVM_MVC.Models.Source
 
 @{
     Layout = "_ModelLayout";
 }
 
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>Properties</h3>
 <div>
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SourceLabel)
+            ID
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SourceId)
+        </dd>
+
+        <dt class="col-sm-2">
+            Label
+        </dt>
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.SourceLabel)
         </dd>
+
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SourceDateBurned)
+            Date Burned
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.SourceDateBurned)
         </dd>
+
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SourceDateRipped)
+            Date Ripped
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.SourceDateRipped)
+        </dd>
+
+        <dt class="col-sm-2">
+            Format
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SourceFormat.SourceFormatText)
         </dd>
     </dl>
 </div>
+
+<h3>Clips</h3>
+<div class="container">
+    <div class="card-deck">
+        @for (int i = 1; i <= Model.Clips.Count; i++)
+        {
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Clips.ElementAt(i - 1).Description</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+
+            if (i % 2 == 0){
+                <div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>
+            }
+
+            if (i % 3 == 0)
+            {
+                <div class="w-100 d-none d-md-block d-lg-none"><!-- wrap every 3 on md--></div>
+            }
+
+            if (i % 4 == 0)
+            {
+                <div class="w-100 d-none d-lg-block d-xl-block"><!-- wrap every 4 on lg--></div>
+            }
+
+            if (i % 5 == 0)
+            {
+                //<div class="w-100 d-none d-xl-block"><!-- wrap every 5 on xl--></div>
+            }
+        }
+    </div>
+</div>
+
 @section ActionButtons
-    {
+{
     <a asp-action="Edit" asp-route-id="@Model.SourceId" class="btn btn-primary" title="Edit" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+    <a href="#" class="btn btn-danger" id="deleteModalBtnNested" data-target="#deleteModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("DeleteModalActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id", @Model.SourceId}})')" title="Delete"><i class="fas fa-trash"></i></a>
     <button onclick="goBack()" class="btn btn-secondary" title="Cancel" data-toggle="tooltip"><i class="fas fa-times"></i></button>
+}
+
+        @section Scripts
+        {
+    <script type="text/javascript" src="~/js/ModelIndexModals.js"></script>
 }

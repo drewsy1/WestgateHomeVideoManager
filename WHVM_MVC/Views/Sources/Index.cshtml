@@ -15,7 +15,7 @@
 </style>
 
 <div class="modal fade" id="sourcesModal" tabindex="-1" role="dialog" aria-labelledby="sourcesModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="progress">
@@ -38,37 +38,48 @@
     </div>
 </div>
 
-<table id="dtSources" class="table table-striped" data-order='[[0, "asc"]]' width="100%">
-    <thead>
-        <tr>
-            <th style="width: 5%" scope="col">#</th>
-            <th scope="col">Label</th>
-            <th style="width: 10%" scope="col">Clips</th>
-            <th style="width: 13%" scope="col">Date Burned</th>
-            <th style="width: 13%" scope="col">Date Ripped</th>
-            <th style="width: 8%" scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            SourceFormat currentSourceFormat = SourceFormat.AllFormats.First(c => c.SourceFormatId == item.SourceFormatId);
+<div class="table-responsive">
+    <table id="dtSources" class="table table-striped w-100" data-order='[[0, "asc"]]' width="100%">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Label</th>
+                <th scope="col">Clips</th>
+                <th scope="col">Date Burned</th>
+                <th scope="col">Date Ripped</th>
+                <!--<th scope="col"></th>-->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                SourceFormat currentSourceFormat = SourceFormat.AllFormats.First(c => c.SourceFormatId == item.SourceFormatId);
 
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.SourceId)</td>
-            <td><span class="badge badge-secondary">@currentSourceFormat.SourceFormatText</span> <a href="#" id="sourcesModalBtn" data-target="#sourcesModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("DetailsModalActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id",@item.SourceId}})')">@Html.DisplayFor(modelItem => item.SourceLabel)</a></td>
-            <td>@(Html.DisplayFor(modelItem => item.Clips.Count))</td>
-            <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateBurned)).ToString("F"))">@(((DateTime)(item.SourceDateBurned)).ToString("d"))</div></td>
-            <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateRipped)).ToString("F"))">@(((DateTime)(item.SourceDateRipped)).ToString("d"))</div></td>
-            <td class="text-right">
-                <a asp-action="Edit" asp-route-id="@(item.SourceId)" title="Edit" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-                <a href="#" class="text-danger" id="deleteModalBtn" data-target="#deleteModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("DeleteModalActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id",@item.SourceId}})')" title="Delete" data-toggle="tooltip"><i class="fas fa-trash"></i></a>
-            </td>
-        </tr>
-        }
+            <tr>
+                <td>@(Html.DisplayFor(modelItem => item.SourceId))</td>
+                <td class="text-truncate">
+                    <div class="d-flex">
+                        <span class="badge badge-secondary align-self-center mr-1">@currentSourceFormat.SourceFormatText</span>
+                        <a href="#" id="sourcesModalBtn" data-target="#sourcesModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("DetailsModalActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id",@item.SourceId}})')"><span class="text-truncate">@Html.DisplayFor(modelItem => item.SourceLabel)</span></a>
+                        <a asp-action="Details" asp-route-id="@(item.SourceId)" title="Details" data-toggle="tooltip" class="ml-auto text-info px-1"><i class="fas fa-info-circle"></i></a>
+                        <a asp-action="Edit" asp-route-id="@(item.SourceId)" title="Edit" data-toggle="tooltip" class="text-primary px-1"><i class="fas fa-edit"></i></a>
+                        <a href="#" id="deleteModalBtn" data-target="#deleteModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("DeleteModalActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id",@item.SourceId}})')" title="Delete" data-toggle="tooltip" class="text-danger px-1"><i class="fas fa-trash"></i></a>
+                    </div>
+                </td>
+                <td>@(Html.DisplayFor(modelItem => item.Clips.Count))</td>
+                <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateBurned)).ToString("F"))">@(((DateTime)(item.SourceDateBurned)).ToString("d"))</div></td>
+                <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateRipped)).ToString("F"))">@(((DateTime)(item.SourceDateRipped)).ToString("d"))</div></td>
+                <!--<td class="text-right">
+                    <a asp-action="Details" asp-route-id="@(item.SourceId)" title="Details" data-toggle="tooltip" class="text-info"><i class="fas fa-info-circle"></i></a>
+                    <a asp-action="Edit" asp-route-id="@(item.SourceId)" title="Edit" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+                    <a href="#" class="text-danger" id="deleteModalBtn" data-target="#deleteModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("DeleteModalActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id",@item.SourceId}})')" title="Delete" data-toggle="tooltip"><i class="fas fa-trash"></i></a>
+                </td>-->
+            </tr>
+            }
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
 
 @section ActionButtons
 {

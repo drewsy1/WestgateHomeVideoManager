@@ -23,7 +23,7 @@ namespace WHVM_MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var homeVideoDbContext = _context.Source;
-            return View(await homeVideoDbContext.ToListAsync());
+            return View(await homeVideoDbContext.ToListAsync().ConfigureAwait(false));
         }
 
         // GET: Sources/Details/5
@@ -35,7 +35,8 @@ namespace WHVM_MVC.Controllers
             }
 
             var source = await _context.Source
-                .FirstOrDefaultAsync(m => m.SourceId == id);
+                .FirstOrDefaultAsync(m => m.SourceId == id)
+                .ConfigureAwait(false);
             if (source == null)
             {
                 return NotFound();
@@ -50,7 +51,8 @@ namespace WHVM_MVC.Controllers
 
             Source currentSource = _context.Source.FirstOrDefault(m => m.SourceId == id);
 
-            ViewBag.modelSourceFormat = SourceFormat.AllFormats.FirstOrDefault(c => c.SourceFormatId == currentSource?.SourceFormatId);
+            ViewBag.modelSourceFormat =
+                SourceFormat.AllFormats.FirstOrDefault(c => c.SourceFormatId == currentSource?.SourceFormatId);
 
             string[] modalTitleParts =
             {
@@ -64,7 +66,7 @@ namespace WHVM_MVC.Controllers
 
             ViewBag.modelDataDictionary = new Dictionary<string, object>
             {
-                {"ID", id },
+                {"ID", id},
                 {"Label", currentSource?.SourceLabel},
                 {"Date Burned", currentSource?.SourceDateBurned},
                 {"Date Ripped", currentSource?.SourceDateRipped},
@@ -85,15 +87,19 @@ namespace WHVM_MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SourceId,SourceLabel,SourceDateBurned,SourceDateRipped,SourceFormatId,SourceFilePath")] Source source)
+        public async Task<IActionResult> Create(
+            [Bind("SourceId,SourceLabel,SourceDateBurned,SourceDateRipped,SourceFormatId,SourceFilePath")]
+            Source source)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(source);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync().ConfigureAwait(false);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormat, "SourceFormatId", "SourceFormatId", source.SourceFormatId);
+
+            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormat, "SourceFormatId", "SourceFormatId",
+                source.SourceFormatId);
             return View(source);
         }
 
@@ -105,12 +111,14 @@ namespace WHVM_MVC.Controllers
                 return NotFound();
             }
 
-            var source = await _context.Source.FindAsync(id);
+            var source = await _context.Source.FindAsync(id).ConfigureAwait(false);
             if (source == null)
             {
                 return NotFound();
             }
-            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormat, "SourceFormatId", "SourceFormatId", source.SourceFormatId);
+
+            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormat, "SourceFormatId", "SourceFormatId",
+                source.SourceFormatId);
             return View(source);
         }
 
@@ -119,7 +127,9 @@ namespace WHVM_MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SourceId,SourceLabel,SourceDateBurned,SourceDateRipped,SourceFormatId,SourceFilePath")] Source source)
+        public async Task<IActionResult> Edit(int id,
+            [Bind("SourceId,SourceLabel,SourceDateBurned,SourceDateRipped,SourceFormatId,SourceFilePath")]
+            Source source)
         {
             if (id != source.SourceId)
             {
@@ -131,7 +141,7 @@ namespace WHVM_MVC.Controllers
                 try
                 {
                     _context.Update(source);
-                    await _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync().ConfigureAwait(false);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -144,9 +154,12 @@ namespace WHVM_MVC.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormat, "SourceFormatId", "SourceFormatId", source.SourceFormatId);
+
+            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormat, "SourceFormatId", "SourceFormatId",
+                source.SourceFormatId);
             return View(source);
         }
 
@@ -160,7 +173,8 @@ namespace WHVM_MVC.Controllers
 
             var source = await _context.Source
                 .Include(s => s.SourceFormat)
-                .FirstOrDefaultAsync(m => m.SourceId == id);
+                .FirstOrDefaultAsync(m => m.SourceId == id)
+                .ConfigureAwait(false);
             if (source == null)
             {
                 return NotFound();
@@ -172,11 +186,13 @@ namespace WHVM_MVC.Controllers
         // POST: Sources/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int? id, bool returnJson = false)
         {
-            var source = await _context.Source.FindAsync(id);
+            var source = await _context.Source.FindAsync(id).ConfigureAwait(false);
             _context.Source.Remove(source);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync().ConfigureAwait(false);
+
+            if(returnJson) return Json(Url.Action("Index", "Sources"));
             return RedirectToAction(nameof(Index));
         }
 
@@ -186,7 +202,8 @@ namespace WHVM_MVC.Controllers
 
             Source currentSource = _context.Source.FirstOrDefault(m => m.SourceId == id);
 
-            ViewBag.modelSourceFormat = SourceFormat.AllFormats.FirstOrDefault(c => c.SourceFormatId == currentSource?.SourceFormatId);
+            ViewBag.modelSourceFormat =
+                SourceFormat.AllFormats.FirstOrDefault(c => c.SourceFormatId == currentSource?.SourceFormatId);
 
             string[] modalTitleParts =
             {
@@ -200,7 +217,7 @@ namespace WHVM_MVC.Controllers
 
             ViewBag.modelDataDictionary = new Dictionary<string, object>
             {
-                {"ID", id },
+                {"ID", id},
                 {"Label", currentSource?.SourceLabel},
                 {"Date Burned", currentSource?.SourceDateBurned},
                 {"Date Ripped", currentSource?.SourceDateRipped},
