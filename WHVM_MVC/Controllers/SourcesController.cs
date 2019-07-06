@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
@@ -50,7 +51,7 @@ namespace WHVM_MVC.Controllers
             ViewBag.modelId = id;
 
             var currentSource = _context.Source.FirstOrDefault(m => m.SourceId == id);
-            _context.Entry(currentSource).Reference(s => s.SourceFormat).Load();
+            _context.Entry(currentSource ?? throw new InvalidOperationException()).Reference(s => s.SourceFormat).Load();
 
             ViewBag.modelSourceFormat =
                 SourceFormat.AllFormats.FirstOrDefault(c => c.SourceFormatId == currentSource?.SourceFormatId);
