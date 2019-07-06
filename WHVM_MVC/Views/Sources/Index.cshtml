@@ -2,7 +2,7 @@
 @model IEnumerable<WHVM_MVC.Models.Source>
 
 @{
-    Layout = "_ModelLayout";
+    Layout = "_Layout";
 }
 
 <style>
@@ -38,61 +38,164 @@
     </div>
 </div>
 
-<div class="table-responsive">
-    <table id="dtSources" class="table table-striped w-100" data-order='[[0, "asc"]]' width="100%">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Label</th>
-                <th scope="col">Clips</th>
-                <th scope="col">Date Burned</th>
-                <th scope="col">Date Ripped</th>
-                <!--<th scope="col"></th>-->
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                SourceFormat currentSourceFormat = SourceFormat.AllFormats.First(c => c.SourceFormatId == item.SourceFormatId);
+<div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 whvm-sidebar d-flex flex-column">
+        <h2 class="py-3">Sources</h2>
+        <!-- hidden sort control -->
+        <div style="display: none"
+             data-jplist-control="hidden-sort"
+             data-group="group1"
+             data-path=".sourceID"
+             data-order="asc"
+             data-type="number"></div>
 
-            <tr>
-                <td>@(Html.DisplayFor(modelItem => item.SourceId))</td>
-                <td class="text-truncate">
-                    <div class="d-flex">
-                        <span class="badge badge-secondary align-self-center mr-1">@(item.SourceFormat.SourceFormatText)</span>
-                        <a href="#" id="sourcesModalBtn" data-target="#sourcesModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("ModalBtnActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id",@item.SourceId}})')">
-                            <span class="text-truncate">
-                                @(Html.DisplayFor(modelItem => item.SourceLabel))
-                            </span>
-                        </a>
-                        <a asp-action="Details" asp-route-id="@(item.SourceId)" title="Details" data-toggle="tooltip" class="ml-auto text-info px-1"><i class="fas fa-info-circle"></i></a>
-                        <a asp-action="Edit" asp-route-id="@(item.SourceId)" title="Edit" data-toggle="tooltip" class="text-primary px-1"><i class="fas fa-edit"></i></a>
-                        <span data-toggle="modal" data-target="#deleteModal"></span>
-                        <a href="#" id="deleteModalBtn" onclick="SetDetailViewID('@Url.Action("ModalBtnActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id",@item.SourceId},{"modalName","_DeleteModal"}})')" title="Delete" data-toggle="tooltip" class="text-danger px-1"><i class="fas fa-trash"></i></a>
+        <!-- text filter control -->
+        <div class="input-group input-group-sm py-1">
+            <input class="form-control form-control-sm"
+                   data-jplist-control="textbox-filter"
+                   data-group="group1"
+                   data-name="sourceName-text-filter"
+                   data-path=".sourceName"
+                   type="text"
+                   value=""
+                   id="textFilterInput"
+                   data-clear-btn-id="name-clear-btn"
+                   placeholder="Filter by Name" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="name-clear-btn">Clear</button>
+            </div>
+        </div>
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        @foreach (var format in SourceFormat.AllFormats)
+        {
+            <label class="btn btn-secondary">
+                <input type="radio" name="options" id="option1" autocomplete="off" checked>
+            </label>
+        }
+        </div>
+
+            <!-- format filter control -->
+            <div class="input-group input-group-sm py-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Format(s):</span>
+                </div>
+                <div class="input-group-append">
+                    @foreach (var format in SourceFormat.AllFormats)
+                    {
+                        <div class="input-group-text">
+                            <label class="mb-0">
+                                <input data-jplist-control="checkbox-text-filter"
+                                       data-group="group1"
+                                       data-name="sourceFormat-tag-filter"
+                                       data-path=".sourceFormat"
+                                       type="checkbox"
+                                       value="@format.SourceFormatText"
+                                       id="sourceFormatFilter@(format.SourceFormatText)"/>
+                                @format.SourceFormatText
+                            </label>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- page navigation -->
+            <div class="mt-auto py-3">
+                <div class="pagination justify-content-center" aria-label="Page navigation"
+                     data-jplist-control="pagination"
+                     data-group="group1"
+                     data-items-per-page="8"
+                     data-current-page="0"
+                     data-disabled-class="disabled"
+                     data-selected-class="active"
+                     data-name="pagination1">
+
+                    <!-- items per page dropdown -->
+                    <div class="dropup d-inline-flex col-12 pb-3 px-0"
+                         data-type="items-per-page-dd"
+                         data-opened-class="show">
+
+                        <button data-type="panel"
+                                class="btn btn-sm btn-primary dropdown-toggle"
+                                type="button">
+                            Dropdown button
+                        </button>
+
+                        <div data-type="content"
+                             class="dropdown-menu"
+                             aria-labelledby="dropdownMenuButton">
+
+                            <a class="dropdown-item" href="#" data-value="8">8 per page</a>
+                            <a class="dropdown-item" href="#" data-value="25">25 per page</a>
+                            <a class="dropdown-item" href="#" data-value="50">50 per page</a>
+                            <a class="dropdown-item" href="#" data-value="0">View All</a>
+
+                        </div>
                     </div>
-                </td>
-                <td>@(Html.DisplayFor(modelItem => item.Clips.Count))</td>
-                <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateBurned)).ToString("F"))">@(((DateTime)(item.SourceDateBurned)).ToString("d"))</div></td>
-                <td><div data-toggle="tooltip" title="@(((DateTime)(item.SourceDateRipped)).ToString("F"))">@(((DateTime)(item.SourceDateRipped)).ToString("d"))</div></td>
-            </tr>
-            }
+                </div>
+                <div class="pagination justify-content-center" aria-label="Page navigation"
+                     data-jplist-control="pagination"
+                     data-group="group1"
+                     data-items-per-page="8"
+                     data-current-page="0"
+                     data-disabled-class="disabled"
+                     data-selected-class="active"
+                     data-name="pagination1">
 
-        </tbody>
-    </table>
-</div>
+                    <!-- page selector buttons -->
+                    <div class="btn-group col-12 px-0" role="group">
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-type="first"><i class="fas fa-angle-double-left"></i></button>
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-type="prev"><i class="fas fa-angle-left"></i></button>
 
-@section ActionButtons
-{
-    <a asp-action="Create" class="btn btn-primary" title="New" data-toggle="tooltip"><i class="fas fa-plus"></i></a>
-}
+                        <div class="btn-group" role="group" data-type="pages">
+                            <button type="button" class="btn btn-sm btn-outline-primary " data-type="page">{pageNumber}</button>
+                        </div>
+
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-type="next"><i class="fas fa-angle-right"></i></button>
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-type="last"><i class="fas fa-angle-double-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main class="col-12 col-md-9 col-xl-10 py-3 px-md-5 whvm-content" role="main">
+            <div data-jplist-group="group1" style="overflow: auto ">
+                @foreach (var item in Model)
+                {
+                    <div class="card mb-3" data-jplist-item>
+                        <div class="row no-gutters">
+                            <div class="col-md-4 col-lg-2">
+                                @*<img src="..." class="card-img" alt="...">*@
+                            </div>
+                            <div class="col-md-8 col-lg-10">
+                                <div class="card-body">
+                                    <h3 class="card-title ">
+                                        <a href="#"
+                                           class="sourceName text-truncate"
+                                           id="sourcesModalBtn"
+                                           data-target="#sourcesModal"
+                                           data-toggle="modal"
+                                           onclick="SetDetailViewID('@Url.Action("ModalBtnActionResult", ViewContext.RouteData.Values["controller"].ToString(), new RouteValueDictionary {{"id", @item.SourceId}})')">
+                                            @(Html.DisplayFor(modelItem => item.SourceLabel))
+                                        </a>
+                                    </h3>
+                                    <p class="card-text">
+                                        <span class="badge badge-secondary align-self-center mr-1 sourceFormat">@(item.SourceFormat.SourceFormatText)</span>
+                                        <span class="card-text sourceID" style="display:none">@(Html.DisplayFor(modelItem => item.SourceId))</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </main>
+    </div>
 
 @section Scripts
 {
     <script>
-        var table;
-        $(document).ready(function () {
-            table = $('#dtSources').DataTable();
-        });
+        jplist.init();
     </script>
 
     <script type="text/javascript" src="~/js/ModelIndexModals.js"></script>
