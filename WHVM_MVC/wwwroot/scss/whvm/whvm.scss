@@ -1,7 +1,7 @@
 // Load Bootstrap variables and mixins
-@import "../bootstrap-4.3.1/functions";
-@import "../bootstrap-4.3.1/variables";
-@import "../bootstrap-4.3.1/mixins";
+@import "../bootstrap-4.3.1/bootstrap";
+@import "../bootstrap-4.3.1/bootstrap-grid";
+@import "../bootstrap-4.3.1/bootstrap-reboot";
 
 // Load WHVM components
 @import "variables";

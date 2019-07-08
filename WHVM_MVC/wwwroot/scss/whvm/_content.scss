@@ -7,6 +7,18 @@
 .whvm-content {
   order: 1;
   background-color: $gray-100;
+  padding:1rem;
+
+  @include media-breakpoint-down(md) {
+    padding:.5rem;
+  }
+
+  .card {
+    margin-bottom:1rem;
+    @include media-breakpoint-down(md) {
+      margin-bottom:.5rem;
+    }
+  }
 
   // Hack the sticky header
   > h2[id],
@@ -118,5 +130,16 @@
 
   @include media-breakpoint-up(lg) {
     max-width: 80%;
+  }
+}
+
+[class^="btn-group"] {
+  .btn{
+    line-height: 1 !important;
+  }
+
+  .btn-sm{
+    line-height: 1 !important;
+    @include font-size(.875rem);
   }
 }

@@ -39,8 +39,8 @@
 </div>
 
 <div class="row flex-xl-nowrap">
-    <div class="col-12 col-md-3 col-xl-2 whvm-sidebar d-flex flex-column">
-        <h2 class="py-3">Sources</h2>
+    <div class="col-12 col-md-4 col-lg-3 whvm-sidebar d-flex flex-column">
+        <h2>Sources</h2>
         <!-- hidden sort control -->
         <div style="display: none"
              data-jplist-control="hidden-sort"
@@ -48,60 +48,87 @@
              data-path=".sourceID"
              data-order="asc"
              data-type="number"></div>
-
-        <!-- text filter control -->
-        <div class="input-group input-group-sm py-1">
-            <input class="form-control form-control-sm"
-                   data-jplist-control="textbox-filter"
-                   data-group="group1"
-                   data-name="sourceName-text-filter"
-                   data-path=".sourceName"
-                   type="text"
-                   value=""
-                   id="textFilterInput"
-                   data-clear-btn-id="name-clear-btn"
-                   placeholder="Filter by Name" />
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="name-clear-btn">Clear</button>
+        
+        <div>
+            <!-- sourceName filter control -->
+            <div class="input-group input-group-sm py-1">
+                <input class="form-control form-control-sm"
+                       data-jplist-control="textbox-filter"
+                       data-group="group1"
+                       data-name="sourceName-text-filter"
+                       data-path=".sourceName"
+                       type="text"
+                       value=""
+                       id="textFilterInput"
+                       data-clear-btn-id="name-clear-btn"
+                       placeholder="Filter by Name" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="name-clear-btn">Clear</button>
+                </div>
             </div>
-        </div>
 
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        @foreach (var format in SourceFormat.AllFormats)
-        {
-            <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option1" autocomplete="off" checked>
-            </label>
-        }
-        </div>
+            <!-- sourceFormat filter control -->
+            <div class="btn-group btn-group-toggle btn-group-sm whvm-sidebar-item" id="sourceFormat-tag-filter-group">
+                <label class="btn btn-secondary active px-1" id="sourceFormat-tag-filter-default-btn">
+                    <input class=""
+                           type="radio"
+                           data-jplist-control="radio-buttons-text-filter"
+                           data-group="group1"
+                           data-name="sourceFormat-tag-filter"
+                           data-path="default"
+                           name="sourceFormat-tag-filter"
+                           value=""
+                           checked=""
+                           id="sourceFormat-tag-filter-default">
+                    All
+                </label>
+                @foreach (var format in SourceFormat.AllFormats)
+                {
+                    <label class="btn btn-secondary px-1" id="sourceFormat-tag-filter-@(format.SourceFormatText)-btn">
+                        <input class=""
+                               type="radio"
+                               data-jplist-control="radio-buttons-text-filter"
+                               data-group="group1"
+                               data-name="sourceFormat-tag-filter"
+                               data-path=".sourceFormat"
+                               name="sourceFormat-tag-filter"
+                               value="@(format.SourceFormatText)"
+                               id="sourceFormat-tag-filter-@(format.SourceFormatText)" />
+                        @(format.SourceFormatText)
+                    </label>
+                }
+            </div>
 
             <!-- format filter control -->
-            <div class="input-group input-group-sm py-1">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Format(s):</span>
-                </div>
-                <div class="input-group-append">
-                    @foreach (var format in SourceFormat.AllFormats)
-                    {
-                        <div class="input-group-text">
-                            <label class="mb-0">
-                                <input data-jplist-control="checkbox-text-filter"
-                                       data-group="group1"
-                                       data-name="sourceFormat-tag-filter"
-                                       data-path=".sourceFormat"
-                                       type="checkbox"
-                                       value="@format.SourceFormatText"
-                                       id="sourceFormatFilter@(format.SourceFormatText)"/>
-                                @format.SourceFormatText
-                            </label>
-                        </div>
-                    }
-                </div>
+            @*<div class="input-group input-group-sm py-1">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Format(s):</span>
             </div>
+            <div class="input-group-append">
+                @foreach (var format in SourceFormat.AllFormats)
+                {
+                    <div class="input-group-text">
+                        <label class="mb-0">
+                            <input data-jplist-control="radio-buttons-text-filter"
+                                   data-group="group1"
+                                   data-name="sourceFormat-tag-filter"
+                                   data-path=".sourceFormat"
+                                   type="checkbox"
+                                   value="@format.SourceFormatText"
+                                   id="sourceFormatFilter@(format.SourceFormatText)"/>
+                            @format.SourceFormatText
+                        </label>
+                    </div>
+                }
+            </div>
+        </div>*@
 
-            <!-- page navigation -->
-            <div class="mt-auto py-3">
-                <div class="pagination justify-content-center" aria-label="Page navigation"
+        
+        </div>
+
+        <!-- page navigation -->
+        <div class="mt-auto d-flex flex-wrap">
+            <div class="pagination col-3 col-md-12 pr-1 pl-0 px-md-0" aria-label="Page navigation"
                      data-jplist-control="pagination"
                      data-group="group1"
                      data-items-per-page="8"
@@ -111,12 +138,12 @@
                      data-name="pagination1">
 
                     <!-- items per page dropdown -->
-                    <div class="dropup d-inline-flex col-12 pb-3 px-0"
+                    <div class="whvm-sidebar-dropdown dropup"
                          data-type="items-per-page-dd"
                          data-opened-class="show">
 
                         <button data-type="panel"
-                                class="btn btn-sm btn-primary dropdown-toggle"
+                                class="btn btn-primary col-12 dropdown-toggle"
                                 type="button">
                             Dropdown button
                         </button>
@@ -133,45 +160,45 @@
                         </div>
                     </div>
                 </div>
-                <div class="pagination justify-content-center" aria-label="Page navigation"
-                     data-jplist-control="pagination"
-                     data-group="group1"
-                     data-items-per-page="8"
-                     data-current-page="0"
-                     data-disabled-class="disabled"
-                     data-selected-class="active"
-                     data-name="pagination1">
+            <div class="pagination justify-content-center col-9 col-md-12 pr-0 pl-1 px-md-0" aria-label="Page navigation"
+                 data-jplist-control="pagination"
+                 data-group="group1"
+                 data-items-per-page="8"
+                 data-current-page="0"
+                 data-disabled-class="disabled"
+                 data-selected-class="active"
+                 data-name="pagination1">
 
-                    <!-- page selector buttons -->
-                    <div class="btn-group col-12 px-0" role="group">
-
-                        <div class="btn-group" role="group" data-type="pages">
-                            <button type="button" class="btn btn-sm btn-outline-primary " data-type="page">{pageNumber}</button>
-                        </div>
-
+                <!-- page selector buttons -->
+                <div class="btn-group whvm-sidebar-item " role="group">
                     <button type="button" class="btn btn-outline-primary col-1 px-0" data-type="first"><i class="mi mi-ChevronLeftSmall"></i></button>
                     <button type="button" class="btn btn-outline-primary col-1 px-0" data-type="prev"><i class="mi mi-ChevronLeft"></i></button>
+
+                    <div class="btn-group col px-0" role="group" data-type="pages">
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-type="page">{pageNumber}</button>
                     </div>
+
                     <button type="button" class="btn btn-outline-primary col-1 px-0" data-type="next"><i class="mi mi-ChevronRight"></i></button>
                     <button type="button" class="btn btn-outline-primary col-1 px-0" data-type="last"><i class="mi mi-ChevronRightSmall"></i></button>
                 </div>
             </div>
         </div>
+        </div>
 
-        <main class="col-12 col-md-9 col-xl-10 py-3 px-md-5 whvm-content" role="main">
+        <main class="col-12 col-md-8 col-lg-9 col-xl-10 px-md-3 whvm-content" role="main">
             <div data-jplist-group="group1" style="overflow: auto ">
                 @foreach (var item in Model)
                 {
-                    <div class="card mb-3" data-jplist-item>
+                    <div class="card" data-jplist-item>
                         <div class="row no-gutters">
-                            <div class="col-md-4 col-lg-2">
+                            <div class="col-3 col-lg-2 col-xl-1">
                                 <img src="~/images/@(item.SourceFormat.SourceFormatText)_logo.svg" class="img-fluid p-2 p-md-3" alt="@(item.SourceFormat.SourceFormatText)">
                             </div>
-                            <div class="col-md-8 col-lg-10">
-                                <div class="card-body">
-                                    <h3 class="card-title ">
+                            <div class="col-9 col-lg-10 col-xl-11">
+                                <div class="card-body pl-0 pr-2 py-2 pl-md-0 pr-md-3 py-md-3">
+                                    <h3 class="card-title text-truncate">
                                         <a href="#"
-                                           class="sourceName text-truncate"
+                                           class="sourceName "
                                            id="sourcesModalBtn"
                                            data-target="#sourcesModal"
                                            data-toggle="modal"
@@ -196,6 +223,15 @@
 {
     <script>
         jplist.init();
+    </script>
+    
+    <script>
+    var $sourceFormatFilter = $('#sourceFormat-tag-filter-group > label > input');
+    $sourceFormatFilter.change(function () {
+        console.log($(this));
+        $(this).parent().siblings().removeClass("active");
+        $(this).parent().button("toggle");
+    });
     </script>
 
     <script type="text/javascript" src="~/js/ModelIndexModals.js"></script>

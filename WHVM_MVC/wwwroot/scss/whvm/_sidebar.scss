@@ -60,6 +60,7 @@
     order: 0;
     // background-color: #f5f2f9;
     border-bottom: 1px solid rgba(0, 0, 0, .1);
+    padding:.5rem;
   
     @include media-breakpoint-up(md) {
       @supports (position: sticky) {
@@ -68,6 +69,7 @@
         z-index: 1000;
         height: calc(100vh - 4rem);
       }
+      padding: 1rem;
       border-right: 1px solid rgba(0, 0, 0, .1);
     }
   
@@ -77,6 +79,21 @@
 
     > h2 {
       border-bottom: 1px solid rgba(0, 0, 0, .1);
+      padding: 0rem 0rem 1rem 0rem;
+    }
+
+    .whvm-sidebar-item {
+      @extend .col-12;
+      @extend .px-0;
+      @extend .py-1;
+    }
+    
+    .whvm-sidebar-dropdown {
+      @extend .whvm-sidebar-item;
+
+      @include media-breakpoint-up(md) {
+
+      }
     }
   }
   
@@ -175,4 +192,3 @@
     color: rgba(0, 0, 0, .85);
     background-color: transparent;
   }
-  

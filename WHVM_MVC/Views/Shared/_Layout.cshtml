@@ -6,17 +6,18 @@
     <title>@(ViewContext.RouteData.Values["controller"].ToString() + " - " + ViewContext.RouteData.Values["action"].ToString() + " | " + Startup.Configuration.GetSection("SiteVariables:SiteName").Value)</title>
 
     <environment include="Development">
-        <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        @*<link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.css" />*@
         <link rel="stylesheet" type="text/css" href="~/lib/jplist-es6/css/jplist.styles.css" />
         <link rel="stylesheet" type="text/css" href="~/lib/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.css" />
         <link rel="stylesheet" type="text/css" href="~/lib/font-awesome/css/all.min.css" />
+
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />*@
         <link rel="stylesheet" type="text/css" href="~/lib/jplist-es6/css/jplist.styles.css" />
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css"
               asp-fallback-href="~/lib/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.css" />
@@ -33,43 +34,44 @@
     var antiforgeryRequestToken = Antiforgery.GetAndStoreTokens(Context).RequestToken;
 }
 
-<body>
-    <header class="navbar navbar-expand navbar-dark bg-primary flex-column flex-md-row whvm-navbar">
-                <a class="navbar-brand d-inline-block text-truncate" asp-area="" asp-controller="Home" asp-action="Index">@(Startup.Configuration.GetSection("SiteVariables:SiteName").Value)</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Sources" asp-action="Index">Sources</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Clips" asp-action="Index">Clips</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+<body style="overflow-y:scroll">
+    <header class="navbar navbar-expand-md navbar-dark bg-primary whvm-navbar ">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@(Startup.Configuration.GetSection("SiteVariables:SiteName").Value)</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
             @*<span class="navbar-toggler-icon"></span>*@
             <i class="mi mi-GlobalNavigationButton"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarMain">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Sources" asp-action="Index">Sources</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Clips" asp-action="Index">Clips</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </li>
+            </ul>
+        </div>
     </header>
     <div class="container-fluid">
         <partial name="_CookieConsentPartial" />
-            @RenderBody()
+        @RenderBody()
     </div>
 
-    @*<footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - @(Startup.Configuration.GetSection("SiteVariables:SiteName").Value) - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>*@
+@*<footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2019 - @(Startup.Configuration.GetSection("SiteVariables:SiteName").Value) - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>*@
 
-    <environment include="Development">
+
+<environment include="Development">
         <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="~/lib/jplist-es6/js/jplist.min.js"></script>
