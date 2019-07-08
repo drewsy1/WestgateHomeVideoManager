@@ -144,16 +144,16 @@
 
                     <!-- page selector buttons -->
                     <div class="btn-group col-12 px-0" role="group">
-                        <button type="button" class="btn btn-sm btn-outline-primary" data-type="first"><i class="fas fa-angle-double-left"></i></button>
-                        <button type="button" class="btn btn-sm btn-outline-primary" data-type="prev"><i class="fas fa-angle-left"></i></button>
 
                         <div class="btn-group" role="group" data-type="pages">
                             <button type="button" class="btn btn-sm btn-outline-primary " data-type="page">{pageNumber}</button>
                         </div>
 
-                        <button type="button" class="btn btn-sm btn-outline-primary" data-type="next"><i class="fas fa-angle-right"></i></button>
-                        <button type="button" class="btn btn-sm btn-outline-primary" data-type="last"><i class="fas fa-angle-double-right"></i></button>
+                    <button type="button" class="btn btn-outline-primary col-1 px-0" data-type="first"><i class="mi mi-ChevronLeftSmall"></i></button>
+                    <button type="button" class="btn btn-outline-primary col-1 px-0" data-type="prev"><i class="mi mi-ChevronLeft"></i></button>
                     </div>
+                    <button type="button" class="btn btn-outline-primary col-1 px-0" data-type="next"><i class="mi mi-ChevronRight"></i></button>
+                    <button type="button" class="btn btn-outline-primary col-1 px-0" data-type="last"><i class="mi mi-ChevronRightSmall"></i></button>
                 </div>
             </div>
         </div>
@@ -165,7 +165,7 @@
                     <div class="card mb-3" data-jplist-item>
                         <div class="row no-gutters">
                             <div class="col-md-4 col-lg-2">
-                                @*<img src="..." class="card-img" alt="...">*@
+                                <img src="~/images/@(item.SourceFormat.SourceFormatText)_logo.svg" class="img-fluid p-2 p-md-3" alt="@(item.SourceFormat.SourceFormatText)">
                             </div>
                             <div class="col-md-8 col-lg-10">
                                 <div class="card-body">
