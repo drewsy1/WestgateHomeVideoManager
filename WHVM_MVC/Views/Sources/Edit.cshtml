@@ -57,7 +57,17 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var dateTimePickerOpts = {
-                icons: { time: 'fas fa-clock' },
+                icons: {
+                    time: 'mi mi-Clock',
+                    date: 'mi mi-Calendar',
+                    up: 'mi mi-Up',
+                    down: 'mi mi-Down',
+                    previous: 'mi mi-ChevronLeft',
+                    next: 'mi mi-ChevronRight',
+                    today: 'mi mi-DateTime',
+                    clear: 'mi mi-Delete',
+                    close: 'mi mi-Clear'
+                },
                 format: 'M[/]D[/]YYYY hh[:]mm[:]ss A',
                 extraFormats: ['YYYY[-]MM[-]DD[T]HH[:]mm[:]ss[.]SSSS']
             };
