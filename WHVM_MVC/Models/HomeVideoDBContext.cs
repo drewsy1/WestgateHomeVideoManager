@@ -69,9 +69,9 @@ namespace WHVM_MVC.Models
             {
                 entity.Property(e => e.SourceId).HasColumnName("SourceID");
 
-                entity.Property(e => e.SourceDateBurned).HasColumnType("datetime");
+                entity.Property(e => e.SourceDateCreated).HasColumnType("datetime");
 
-                entity.Property(e => e.SourceDateRipped).HasColumnType("datetime");
+                entity.Property(e => e.SourceDateImported).HasColumnType("datetime");
 
                 entity.Property(e => e.SourceFilePath).HasMaxLength(300);
 
@@ -112,6 +112,20 @@ namespace WHVM_MVC.Models
                 entity.Property(e => e.PeopleId).HasColumnName("PeopleID");
 
                 entity.Property(e => e.PeopleName).HasMaxLength(30);
+            });
+
+            modelBuilder.Entity<View_SourceDates>(entity =>
+            {
+                entity.HasKey(e => e.SourceId);
+
+                entity.Property(e => e.SourceId).HasColumnName("SourceID");
+
+                entity.Property(e => e.SourceDateStart);
+
+                entity.Property(e => e.SourceDateEnd);
+
+                entity.HasOne(d => d.Source)
+                    .WithOne(p => p.SourceDates);
             });
         }
     }

@@ -14,8 +14,8 @@ namespace WHVM_MVC.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SourceId { get; set; }
         public string SourceLabel { get; set; }
-        public DateTime? SourceDateBurned { get; set; }
-        public DateTime? SourceDateRipped { get; set; }
+        public DateTime? SourceDateCreated { get; set; }
+        public DateTime? SourceDateImported { get; set; }
         public int? SourceFormatId { get; set; }
         public string SourceFilePath { get; set; }
 

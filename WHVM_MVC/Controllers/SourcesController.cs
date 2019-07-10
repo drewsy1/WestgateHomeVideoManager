@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -54,21 +53,21 @@ namespace WHVM_MVC.Controllers
             _context.Entry(currentSource ?? throw new InvalidOperationException()).Reference(s => s.SourceFormat).Load();
 
             ViewBag.modelSourceFormat =
-                SourceFormat.AllFormats.FirstOrDefault(c => c.SourceFormatId == currentSource?.SourceFormatId);
+                SourceFormat.AllFormats.FirstOrDefault(c => c.SourceFormatId == currentSource.SourceFormatId);
 
             ViewBag.modelID = id;
-            ViewBag.modelLabel = currentSource?.SourceLabel;
-            ViewBag.modelDateBurned = currentSource?.SourceDateBurned;
-            ViewBag.modelDateRipped = currentSource?.SourceDateRipped;
-            ViewBag.modelFormat = currentSource?.SourceFormat.SourceFormatText;
+            ViewBag.modelLabel = currentSource.SourceLabel;
+            ViewBag.modelDateCreated = currentSource.SourceDateCreated;
+            ViewBag.modelDateImported = currentSource.SourceDateImported;
+            ViewBag.modelFormat = currentSource.SourceFormat.SourceFormatText;
             ViewBag.modelController = "Sources";
 
             ViewBag.modelDataDictionary = new Dictionary<string, object>();
             ViewBag.modelDataDictionary.Add("ID", id);
-            ViewBag.modelDataDictionary.Add("Label", currentSource?.SourceLabel);
-            ViewBag.modelDataDictionary.Add("Date Burned", currentSource?.SourceDateBurned);
-            ViewBag.modelDataDictionary.Add("Date Ripped", currentSource?.SourceDateRipped);
-            ViewBag.modelDataDictionary.Add("Format", currentSource?.SourceFormat.SourceFormatText);
+            ViewBag.modelDataDictionary.Add("Label", currentSource.SourceLabel);
+            ViewBag.modelDataDictionary.Add("Date Created", currentSource.SourceDateCreated);
+            ViewBag.modelDataDictionary.Add("Date Imported", currentSource.SourceDateImported);
+            ViewBag.modelDataDictionary.Add("Format", currentSource.SourceFormat.SourceFormatText);
             ViewBag.Controller = "Sources";
             return PartialView(modalName, currentSource);
         }
@@ -86,7 +85,7 @@ namespace WHVM_MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("SourceId,SourceLabel,SourceDateBurned,SourceDateRipped,SourceFormatId,SourceFilePath")]
+            [Bind("SourceId,SourceLabel,SourceDateCreated,SourceDateImported,SourceFormatId,SourceFilePath")]
             Source source)
         {
             if (ModelState.IsValid)
@@ -126,7 +125,7 @@ namespace WHVM_MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,
-            [Bind("SourceId,SourceLabel,SourceDateBurned,SourceDateRipped,SourceFormatId,SourceFilePath")]
+            [Bind("SourceId,SourceLabel,SourceDateCreated,SourceDateImported,SourceFormatId,SourceFilePath")]
             Source source)
         {
             if (id != source.SourceId)

@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WHVM_MVC.Models
 {
     public partial class Clip
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ClipId { get; set; }
-        public int? SourceId { get; set; }
+        public int? SourceSegment { get; set; }
+        public int SourceId { get; set; }
         public int? ClipNumber { get; set; }
         public DateTime? ClipTimeStart { get; set; }
         public DateTime? ClipTimeEnd { get; set; }
