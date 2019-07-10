@@ -143,3 +143,18 @@
     @include font-size(.875rem);
   }
 }
+
+@media (max-width: 768px) {
+  .collapse.collapse-md-down, .collapsing.collapse-md-down {
+      margin: .25rem;
+      background: $light;
+  }
+}
+
+@media (min-width: 768px) {
+  .collapse.collapse-md-down {
+      display: block;
+      height: auto !important;
+      visibility: visible;
+  }
+}
