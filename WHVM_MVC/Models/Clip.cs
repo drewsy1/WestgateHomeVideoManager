@@ -14,9 +14,9 @@ namespace WHVM_MVC.Models
         public TimeSpan? ClipVidTimeStart { get; set; }
         public TimeSpan? ClipVidTimeEnd { get; set; }
         public TimeSpan? ClipVidTimeLength { get; set; }
-        public string ClipReviewer { get; set; }
-        public string CameraOperator { get; set; }
-        public string Description { get; set; }
+        public int ClipReviewerId { get; set; }
+        public int ClipCameraOperatorId { get; set; }
+        public string ClipDescription { get; set; }
         public string ClipFilePath { get; set; }
 
         public virtual Source Source { get; set; }

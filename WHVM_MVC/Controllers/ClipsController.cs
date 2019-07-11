@@ -53,17 +53,17 @@ namespace WHVM_MVC.Controllers
 
             string[] modalTitleParts =
             {
-                currentClip?.Description
+                currentClip?.ClipDescription
             };
 
             ViewBag.modalTitle = new HtmlString(string.Join("", modalTitleParts));
 
             ViewBag.modelDataDictionary = new Dictionary<string, object>();
             ViewBag.modelDataDictionary.Add("ID", currentClip?.ClipId);
-            ViewBag.modelDataDictionary.Add("Label", currentClip?.Description);
+            ViewBag.modelDataDictionary.Add("Label", currentClip?.ClipDescription);
             ViewBag.modelDataDictionary.Add("Camera Operator", currentClip?.CameraOperator);
             ViewBag.modelDataDictionary.Add("Clip Number", currentClip?.ClipNumber);
-            ViewBag.modelDataDictionary.Add("Clip Reviewer", currentClip?.ClipReviewer);
+            ViewBag.modelDataDictionary.Add("Clip Reviewer", currentClip?.ClipReviewerId);
             ViewBag.modelDataDictionary.Add("Start (Timestamp)", currentClip?.ClipTimeStart);
             ViewBag.modelDataDictionary.Add("End (Timestamp)", currentClip?.ClipTimeEnd);
             ViewBag.modelDataDictionary.Add("Start (Clip Timestamp)", currentClip?.ClipVidTimeStart);
@@ -85,7 +85,7 @@ namespace WHVM_MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClipId,SourceId,ClipNumber,ClipTimeStart,ClipTimeEnd,ClipVidTimeStart,ClipVidTimeEnd,ClipVidTimeLength,ClipReviewer,CameraOperator,Description,ClipFilePath")] Clip clip)
+        public async Task<IActionResult> Create([Bind("ClipId,SourceId,ClipNumber,ClipTimeStart,ClipTimeEnd,ClipVidTimeStart,ClipVidTimeEnd,ClipVidTimeLength,ClipReviewerID,ClipCameraOperatorID,ClipDescription,ClipFilePath")] Clip clip)
         {
             if (ModelState.IsValid)
             {
@@ -117,7 +117,7 @@ namespace WHVM_MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClipId,SourceId,ClipNumber,ClipTimeStart,ClipTimeEnd,ClipVidTimeStart,ClipVidTimeEnd,ClipVidTimeLength,ClipReviewer,CameraOperator,Description,ClipFilePath")] Clip clip)
+        public async Task<IActionResult> Edit(int id, [Bind("ClipId,SourceId,ClipNumber,ClipTimeStart,ClipTimeEnd,ClipVidTimeStart,ClipVidTimeEnd,ClipVidTimeLength,ClipReviewerID,ClipCameraOperatorID,ClipDescription,ClipFilePath")] Clip clip)
         {
             if (id != clip.ClipId)
             {

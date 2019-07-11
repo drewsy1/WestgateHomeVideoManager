@@ -37,11 +37,13 @@ namespace WHVM_MVC.Models
             {
                 entity.Property(e => e.ClipId).HasColumnName("ClipID");
 
-                entity.Property(e => e.CameraOperator).HasMaxLength(50);
+                entity.Property(e => e.SourceSegment);
+
+                entity.Property(e => e.ClipCameraOperatorId).HasColumnName("ClipCameraOperatorID");
 
                 entity.Property(e => e.ClipFilePath).HasMaxLength(300);
 
-                entity.Property(e => e.ClipReviewer).HasMaxLength(50);
+                entity.Property(e => e.ClipReviewerId).HasColumnName("ClipReviewerID");
 
                 entity.Property(e => e.ClipTimeEnd).HasColumnType("datetime");
 
@@ -55,7 +57,7 @@ namespace WHVM_MVC.Models
 
                 entity.Property(e => e.ClipVidTimeStart).HasColumnType("time(3)");
 
-                entity.Property(e => e.Description).HasMaxLength(250);
+                entity.Property(e => e.ClipDescription).HasMaxLength(250);
 
                 entity.Property(e => e.SourceId).HasColumnName("SourceID");
 
@@ -63,6 +65,16 @@ namespace WHVM_MVC.Models
                     .WithMany(p => p.Clips)
                     .HasForeignKey(d => d.SourceId)
                     .HasConstraintName("FK_Clip_Source");
+
+                entity.HasOne(d => d.ClipReviewer)
+                    .WithMany(p => p.ClipsAsReviewer)
+                    .HasForeignKey(d => d.ClipReviewerId)
+                    .HasConstraintName("FK_Clip_TagsPeople_ClipReviewer");
+
+                entity.HasOne(d => d.ClipCameraOperator)
+                    .WithMany(p => p.ClipsAsCameraOperator)
+                    .HasForeignKey(d => d.ClipCameraOperatorId)
+                    .HasConstraintName("FK_Clip_TagsPeople_ClipCameraOperator");
             });
 
             modelBuilder.Entity<Source>(entity =>

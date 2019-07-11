@@ -140,7 +140,7 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body p-3">
-                                    <h5 class="card-title"><a href="#" id="clipModalBtn" data-target="#clipModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("ModalBtnActionResult", "Clips", new RouteValueDictionary {{"id", clip.ClipId}})')">@(clip.Description)</a></h5>
+                                    <h5 class="card-title"><a href="#" id="clipModalBtn" data-target="#clipModal" data-toggle="modal" onclick="SetDetailViewID('@Url.Action("ModalBtnActionResult", "Clips", new RouteValueDictionary {{"id", clip.ClipId}})')">@(clip.ClipDescription)</a></h5>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                     <a href="#" class="btn btn-primary">Go somewhere</a>
                                 </div>
