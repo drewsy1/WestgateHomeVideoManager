@@ -61,7 +61,7 @@ namespace WHVM_MVC.Controllers
             ViewBag.modelDataDictionary = new Dictionary<string, object>();
             ViewBag.modelDataDictionary.Add("ID", currentClip?.ClipId);
             ViewBag.modelDataDictionary.Add("Label", currentClip?.ClipDescription);
-            ViewBag.modelDataDictionary.Add("Camera Operator", currentClip?.CameraOperator);
+            ViewBag.modelDataDictionary.Add("Camera Operator", currentClip?.ClipCameraOperatorId);
             ViewBag.modelDataDictionary.Add("Clip Number", currentClip?.ClipNumber);
             ViewBag.modelDataDictionary.Add("Clip Reviewer", currentClip?.ClipReviewerId);
             ViewBag.modelDataDictionary.Add("Start (Timestamp)", currentClip?.ClipTimeStart);
