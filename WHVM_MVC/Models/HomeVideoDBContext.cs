@@ -20,6 +20,8 @@ namespace WHVM_MVC.Models
         public virtual DbSet<SourceFormat> SourceFormat { get; set; }
         public virtual DbSet<TagsCollections> TagsCollections { get; set; }
         public virtual DbSet<TagsPeople> TagsPeople { get; set; }
+        public virtual DbSet<Clip_TagsPeople> Clip_TagsPeople { get; set; }
+        public virtual DbSet<Clip_TagsCollections> Clip_TagsCollections { get; set; }
 
         // Unable to generate entity type for table 'dbo.Clip_TagsPeople'. Please see the warning messages.
         // Unable to generate entity type for table 'dbo.Clip_TagsCollections'. Please see the warning messages.
@@ -41,6 +43,8 @@ namespace WHVM_MVC.Models
 
                 entity.Property(e => e.ClipCameraOperatorId).HasColumnName("ClipCameraOperatorID");
 
+                entity.Property(e => e.ClipDescription).HasMaxLength(250);
+
                 entity.Property(e => e.ClipFilePath).HasMaxLength(300);
 
                 entity.Property(e => e.ClipReviewerId).HasColumnName("ClipReviewerID");
@@ -57,24 +61,23 @@ namespace WHVM_MVC.Models
 
                 entity.Property(e => e.ClipVidTimeStart).HasColumnType("time(3)");
 
-                entity.Property(e => e.ClipDescription).HasMaxLength(250);
-
                 entity.Property(e => e.SourceId).HasColumnName("SourceID");
 
-                entity.HasOne(d => d.Source)
-                    .WithMany(p => p.Clips)
-                    .HasForeignKey(d => d.SourceId)
-                    .HasConstraintName("FK_Clip_Source");
+                entity.HasOne(d => d.ClipCameraOperator)
+                    .WithMany(p => p.ClipsAsCameraOperator)
+                    .HasForeignKey(d => d.ClipCameraOperatorId)
+                    .HasConstraintName("FK_Clip_TagsPeople_ClipCameraOperator");
 
                 entity.HasOne(d => d.ClipReviewer)
                     .WithMany(p => p.ClipsAsReviewer)
                     .HasForeignKey(d => d.ClipReviewerId)
                     .HasConstraintName("FK_Clip_TagsPeople_ClipReviewer");
 
-                entity.HasOne(d => d.ClipCameraOperator)
-                    .WithMany(p => p.ClipsAsCameraOperator)
-                    .HasForeignKey(d => d.ClipCameraOperatorId)
-                    .HasConstraintName("FK_Clip_TagsPeople_ClipCameraOperator");
+                entity.HasOne(d => d.Source)
+                    .WithMany(p => p.Clips)
+                    .HasForeignKey(d => d.SourceId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Clip_Source");
             });
 
             modelBuilder.Entity<Source>(entity =>
@@ -139,6 +142,10 @@ namespace WHVM_MVC.Models
                 entity.HasOne(d => d.Source)
                     .WithOne(p => p.SourceDates);
             });
+
+            modelBuilder.Entity<Clip_TagsPeople>().HasKey(tp => new {tp.ClipId, tp.PeopleId});
+
+            modelBuilder.Entity<Clip_TagsCollections>().HasKey(tp => new { tp.ClipId, tp.CollectionsId });
         }
     }
 }
