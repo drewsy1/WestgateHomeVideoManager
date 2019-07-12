@@ -1,0 +1,117 @@
+﻿@{
+    Layout = "Layouts/_Layout_Sidebar";
+}
+
+@section SidebarContent{
+    <!--#region Clip Sort (hidden)-->
+    <div style="display: none"
+         data-jplist-control="hidden-sort"
+         data-group="@ViewData["JplistDataGroup"]"
+         data-path="@ViewData["JplistSortDataPath"]"
+         data-order="@ViewData["JplistSortDataOrder"]"
+         data-type="@ViewData["JplistSortDataType"]"></div>
+    <!--#endregion-->
+    <!-- Filter Collapse toggle-button, only seen at small device sizes-->
+    <button class="btn btn-primary d-sm-none my-1" type="button" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
+        Filters
+    </button>
+
+    <!--#region Filter Collapse (only collapsible on small devices)-->
+    <div class="collapse collapse-md-down" id="collapseFilters"  style="overflow-y: auto">
+        @if (IsSectionDefined("SidebarContent"))
+        {
+            @await RenderSectionAsync("SidebarContent").ConfigureAwait(false)
+        }
+        else
+        {
+            // default content
+        }
+    </div>
+    <!--#endregion-->
+
+        <!--#region Page Navigation Controls-->
+        <div class="pagination mt-auto d-flex flex-wrap" aria-label="Page navigation"
+             data-jplist-control="pagination"
+             data-group="@ViewData["JplistDataGroup"]"
+             data-items-per-page="8"
+             data-current-page="0"
+             data-disabled-class="disabled"
+             data-selected-class="active"
+             data-name="pagination1"
+             data-range="4">
+
+            <div class="w-100 ">
+                <span data-type="info" class="d-block text-center">
+                    Page {pageNumber} of {pagesNumber}
+                </span>
+            </div>
+            <div class="col-3 col-md-12 pr-1 pl-0 px-md-0 my-1">
+                <!-- items per page dropdown -->
+                <div class="dropup"
+                     data-type="items-per-page-dd"
+                     data-opened-class="show">
+
+                    <button data-type="panel"
+                            class="btn btn-sm btn-primary col-12 dropdown-toggle px-0"
+                            type="button">
+                        Dropdown button
+                    </button>
+
+                    <div data-type="content"
+                         class="dropdown-menu"
+                         aria-labelledby="dropdownMenuButton">
+
+                        <a class="dropdown-item" href="#" data-value="8">8 per page</a>
+                        <a class="dropdown-item" href="#" data-value="25">25 per page</a>
+                        <a class="dropdown-item" href="#" data-value="50">50 per page</a>
+                        <a class="dropdown-item" href="#" data-value="0">View All</a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="justify-content-center align-content-center col-9 col-md-12 pr-0 pl-1 px-md-0 my-1">
+                <div class="btn-group col-12 px-0" role="group">
+                    <button type="button" class="btn btn-outline-primary col-1 px-0" data-type="first"><i class="mi mi-ChevronLeftSmall"></i></button>
+                    <button type="button" class="btn btn-outline-primary col-1 px-0" data-type="prev"><i class="mi mi-ChevronLeft"></i></button>
+
+                    <div class="btn-group col px-0" role="group" data-type="pages">
+                        <button type="button" class="btn btn-sm btn-outline-primary" data-type="page">{pageNumber}</button>
+                    </div>
+
+                    <button type="button" class="btn btn-outline-primary col-1 px-0" data-type="next"><i class="mi mi-ChevronRight"></i></button>
+                    <button type="button" class="btn btn-outline-primary col-1 px-0" data-type="last"><i class="mi mi-ChevronRightSmall"></i></button>
+                </div>
+            </div>
+        </div>
+        <!--#endregion-->
+}
+
+@section Body{
+    @if (IsSectionDefined("Body"))
+    {
+        @await RenderSectionAsync("Body").ConfigureAwait(false)
+    }
+    else
+    {
+        // default content
+    }
+}
+
+@section Scripts{
+    <script>
+        (function() {
+            'use strict';
+            jplist.init();
+        })();
+        
+    </script>
+
+    @if (IsSectionDefined("Scripts"))
+    {
+        @await RenderSectionAsync("Scripts").ConfigureAwait(false)
+    }
+    else
+    {
+        // default content
+    }
+}

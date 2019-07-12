@@ -6,18 +6,12 @@
     <title>@(ViewContext.RouteData.Values["controller"].ToString() + " - " + ViewContext.RouteData.Values["action"].ToString() + " | " + Startup.Configuration.GetSection("SiteVariables:SiteName").Value)</title>
 
     <environment include="Development">
-        @*<link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.css" />*@
         <link rel="stylesheet" type="text/css" href="~/lib/jplist-es6/jplist.styles.css" />
         <link rel="stylesheet" type="text/css" href="~/lib/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.css" />
         <link rel="stylesheet" type="text/css" href="~/lib/font-awesome/css/all.min.css" />
 
     </environment>
     <environment exclude="Development">
-        @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-              crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />*@
         <link rel="stylesheet" type="text/css" href="~/lib/jplist-es6/jplist.styles.css" />
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css"
               asp-fallback-href="~/lib/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.css" />
@@ -64,14 +58,7 @@
         @RenderBody()
     </div>
 
-@*<footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2019 - @(Startup.Configuration.GetSection("SiteVariables:SiteName").Value) - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>*@
-
-
-<environment include="Development">
+    <environment include="Development">
         <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
         <script type="text/javascript" src="~/lib/jplist-es6/jplist-es6.min.js"></script>
@@ -92,13 +79,7 @@
                 crossorigin="anonymous"
                 integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
         </script>
-        @*<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"
-                    asp-fallback-src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
-                    asp-fallback-src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
-            <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-            <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.bootstrap4.min.js"></script>*@
-        <script type="text/javascript" src="~/lib/jplist-es6/js/jplist.min.js"></script>
+        <script type="text/javascript" src="~/lib/jplist-es6/jplist.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
                 asp-fallback-src="~/lib/moment.js/moment.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"
