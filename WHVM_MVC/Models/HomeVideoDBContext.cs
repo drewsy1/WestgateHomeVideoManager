@@ -69,7 +69,7 @@ namespace WHVM_MVC.Models
                     .HasConstraintName("FK_Clip_TagsPeople_ClipCameraOperator");
 
                 entity.HasOne(d => d.ClipReviewer)
-                    .WithMany(p => p.ClipsAsReviewer)
+                    .WithMany(p => p.ClipsAsClipReviewer)
                     .HasForeignKey(d => d.ClipReviewerId)
                     .HasConstraintName("FK_Clip_TagsPeople_ClipReviewer");
 
