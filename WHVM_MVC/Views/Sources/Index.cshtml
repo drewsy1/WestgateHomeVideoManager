@@ -2,310 +2,219 @@
 
 @{
     Layout = "Layouts/_Layout_Sidebar_Index";
+    ViewData["Title"] = "Sources";
+    ViewData["JplistDataGroup"] = "sources";
+    ViewData["JplistSortDataPath"] = ".sourceID";
+    ViewData["JplistSortDataOrder"] = "asc";
+    ViewData["JplistSortDataType"] = "number";
+
     var maxClipCount = Model.Max(x => x.Clips.Count);
 }
 
-<!-- <style>
-    @@media (max-width: 768px) {
-        .collapse.collapse-md-down, .collapsing.collapse-md-down {
-            margin: .25rem;
-            background: $light;
-        }
-    }
-
-    @@media (min-width: 768px) {
-        .collapse.collapse-md-down {
-            display: block;
-            height: auto !important;
-            visibility: visible;
-        }
-    }
-</style> -->
-
-<div class="row flex-xl-nowrap">
-    <div class="col-12 col-md-4 col-lg-3 whvm-sidebar d-flex flex-column">
-        <h2>Sources</h2>
-        <!-- hidden sort control -->
-        <div style="display: none"
-             data-jplist-control="hidden-sort"
-             data-group="sources"
-             data-path=".sourceID"
-             data-order="asc"
-             data-type="number"></div>
-
-        <button class="btn btn-primary d-sm-none my-1" type="button" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
-            Filters
-        </button>
-
-        <div class="collapse collapse-md-down" id="collapseFilters">
-            <div>
-            <!-- sourceFormat filter control -->
-            <div class="btn-group btn-group-toggle btn-group-sm whvm-sidebar-item" id="sourceFormat-tag-filter-group">
-                <label class="btn btn-secondary active px-1" id="sourceFormat-tag-filter-default-btn">
+@section SidebarContent{
+    <div>
+        <!--#region Filter - Radio - SourceFormat - Source-->
+        <div class="btn-group btn-group-toggle btn-group-sm col-12 px-0 py-1" id="sourceFormat-tag-filter-group">
+            <label class="btn btn-secondary active px-1" id="sourceFormat-tag-filter-default-btn">
+                <input class=""
+                       type="radio"
+                       data-jplist-control="radio-buttons-text-filter"
+                       data-group="@ViewData["JplistDataGroup"]"
+                       data-name="sourceFormat-tag-filter"
+                       data-path="default"
+                       name="sourceFormat-tag-filter"
+                       data-id="format"
+                       value=""
+                       id="sourceFormat-tag-filter-default">
+                All
+            </label>
+            @foreach (var format in SourceFormat.AllFormats)
+            {
+                <label class="btn btn-secondary px-1" id="sourceFormat-tag-filter-@(format.SourceFormatText)-btn">
                     <input class=""
                            type="radio"
                            data-jplist-control="radio-buttons-text-filter"
-                           data-group="sources"
+                           data-group="@ViewData["JplistDataGroup"]"
                            data-name="sourceFormat-tag-filter"
-                           data-path="default"
+                           data-path=".sourceFormat"
                            name="sourceFormat-tag-filter"
                            data-id="format"
-                           value=""
-                           id="sourceFormat-tag-filter-default">
-                    All
+                           value="@(format.SourceFormatText)"
+                           id="sourceFormat-tag-filter-@(format.SourceFormatText)" />
+                    @(format.SourceFormatText)
                 </label>
-                @foreach (var format in SourceFormat.AllFormats)
-                {
-                    <label class="btn btn-secondary px-1" id="sourceFormat-tag-filter-@(format.SourceFormatText)-btn">
-                        <input class=""
-                               type="radio"
-                               data-jplist-control="radio-buttons-text-filter"
-                               data-group="sources"
-                               data-name="sourceFormat-tag-filter"
-                               data-path=".sourceFormat"
-                               name="sourceFormat-tag-filter"
-                               data-id="format"
-                               value="@(format.SourceFormatText)"
-                               id="sourceFormat-tag-filter-@(format.SourceFormatText)" />
-                        @(format.SourceFormatText)
-                    </label>
-                }
-            </div>
-
-            <!-- sourceName filter control -->
-            <div class="input-group input-group-sm py-1 py-lg-2">
-                <input class="form-control form-control-sm"
-                       data-jplist-control="textbox-filter"
-                       data-group="sources"
-                       data-name="sourceName-text-filter"
-                       data-path=".sourceName"
-                       data-id="name"
-                       type="text"
-                       value=""
-                       id="textFilterInput"
-                       data-clear-btn-id="name-clear-btn"
-                       placeholder="Filter by Name" />
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="name-clear-btn">Clear</button>
-                </div>
-            </div>
-
-
-            <div class='input-group input-group-sm py-1 py-lg-2' id="datetimepickerMin" >
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Start Date</span>
-                    </div>
-                <input class="form-control form-control-sm" 
-                    data-jplist-control="textbox-filter"
-                    data-group="sources"
-                    data-name="sourceDate-text-filter"
-                    data-path=".sourceDate"
-                    data-id="min-date"
-                    type="date"
-                    value=""
-                    id="datetimepickerMinText"
-                    data-mode="dateLower"
-                />
-            </div>
-
-            <div class='input-group input-group-sm py-1 py-lg-2' id="datetimepickerMax" >
-                <div class="input-group-prepend">
-                    <span class="input-group-text">End Date</span>
-                    </div>
-                <input class="form-control form-control-sm" 
-                    data-jplist-control="textbox-filter"
-                    data-group="sources"
-                    data-name="sourceDate-text-filter"
-                    data-path=".sourceDate"
-                    data-id="max-date"
-                    type="date"
-                    value=""
-                    id="datetimepickerMaxText"
-                    data-mode="dateUpper"
-                />
-
-                <div id="datetimepickerError" class="invalid-feedback">Start date must come after end date.</div>
-            </div>
-
-            <div class='input-group input-group-sm py-1 py-lg-2' id="sourceClipCountRange" >
-                <span>Number of Clips</span>
-                <div data-jplist-control="slider-range-filter"
-                        data-group="sources"
-                        data-name="sourceClipCount-range-filter"
-                        data-path=".sourceClipCount"
-                        data-id="clips"
-                        id="sourceClipCountFilter"
-                        data-min="0"
-                        data-from="0"
-                        data-to="@maxClipCount"
-                        data-max="@maxClipCount">
-                    
-                    <div class="jplist-slider" data-type="slider"></div>
-        
-                    <div class="jplist-slider-values">
-                        <b>Min:</b> <span data-type="min"></span>,
-                        <b>Current Min:</b> <span data-type="value-1"></span>,
-                        <b>Current Max:</b> <span data-type="value-2"></span>,
-                        <b>Max:</b> <span data-type="max"></span>
-                    </div>
-                </div>
-            </div>
-
+            }
         </div>
+        <!--#endregion-->
+        <!--#region Filter - Text - SourceName - Source-->
+        <div class="input-group input-group-sm py-1 py-lg-2">
+            <input class="form-control form-control-sm"
+                   data-jplist-control="textbox-filter"
+                   data-group="@ViewData["JplistDataGroup"]"
+                   data-name="sourceName-text-filter"
+                   data-path=".sourceName"
+                   data-id="name"
+                   type="text"
+                   value=""
+                   id="textFilterInput"
+                   data-clear-btn-id="name-clear-btn"
+                   placeholder="Filter by Name" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="name-clear-btn">Clear</button>
+            </div>
         </div>
+        <!--#endregion-->
+        <!--#region Filter - Date - SourceDateMinimum - Source-->
+        <div class='input-group input-group-sm py-1 py-lg-2' id="datetimepickerMin">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Start Date</span>
+            </div>
+            <input class="form-control form-control-sm"
+                   data-jplist-control="textbox-filter"
+                   data-group="@ViewData["JplistDataGroup"]"
+                   data-name="sourceDate-text-filter"
+                   data-path=".sourceDate"
+                   data-id="min-date"
+                   type="date"
+                   value=""
+                   id="datetimepickerMinText"
+                   data-mode="dateLower" />
+        </div>
+        <!--#endregion-->
+        <!--#region Filter - Date - SourceDateMaximum - Source-->
+        <div class='input-group input-group-sm py-1 py-lg-2' id="datetimepickerMax">
+            <div class="input-group-prepend">
+                <span class="input-group-text">End Date</span>
+            </div>
+            <input class="form-control form-control-sm"
+                   data-jplist-control="textbox-filter"
+                   data-group="@ViewData["JplistDataGroup"]"
+                   data-name="sourceDate-text-filter"
+                   data-path=".sourceDate"
+                   data-id="max-date"
+                   type="date"
+                   value=""
+                   id="datetimepickerMaxText"
+                   data-mode="dateUpper" />
 
-        <!-- page navigation -->
-        <div class="mt-auto d-flex flex-wrap">
-            <div class="pagination col-3 col-md-12 pr-1 pl-0 px-md-0" aria-label="Page navigation"
-                     data-jplist-control="pagination"
-                     data-group="sources"
-                     data-items-per-page="8"
-                     data-current-page="0"
-                     data-disabled-class="disabled"
-                     data-selected-class="active"
-                     data-name="pagination1">
+            <div id="datetimepickerError" class="invalid-feedback">Start date must come after end date.</div>
+        </div>
+        <!--#endregion-->
+        <!--#region Filter - Slider - SourceClipCount - Source -->
+        <div class='input-group input-group-sm py-1 py-lg-2' id="sourceClipCountRange">
+            <span>Number of Clips</span>
+            <div data-jplist-control="slider-range-filter"
+                 data-group="@ViewData["JplistDataGroup"]"
+                 data-name="sourceClipCount-range-filter"
+                 data-path=".sourceClipCount"
+                 data-id="clips"
+                 id="sourceClipCountFilter"
+                 data-min="0"
+                 data-from="0"
+                 data-to="@maxClipCount"
+                 data-max="@maxClipCount">
 
-                    <!-- items per page dropdown -->
-                    <div class="whvm-sidebar-dropdown dropup"
-                         data-type="items-per-page-dd"
-                         data-opened-class="show">
+                <div class="jplist-slider" data-type="slider"></div>
 
-                        <button data-type="panel"
-                                class="btn btn-primary col-12 dropdown-toggle"
-                                type="button">
-                            Dropdown button
-                        </button>
-
-                        <div data-type="content"
-                             class="dropdown-menu"
-                             aria-labelledby="dropdownMenuButton">
-
-                            <a class="dropdown-item" href="#" data-value="8">8 per page</a>
-                            <a class="dropdown-item" href="#" data-value="25">25 per page</a>
-                            <a class="dropdown-item" href="#" data-value="50">50 per page</a>
-                            <a class="dropdown-item" href="#" data-value="0">View All</a>
-
-                        </div>
-                    </div>
-                </div>
-            <div class="pagination justify-content-center col-9 col-md-12 pr-0 pl-1 px-md-0" aria-label="Page navigation"
-                 data-jplist-control="pagination"
-                 data-group="sources"
-                 data-items-per-page="8"
-                 data-current-page="0"
-                 data-disabled-class="disabled"
-                 data-selected-class="active"
-                 data-name="pagination1">
-
-                <!-- page selector buttons -->
-                <div class="btn-group whvm-sidebar-item " role="group">
-                    <button type="button" class="btn btn-outline-primary col-1 px-0" data-type="first"><i class="mi mi-ChevronLeftSmall"></i></button>
-                    <button type="button" class="btn btn-outline-primary col-1 px-0" data-type="prev"><i class="mi mi-ChevronLeft"></i></button>
-
-                    <div class="btn-group col px-0" role="group" data-type="pages">
-                        <button type="button" class="btn btn-sm btn-outline-primary" data-type="page">{pageNumber}</button>
-                    </div>
-
-                    <button type="button" class="btn btn-outline-primary col-1 px-0" data-type="next"><i class="mi mi-ChevronRight"></i></button>
-                    <button type="button" class="btn btn-outline-primary col-1 px-0" data-type="last"><i class="mi mi-ChevronRightSmall"></i></button>
+                <div class="jplist-slider-values">
+                    <b>Min:</b> <span data-type="min"></span>,
+                    <b>Current Min:</b> <span data-type="value-1"></span>,
+                    <b>Current Max:</b> <span data-type="value-2"></span>,
+                    <b>Max:</b> <span data-type="max"></span>
                 </div>
             </div>
         </div>
-        </div>
+        <!--#endregion-->
 
-        <main class="col-12 col-md-8 col-lg-9 col-xl-10 px-md-3 whvm-content" role="main">
-            <div data-jplist-group="sources" style="overflow: auto ">
-                @foreach (var item in Model)
-                {
-                    <a asp-action="Details" asp-controller="Sources" asp-route-id="@item.SourceId" class="card" data-jplist-item>
-                        <span class="sourceDate" style="display:none">@(Html.DisplayFor(modelItem => item.SourceDates.SourceDateStart))</span>
-                        <span class="sourceDate" style="display:none">@(Html.DisplayFor(modelItem => item.SourceDates.SourceDateEnd))</span>
-                        <span class="sourceFormat" style="display:none">@(Html.DisplayFor(modelItem => item.SourceFormat.SourceFormatText))</span>
-                        <span class="sourceClipCount" style="display:none">@(Html.DisplayFor(modelItem => item.Clips.Count))</span>
-                        <div class="row no-gutters">
-                            <div class="col-3 col-lg-2 col-xl-1">
-                                <img src="~/images/@(item.SourceFormat.SourceFormatText)_logo.svg" class="img-fluid p-2 p-md-3" alt="@(item.SourceFormat.SourceFormatText)">
-                            </div>
-                            <div class="col-9 col-lg-10 col-xl-11">
-                                <div class="card-body pl-0 pr-2 py-2 pl-md-0 pr-md-3 py-md-3">
-                                    <h3 class="card-title text-truncate sourceName">
-                                        @(Html.DisplayFor(modelItem => item.SourceLabel))
-                                    </h3>
-                                    <p class="card-text">
-                                        <span class="badge badge-info align-self-center mr-1 ">@(item.SourceFormat.SourceFormatText)</span>
-
-                                        @{switch(item.Clips.Count)
-                                            {
-                                                case 0:
-                                                    <span class="badge badge-danger align-self-center mr-1 ">0 clips</span>
-                                                    break;
-                                                case 1:
-                                                    <span class="badge badge-secondary align-self-center mr-1 ">@(item.Clips.Count) clip</span>
-                                                    break;
-                                                default:
-                                                    <span class="badge badge-secondary align-self-center mr-1 ">@(item.Clips.Count) clips</span>
-                                                    break;
-                                            }
-                                        }
-                                        
-                                        @{if(item.SourceDates?.SourceDateStart != null)
-                                            {
-                                                <span class="badge badge-secondary align-self-center mr-1 ">Start Date: @(Html.DisplayFor(modelItem => item.SourceDates.SourceDateStart))</span>
-                                            }
-                                          else
-                                          {
-                                                <span class="badge badge-danger align-self-center mr-1 ">No start date!</span>
-                                          }
-                                        }
-                                        
-                                        @{if(item.SourceDates?.SourceDateEnd != null)
-                                          {
-                                              <span class="badge badge-secondary align-self-center mr-1 ">End Date: @(Html.DisplayFor(modelItem => item.SourceDates.SourceDateEnd))</span>
-                                          }
-                                          else
-                                          {
-                                              <span class="badge badge-danger align-self-center mr-1 ">No end date!</span>
-                                          }
-                                        }
-                                        
-                                        @{if(item.SourceDateCreated != null)
-                                          {
-                                              <span class="badge badge-secondary align-self-center mr-1 ">Date Created: @(Html.DisplayFor(modelItem => item.SourceDateCreated))</span>
-                                          }
-                                          else
-                                          {
-                                              <span class="badge badge-danger align-self-center mr-1 ">No date created!</span>
-                                          }
-                                        }
-                                        
-                                        @{if(item.SourceDateImported != null)
-                                          {
-                                              <span class="badge badge-secondary align-self-center mr-1 ">Date Imported: @(Html.DisplayFor(modelItem => item.SourceDateImported))</span>
-                                          }
-                                          else
-                                          {
-                                              <span class="badge badge-danger align-self-center mr-1 ">No date imported!</span>
-                                          }
-                                        }
-                                        
-                                        
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                }
-            </div>
-        </main>
     </div>
+}
+
+@section Body{
+    <div data-jplist-group="sources" style="overflow: auto">
+        @foreach (var item in Model)
+        {
+            <a asp-action="Details" asp-controller="Sources" asp-route-id="@item.SourceId" class="card" data-jplist-item>
+                <span class="sourceDate" style="display: none">@(Html.DisplayFor(modelItem => item.SourceDates.SourceDateStart))</span>
+                <span class="sourceDate" style="display: none">@(Html.DisplayFor(modelItem => item.SourceDates.SourceDateEnd))</span>
+                <span class="sourceFormat" style="display: none">@(Html.DisplayFor(modelItem => item.SourceFormat.SourceFormatText))</span>
+                <span class="sourceClipCount" style="display: none">@(Html.DisplayFor(modelItem => item.Clips.Count))</span>
+                <div class="row no-gutters">
+                    <div class="col-3 col-lg-2 col-xl-1">
+                        <img src="~/images/@(item.SourceFormat.SourceFormatText)_logo.svg" class="img-fluid p-2 p-md-3" alt="@(item.SourceFormat.SourceFormatText)">
+                    </div>
+                    <div class="col-9 col-lg-10 col-xl-11">
+                        <div class="card-body pl-0 pr-2 py-2 pl-md-0 pr-md-3 py-md-3">
+                            <h3 class="card-title text-truncate sourceName">
+                                @(Html.DisplayFor(modelItem => item.SourceLabel))
+                            </h3>
+                            <p class="card-text">
+                                <span class="badge badge-info align-self-center mr-1 ">@(item.SourceFormat.SourceFormatText)</span>
+
+                                @{switch (item.Clips.Count)
+                                    {
+                                        case 0:
+                                            <span class="badge badge-danger align-self-center mr-1 ">0 clips</span>
+                                            break;
+                                        case 1:
+                                            <span class="badge badge-secondary align-self-center mr-1 ">@(item.Clips.Count) clip</span>
+                                            break;
+                                        default:
+                                            <span class="badge badge-secondary align-self-center mr-1 ">@(item.Clips.Count) clips</span>
+                                            break;
+                                    } }
+
+                                @{if (item.SourceDates?.SourceDateStart != null)
+                                    {
+                                        <span class="badge badge-secondary align-self-center mr-1 ">Start Date: @(Html.DisplayFor(modelItem => item.SourceDates.SourceDateStart))</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-danger align-self-center mr-1 ">No start date!</span>
+                                    }
+                                }
+
+                                @{if (item.SourceDates?.SourceDateEnd != null)
+                                    {
+                                        <span class="badge badge-secondary align-self-center mr-1 ">End Date: @(Html.DisplayFor(modelItem => item.SourceDates.SourceDateEnd))</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-danger align-self-center mr-1 ">No end date!</span>
+                                    }
+                                }
+
+                                @{if (item.SourceDateCreated != null)
+                                    {
+                                        <span class="badge badge-secondary align-self-center mr-1 ">Date Created: @(Html.DisplayFor(modelItem => item.SourceDateCreated))</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-danger align-self-center mr-1 ">No date created!</span>
+                                    }
+                                }
+
+                                @{if (item.SourceDateImported != null)
+                                    {
+                                        <span class="badge badge-secondary align-self-center mr-1 ">Date Imported: @(Html.DisplayFor(modelItem => item.SourceDateImported))</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-danger align-self-center mr-1 ">No date imported!</span>
+                                    }
+                                }
+
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+}
 
 @section Scripts
 {
-    <script>
-        jplist.init({
-        });
-    </script>
-    
     <script>
         var $sourceFormatFilter = $('#sourceFormat-tag-filter-group > label > input');
         $sourceFormatFilter.change(function () {
@@ -313,6 +222,6 @@
             $(this).parent().button("toggle");
         });
     </script>
-    
+
     <script type="text/javascript" src="~/js/View_Sources_Index.js"></script>
 }

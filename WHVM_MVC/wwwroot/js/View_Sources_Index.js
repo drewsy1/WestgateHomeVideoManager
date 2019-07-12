@@ -1,9 +1,17 @@
 // Realtime form validation https://www.sitepoint.com/instant-validation/
+//#region Page Variables
+const dateTimePickerMinText = document.getElementById("dateTimePickerMinText");
+const dateTimePickerMaxText = document.getElementById("dateTimePickerMaxText");
+const dateTimePickerError = document.getElementById("dateTimePickerError");
+//#endregion
 
-const datetimepickerMinText = document.getElementById("datetimepickerMinText");
-const datetimepickerMaxText = document.getElementById("datetimepickerMaxText");
-const datetimepickerError = document.getElementById("datetimepickerError");
-
+//#region Page Functions
+/**
+ * Adds a callback function to an element's event
+ * @param node - HTML element to which the eventListener should be attached
+ * @param type - Event to be attached
+ * @param callback - Function to be attached to the event
+ */
 function addEvent(node, type, callback) {
     if (node.addEventListener) {
         node.addEventListener(type, function (e) {
@@ -16,6 +24,11 @@ function addEvent(node, type, callback) {
     }
 }
 
+/**
+ * Confirms that a field should be validated
+ * @param field - HTML input element to be tested
+ * @returns {boolean}
+ */
 function shouldBeValidated(field) {
     return (
         !(field.getAttribute("readonly") || field.readonly) &&
@@ -23,27 +36,35 @@ function shouldBeValidated(field) {
     );
 }
 
+/**
+ * Sets an input field's aria-invalid attribute and changes its appearance if the field is invalid.
+ * @param field - HTML input element to be modified
+ */
 function instantValidation(field) {
     if (shouldBeValidated(field)) {
-        var invalid =
-            (datetimepickerMinText.value.length > 0) &&
-            (datetimepickerMaxText.value.length > 0) &&
-            (new Date(datetimepickerMaxText.value) < new Date(datetimepickerMinText.value));
+        let invalid =
+            (dateTimePickerMinText.value.length > 0) &&
+            (dateTimePickerMaxText.value.length > 0) &&
+            (new Date(dateTimePickerMaxText.value) < new Date(dateTimePickerMinText.value));
         if (!invalid && field.getAttribute("aria-invalid")) {
-            datetimepickerMinText.removeAttribute("aria-invalid");
-            datetimepickerMaxText.removeAttribute("aria-invalid");
-            datetimepickerError.style.display = "none";
+            dateTimePickerMinText.removeAttribute("aria-invalid");
+            dateTimePickerMaxText.removeAttribute("aria-invalid");
+            dateTimePickerError.style.display = "none";
         } else if (invalid && !field.getAttribute("aria-invalid")) {
-            datetimepickerMinText.setAttribute("aria-invalid", "true");
-            datetimepickerMaxText.setAttribute("aria-invalid", "true");
-            datetimepickerError.style.display = "block";
+            dateTimePickerMinText.setAttribute("aria-invalid", "true");
+            dateTimePickerMaxText.setAttribute("aria-invalid", "true");
+            dateTimePickerError.style.display = "block";
         }
     }
 }
+//#endregion
 
-addEvent(datetimepickerMinText, "change", function (e, target) {
+//#region Page Event Listeners
+dateTimePickerMinText.addEventListener("change", function (e, target) {
     instantValidation(target);
 });
-addEvent(datetimepickerMaxText, "change", function (e, target) {
+
+dateTimePickerMaxText.addEventListener("change", function (e, target) {
     instantValidation(target);
 });
+//#endregion
