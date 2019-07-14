@@ -2,38 +2,49 @@
 @model WHVM_MVC.Models.Source
 
 @{
-    Layout = "Layouts/_Layout_Sidebar";
+    Layout = "Layouts/_Layout_Sidebar_Details";
+    ViewData["Subtitle"] = ViewContext.RouteData.Values["action"];
 }
 
-        @section Body{
-            <div>
-                <h1>@Html.DisplayFor(model => model.SourceLabel)</h1>
-                <hr/>
-                <dl class="row">
-                    <dt class="col-sm-2">
-                        Source ID
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.SourceId)
-                    </dd>
-                    <dt class="col-sm-2">
-                        Date Created
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.SourceDateCreated)
-                    </dd>
-                    <dt class="col-sm-2">
-                        Date Imported
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.SourceDateImported)
-                    </dd>
-                    <dt class="col-sm-2">
-                        Format
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.SourceFormat.SourceFormatText)
-                    </dd>
-                </dl>
-            </div>
-        }
+@section SidebarContent{
+    <div>
+        <a asp-action="Edit" asp-controller="Sources" asp-route-id="@Model.SourceId" class="btn btn-secondary px-1" id="source-edit-btn">
+            Edit
+        </a>
+    </div>
+}
+
+
+    @section Body{
+        <div>
+            <h1>@Html.DisplayFor(model => model.SourceLabel)</h1>
+            <p class="lead">@ViewData["Subtitle"]</p>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    Source ID
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.SourceId)
+                </dd>
+                <dt class="col-sm-2">
+                    Date Created
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.SourceDateCreated)
+                </dd>
+                <dt class="col-sm-2">
+                    Date Imported
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.SourceDateImported)
+                </dd>
+                <dt class="col-sm-2">
+                    Format
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.SourceFormat.SourceFormatText)
+                </dd>
+            </dl>
+        </div>
+    }

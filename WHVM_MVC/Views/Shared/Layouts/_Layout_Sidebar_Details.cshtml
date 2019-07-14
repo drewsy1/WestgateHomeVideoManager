@@ -1,0 +1,86 @@
+﻿@{
+    Layout = "Layouts/_Layout_Sidebar";
+}
+
+@section SidebarContent{
+    <!-- Filter Collapse toggle-button, only seen at small device sizes-->
+    <button class="btn btn-primary d-sm-none my-1" type="button" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
+        Menu
+    </button>
+
+    <!--#region Filter Collapse (only collapsible on small devices)-->
+    <div class="collapse collapse-md-down" id="collapseFilters" style="overflow-y: auto">
+        @if (IsSectionDefined("SidebarContent"))
+        {
+        @await RenderSectionAsync("SidebarContent").ConfigureAwait(false)
+        }
+        else
+        {
+            // default content
+        }
+    </div>
+    <!--#endregion-->
+    <!--#region Page Navigation Controls-->
+    <div class="mt-auto d-flex flex-wrap" aria-label="Page navigation">
+
+        <div class="col-3 col-md-12 pr-1 pl-0 px-md-0 my-1">
+            <!-- items per page dropdown -->
+            <div class="dropup">
+
+                <button data-type="panel"
+                        class="btn btn-sm btn-primary col-12 dropdown-toggle px-0"
+                        type="button">
+                    Sources
+                </button>
+
+                <div class="dropdown-menu"
+                     aria-labelledby="dropdownMenuButton">
+
+                    <a class="dropdown-item" href="#" >8 per page</a>
+                </div>
+            </div>
+        </div>
+        <div class="justify-content-center align-content-center col-9 col-md-12 pr-0 pl-1 px-md-0 my-1">
+            <div class="btn-group col-12 px-0" role="group" id="source-select-btn-group">
+                <a href ="#" class="btn btn-outline-primary col-1 px-0" id="source-select-first"><i class="mi mi-ChevronLeftSmall"></i></a>
+                <a href ="#" class="btn btn-outline-primary col-1 px-0" id="source-select-prev"><i class="mi mi-ChevronLeft"></i></a>
+
+                <div class="btn-group col px-0" role="group" >
+                    <a href ="#" class="btn btn-sm btn-outline-primary" style="font-size:1rem" >{pageNumber}</a>
+                </div>
+
+                <a href ="#" class="btn btn-outline-primary col-1 px-0" id="source-select-next"><i class="mi mi-ChevronRight"></i></a>
+                <a href ="#" class="btn btn-outline-primary col-1 px-0" id="source-select-last"><i class="mi mi-ChevronRightSmall"></i></a>
+            </div>
+        </div>
+    </div>
+    <!--#endregion-->
+
+}
+
+@section Body{
+    @if (IsSectionDefined("Body"))
+    {
+        await RenderSectionAsync("Body").ConfigureAwait(false);
+    }
+    else
+    {
+        // default content
+    }
+}
+
+@section LayoutSidebarScripts{
+    @if (IsSectionDefined("Scripts"))
+    {
+        await RenderSectionAsync("Scripts").ConfigureAwait(false);
+    }
+    else
+    {
+        // default content
+    }
+    <script type="text/javascript">
+        const ModelCount = @Html.Raw(Json.Serialize(ViewData["ModelCount"]));
+        const ModelID = @Html.Raw(Json.Serialize(ViewData["ModelID"]));
+    </script>
+    <script type="text/javascript" src="~/js/View_Sources_Details.js"></script>
+}

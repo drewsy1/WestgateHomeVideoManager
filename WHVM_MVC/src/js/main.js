@@ -1,9 +1,5 @@
-﻿//import "../css/site.css";
-import "jplist-es6/dist/1.2.0/jplist.styles.css";
-//import "bootstrap/dist/css/bootstrap.css";
+﻿import "jplist-es6/dist/1.2.0/jplist.styles.css";
 import "bootstrap/dist/js/bootstrap.js";
-//import "bootstrap/scss/bootstrap*.scss";
-//import "../css/whvm.css";
 import "../scss/whvm/whvm.scss"
 import "@icon/micon/micon.css";
 import "jquery";
@@ -12,3 +8,4 @@ import "jquery-validation-unobtrusive";
 import "jquery-validation-unobtrusive-bootstrap";
 import "moment";
 import "jplist-es6";
+import "./View_Layout_Global";

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@(ViewContext.RouteData.Values["controller"] + " - " + ViewContext.RouteData.Values["action"] + " | " + Startup.Configuration.GetSection("SiteVariables:SiteName").Value)</title>
     <link rel="stylesheet" type="text/css" href="~/css/main.css" />
-    @*<link rel="stylesheet" type="text/css" href="~/lib/micon/css/micon.min.css" />*@
 </head>
 
 @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery;
@@ -13,7 +12,7 @@
     var antiforgeryRequestToken = Antiforgery.GetAndStoreTokens(Context).RequestToken;
 }
 
-<body style="overflow-y:scroll">
+<body style="overflow-y: scroll">
     <header class="navbar navbar-expand-md navbar-dark bg-primary whvm-navbar ">
         <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@(Startup.Configuration.GetSection("SiteVariables:SiteName").Value)</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarSupportedContent"
@@ -41,16 +40,17 @@
         <partial name="_CookieConsentPartial" />
         @RenderBody()
     </div>
-
+    
+    
 <environment names="Development">
     <script src="~/js/main.js"></script>
 </environment>
 <environment names="Staging,Production">
     <script src="~/js/main.js" asp-append-version="true"></script>
 </environment>
+@*<script src="~/js/View_Layout_Global.js" defer></script>*@
 
-
-    <script>
+<script>
     //Render the token in a property readable from your client JavaScript
     var antiforgeryToken = @Json.Serialize(antiforgeryRequestToken);
     </script>

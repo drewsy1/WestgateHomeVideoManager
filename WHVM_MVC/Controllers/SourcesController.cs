@@ -37,6 +37,10 @@ namespace WHVM_MVC.Controllers
             var source = await _context.Source
                 .FirstOrDefaultAsync(m => m.SourceId == id)
                 .ConfigureAwait(false);
+
+            ViewData["ModelCount"] = await _context.Source.CountAsync().ConfigureAwait(false);
+            ViewData["ModelID"] = source.SourceId;
+
             if (source == null)
             {
                 return NotFound();

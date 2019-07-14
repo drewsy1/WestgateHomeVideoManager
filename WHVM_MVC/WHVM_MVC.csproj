@@ -7,8 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Client\css\whvm.css" />
-    <Content Include="Client\css\whvm.css.map" />
+    <Compile Remove="Client\**" />
+    <Content Remove="Client\**" />
+    <EmbeddedResource Remove="Client\**" />
+    <None Remove="Client\**" />
+    <TypeScriptCompile Remove="Client\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="node_modules\%40icon\micon\manifest.json" />
     <Content Include="node_modules\%40icon\micon\micon.css" />
     <Content Include="node_modules\%40icon\micon\micon.eot" />
@@ -109,7 +115,6 @@
     <Content Include="node_modules\chownr\package.json" />
     <Content Include="node_modules\chrome-trace-event\LICENSE.txt" />
     <Content Include="node_modules\chrome-trace-event\package.json" />
-    <Content Include="node_modules\chrome-trace-event\tsconfig.json" />
     <Content Include="node_modules\cipher-base\package.json" />
     <Content Include="node_modules\class-utils\node_modules\define-property\package.json" />
     <Content Include="node_modules\class-utils\package.json" />

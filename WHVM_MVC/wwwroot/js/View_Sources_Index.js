@@ -65,14 +65,12 @@ function instantValidation(field) {
 
 function toggleFilterButtons(filterButtonPressed, filterButtonsArray) {
     for (let filterButton of filterButtonsArray) {
-        filterButton.classList.remove("active");
-        filterButton.setAttribute("aria-pressed","false");
+        toggleButton(filterButton,false)
     }
 
     let filterButtonLabel = filterButtonPressed.parentElement;
 
-    filterButtonLabel.classList.add("active");
-    filterButtonPressed.setAttribute("aria-pressed", "true");
+    toggleButton(filterButtonLabel,true)
 }
 //#endregion
 

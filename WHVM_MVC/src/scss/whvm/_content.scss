@@ -5,72 +5,71 @@
 //
 
 .whvm-content {
-  order: 1;
-  background-color: $gray-100;
-  padding:1rem;
-
-  @include media-breakpoint-down(md) {
-    padding:.5rem;
-  }
-
-  .card {
-    margin-bottom:1rem;
-    @include media-breakpoint-down(md) {
-      margin-bottom:.5rem;
-    }
-  }
-
-  // Hack the sticky header
-  > h2[id],
-  > h3[id],
-  > h4[id] {
-    pointer-events: none;
-
-    &::before {
-      display: block;
-      height: 6rem;
-      margin-top: -6rem;
-      content: "";
-    }
-  }
-
-  > table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 1rem;
+    order: 1;
+    //background-color: $gray-100;
+    padding: 1rem;
+    height: 100%;
 
     @include media-breakpoint-down(md) {
-      display: block;
-      overflow-x: auto;
-
-      &.table-bordered {
-        border: 0;
-      }
+        padding: .5rem;
     }
 
-    // Cells
-    > thead,
-    > tbody,
-    > tfoot {
-      > tr {
-        > th,
-        > td {
-          padding: $table-cell-padding;
-          vertical-align: top;
-          border: 1px solid $table-border-color;
+    .card {
+        margin-bottom: 1rem;
 
-          > p:last-child {
-            margin-bottom: 0;
-          }
+        @include media-breakpoint-down(md) {
+            margin-bottom: .5rem;
         }
-      }
+    }
+    // Hack the sticky header
+    > h2[id],
+    > h3[id],
+    > h4[id] {
+        pointer-events: none;
+
+        &::before {
+            display: block;
+            height: 6rem;
+            margin-top: -6rem;
+            content: "";
+        }
     }
 
-    // Prevent breaking of code (e.g., Grunt tasks list)
-    td:first-child > code {
-      white-space: nowrap;
+    > table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+
+        @include media-breakpoint-down(md) {
+            display: block;
+            overflow-x: auto;
+
+            &.table-bordered {
+                border: 0;
+            }
+        }
+        // Cells
+        > thead,
+        > tbody,
+        > tfoot {
+            > tr {
+                > th,
+                > td {
+                    padding: $table-cell-padding;
+                    vertical-align: top;
+                    border: 1px solid $table-border-color;
+
+                    > p:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+        // Prevent breaking of code (e.g., Grunt tasks list)
+        td:first-child > code {
+            white-space: nowrap;
+        }
     }
-  }
 }
 
 .whvm-content-title {

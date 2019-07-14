@@ -1,8 +1,9 @@
 ﻿@{
     Layout = "Layouts/_Layout";
+    ViewData["Title"] = ViewContext.RouteData.Values["controller"];
 }
 
-<div class="row flex-xl-nowrap">
+<div class="row flex-xl-nowrap" >
     <div class="col-12 col-md-4 col-lg-3 whvm-sidebar d-flex flex-column">
         <h2>@ViewData["Title"]</h2>
 
