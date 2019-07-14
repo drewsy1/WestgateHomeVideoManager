@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.539
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WHVM_MVC", "WHVM_MVC\WHVM_MVC.csproj", "{3585B5D0-5D3F-4876-8ADA-70E6E0E957B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeVideoDB_EFTest", "HomeVideoDB_EFTest\HomeVideoDB_EFTest.csproj", "{5897EACB-7264-4414-BE41-91E1EFA4D48E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeVideoDB_EFCoreTest", "HomeVideoDB_EFCoreTest\HomeVideoDB_EFCoreTest.csproj", "{F1F53422-08F8-4DD2-A826-9DE80147501A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeVideoDB_EFCoreTest", "HomeVideoDB_EFCoreTest\HomeVideoDB_EFCoreTest.csproj", "{F1F53422-08F8-4DD2-A826-9DE80147501A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WHVM_MVC_Tests", "WHVM_MVC_Tests\WHVM_MVC_Tests.csproj", "{28EAED0D-17BF-4EBC-8330-DADF9EE74417}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{F1F53422-08F8-4DD2-A826-9DE80147501A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1F53422-08F8-4DD2-A826-9DE80147501A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1F53422-08F8-4DD2-A826-9DE80147501A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28EAED0D-17BF-4EBC-8330-DADF9EE74417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28EAED0D-17BF-4EBC-8330-DADF9EE74417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28EAED0D-17BF-4EBC-8330-DADF9EE74417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28EAED0D-17BF-4EBC-8330-DADF9EE74417}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
