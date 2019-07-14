@@ -77,7 +77,7 @@
                    data-id="min-date"
                    type="date"
                    value=""
-                   id="datetimepickerMinText"
+                   id="dateTimePickerMinText"
                    data-mode="dateLower" />
         </div>
         <!--#endregion-->
@@ -94,7 +94,7 @@
                    data-id="max-date"
                    type="date"
                    value=""
-                   id="datetimepickerMaxText"
+                   id="dateTimePickerMaxText"
                    data-mode="dateUpper" />
 
             <div id="datetimepickerError" class="invalid-feedback">Start date must come after end date.</div>
@@ -215,13 +215,5 @@
 
 @section Scripts
 {
-    <script>
-        var $sourceFormatFilter = $('#sourceFormat-tag-filter-group > label > input');
-        $sourceFormatFilter.change(function () {
-            $(this).parent().siblings().removeClass("active");
-            $(this).parent().button("toggle");
-        });
-    </script>
-
-    <script type="text/javascript" src="~/js/View_Sources_Index.js"></script>
+    <script type="text/javascript" src="~/js/View_Sources_Index.js" defer></script>
 }

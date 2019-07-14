@@ -2,18 +2,5 @@
   "version": "1.0",
   "defaultProvider": "cdnjs",
   "libraries": [
-    {
-      "provider": "cdnjs",
-      "library": "tempusdominus-bootstrap-4@5.1.2",
-      "destination": "wwwroot/lib/tempusdominus-bootstrap-4/"
-    },
-    {
-      "library": "font-awesome@5.8.2",
-      "destination": "wwwroot/lib/font-awesome/"
-    },
-    {
-      "library": "moment.js@2.24.0",
-      "destination": "wwwroot/lib/moment.js/"
-    }
   ]
 }

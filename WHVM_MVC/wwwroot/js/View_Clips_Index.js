@@ -1,10 +1,10 @@
 ﻿//#region Constant Variables
 const clipsPeopleFilterElement = document.getElementById("clipsPeopleFilter");
-const clipsCollectionsFilterElement = document.getElementById("clipsCollectionsFilter")
+const clipsCollectionsFilterElement = document.getElementById("clipsCollectionsFilter");
 const clipsPeopleFilter = Array.from(clipsPeopleFilterElement.getElementsByTagName("input"));
 const clipsCollectionsFilter = Array.from(clipsCollectionsFilterElement.getElementsByTagName("input"));
 const filterAccordionObjects = document.getElementById("FilterAccordion");
-const filterAccordionButtonObjects = Array.from(filterAccordionObjects.getElementsByTagName("button"));
+const filterAccordionButtonObjects = Array.from(filterAccordionObjects.getElementsByTagName("a"));
 const iconChevronToggleObject = {true: "mi-ChevronDown", false: "mi-ChevronRight"};
 const CheckboxCollections = [{element: clipsPeopleFilterElement, collection: clipsPeopleFilter, color:"badge-purple"},{element: clipsCollectionsFilterElement, collection: clipsCollectionsFilter, color:"badge-teal"}];
 //#endregion
@@ -61,7 +61,7 @@ function refreshCheckboxFilterHighlights(checkboxFilters) {
         else{
             countTextElement.innerText = "";
             countTextElement.classList.add("d-none");
-            clearButton.classList.add("disabled")
+            clearButton.classList.add("disabled");
         }
 
         for (const arrayItem of currentCheckboxFilter.collection) {
@@ -70,11 +70,11 @@ function refreshCheckboxFilterHighlights(checkboxFilters) {
 
             if (arrayItem.checked) {
                 for (const element of itemArray) {
-                    tagHighlightOn(element, currentCheckboxFilter.color)
+                    tagHighlightOn(element, currentCheckboxFilter.color);
                 }
             } else {
                 for (const element of itemArray) {
-                    tagHighlightOff(element, currentCheckboxFilter.color)
+                    tagHighlightOff(element, currentCheckboxFilter.color);
                 }
             }
         }
@@ -89,19 +89,19 @@ function refreshCheckboxFilterHighlights(checkboxFilters) {
  */
 function toggleIcon(target, iconObject, targetAttribute) {
             const item = target.getElementsByTagName("i")[0];
-            let ariaExpanded = target.attributes.getNamedItem(targetAttribute).value === "true";
+            const ariaExpanded = target.getAttribute(targetAttribute) === "true";
             replaceClass(item, iconObject[ariaExpanded], iconObject[!ariaExpanded]);
 }
 //#endregion
 
 //#region Event Listeners
 document.getElementById('textFilterInput').addEventListener('jplist.state', function (e) {
-    refreshCheckboxFilterHighlights(CheckboxCollections)
+    refreshCheckboxFilterHighlights(CheckboxCollections);
 });
 
 for (const button of filterAccordionButtonObjects) {
     button.addEventListener("click", function (e) {
-        toggleIcon(e.currentTarget, iconChevronToggleObject, "aria-expanded")
+        toggleIcon(e.currentTarget, iconChevronToggleObject, "aria-expanded");
     });
 }
 //#endregion

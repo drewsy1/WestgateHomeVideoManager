@@ -28,10 +28,10 @@
     </main>
 </div>
 
-@section Scripts{
-    @if (IsSectionDefined("Scripts"))
+@section LayoutScripts{
+    @if (IsSectionDefined("LayoutSidebarScripts"))
     {
-        @await RenderSectionAsync("Scripts").ConfigureAwait(false)
+        await RenderSectionAsync("LayoutSidebarScripts").ConfigureAwait(false);
     }
     else
     {

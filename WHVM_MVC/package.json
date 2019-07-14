@@ -1,0 +1,53 @@
+{
+  "name": "whvm_mvc",
+  "version": "1.0.0",
+  "description": "Westgate Home Video Manager",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "@icon/micon": "^3.0.168",
+    "@types/node": "^12.6.2",
+    "bootstrap": "^4.3.1",
+    "jplist-es6": "git+https://github.com/drewsy1/jplist-es6.git",
+    "jquery": "^3.4.1",
+    "jquery-validation": "^1.19.1",
+    "jquery-validation-unobtrusive": "^3.2.11",
+    "jquery-validation-unobtrusive-bootstrap": "^2.2.0",
+    "moment": "^2.24.0",
+    "popper.js": "^1.15.0"
+  },
+  "devDependencies": {
+    "css-loader": "^3.0.0",
+    "file-loader": "^4.0.0",
+    "mini-css-extract-plugin": "^0.7.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
+    "sass": "^1.22.4",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "terser-webpack-plugin": "^1.3.0",
+    "url-loader": "^2.0.1",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --config webpack.config.js --watch --progress --profile",
+    "build": "webpack --config webpack.config.js --progress --profile  --display-error-details",
+    "prod": "webpack --env.NODE_ENV=production --config webpack.config.js --progress --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drewsy1/WestgateHomeVideoManager.git"
+  },
+  "author": "Drew Westgate",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drewsy1/WestgateHomeVideoManager/issues"
+  },
+  "homepage": "https://github.com/drewsy1/WestgateHomeVideoManager#readme",
+  "-vs-binding": {
+    "BeforeBuild": [
+      "build"
+    ]
+  }
+}

@@ -89,7 +89,7 @@
 @section Body{
     @if (IsSectionDefined("Body"))
     {
-        @await RenderSectionAsync("Body").ConfigureAwait(false)
+        await RenderSectionAsync("Body").ConfigureAwait(false);
     }
     else
     {
@@ -97,18 +97,14 @@
     }
 }
 
-@section Scripts{
+@section LayoutSidebarScripts{
     <script>
-        (function() {
-            'use strict';
-            jplist.init();
-        })();
-        
+        jplist.init();
     </script>
 
     @if (IsSectionDefined("Scripts"))
     {
-        @await RenderSectionAsync("Scripts").ConfigureAwait(false)
+        await RenderSectionAsync("Scripts").ConfigureAwait(false);
     }
     else
     {

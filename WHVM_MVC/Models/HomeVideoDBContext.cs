@@ -1,9 +1,9 @@
-﻿using System;
+﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace WHVM_MVC.Models
 {
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public partial class HomeVideoDBContext : DbContext
     {
         public HomeVideoDBContext()
@@ -22,9 +22,6 @@ namespace WHVM_MVC.Models
         public virtual DbSet<TagsPeople> TagsPeople { get; set; }
         public virtual DbSet<Clip_TagsPeople> Clip_TagsPeople { get; set; }
         public virtual DbSet<Clip_TagsCollections> Clip_TagsCollections { get; set; }
-
-        // Unable to generate entity type for table 'dbo.Clip_TagsPeople'. Please see the warning messages.
-        // Unable to generate entity type for table 'dbo.Clip_TagsCollections'. Please see the warning messages.
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -3,6 +3,11 @@
 const dateTimePickerMinText = document.getElementById("dateTimePickerMinText");
 const dateTimePickerMaxText = document.getElementById("dateTimePickerMaxText");
 const dateTimePickerError = document.getElementById("dateTimePickerError");
+const sourceFormatFilterGroup = document.getElementById("sourceFormat-tag-filter-group");
+const sourceFormatFilterInputs = sourceFormatFilterGroup.getElementsByTagName("input");
+const sourceFormatFilterInputsArray = Array.from(sourceFormatFilterInputs);
+const sourceFormatFilterLabels = sourceFormatFilterGroup.getElementsByTagName("label");
+const sourceFormatFilterLabelsArray = Array.from(sourceFormatFilterLabels);
 //#endregion
 
 //#region Page Functions
@@ -57,6 +62,18 @@ function instantValidation(field) {
         }
     }
 }
+
+function toggleFilterButtons(filterButtonPressed, filterButtonsArray) {
+    for (let filterButton of filterButtonsArray) {
+        filterButton.classList.remove("active");
+        filterButton.setAttribute("aria-pressed","false");
+    }
+
+    let filterButtonLabel = filterButtonPressed.parentElement;
+
+    filterButtonLabel.classList.add("active");
+    filterButtonPressed.setAttribute("aria-pressed", "true");
+}
 //#endregion
 
 //#region Page Event Listeners
@@ -67,4 +84,11 @@ dateTimePickerMinText.addEventListener("change", function (e, target) {
 dateTimePickerMaxText.addEventListener("change", function (e, target) {
     instantValidation(target);
 });
+
+for (let filterButtonLabel of sourceFormatFilterInputsArray) {
+    filterButtonLabel.addEventListener("change",
+        function() {
+            toggleFilterButtons(this, sourceFormatFilterLabelsArray);
+        });
+}
 //#endregion
