@@ -1,6 +1,7 @@
-﻿export class View_Layout_Global {
+﻿/* global $ */
+export class View_Layout_Global {
     constructor() {
-        $('body').tooltip({selector: '[data-toggle="tooltip"]'});
+        
     }
 
     static goBack() {

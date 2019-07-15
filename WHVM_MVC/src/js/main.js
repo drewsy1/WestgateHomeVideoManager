@@ -1,4 +1,5 @@
 ﻿import "jplist-es6/dist/1.2.0/jplist.styles.css";
+import "popper.js"
 import "bootstrap/dist/js/bootstrap.js";
 import "../scss/whvm/whvm.scss"
 import "@icon/micon/micon.css";
