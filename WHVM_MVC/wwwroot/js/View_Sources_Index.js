@@ -1,13 +1,11 @@
 // Realtime form validation https://www.sitepoint.com/instant-validation/
 //#region Page Variables
-const dateTimePickerMinText = document.getElementById("dateTimePickerMinText");
-const dateTimePickerMaxText = document.getElementById("dateTimePickerMaxText");
-const dateTimePickerError = document.getElementById("dateTimePickerError");
-const sourceFormatFilterGroup = document.getElementById("sourceFormat-tag-filter-group");
-const sourceFormatFilterInputs = sourceFormatFilterGroup.getElementsByTagName("input");
-const sourceFormatFilterInputsArray = Array.from(sourceFormatFilterInputs);
-const sourceFormatFilterLabels = sourceFormatFilterGroup.getElementsByTagName("label");
-const sourceFormatFilterLabelsArray = Array.from(sourceFormatFilterLabels);
+const dateTimePickerMinText = $('#dateTimePickerMinText');
+const dateTimePickerMaxText = $('#dateTimePickerMaxText');
+const dateTimePickerError = $('#dateTimePickerError');
+const sourceFormatFilterGroup = $('#sourceFormat-tag-filter-group');
+const sourceFormatFilterInputs = sourceFormatFilterGroup.find('input');
+const sourceFormatFilterLabels = sourceFormatFilterGroup.find('label');
 //#endregion
 
 //#region Page Functions
@@ -36,8 +34,8 @@ function addEvent(node, type, callback) {
  */
 function shouldBeValidated(field) {
     return (
-        !(field.getAttribute("readonly") || field.readonly) &&
-        !(field.getAttribute("disabled") || field.disabled)
+        !(field.attr("readonly") || field.readonly) &&
+        !(field.attr("disabled") || field.disabled)
     );
 }
 
@@ -48,45 +46,38 @@ function shouldBeValidated(field) {
 function instantValidation(field) {
     if (shouldBeValidated(field)) {
         let invalid =
-            (dateTimePickerMinText.value.length > 0) &&
-            (dateTimePickerMaxText.value.length > 0) &&
-            (new Date(dateTimePickerMaxText.value) < new Date(dateTimePickerMinText.value));
-        if (!invalid && field.getAttribute("aria-invalid")) {
-            dateTimePickerMinText.removeAttribute("aria-invalid");
-            dateTimePickerMaxText.removeAttribute("aria-invalid");
-            dateTimePickerError.style.display = "none";
-        } else if (invalid && !field.getAttribute("aria-invalid")) {
-            dateTimePickerMinText.setAttribute("aria-invalid", "true");
-            dateTimePickerMaxText.setAttribute("aria-invalid", "true");
-            dateTimePickerError.style.display = "block";
+            (dateTimePickerMinText.val().length > 0) &&
+            (dateTimePickerMaxText.val().length > 0) &&
+            (new Date(dateTimePickerMaxText.val()) < new Date(dateTimePickerMinText.val()));
+        if (!invalid && field.attr("aria-invalid")) {
+            dateTimePickerMinText.removeAttr("aria-invalid");
+            dateTimePickerMaxText.removeAttr("aria-invalid");
+            dateTimePickerError.css('display','none');
+        } else if (invalid && !field.attr("aria-invalid")) {
+            dateTimePickerMinText.attr("aria-invalid", "true");
+            dateTimePickerMaxText.attr("aria-invalid", "true");
+            dateTimePickerError.css('display','block');
         }
     }
 }
 
-function toggleFilterButtons(filterButtonPressed, filterButtonsArray) {
-    for (let filterButton of filterButtonsArray) {
-        toggleButton(filterButton,false)
-    }
+function toggleFilterButtons(filterButtonPressed) {
+    let filterButton = $(filterButtonPressed.currentTarget).parent();
 
-    let filterButtonLabel = filterButtonPressed.parentElement;
-
-    toggleButton(filterButtonLabel,true)
+    filterButton.siblings('.active').button('toggle');
+    filterButton.button('toggle');
 }
 //#endregion
 
 //#region Page Event Listeners
-dateTimePickerMinText.addEventListener("change", function (e, target) {
-    instantValidation(target);
+dateTimePickerMinText.change(function (e) {
+    instantValidation($(e.currentTarget));
 });
 
-dateTimePickerMaxText.addEventListener("change", function (e, target) {
-    instantValidation(target);
+dateTimePickerMaxText.change(function (e) {
+    instantValidation($(e.currentTarget));
 });
 
-for (let filterButtonLabel of sourceFormatFilterInputsArray) {
-    filterButtonLabel.addEventListener("change",
-        function() {
-            toggleFilterButtons(this, sourceFormatFilterLabelsArray);
-        });
-}
-//#endregion
+sourceFormatFilterInputs.change(
+    toggleFilterButtons
+);//#endregion

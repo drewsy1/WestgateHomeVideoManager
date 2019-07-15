@@ -8,10 +8,7 @@
   color: #575757;
   font-size: 13px;
   border-radius: 2px;
-  display: -ms-flexbox;
-  display: -webkit-box;
   display: flex;
-  -ms-flex-direction: column;
   flex-direction: column;
   position: relative;
   box-sizing: border-box;
@@ -24,9 +21,6 @@
   padding: 5px 7px;
   transition: color 0.5s;
   box-sizing: border-box;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -51,10 +45,7 @@
 }
 
 .jplist-dd-content.jplist-dd-opened {
-  display: -ms-flexbox;
-  display: -webkit-box;
   display: flex;
-  -ms-flex-direction: column;
   flex-direction: column;
   width: 100%;
   top: 100%;
@@ -83,8 +74,8 @@
 }
 
 /**
-* horizontal
-*/
+ * horizontal
+ */
 .jplist-slider {
   width: 300px;
   height: 20px;
