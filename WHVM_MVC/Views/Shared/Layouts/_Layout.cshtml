@@ -53,9 +53,9 @@
 <script>
     //Render the token in a property readable from your client JavaScript
     var antiforgeryToken = @Json.Serialize(antiforgeryRequestToken);
-    </script>
+</script>
 
-    @if (IsSectionDefined("LayoutScripts"))
+@if (IsSectionDefined("LayoutScripts"))
     {
         await RenderSectionAsync("LayoutScripts").ConfigureAwait(false);
     }

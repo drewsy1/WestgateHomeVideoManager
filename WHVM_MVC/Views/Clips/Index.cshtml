@@ -69,7 +69,7 @@
         <div class="accordion py-1 py-lg-2" id="FilterAccordion">
             <!--#region Filter - Checkboxes - ClipTagsPeople - Clip-->
             <div class="card" id="clipsPeopleFilter">
-                <div class="card-header" id="headingOne">
+                <div class="card-header" id="clipsPeopleFilterHeader">
                     <div class="d-flex align-items-center px-2">
                         <button class="btn btn-link collapsed pl-0 pr-1" data-toggle="collapse" data-target="#collapsePeople" aria-expanded="false" aria-controls="collapsePeople">
                             <div class="d-flex">
@@ -86,21 +86,21 @@
                     </div>
 
                 </div>
-                <div id="collapsePeople" class="collapse" aria-labelledby="headingPeople" data-parent="#FilterAccordion">
+                <div id="collapsePeople" class="collapse" aria-labelledby="clipsPeopleFilterHeader" data-parent="#FilterAccordion">
                     <div class="card-body">
                         <ul style="list-style-type: none; margin: 0; margin-left: 1rem; padding: 0">
                             @{
                                 foreach (TagsPeople person in TagsPeople.AllPeople)
                                 {
                                     <li>
-                                        <label>
+                                        <label class="my-1">
                                             <input type="checkbox"
                                                    data-jplist-control="checkbox-path-filter"
                                                    data-path=".tag-person-@(person.PeopleId)"
                                                    data-group="@ViewData["JplistDataGroup"]"
                                                    data-clear-btn-id="clipsPeopleFilterClear"
                                                    name="checkbox-person-@(person.PeopleId)"
-                                                   id="tag-person-@(person.PeopleId)-cb" />
+                                                   id="tag-person-@(person.PeopleId)" />
                                             @(person.PeopleName)
                                         </label>
                                     </li>
@@ -136,7 +136,7 @@
                                 foreach (TagsCollections collection in TagsCollections.AllCollections)
                                 {
                                     <li>
-                                        <label>
+                                        <label class="my-1">
                                             <input type="checkbox"
                                                    data-jplist-control="checkbox-path-filter"
                                                    data-path=".tag-collection-@(collection.CollectionsId)"
@@ -154,6 +154,124 @@
                 </div>
             </div>
             <!--#endregion-->
+            <!--#region Filter - Checkboxes - ClipTagsPeopleReviewer - Clip-->
+            <div class="card" id="clipsPeopleReviewerFilter">
+                <div class="card-header" id="clipsPeopleReviewerFilterHeader">
+                    <div class="d-flex align-items-center px-2">
+                        <button class="btn btn-link collapsed px-0 flex-shrink-0" data-toggle="collapse" data-target="#collapsePeopleReviewer" aria-expanded="false" aria-controls="collapsePeopleReviewer">
+                            <div class="d-flex">
+                                <i class="mr-1 mi mi-ChevronRight"></i>
+                                <span>Clip Reviewer</span>
+                            </div>
+                        </button>
+                        <div class="p-1 badge badge-primary d-none text-truncate mx-1" data-toggle="tooltip"></div>
+                        <div class="ml-auto">
+                            <a href="#" class="btn btn-sm btn-link disabled p-0" role="button" id="clipsPeopleReviewerFilterClear">
+                                <i class="mi mi-Clear"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div id="collapsePeopleReviewer" class="collapse" aria-labelledby="clipsPeopleReviewerFilterHeader" data-parent="#FilterAccordion">
+                    <div class="card-body">
+                        <ul style="list-style-type: none; margin: 0; margin-left: 1rem; padding: 0">
+                            <li>
+                                <label class="my-1">
+                                    <input type="radio"
+                                           data-jplist-control="radio-buttons-path-filter"
+                                           data-path="default"
+                                           data-group="@ViewData["JplistDataGroup"]"
+                                           data-name="radio-person-reviewer"
+                                           name="radio-person-reviewer"
+                                           id="tag-person-default-reviewer"
+                                           checked />
+                                    Any
+                                </label>
+                            </li>
+                            @{
+                                foreach (TagsPeople person in TagsPeople.AllPeople.Where(x => x.ClipsAsReviewer.Count > 0))
+                                {
+                                    <li>
+                                        <label class="my-1">
+                                            <input type="radio"
+                                                   data-jplist-control="radio-buttons-path-filter"
+                                                   data-path=".tag-person-@(person.PeopleId)-reviewer"
+                                                   data-group="@ViewData["JplistDataGroup"]"
+                                                   data-name="radio-person-reviewer"
+                                                   name="radio-person-reviewer"
+                                                   id="tag-person-@(person.PeopleId)-reviewer" />
+                                            @(person.PeopleName)
+                                        </label>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--#endregion-->
+            <!--#region Filter - Checkboxes - ClipTagsPeopleCamera - Clip-->
+            <div class="card" id="clipsPeopleCameraFilter">
+                <div class="card-header" id="clipsPeopleCameraFilterHeader">
+                    <div class="d-flex align-items-center px-2">
+                        <button class="btn btn-link collapsed px-0 flex-shrink-0" data-toggle="collapse" data-target="#collapsePeopleCamera" aria-expanded="false" aria-controls="collapsePeopleCamera">
+                            <div class="d-flex">
+                                <i class="mr-1 mi mi-ChevronRight"></i>
+                                <span>Camera Operator</span>
+                            </div>
+                        </button>
+                        <span class="p-1 badge badge-primary d-none text-truncate mx-1"></span>
+                        <div class="ml-auto">
+                            <a href="#" class="btn btn-sm btn-link disabled p-0" role="button" id="clipsPeopleCameraFilterClear">
+                                <i class="mi mi-Clear"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div id="collapsePeopleCamera" class="collapse" aria-labelledby="clipsPeopleCameraFilterHeader" data-parent="#FilterAccordion">
+                    <div class="card-body">
+                        <ul style="list-style-type: none; margin: 0; margin-left: 1rem; padding: 0">
+                            <li>
+                                <label class="my-1">
+                                    <input type="radio"
+                                           data-jplist-control="radio-buttons-path-filter"
+                                           data-path="default"
+                                           data-group="@ViewData["JplistDataGroup"]"
+                                           data-name="radio-person-camera"
+                                           name="radio-person-camera"
+                                           id="tag-person-default-camera"
+                                           checked
+                                           class="jplist-selected" />
+                                    Any
+                                </label>
+                            </li>
+                            @{
+                                foreach (TagsPeople person in TagsPeople.AllPeople.Where(x => x.ClipsAsCameraOperator.Count > 0))
+                                {
+                                    <li>
+                                        <label class="my-1">
+                                            <input type="radio"
+                                                   data-jplist-control="radio-buttons-path-filter"
+                                                   data-path=".tag-person-@(person.PeopleId)-camera"
+                                                   data-group="@ViewData["JplistDataGroup"]"
+                                                   data-name="radio-person-camera"
+                                                   name="radio-person-camera"
+                                                   id="tag-person-@(person.PeopleId)-camera" />
+                                            @(person.PeopleName)
+                                        </label>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--#endregion-->
+
         </div>
         <!--#endregion-->
 
@@ -166,8 +284,8 @@
         {
 
             <div class="card" data-jplist-item>
-                <span class="clipDate" style="display:none">@(Html.DisplayFor(modelItem => item.ClipTimeStart))</span>
-                <span class="clipDate" style="display:none">@(Html.DisplayFor(modelItem => item.ClipTimeEnd))</span>
+
+
                 <a asp-action="Details" asp-controller="Clips" asp-route-id="@item.ClipId" style="text-decoration:none">
                     <div class="row no-gutters">
                         <div class="col-3 col-lg-2 col-xl-1">
@@ -184,23 +302,39 @@
                                     <span class="badge badge-cyan align-self-center mr-1 ">Source: @(item.Source.SourceLabel)</span>
 
                                     @{
-                                        if (item.SourceSegment != null)
+                                        if (item.ClipTimeStart != null)
                                         {
-                                            <span class="badge badge-teal align-self-center mr-1 ">Source Segment: @(item.SourceSegment)</span>
+                                            <span class="badge badge-teal align-self-center mr-1 ">Start Time: <span class="clipDate">@(Html.DisplayFor(modelItem => item.ClipTimeStart))</span></span>
                                         }
                                     }
 
+                                    @{
+                                        if (item.ClipTimeEnd != null)
+                                        {
+                                            <span class="badge badge-teal align-self-center mr-1 ">End Time: <span class="clipDate">@(Html.DisplayFor(modelItem => item.ClipTimeEnd))</span></span>
+                                        }
+                                    }
+
+                                    @{
+                                        if (item.SourceSegment != null)
+                                        {
+                                            <span class="badge badge-blue align-self-center mr-1 ">Source Segment: @(item.SourceSegment)</span>
+                                        }
+                                    }
+
+                                    <br />Clip Reviewer:
                                     @{
                                         if (item.ClipReviewer?.PeopleName != null)
                                         {
-                                            <span class="badge badge-secondary align-self-center mr-1 tag-person-@(item.ClipReviewer.PeopleId)">Clip Reviewer: @(item.ClipReviewer.PeopleName)</span>
+                                            <span class="badge badge-secondary align-self-center mr-1 tag-person-@(item.ClipReviewer.PeopleId) tag-person-@(item.ClipReviewer.PeopleId)-reviewer">@(item.ClipReviewer.PeopleName)</span>
                                         }
                                     }
 
+                                    <br />Camera Operator:
                                     @{
                                         if (item.ClipCameraOperator?.PeopleName != null)
                                         {
-                                            <span class="badge badge-secondary align-self-center mr-1 tag-person-@(item.ClipCameraOperator.PeopleId)">Camera Operator: @(item.ClipCameraOperator.PeopleName)</span>
+                                            <span class="badge badge-secondary align-self-center mr-1 tag-person-@(item.ClipCameraOperator.PeopleId) tag-person-@(item.ClipCameraOperator.PeopleId)-camera">@(item.ClipCameraOperator.PeopleName)</span>
                                         }
                                     }
 

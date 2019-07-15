@@ -1,22 +1,41 @@
-﻿//#region Constant Variables
+﻿/* global $,jplist */
+
+//#region Constant Variables
 const clipsPeopleFilterElement = $('#clipsPeopleFilter');
+const clipsPeopleReviewerFilterElement = $('#clipsPeopleReviewerFilter');
+const clipsPeopleCameraFilterElement = $('#clipsPeopleCameraFilter');
 const clipsCollectionsFilterElement = $('#clipsCollectionsFilter');
-const clipsPeopleFilter = $('#clipsPeopleFilter > input');
-const clipsCollectionsFilter = $('#clipsCollectionsFilter > input');
+const clipsPeopleFilter = clipsPeopleFilterElement.find('input');
+const clipsPeopleReviewerFilter = clipsPeopleReviewerFilterElement.find('input');
+const clipsPeopleCameraFilter = clipsPeopleCameraFilterElement.find('input');
+const clipsCollectionsFilter = clipsCollectionsFilterElement.find('input');
 const filterAccordionObjects = $('#FilterAccordion');
-const filterAccordionButtonObjects = filterAccordionObjects.find('button');
-const iconChevronToggleObject = {true: "mi-ChevronDown", false: "mi-ChevronRight"};
+const filterAccordionButtonObjects = filterAccordionObjects.find('.collapse');
 const CheckboxCollections = [
     {
         element: clipsPeopleFilterElement,
         collection: clipsPeopleFilter,
-        color: "badge-purple"
+        color: "badge-blue"
     },
     {
         element: clipsCollectionsFilterElement,
         collection: clipsCollectionsFilter,
-        color: "badge-teal"
-    }];
+        color: "badge-blue"
+    }
+    ];
+const RadioCollections= [
+    {
+        element: clipsPeopleReviewerFilterElement,
+        collection: clipsPeopleReviewerFilter,
+        color: "badge-blue"
+    },
+    {
+        element: clipsPeopleCameraFilterElement,
+        collection: clipsPeopleCameraFilter,
+        color: "badge-blue"
+    }
+];
+
 //#endregion
 
 //#region Page Functions
@@ -24,14 +43,14 @@ const CheckboxCollections = [
  *
  * @param checkboxFilters
  */
-function refreshCheckboxFilterHighlights(checkboxFilters) {
+function refreshCheckboxFilterHighlights() {
     let itemId;
-    let itemArray;
+    let itemElement;
 
-    for (const currentCheckboxFilter of checkboxFilters) {
+    for (const currentCheckboxFilter of CheckboxCollections) {
         let countTextElement = currentCheckboxFilter.element.find(".badge.badge-primary");
         let clearButton = currentCheckboxFilter.element.find("a");
-        let checkboxesSelected = currentCheckboxFilter.element.find(".jplist-selected");
+        let checkboxesSelected = currentCheckboxFilter.element.find("input:checked");
         let checkboxesSelectedCount = checkboxesSelected.length;
 
         countTextElement.text(checkboxesSelectedCount);
@@ -39,27 +58,67 @@ function refreshCheckboxFilterHighlights(checkboxFilters) {
         clearButton.toggleClass("disabled",!(checkboxesSelectedCount > 0));
 
         for (const arrayItem of currentCheckboxFilter.collection) {
-            itemID = arrayItem.attr("id",function(i,val){
-                return val.replace('-cb','')
-            })
-            itemArray = $('#'+itemId);
+            itemId = $(arrayItem).attr("data-path")
+            itemElement = $(itemId);
 
-            itemArray.toggleClass(currentCheckboxFilter.color, arrayItem.checked)
-            itemArray.toggleClass("badge-secondary", !arrayItem.checked)
+            itemElement.toggleClass(currentCheckboxFilter.color, arrayItem.checked)
+            itemElement.toggleClass("badge-secondary", !arrayItem.checked)
         }
     }
+    for (const currentRadioFilter of RadioCollections) {
+        let countTextElement = currentRadioFilter.element.find(".badge.badge-primary");
+        let clearButton = currentRadioFilter.element.find("a");
+        let radioSelected = currentRadioFilter.element.find(".jplist-selected");
+        let radioIsDefault = $(radioSelected).attr('data-path') === 'default'
+        let radioSelectedText = $($(radioSelected).attr('data-path')+':first').text();
+
+        countTextElement.text(radioSelectedText);
+        countTextElement.attr("title",radioSelectedText);
+        countTextElement.toggleClass("d-none", radioIsDefault);
+        clearButton.toggleClass("disabled", radioIsDefault);
+
+        for (const arrayItem of currentRadioFilter.collection) {
+            itemId = $(arrayItem).attr("data-path")
+            itemElement = $(itemId);
+
+            itemElement.toggleClass(currentRadioFilter.color, arrayItem.checked)
+            itemElement.toggleClass("badge-secondary", !arrayItem.checked)
+        }
+    }
+}
+
+function radioFilterClear(dataNameAttr){
+    const radioButtons = Array.from(document.querySelectorAll('[data-name='+dataNameAttr+']'));
+    const radioButtonDefault = document.querySelectorAll('[data-path="default"][data-name='+dataNameAttr+']')
+    // radioButtons.prop("checked",false).toggleClass("jplist-selected",false)
+    // radioButtonDefault.prop("checked",true).toggleClass("jplist-selected",true)
+    radioButtons.forEach(function(Element){jplist.resetControl(Element)})
+    jplist.resetControl(radioButtonDefault);
 }
 //#endregion
 
 //#region Event Listeners
-$('#textFilterInput').on('jplist.state', function (e) {
-    refreshCheckboxFilterHighlights(CheckboxCollections);
+document.getElementById('textFilterInput').addEventListener('jplist.state', function () {
+    refreshCheckboxFilterHighlights();
 });
 
-filterAccordionButtonObjects.click(function () {
-    let thisIcon = $(this).find('i');
-    let ariaExpanded = $(this).attr("aria-expanded") === 'true'
-    thisIcon.toggleClass("mi-ChevronDown", !ariaExpanded)
-    thisIcon.toggleClass("mi-ChevronRight", ariaExpanded)
+$(filterAccordionButtonObjects).on('show.bs.collapse', function () {
+    let thisIcon = $(this).parent().find('i');
+    thisIcon.toggleClass("mi-ChevronDown", true)
+    thisIcon.toggleClass("mi-ChevronRight", false)
 });
+
+$(filterAccordionButtonObjects).on('hide.bs.collapse', function () {
+    let thisIcon = $(this).parent().find('i');
+    thisIcon.toggleClass("mi-ChevronDown", false)
+    thisIcon.toggleClass("mi-ChevronRight", true)
+});
+
+$("#clipsPeopleReviewerFilterClear").click(function(){
+    radioFilterClear('radio-person-reviewer');
+})
+
+$("#clipsPeopleCameraFilterClear").click(function(){
+    radioFilterClear('radio-person-camera');
+})
 //#endregion
