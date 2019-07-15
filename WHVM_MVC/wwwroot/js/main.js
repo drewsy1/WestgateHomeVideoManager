@@ -44575,11 +44575,11 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "View_Layout_Global", function() { return View_Layout_Global; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "View_Layout_Global", function() { return View_Layout_Global; });
 ﻿/* global $ */
 class View_Layout_Global {
     constructor() {
-        $('[data-toggle="tooltip"]').tooltip()
+        
     }
 
     static goBack() {
@@ -44600,7 +44600,6 @@ class View_Layout_Global {
     }
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
