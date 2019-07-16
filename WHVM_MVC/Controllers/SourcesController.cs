@@ -38,7 +38,9 @@ namespace WHVM_MVC.Controllers
                 .FirstOrDefaultAsync(m => m.SourceId == id)
                 .ConfigureAwait(false);
 
-            ViewData["ModelCount"] = await _context.Source.CountAsync().ConfigureAwait(false);
+            Dictionary<int,string> ModelsList = new Dictionary<int, string>();
+            await _context.Source.ForEachAsync(model => ModelsList.Add(model.SourceId, model.SourceLabel)).ConfigureAwait(false);
+            ViewData["ModelsList"] = ModelsList;
             ViewData["ModelID"] = source.SourceId;
 
             if (source == null)

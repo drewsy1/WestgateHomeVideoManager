@@ -39,6 +39,12 @@ namespace WHVM_MVC.Controllers
                 .Include(c => c.Source)
                 .FirstOrDefaultAsync(m => m.ClipId == id)
                 .ConfigureAwait(false);
+
+            Dictionary<int, string> ModelsList = new Dictionary<int, string>();
+            await _context.Clip.ForEachAsync(model => ModelsList.Add(model.ClipId, model.ClipDescription)).ConfigureAwait(false);
+            ViewData["ModelsList"] = ModelsList;
+            ViewData["ModelID"] = clip.ClipId;
+
             if (clip == null)
             {
                 return NotFound();

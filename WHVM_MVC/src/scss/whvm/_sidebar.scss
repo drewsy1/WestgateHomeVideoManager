@@ -74,10 +74,6 @@
       padding: 1rem;
       border-right: 1px solid rgba(0, 0, 0, .1);
     }
-  
-    @include media-breakpoint-up(xl) {
-      flex: 0 1 320px;
-    }
 
     > h2 {
       border-bottom: 1px solid rgba(0, 0, 0, .1);
@@ -87,14 +83,11 @@
     .accordion {
       .card{
         .card-header{
-          padding: 0;
+          padding: .25rem .5rem;
   
-          > button{
-            padding: .25rem .5rem;
-            width: 100%;
+          button[data-toggle=collapse]{
+            padding: 0;
             text-decoration:none;
-
-            
           }
 
           i {

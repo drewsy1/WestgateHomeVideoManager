@@ -1,5 +1,8 @@
 ﻿@{
     Layout = "Layouts/_Layout_Sidebar";
+    ViewData["Title"] = ViewContext.RouteData.Values["controller"];
+    ViewData["Subtitle"] = ViewContext.RouteData.Values["action"];
+
 }
 
 @section SidebarContent{
@@ -12,7 +15,7 @@
     <div class="collapse collapse-md-down" id="collapseFilters" style="overflow-y: auto">
         @if (IsSectionDefined("SidebarContent"))
         {
-        @await RenderSectionAsync("SidebarContent").ConfigureAwait(false)
+            @await RenderSectionAsync("SidebarContent").ConfigureAwait(false)
         }
         else
         {
@@ -20,40 +23,38 @@
         }
     </div>
     <!--#endregion-->
-    <!--#region Page Navigation Controls-->
-    <div class="mt-auto d-flex flex-wrap" aria-label="Page navigation">
+    <!--#region Accordion - Model Selector-->
+    @*<div class="accordion mt-auto py-1 py-lg-2" id="FilterAccordion" style="overflow-y: auto">*@
+    <!--#region Filter - Checkboxes - ClipTagsPeople - Clip-->
+    <div class="card mt-auto" style="max-height: 50%" id="modelSelector">
+        <div id="collapseModelSelector" class="collapse" aria-labelledby="modelSelectorHeader" style="overflow-y: auto">
+            <ul class="card-body p-0 list-group list-group-flush" id="modelList">
 
-        <div class="col-3 col-md-12 pr-1 pl-0 px-md-0 my-1">
-            <!-- items per page dropdown -->
-            <div class="dropup">
-
-                <button data-type="panel"
-                        class="btn btn-sm btn-primary col-12 dropdown-toggle px-0"
-                        type="button">
-                    Sources
-                </button>
-
-                <div class="dropdown-menu"
-                     aria-labelledby="dropdownMenuButton">
-
-                    <a class="dropdown-item" href="#" >8 per page</a>
-                </div>
-            </div>
+                @foreach (var currentObject in ((Dictionary<int, string>)ViewData["ModelsList"]))
+                {
+                    string[] objectClasses =
+                    {
+                    "list-group-item",
+                    "list-group-item-action",
+                    "p-2",
+                    "text-truncate",
+                            currentObject.Key == (int) ViewData["ModelID"] ? "active" : ""
+                };
+                    <a asp-action="Details" asp-controller="@(ViewData["Title"])" asp-route-id="@(currentObject.Key)" class="@string.Join(" ", objectClasses)">@currentObject.Value</a>
+                }
+            </ul>
         </div>
-        <div class="justify-content-center align-content-center col-9 col-md-12 pr-0 pl-1 px-md-0 my-1">
-            <div class="btn-group col-12 px-0" role="group" id="source-select-btn-group">
-                <a href ="#" class="btn btn-outline-primary col-1 px-0" id="source-select-first"><i class="mi mi-ChevronLeftSmall"></i></a>
-                <a href ="#" class="btn btn-outline-primary col-1 px-0" id="source-select-prev"><i class="mi mi-ChevronLeft"></i></a>
-
-                <div class="btn-group col px-0" role="group" >
-                    <a href ="#" class="btn btn-sm btn-outline-primary" style="font-size:1rem" >{pageNumber}</a>
+        <div class="card-header p-2" id="modelSelectorHeader">
+            <button class="btn btn-link collapsed p-0 flex-grow-0" data-toggle="collapse" data-target="#collapseModelSelector" aria-expanded="false" aria-controls="collapseModelSelector" style="text-decoration:none">
+                <div class="d-flex">
+                    <i class="mi mi-ChevronRight"></i>
+                    <div class="mx-1">@ViewData["Title"]</div>
                 </div>
-
-                <a href ="#" class="btn btn-outline-primary col-1 px-0" id="source-select-next"><i class="mi mi-ChevronRight"></i></a>
-                <a href ="#" class="btn btn-outline-primary col-1 px-0" id="source-select-last"><i class="mi mi-ChevronRightSmall"></i></a>
-            </div>
+            </button>
         </div>
     </div>
+    <!--#endregion-->
+    @*</div>*@
     <!--#endregion-->
 
 }
@@ -79,7 +80,7 @@
         // default content
     }
     <script type="text/javascript">
-        const ModelCount = @Html.Raw(Json.Serialize(ViewData["ModelCount"]));
+        const ModelsList = @Html.Raw(Json.Serialize(ViewData["ModelsList"]));
         const ModelID = @Html.Raw(Json.Serialize(ViewData["ModelID"]));
     </script>
     <script type="text/javascript" src="~/js/View_Sources_Details.js"></script>

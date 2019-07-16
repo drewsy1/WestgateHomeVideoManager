@@ -3,6 +3,7 @@
 
 @{
     Layout = "Layouts/_Layout_Sidebar_Details";
+    ViewData["Title"] = ViewContext.RouteData.Values["controller"];
     ViewData["Subtitle"] = ViewContext.RouteData.Values["action"];
 }
 

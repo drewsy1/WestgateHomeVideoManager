@@ -1,5 +1,7 @@
 ﻿@{
     Layout = "Layouts/_Layout_Sidebar";
+    ViewData["Title"] = ViewContext.RouteData.Values["controller"];
+    ViewData["Subtitle"] = ViewContext.RouteData.Values["action"];
 }
 
 @section SidebarContent{

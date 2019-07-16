@@ -66,24 +66,23 @@
         </div>
         <!--#endregion-->
         <!--#region Accordion - Filters - Clip-->
-        <div class="accordion py-1 py-lg-2" id="FilterAccordion">
+        <div class="accordion py-1 py-lg-2" id="FilterAccordion" >
             <!--#region Filter - Checkboxes - ClipTagsPeople - Clip-->
             <div class="card" id="clipsPeopleFilter">
-                <div class="card-header" id="clipsPeopleFilterHeader">
-                    <div class="d-flex align-items-center px-2">
-                        <button class="btn btn-link collapsed pl-0 pr-1" data-toggle="collapse" data-target="#collapsePeople" aria-expanded="false" aria-controls="collapsePeople">
-                            <div class="d-flex">
-                                <i class="mi mi-ChevronRight"></i>
-                                <div class="mx-1">People</div>
-                            </div>
-                        </button>
-                        <div class="mr-auto">
-                            <span class="p-1 badge badge-primary d-none"></span>
+                <div class="card-header d-flex align-items-center" id="clipsPeopleFilterHeader">
+                    <button class="btn btn-link collapsed px-0" data-toggle="collapse" data-target="#collapsePeople" aria-expanded="false" aria-controls="collapsePeople">
+                        <div class="d-flex">
+                            <i class="mi mi-ChevronRight"></i>
+                            <div class="mx-1">People</div>
                         </div>
+                    </button>
+                    <div class="p-1 flex-grow-0 badge badge-primary badge-pill d-none text-truncate mx-1" data-toggle="tooltip"></div>
+                    <div class="ml-auto">
                         <a href="#" class="btn btn-sm btn-link disabled p-0" role="button" id="clipsPeopleFilterClear">
                             <i class="mi mi-Clear"></i>
                         </a>
                     </div>
+                    
 
                 </div>
                 <div id="collapsePeople" class="collapse" aria-labelledby="clipsPeopleFilterHeader" data-parent="#FilterAccordion">
@@ -113,17 +112,15 @@
             <!--#endregion-->
             <!--#region Filter - Checkboxes - ClipTagsCollections - Clip-->
             <div class="card" id="clipsCollectionsFilter">
-                <div class="card-header" id="headingTwo">
-                    <div class="d-flex align-items-center  px-2">
-                        <button class="btn btn-link collapsed pl-0 pr-1" data-toggle="collapse" data-target="#collapseCollections" aria-expanded="false" aria-controls="collapseCollections">
+                <div class="card-header d-flex align-items-center" id="clipsCollectionsHeading">
+                    <button class="btn btn-link collapsed px-0" data-toggle="collapse" data-target="#collapseCollections" aria-expanded="false" aria-controls="collapseCollections">
                             <div class="d-flex">
                                 <i class="mi mi-ChevronRight"></i>
                                 <div class="ml-1">Collections</div>
                             </div>
                         </button>
-                        <div class="mr-auto">
-                            <span class="p-1 badge badge-primary d-none"></span>
-                        </div>
+                    <div class="p-1 flex-grow-0 badge badge-primary badge-pill d-none text-truncate mx-1" data-toggle="tooltip"></div>
+                    <div class="ml-auto">
                         <a href="#" class="btn btn-sm btn-link disabled p-0" role="button" id="clipsCollectionsFilterClear">
                             <i class="mi mi-Clear"></i>
                         </a>
@@ -156,23 +153,19 @@
             <!--#endregion-->
             <!--#region Filter - Checkboxes - ClipTagsPeopleReviewer - Clip-->
             <div class="card" id="clipsPeopleReviewerFilter">
-                <div class="card-header" id="clipsPeopleReviewerFilterHeader">
-                    <div class="d-flex align-items-center px-2">
-                        <button class="btn btn-link collapsed px-0 flex-shrink-0" data-toggle="collapse" data-target="#collapsePeopleReviewer" aria-expanded="false" aria-controls="collapsePeopleReviewer">
-                            <div class="d-flex">
-                                <i class="mr-1 mi mi-ChevronRight"></i>
-                                <span>Clip Reviewer</span>
-                            </div>
-                        </button>
-                        <div class="p-1 badge badge-primary d-none text-truncate mx-1" data-toggle="tooltip"></div>
-                        <div class="ml-auto">
-                            <a href="#" class="btn btn-sm btn-link disabled p-0" role="button" id="clipsPeopleReviewerFilterClear">
-                                <i class="mi mi-Clear"></i>
-                            </a>
+                <div class="card-header d-flex align-items-center" id="clipsPeopleReviewerFilterHeader">
+                    <button class="btn btn-link collapsed px-0 flex-shrink-0" data-toggle="collapse" data-target="#collapsePeopleReviewer" aria-expanded="false" aria-controls="collapsePeopleReviewer">
+                        <div class="d-flex">
+                            <i class="mr-1 mi mi-ChevronRight"></i>
+                            <span class="text-truncate">Clip Reviewer</span>
                         </div>
-
+                    </button>
+                    <div class="p-1 flex-grow-0 badge badge-primary badge-pill d-none text-truncate mx-1" data-toggle="tooltip"></div>
+                    <div class="ml-auto ">
+                        <a href="#" class="btn btn-sm btn-link disabled p-0" role="button" id="clipsPeopleReviewerFilterClear">
+                            <i class="mi mi-Clear"></i>
+                        </a>
                     </div>
-
                 </div>
                 <div id="collapsePeopleReviewer" class="collapse" aria-labelledby="clipsPeopleReviewerFilterHeader" data-parent="#FilterAccordion">
                     <div class="card-body">
@@ -201,7 +194,8 @@
                                                    data-group="@ViewData["JplistDataGroup"]"
                                                    data-name="radio-person-reviewer"
                                                    name="radio-person-reviewer"
-                                                   id="tag-person-@(person.PeopleId)-reviewer" />
+                                                   id="tag-person-@(person.PeopleId)-reviewer"
+                                                   value="@(person.PeopleName)"/>
                                             @(person.PeopleName)
                                         </label>
                                     </li>
@@ -214,23 +208,19 @@
             <!--#endregion-->
             <!--#region Filter - Checkboxes - ClipTagsPeopleCamera - Clip-->
             <div class="card" id="clipsPeopleCameraFilter">
-                <div class="card-header" id="clipsPeopleCameraFilterHeader">
-                    <div class="d-flex align-items-center px-2">
-                        <button class="btn btn-link collapsed px-0 flex-shrink-0" data-toggle="collapse" data-target="#collapsePeopleCamera" aria-expanded="false" aria-controls="collapsePeopleCamera">
+                <div class="card-header d-flex align-items-center" id="clipsPeopleCameraFilterHeader">
+                    <button class="btn btn-link collapsed px-0 flex-shrink-0" data-toggle="collapse" data-target="#collapsePeopleCamera" aria-expanded="false" aria-controls="collapsePeopleCamera">
                             <div class="d-flex">
                                 <i class="mr-1 mi mi-ChevronRight"></i>
                                 <span>Camera Operator</span>
                             </div>
                         </button>
-                        <span class="p-1 badge badge-primary d-none text-truncate mx-1"></span>
+                        <div class="p-1 flex-grow-0 badge badge-primary badge-pill d-none text-truncate mx-1" data-toggle="tooltip"></div>
                         <div class="ml-auto">
                             <a href="#" class="btn btn-sm btn-link disabled p-0" role="button" id="clipsPeopleCameraFilterClear">
                                 <i class="mi mi-Clear"></i>
                             </a>
                         </div>
-
-                    </div>
-
                 </div>
                 <div id="collapsePeopleCamera" class="collapse" aria-labelledby="clipsPeopleCameraFilterHeader" data-parent="#FilterAccordion">
                     <div class="card-body">
@@ -260,7 +250,8 @@
                                                    data-group="@ViewData["JplistDataGroup"]"
                                                    data-name="radio-person-camera"
                                                    name="radio-person-camera"
-                                                   id="tag-person-@(person.PeopleId)-camera" />
+                                                   id="tag-person-@(person.PeopleId)-camera"
+                                                   value="@(person.PeopleName)" />
                                             @(person.PeopleName)
                                         </label>
                                     </li>

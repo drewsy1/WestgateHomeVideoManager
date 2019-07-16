@@ -1,4 +1,4 @@
-﻿/* global $,jplist */
+﻿/* global document,jplist */
 
 //#region Constant Variables
 const clipsPeopleFilterElement = $('#clipsPeopleFilter');
@@ -70,7 +70,7 @@ function refreshCheckboxFilterHighlights() {
         let clearButton = currentRadioFilter.element.find("a");
         let radioSelected = currentRadioFilter.element.find(".jplist-selected");
         let radioIsDefault = $(radioSelected).attr('data-path') === 'default'
-        let radioSelectedText = $($(radioSelected).attr('data-path')+':first').text();
+        let radioSelectedText = $(radioSelected).val();
 
         countTextElement.text(radioSelectedText);
         countTextElement.attr("title",radioSelectedText);
@@ -121,4 +121,9 @@ $("#clipsPeopleReviewerFilterClear").click(function(){
 $("#clipsPeopleCameraFilterClear").click(function(){
     radioFilterClear('radio-person-camera');
 })
+
+$(document).ready(function(){
+    refreshCheckboxFilterHighlights();
+});
 //#endregion
+

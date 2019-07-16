@@ -1,4 +1,3 @@
-/* global $ */
 // Realtime form validation https://www.sitepoint.com/instant-validation/
 // #region Page Variables
 const dateTimePickerMinText = $("#dateTimePickerMinText");
