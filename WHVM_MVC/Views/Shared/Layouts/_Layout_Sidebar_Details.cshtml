@@ -7,8 +7,8 @@
 
 @section SidebarContent{
     <!-- Filter Collapse toggle-button, only seen at small device sizes-->
-    <button class="btn btn-primary d-sm-none my-1" type="button" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
-        Menu
+    <button class="btn btn-primary d-md-none my-1" type="button" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
+        Navigation
     </button>
 
     <!--#region Filter Collapse (only collapsible on small devices)-->
@@ -21,41 +21,62 @@
         {
             // default content
         }
-    </div>
-    <!--#endregion-->
-    <!--#region Accordion - Model Selector-->
-    @*<div class="accordion mt-auto py-1 py-lg-2" id="FilterAccordion" style="overflow-y: auto">*@
-    <!--#region Filter - Checkboxes - ClipTagsPeople - Clip-->
-    <div class="card mt-auto" style="max-height: 50%" id="modelSelector">
-        <div id="collapseModelSelector" class="collapse" aria-labelledby="modelSelectorHeader" style="overflow-y: auto">
-            <ul class="card-body p-0 list-group list-group-flush" id="modelList">
+        <div id="modelSelector" style="overflow-y: auto">
+            <ul class="p-0 list-group list-group-flush" id="modelList">
 
                 @foreach (var currentObject in ((Dictionary<int, string>)ViewData["ModelsList"]))
                 {
                     string[] objectClasses =
                     {
-                    "list-group-item",
-                    "list-group-item-action",
-                    "p-2",
-                    "text-truncate",
-                            currentObject.Key == (int) ViewData["ModelID"] ? "active" : ""
-                };
+                        "list-group-item",
+                        "list-group-item-action",
+                        "p-2",
+                        "text-truncate",
+                        currentObject.Key == (int) ViewData["ModelID"] ? "active" : ""
+                    };
                     <a asp-action="Details" asp-controller="@(ViewData["Title"])" asp-route-id="@(currentObject.Key)" class="@string.Join(" ", objectClasses)">@currentObject.Value</a>
                 }
             </ul>
         </div>
-        <div class="card-header p-2" id="modelSelectorHeader">
-            <button class="btn btn-link collapsed p-0 flex-grow-0" data-toggle="collapse" data-target="#collapseModelSelector" aria-expanded="false" aria-controls="collapseModelSelector" style="text-decoration:none">
-                <div class="d-flex">
-                    <i class="mi mi-ChevronRight"></i>
-                    <div class="mx-1">@ViewData["Title"]</div>
-                </div>
-            </button>
-        </div>
     </div>
     <!--#endregion-->
-    @*</div>*@
-    <!--#endregion-->
+    <!--#region Accordion - Model Selector-->
+    @*<div class="card mt-auto modelSelector" id="modelSelector">
+            <div class="card-header p-2 d-md-none" id="modelSelectorHeaderTop">
+                <button class="btn btn-link collapsed p-0 flex-grow-0" data-toggle="collapse" data-target="#collapseModelSelector" aria-expanded="false" aria-controls="collapseModelSelector" style="text-decoration:none">
+                    <div class="d-flex">
+                        <i class="mi mi-ChevronRight"></i>
+                        <div class="mx-1">@ViewData["Title"]</div>
+                    </div>
+                </button>
+            </div>
+            <div id="collapseModelSelector" class="collapse" aria-labelledby="modelSelectorHeaderBottom" style="overflow-y: auto">
+                <ul class="card-body p-0 list-group list-group-flush" id="modelList">
+
+                    @foreach (var currentObject in ((Dictionary<int, string>)ViewData["ModelsList"]))
+                    {
+                        string[] objectClasses =
+                        {
+                                "list-group-item",
+                                "list-group-item-action",
+                                "p-2",
+                                "text-truncate",
+                                currentObject.Key == (int) ViewData["ModelID"] ? "active" : ""
+                            };
+                        <a asp-action="Details" asp-controller="@(ViewData["Title"])" asp-route-id="@(currentObject.Key)" class="@string.Join(" ", objectClasses)">@currentObject.Value</a>
+                    }
+                </ul>
+            </div>
+            <div class="card-header p-2 d-none d-md-block" id="modelSelectorHeaderBottom">
+                <button class="btn btn-link collapsed p-0 flex-grow-0" data-toggle="collapse" data-target="#collapseModelSelector" aria-expanded="false" aria-controls="collapseModelSelector" style="text-decoration: none">
+                    <div class="d-flex">
+                        <i class="mi mi-ChevronRight"></i>
+                        <div class="mx-1">@ViewData["Title"]</div>
+                    </div>
+                </button>
+            </div>
+        </div>*@
+            <!--#endregion-->
 
 }
 

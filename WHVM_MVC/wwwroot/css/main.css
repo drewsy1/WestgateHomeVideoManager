@@ -10227,6 +10227,12 @@ h3 {
   background-color: transparent;
 }
 
+@media (min-width: 768px) {
+  .modelSelector {
+    max-height: 50%;
+  }
+}
+
 input[aria-invalid=true], textarea[aria-invalid=true] {
   border: 1px solid #f00;
   box-shadow: 0 0 4px 0 #f00;

@@ -7,89 +7,103 @@
 }
 
 @section SidebarContent{
-    <div>
-        <a asp-action="Edit" asp-controller="Clips" asp-route-id="@Model.ClipId" class="btn btn-secondary px-1" id="clip-edit-btn">
-            Edit
-        </a>
-    </div>
+    
 }
 
 @section Body{
     <div>
-        <h1>@Html.DisplayFor(model => model.ClipDescription)</h1>
-        <p class="lead">@ViewData["Subtitle"]</p>
-        <hr />
+        <div class="d-flex flex-wrap flex-md-nowrap align-items-start flex-row pb-1">
+            <div class="order-12 order-md-0">
+                <h1>@Html.DisplayFor(model => model.ClipDescription)</h1>
+                <span class="lead">@ViewData["Subtitle"]</span>
+            </div>
+            <div class="mx-auto d-md-none order-0"></div>
+            <button class="btn btn-secondary m-1 ml-md-auto" id="clip-back-btn" onclick="window.history.back()">
+                <div class="d-flex justify-content-center">
+                    <i class="mi mi-Back"></i>
+                </div>
+            </button>
+            <a asp-action="Edit" asp-controller="Clips" asp-route-id="@Model.ClipId" class="btn btn-primary m-1" id="clip-edit-btn">
+                <div class="d-flex justify-content-center">
+                    <i class="mi mi-Edit"></i>
+                </div>
+            </a>
+            <a asp-action="Delete" asp-controller="Clips" asp-route-id="@Model.ClipId" class="btn btn-danger m-1" id="clip-delete-btn">
+                <div class="d-flex justify-content-center">
+                    <i class="mi mi-Delete"></i>
+                </div>
+            </a>
+
+        </div>
+        <hr/>
         <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ClipNumber)
+            <dt class="col-lg-2">
+                Clip Number
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-lg-10">
                 @Html.DisplayFor(model => model.ClipNumber)
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ClipTimeStart)
+            <dt class="col-lg-2">
+                Date/Time Start
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-lg-10">
                 @Html.DisplayFor(model => model.ClipTimeStart)
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ClipTimeEnd)
+            <dt class="col-lg-2">
+                Date/Time Start
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-lg-10">
                 @Html.DisplayFor(model => model.ClipTimeEnd)
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ClipVidTimeStart)
+            <dt class="col-lg-2">
+                Start Timestamp
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-lg-10">
                 @Html.DisplayFor(model => model.ClipVidTimeStart)
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ClipVidTimeEnd)
+            <dt class="col-lg-2">
+                End Timestamp
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-lg-10">
                 @Html.DisplayFor(model => model.ClipVidTimeEnd)
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ClipVidTimeLength)
+            <dt class="col-lg-2">
+                Length
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-lg-10">
                 @Html.DisplayFor(model => model.ClipVidTimeLength)
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ClipReviewer.PeopleName)
+            <dt class="col-lg-2">
+                Clip Reviewer
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-lg-10">
                 @Html.DisplayFor(model => model.ClipReviewer.PeopleName)
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ClipCameraOperator.PeopleName)
+            <dt class="col-lg-2">
+                Camera Operator
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-lg-10">
                 @Html.DisplayFor(model => model.ClipCameraOperator.PeopleName)
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ClipDescription)
+            <dt class="col-lg-2">
+                Description
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-lg-5">
                 @Html.DisplayFor(model => model.ClipDescription)
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ClipFilePath)
+            <div class="col-lg-5"></div>
+            <dt class="col-lg-2">
+                File Path
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-lg-10">
                 @Html.DisplayFor(model => model.ClipFilePath)
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Source)
+            <dt class="col-lg-2">
+                Source
             </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Source.SourceId)
+            <dd class="col-lg-10">
+                @Html.DisplayFor(model => model.Source.SourceLabel)
             </dd>
         </dl>
-    </div>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.ClipId">Edit</a> |
-        <a asp-action="Index">Back to List</a>
     </div>
 }
