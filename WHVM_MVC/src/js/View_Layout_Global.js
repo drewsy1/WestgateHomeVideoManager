@@ -1,4 +1,4 @@
-﻿/* global $ */
+﻿/* global $, window */
 export class View_Layout_Global {
     constructor() {
         

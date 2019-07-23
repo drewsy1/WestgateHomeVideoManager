@@ -3,23 +3,42 @@
 
 @{
     Layout = "Layouts/_Layout_Sidebar_Details";
+    ViewData["SidebarTitle"] = "Sources";
+    ViewData["BodyTitle"] = Model.SourceLabel;
     ViewData["Title"] = ViewContext.RouteData.Values["controller"];
     ViewData["Subtitle"] = ViewContext.RouteData.Values["action"];
 }
 
 @section SidebarContent{
-    <div>
-        <a asp-action="Edit" asp-controller="Sources" asp-route-id="@Model.SourceId" class="btn btn-secondary px-1" id="source-edit-btn">
-            Edit
-        </a>
-    </div>
+
 }
 
 
     @section Body{
         <div>
-            <h1>@Html.DisplayFor(model => model.SourceLabel)</h1>
-            <p class="lead">@ViewData["Subtitle"]</p>
+            <div class="d-flex flex-wrap flex-md-nowrap align-items-start flex-row pb-1">
+                <div class="order-12 order-md-0">
+                    <h1>@ViewData["BodyTitle"]</h1>
+                    <span class="lead">@ViewData["Subtitle"]</span>
+                </div>
+                <div class="mx-auto d-md-none order-0"></div>
+                <button class="btn btn-secondary m-1 ml-md-auto" id="source-back-btn" onclick="window.history.back()">
+                    <div class="d-flex justify-content-center">
+                        <i class="mi mi-Back"></i>
+                    </div>
+                </button>
+                <a asp-action="Edit" asp-controller="Sources" asp-route-id="@Model.SourceId" class="btn btn-primary m-1" id="source-edit-btn">
+                    <div class="d-flex justify-content-center">
+                        <i class="mi mi-Edit"></i>
+                    </div>
+                </a>
+                <a asp-action="Delete" asp-controller="Sources" asp-route-id="@Model.SourceId" class="btn btn-danger m-1" id="source-delete-btn">
+                    <div class="d-flex justify-content-center">
+                        <i class="mi mi-Delete"></i>
+                    </div>
+                </a>
+
+            </div>
             <hr />
             <dl class="row">
                 <dt class="col-sm-2">

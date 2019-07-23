@@ -27,7 +27,7 @@ namespace WHVM_MVC.Controllers
         }
 
         // GET: Sources/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, List<Source> sourceList)
         {
             if (id == null)
             {
@@ -39,7 +39,16 @@ namespace WHVM_MVC.Controllers
                 .ConfigureAwait(false);
 
             Dictionary<int,string> ModelsList = new Dictionary<int, string>();
-            await _context.Source.ForEachAsync(model => ModelsList.Add(model.SourceId, model.SourceLabel)).ConfigureAwait(false);
+
+            if (sourceList.Count > 0)
+            {
+                sourceList.ForEach(model => ModelsList.Add(model.SourceId, model.SourceLabel));
+            }
+            else
+            {
+                await _context.Source.ForEachAsync(model => ModelsList.Add(model.SourceId, model.SourceLabel)).ConfigureAwait(false);
+            }
+
             ViewData["ModelsList"] = ModelsList;
             ViewData["ModelID"] = source.SourceId;
 

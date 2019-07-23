@@ -2,19 +2,25 @@
 
 @{
     Layout = "Layouts/_Layout_Sidebar_Details";
+    ViewData["SidebarTitle"] = Html.Raw("<a asp-action=\"Details\" asp-controller=\"Sources\" asp-route-id=\"" + Model.SourceId + "\" id=\"source-details\">" + Model.Source.SourceLabel + "</a>");
+    ViewData["BodyTitle"] = Model.ClipDescription;
     ViewData["Title"] = ViewContext.RouteData.Values["controller"];
     ViewData["Subtitle"] = ViewContext.RouteData.Values["action"];
 }
 
 @section SidebarContent{
-    
+
 }
 
+@section SidebarTitle{
+    <a asp-action="Details" asp-controller="Sources" asp-route-id="@Model.SourceId" id="source-details">@Model.Source.SourceLabel</a>
+}
 @section Body{
+
     <div>
         <div class="d-flex flex-wrap flex-md-nowrap align-items-start flex-row pb-1">
             <div class="order-12 order-md-0">
-                <h1>@Html.DisplayFor(model => model.ClipDescription)</h1>
+                <h1>@ViewData["BodyTitle"]</h1>
                 <span class="lead">@ViewData["Subtitle"]</span>
             </div>
             <div class="mx-auto d-md-none order-0"></div>
@@ -35,7 +41,7 @@
             </a>
 
         </div>
-        <hr/>
+        <hr />
         <dl class="row">
             <dt class="col-lg-2">
                 Clip Number
@@ -88,10 +94,9 @@
             <dt class="col-lg-2">
                 Description
             </dt>
-            <dd class="col-lg-5">
+            <dd class="col-lg-10">
                 @Html.DisplayFor(model => model.ClipDescription)
             </dd>
-            <div class="col-lg-5"></div>
             <dt class="col-lg-2">
                 File Path
             </dt>

@@ -28,7 +28,7 @@ namespace WHVM_MVC.Controllers
         }
 
         // GET: Clips/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, List<Clip> clipList)
         {
             if (id == null)
             {
@@ -41,7 +41,17 @@ namespace WHVM_MVC.Controllers
                 .ConfigureAwait(false);
 
             Dictionary<int, string> ModelsList = new Dictionary<int, string>();
-            await _context.Clip.ForEachAsync(model => ModelsList.Add(model.ClipId, model.ClipDescription)).ConfigureAwait(false);
+
+            if (clipList.Count > 0)
+            {
+                clipList.ForEach(model => ModelsList.Add(model.ClipId, model.ClipDescription));
+            }
+            else
+            {
+                List<Clip> SourceClipsList = clip.Source.Clips.ToList();
+                SourceClipsList.ForEach(model => ModelsList.Add(model.ClipId, model.ClipDescription));
+            }
+            
             ViewData["ModelsList"] = ModelsList;
             ViewData["ModelID"] = clip.ClipId;
 

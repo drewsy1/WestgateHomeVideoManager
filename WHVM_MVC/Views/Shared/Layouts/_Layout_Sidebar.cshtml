@@ -1,11 +1,11 @@
 ﻿@{
     Layout = "Layouts/_Layout";
+    ViewData["Title"] = ViewContext.RouteData.Values["controller"];
+    ViewData["Subtitle"] = ViewContext.RouteData.Values["action"];
 }
 
 <div class="row flex-xl-nowrap" >
     <div class="col-12 col-md-4 col-lg-3 col-xl-2 whvm-sidebar d-flex flex-column">
-        <h2>@ViewData["Title"]</h2>
-
         @if (IsSectionDefined("SidebarContent"))
         {
             @await RenderSectionAsync("SidebarContent").ConfigureAwait(false)

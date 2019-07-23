@@ -2,6 +2,7 @@
 
 @{
     Layout = "Layouts/_Layout_Sidebar_Index";
+    ViewData["SidebarTitle"] = ViewContext.RouteData.Values["controller"];
     ViewData["JplistDataGroup"] = "sources";
     ViewData["JplistSortDataPath"] = ".sourceID";
     ViewData["JplistSortDataOrder"] = "asc";
@@ -132,7 +133,7 @@
     <div data-jplist-group="sources" style="overflow: auto">
         @foreach (var item in Model)
         {
-            <a asp-action="Details" asp-controller="Sources" asp-route-id="@item.SourceId" class="card" data-jplist-item>
+            <a asp-action="Details" asp-controller="Sources" asp-route-id="@item.SourceId" class="card" data-jplist-item style="text-decoration:none">
                 <span class="sourceDate" style="display: none">@(Html.DisplayFor(modelItem => item.SourceDates.SourceDateStart))</span>
                 <span class="sourceDate" style="display: none">@(Html.DisplayFor(modelItem => item.SourceDates.SourceDateEnd))</span>
                 <span class="sourceFormat" style="display: none">@(Html.DisplayFor(modelItem => item.SourceFormat.SourceFormatText))</span>

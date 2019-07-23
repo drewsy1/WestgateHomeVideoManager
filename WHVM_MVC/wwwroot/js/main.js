@@ -44576,7 +44576,7 @@ module.exports = function(module) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "View_Layout_Global", function() { return View_Layout_Global; });
-﻿/* global $ */
+﻿/* global $, window */
 class View_Layout_Global {
     constructor() {
         

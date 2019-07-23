@@ -2,7 +2,7 @@
 
 @{
     Layout = "Layouts/_Layout_Sidebar_Index";
-    ViewData["Title"] = "Clips";
+    ViewData["SidebarTitle"] = "Clips";
     ViewData["JplistDataGroup"] = "clips";
     ViewData["JplistSortDataPath"] = ".clipID";
     ViewData["JplistSortDataOrder"] = "asc";
@@ -66,7 +66,7 @@
         </div>
         <!--#endregion-->
         <!--#region Accordion - Filters - Clip-->
-        <div class="accordion py-1 py-lg-2" id="FilterAccordion" >
+        <div class="accordion py-1 py-lg-2" id="FilterAccordion">
             <!--#region Filter - Checkboxes - ClipTagsPeople - Clip-->
             <div class="card" id="clipsPeopleFilter">
                 <div class="card-header d-flex align-items-center" id="clipsPeopleFilterHeader">
@@ -82,7 +82,7 @@
                             <i class="mi mi-Clear"></i>
                         </a>
                     </div>
-                    
+
 
                 </div>
                 <div id="collapsePeople" class="collapse" aria-labelledby="clipsPeopleFilterHeader" data-parent="#FilterAccordion">
@@ -91,17 +91,16 @@
                             @{
                                 foreach (TagsPeople person in TagsPeople.AllPeople)
                                 {
-                                    <li>
-                                        <label class="my-1">
-                                            <input type="checkbox"
-                                                   data-jplist-control="checkbox-path-filter"
-                                                   data-path=".tag-person-@(person.PeopleId)"
-                                                   data-group="@ViewData["JplistDataGroup"]"
-                                                   data-clear-btn-id="clipsPeopleFilterClear"
-                                                   name="checkbox-person-@(person.PeopleId)"
-                                                   id="tag-person-@(person.PeopleId)" />
-                                            @(person.PeopleName)
-                                        </label>
+                                    <li class="my-1 custom-control custom-checkbox">
+                                        <input type="checkbox"
+                                               data-jplist-control="checkbox-path-filter"
+                                               data-path=".tag-person-@(person.PeopleId)"
+                                               data-group="@ViewData["JplistDataGroup"]"
+                                               data-clear-btn-id="clipsPeopleFilterClear"
+                                               name="checkbox-person-@(person.PeopleId)"
+                                               id="tag-person-@(person.PeopleId)" 
+                                               class="custom-control-input"/>
+                                        <label class="custom-control-label" for="tag-person-@(person.PeopleId)">@(person.PeopleName)</label>
                                     </li>
                                 }
                             }
@@ -114,11 +113,11 @@
             <div class="card" id="clipsCollectionsFilter">
                 <div class="card-header d-flex align-items-center" id="clipsCollectionsHeading">
                     <button class="btn btn-link collapsed px-0" data-toggle="collapse" data-target="#collapseCollections" aria-expanded="false" aria-controls="collapseCollections">
-                            <div class="d-flex">
-                                <i class="mi mi-ChevronRight"></i>
-                                <div class="ml-1">Collections</div>
-                            </div>
-                        </button>
+                        <div class="d-flex">
+                            <i class="mi mi-ChevronRight"></i>
+                            <div class="ml-1">Collections</div>
+                        </div>
+                    </button>
                     <div class="p-1 flex-grow-0 badge badge-primary badge-pill d-none text-truncate mx-1" data-toggle="tooltip"></div>
                     <div class="ml-auto">
                         <a href="#" class="btn btn-sm btn-link disabled p-0" role="button" id="clipsCollectionsFilterClear">
@@ -132,17 +131,16 @@
                             @{
                                 foreach (TagsCollections collection in TagsCollections.AllCollections)
                                 {
-                                    <li>
-                                        <label class="my-1">
-                                            <input type="checkbox"
-                                                   data-jplist-control="checkbox-path-filter"
-                                                   data-path=".tag-collection-@(collection.CollectionsId)"
-                                                   data-group="@ViewData["JplistDataGroup"]"
-                                                   data-clear-btn-id="clipsCollectionsFilterClear"
-                                                   name="checkbox-collection-@(collection.CollectionsId)"
-                                                   id="tag-collection-@(collection.CollectionsId)-cb" />
-                                            @(collection.CollectionsText)
-                                        </label>
+                                    <li class="my-1 custom-control custom-checkbox">
+                                        <input type="checkbox"
+                                               data-jplist-control="checkbox-path-filter"
+                                               data-path=".tag-collection-@(collection.CollectionsId)"
+                                               data-group="@ViewData["JplistDataGroup"]"
+                                               data-clear-btn-id="clipsCollectionsFilterClear"
+                                               name="checkbox-collection-@(collection.CollectionsId)"
+                                               id="tag-collection-@(collection.CollectionsId)-cb"
+                                               class="custom-control-input"/>
+                                        <label class="custom-control-label" for="tag-collection-@(collection.CollectionsId)-cb">@(collection.CollectionsText)</label>
                                     </li>
                                 }
                             }
@@ -170,34 +168,32 @@
                 <div id="collapsePeopleReviewer" class="collapse" aria-labelledby="clipsPeopleReviewerFilterHeader" data-parent="#FilterAccordion">
                     <div class="card-body">
                         <ul style="list-style-type: none; margin: 0; margin-left: 1rem; padding: 0">
-                            <li>
-                                <label class="my-1">
-                                    <input type="radio"
+                            <li class="my-1 custom-control custom-radio">
+                                <input type="radio"
                                            data-jplist-control="radio-buttons-path-filter"
                                            data-path="default"
                                            data-group="@ViewData["JplistDataGroup"]"
                                            data-name="radio-person-reviewer"
                                            name="radio-person-reviewer"
                                            id="tag-person-default-reviewer"
-                                           checked />
-                                    Any
-                                </label>
+                                           checked
+                                           class="custom-control-input jplist-selected"/>
+                                <label class="custom-control-label" for="tag-person-default-reviewer">Any</label>
                             </li>
                             @{
                                 foreach (TagsPeople person in TagsPeople.AllPeople.Where(x => x.ClipsAsReviewer.Count > 0))
                                 {
-                                    <li>
-                                        <label class="my-1">
-                                            <input type="radio"
-                                                   data-jplist-control="radio-buttons-path-filter"
-                                                   data-path=".tag-person-@(person.PeopleId)-reviewer"
-                                                   data-group="@ViewData["JplistDataGroup"]"
-                                                   data-name="radio-person-reviewer"
-                                                   name="radio-person-reviewer"
-                                                   id="tag-person-@(person.PeopleId)-reviewer"
-                                                   value="@(person.PeopleName)"/>
-                                            @(person.PeopleName)
-                                        </label>
+                                    <li class="my-1 custom-control custom-radio">
+                                        <input type="radio"
+                                               data-jplist-control="radio-buttons-path-filter"
+                                               data-path=".tag-person-@(person.PeopleId)-reviewer"
+                                               data-group="@ViewData["JplistDataGroup"]"
+                                               data-name="radio-person-reviewer"
+                                               name="radio-person-reviewer"
+                                               id="tag-person-@(person.PeopleId)-reviewer"
+                                               value="@(person.PeopleName)"
+                                               class="custom-control-input"/>
+                                        <label class="custom-control-label" for="tag-person-@(person.PeopleId)-reviewer">@(person.PeopleName)</label>
                                     </li>
                                 }
                             }
@@ -210,24 +206,23 @@
             <div class="card" id="clipsPeopleCameraFilter">
                 <div class="card-header d-flex align-items-center" id="clipsPeopleCameraFilterHeader">
                     <button class="btn btn-link collapsed px-0 flex-shrink-0" data-toggle="collapse" data-target="#collapsePeopleCamera" aria-expanded="false" aria-controls="collapsePeopleCamera">
-                            <div class="d-flex">
-                                <i class="mr-1 mi mi-ChevronRight"></i>
-                                <span>Camera Operator</span>
-                            </div>
-                        </button>
-                        <div class="p-1 flex-grow-0 badge badge-primary badge-pill d-none text-truncate mx-1" data-toggle="tooltip"></div>
-                        <div class="ml-auto">
-                            <a href="#" class="btn btn-sm btn-link disabled p-0" role="button" id="clipsPeopleCameraFilterClear">
-                                <i class="mi mi-Clear"></i>
-                            </a>
+                        <div class="d-flex">
+                            <i class="mr-1 mi mi-ChevronRight"></i>
+                            <span>Camera Operator</span>
                         </div>
+                    </button>
+                    <div class="p-1 flex-grow-0 badge badge-primary badge-pill d-none text-truncate mx-1" data-toggle="tooltip"></div>
+                    <div class="ml-auto">
+                        <a href="#" class="btn btn-sm btn-link disabled p-0" role="button" id="clipsPeopleCameraFilterClear">
+                            <i class="mi mi-Clear"></i>
+                        </a>
+                    </div>
                 </div>
                 <div id="collapsePeopleCamera" class="collapse" aria-labelledby="clipsPeopleCameraFilterHeader" data-parent="#FilterAccordion">
                     <div class="card-body">
                         <ul style="list-style-type: none; margin: 0; margin-left: 1rem; padding: 0">
-                            <li>
-                                <label class="my-1">
-                                    <input type="radio"
+                            <li class="my-1 custom-control custom-radio">
+                                <input type="radio"
                                            data-jplist-control="radio-buttons-path-filter"
                                            data-path="default"
                                            data-group="@ViewData["JplistDataGroup"]"
@@ -235,25 +230,23 @@
                                            name="radio-person-camera"
                                            id="tag-person-default-camera"
                                            checked
-                                           class="jplist-selected" />
-                                    Any
-                                </label>
+                                           class="custom-control-input jplist-selected"/>
+                                <label class="custom-control-label" for="tag-person-default-camera">Any</label>
                             </li>
                             @{
                                 foreach (TagsPeople person in TagsPeople.AllPeople.Where(x => x.ClipsAsCameraOperator.Count > 0))
                                 {
-                                    <li>
-                                        <label class="my-1">
-                                            <input type="radio"
+                                    <li class="my-1 custom-control custom-radio">
+                                    <input type="radio"
                                                    data-jplist-control="radio-buttons-path-filter"
                                                    data-path=".tag-person-@(person.PeopleId)-camera"
                                                    data-group="@ViewData["JplistDataGroup"]"
                                                    data-name="radio-person-camera"
                                                    name="radio-person-camera"
                                                    id="tag-person-@(person.PeopleId)-camera"
-                                                   value="@(person.PeopleName)" />
-                                            @(person.PeopleName)
-                                        </label>
+                                                   value="@(person.PeopleName)"
+                                                   class="custom-control-input"/>
+                                    <label class="custom-control-label" for="tag-person-@(person.PeopleId)-camera">@(person.PeopleName)</label>
                                     </li>
                                 }
                             }
@@ -275,8 +268,6 @@
         {
 
             <div class="card" data-jplist-item>
-
-
                 <a asp-action="Details" asp-controller="Clips" asp-route-id="@item.ClipId" style="text-decoration:none">
                     <div class="row no-gutters">
                         <div class="col-3 col-lg-2 col-xl-1">
