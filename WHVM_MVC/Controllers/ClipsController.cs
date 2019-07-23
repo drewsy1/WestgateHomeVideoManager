@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
@@ -18,6 +19,7 @@ namespace WHVM_MVC.Controllers
             _context = context;
             TagsCollections.AllCollections = _context.TagsCollections.ToList();
             TagsPeople.AllPeople = _context.TagsPeople.ToList();
+            Source.AllSources = _context.Source.ToList();
         }
 
         // GET: Clips
@@ -28,39 +30,37 @@ namespace WHVM_MVC.Controllers
         }
 
         // GET: Clips/Details/5
-        public async Task<IActionResult> Details(int? id, List<Clip> clipList)
+        public async Task<IActionResult> Details(int? id, int? sourceId)
         {
-            if (id == null)
+            if (!(id == null | sourceId == null))
             {
                 return NotFound();
             }
 
-            var clip = await _context.Clip
+            Clip currentClip = await _context.Clip
                 .Include(c => c.Source)
                 .FirstOrDefaultAsync(m => m.ClipId == id)
                 .ConfigureAwait(false);
+            Source currentSource = await _context.Source
+                .FirstOrDefaultAsync(m => m.SourceId == sourceId)
+                .ConfigureAwait(false);
+
+            currentClip = currentClip ?? currentSource.Clips.First();
+            currentSource = currentSource ?? currentClip.Source;
+
+            if (!currentSource.Clips.Contains(currentClip))
+            {
+                throw new InvalidOperationException("Source "+ currentSource.SourceId +" does not contain Clip "+ currentClip.ClipId);
+                    ;
+            }
 
             Dictionary<int, string> ModelsList = new Dictionary<int, string>();
+            currentSource.Clips.ToList().ForEach(model => ModelsList.Add(model.ClipId, model.ClipDescription));
 
-            if (clipList.Count > 0)
-            {
-                clipList.ForEach(model => ModelsList.Add(model.ClipId, model.ClipDescription));
-            }
-            else
-            {
-                List<Clip> SourceClipsList = clip.Source.Clips.ToList();
-                SourceClipsList.ForEach(model => ModelsList.Add(model.ClipId, model.ClipDescription));
-            }
-            
             ViewData["ModelsList"] = ModelsList;
-            ViewData["ModelID"] = clip.ClipId;
+            ViewData["ModelID"] = currentClip.ClipId;
 
-            if (clip == null)
-            {
-                return NotFound();
-            }
-
-            return View(clip);
+            return View(currentClip);
         }
 
         public IActionResult ModalBtnActionResult(int? id, string modalName = "_DetailsModal")

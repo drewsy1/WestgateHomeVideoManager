@@ -5,10 +5,12 @@ const clipsPeopleFilterElement = $('#clipsPeopleFilter');
 const clipsPeopleReviewerFilterElement = $('#clipsPeopleReviewerFilter');
 const clipsPeopleCameraFilterElement = $('#clipsPeopleCameraFilter');
 const clipsCollectionsFilterElement = $('#clipsCollectionsFilter');
+const clipsSourceFilterElement = $('#clipsSourceFilter');
 const clipsPeopleFilter = clipsPeopleFilterElement.find('input');
 const clipsPeopleReviewerFilter = clipsPeopleReviewerFilterElement.find('input');
 const clipsPeopleCameraFilter = clipsPeopleCameraFilterElement.find('input');
 const clipsCollectionsFilter = clipsCollectionsFilterElement.find('input');
+const clipsSourceFilter = clipsSourceFilterElement.find('input');
 const filterAccordionObjects = $('#FilterAccordion');
 const filterAccordionButtonObjects = filterAccordionObjects.find('.collapse');
 const CheckboxCollections = [
@@ -32,6 +34,11 @@ const RadioCollections= [
     {
         element: clipsPeopleCameraFilterElement,
         collection: clipsPeopleCameraFilter,
+        color: "badge-blue"
+    },
+    {
+        element: clipsSourceFilterElement,
+        collection: clipsSourceFilter,
         color: "badge-blue"
     }
 ];
@@ -120,6 +127,10 @@ $("#clipsPeopleReviewerFilterClear").click(function(){
 
 $("#clipsPeopleCameraFilterClear").click(function(){
     radioFilterClear('radio-person-camera');
+})
+
+$("#clipsSourceFilterClear").click(function(){
+    radioFilterClear('radio-source');
 })
 
 $(document).ready(function(){

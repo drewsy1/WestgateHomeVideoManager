@@ -1,77 +1,76 @@
 ﻿@model WHVM_MVC.Models.Clip
 
 @{
-    ViewData["Title"] = "Edit";
+    Layout = "Layouts/_Layout_Sidebar";
 }
 
-<h1>Edit</h1>
-
-<h4>Clip</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ClipId" />
-            <div class="form-group">
-                <label asp-for="SourceId" class="control-label"></label>
-                <select asp-for="SourceId" class="form-control" asp-items="ViewBag.SourceId"></select>
-                <span asp-validation-for="SourceId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClipNumber" class="control-label"></label>
-                <input asp-for="ClipNumber" class="form-control" />
-                <span asp-validation-for="ClipNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClipTimeStart" class="control-label"></label>
-                <input asp-for="ClipTimeStart" class="form-control" />
-                <span asp-validation-for="ClipTimeStart" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClipTimeEnd" class="control-label"></label>
-                <input asp-for="ClipTimeEnd" class="form-control" />
-                <span asp-validation-for="ClipTimeEnd" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClipVidTimeStart" class="control-label"></label>
-                <input asp-for="ClipVidTimeStart" class="form-control" />
-                <span asp-validation-for="ClipVidTimeStart" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClipVidTimeEnd" class="control-label"></label>
-                <input asp-for="ClipVidTimeEnd" class="form-control" />
-                <span asp-validation-for="ClipVidTimeEnd" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClipReviewer.PeopleName" class="control-label"></label>
-                <input asp-for="ClipReviewer.PeopleName" class="form-control" />
-                <span asp-validation-for="ClipReviewer.PeopleName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClipCameraOperator.PeopleName" class="control-label"></label>
-                <input asp-for="ClipCameraOperator.PeopleName" class="form-control" />
-                <span asp-validation-for="ClipCameraOperator.PeopleName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClipDescription" class="control-label"></label>
-                <input asp-for="ClipDescription" class="form-control" />
-                <span asp-validation-for="ClipDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClipFilePath" class="control-label"></label>
-                <input asp-for="ClipFilePath" class="form-control" />
-                <span asp-validation-for="ClipFilePath" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+@section Body{
+    <h4>Clip</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ClipId" />
+                <div class="form-group">
+                    <label asp-for="SourceId" class="control-label"></label>
+                    <select asp-for="SourceId" class="form-control" asp-items="ViewBag.SourceId"></select>
+                    <span asp-validation-for="SourceId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClipNumber" class="control-label"></label>
+                    <input asp-for="ClipNumber" class="form-control" />
+                    <span asp-validation-for="ClipNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClipTimeStart" class="control-label"></label>
+                    <input asp-for="ClipTimeStart" class="form-control" />
+                    <span asp-validation-for="ClipTimeStart" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClipTimeEnd" class="control-label"></label>
+                    <input asp-for="ClipTimeEnd" class="form-control" />
+                    <span asp-validation-for="ClipTimeEnd" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClipVidTimeStart" class="control-label"></label>
+                    <input asp-for="ClipVidTimeStart" class="form-control" />
+                    <span asp-validation-for="ClipVidTimeStart" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClipVidTimeEnd" class="control-label"></label>
+                    <input asp-for="ClipVidTimeEnd" class="form-control" />
+                    <span asp-validation-for="ClipVidTimeEnd" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClipReviewer.PeopleName" class="control-label"></label>
+                    <input asp-for="ClipReviewer.PeopleName" class="form-control" />
+                    <span asp-validation-for="ClipReviewer.PeopleName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClipCameraOperator.PeopleName" class="control-label"></label>
+                    <input asp-for="ClipCameraOperator.PeopleName" class="form-control" />
+                    <span asp-validation-for="ClipCameraOperator.PeopleName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClipDescription" class="control-label"></label>
+                    <input asp-for="ClipDescription" class="form-control" />
+                    <span asp-validation-for="ClipDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClipFilePath" class="control-label"></label>
+                    <input asp-for="ClipFilePath" class="form-control" />
+                    <span asp-validation-for="ClipFilePath" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+}
 
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial").ConfigureAwait(false);}
+@section LayoutSidebarScripts {
+    @{/*await Html.RenderPartialAsync("_ValidationScriptsPartial").ConfigureAwait(false);*/}
+}
