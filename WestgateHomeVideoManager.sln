@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeVideoDB_EFCoreTest", "H
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WHVM_MVC_Tests", "WHVM_MVC_Tests\WHVM_MVC_Tests.csproj", "{28EAED0D-17BF-4EBC-8330-DADF9EE74417}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WHVM.Database", "WHVM.Database\WHVM.Database.csproj", "{A4AE1BF0-F352-4271-A662-7793C2D4A222}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{28EAED0D-17BF-4EBC-8330-DADF9EE74417}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28EAED0D-17BF-4EBC-8330-DADF9EE74417}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28EAED0D-17BF-4EBC-8330-DADF9EE74417}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4AE1BF0-F352-4271-A662-7793C2D4A222}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4AE1BF0-F352-4271-A662-7793C2D4A222}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4AE1BF0-F352-4271-A662-7793C2D4A222}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4AE1BF0-F352-4271-A662-7793C2D4A222}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

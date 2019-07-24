@@ -5898,4 +5898,9 @@
     <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\WHVM.Database\WHVM.Database.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WHVM.Database": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "connectionString": "Server=(localdb)\\\\MSSQLLocalDB;Database=HomeVideoDB;Integrated Security=true"
+      }
+    }
+  }
+}
