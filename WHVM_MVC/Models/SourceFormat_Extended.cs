@@ -4,6 +4,6 @@ namespace WHVM_MVC.Models
 {
     public partial class SourceFormat
     {
-        public static List<SourceFormat> AllFormats;
+        public static ICollection<SourceFormat> AllFormats;
     }
 }

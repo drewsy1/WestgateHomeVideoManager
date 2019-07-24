@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WHVM_MVC.Models;
+using WHVM.Database.Models;
 
 namespace WHVM_MVC
 {
@@ -36,7 +36,9 @@ namespace WHVM_MVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<HomeVideoDBContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("HomeVideoDB")));
+                options
+                    .UseLazyLoadingProxies()
+                    .UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

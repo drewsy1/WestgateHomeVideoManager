@@ -9,6 +9,6 @@ namespace WHVM.Database.Models
         public string SourceFormatName { get; set; }
         public string SourceFormatLogoPath { get; set; }
 
-        public virtual ICollection<Source> Sources { get; set; }
+        public virtual IEnumerable<Source> Sources { get; set; }
     }
 }

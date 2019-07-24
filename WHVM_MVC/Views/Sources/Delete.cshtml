@@ -1,4 +1,4 @@
-﻿@model WHVM_MVC.Models.Source
+﻿@model WHVM.Database.Models.Source
 
 @{
     Layout = "_ModelLayout";
@@ -7,10 +7,10 @@
 <div>
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SourceLabel)
+            @Html.DisplayNameFor(model => model.SourceName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SourceLabel)
+            @Html.DisplayFor(model => model.SourceName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.SourceDateCreated)
@@ -26,7 +26,7 @@
         </dd>
     </dl>
     
-    <h1><b>Are you <i>sure</i> that you want to delete @(Model.SourceLabel)?</b></h1>
+    <h1><b>Are you <i>sure</i> that you want to delete @(Model.SourceName)?</b></h1>
     <p class="lead">This cannot be reversed.</p>
     
     <form asp-action="Delete">

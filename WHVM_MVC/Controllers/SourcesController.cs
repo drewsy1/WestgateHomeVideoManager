@@ -5,24 +5,26 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using WHVM_MVC.Models;
+using WHVM.Database.Models;
 
 namespace WHVM_MVC.Controllers
 {
     public class SourcesController : Controller
     {
         private readonly HomeVideoDBContext _context;
+        private readonly List<SourceFormat> allSourceFormats;
 
         public SourcesController(HomeVideoDBContext context)
         {
             _context = context;
-            SourceFormat.AllFormats = _context.SourceFormat.ToList();
+            allSourceFormats = _context.SourceFormats.ToList();
         }
 
         // GET: Sources
         public async Task<IActionResult> Index()
         {
-            var homeVideoDbContext = _context.Source;
+            ViewData["AllSourceFormats"] = allSourceFormats;
+            var homeVideoDbContext = _context.Sources;
             return View(await homeVideoDbContext.ToListAsync().ConfigureAwait(false));
         }
 
@@ -34,7 +36,9 @@ namespace WHVM_MVC.Controllers
                 return NotFound();
             }
 
-            var source = await _context.Source
+            ViewData["AllSourceFormats"] = allSourceFormats;
+
+            var source = await _context.Sources
                 .FirstOrDefaultAsync(m => m.SourceId == id)
                 .ConfigureAwait(false);
 
@@ -42,11 +46,11 @@ namespace WHVM_MVC.Controllers
 
             if (sourceList.Count > 0)
             {
-                sourceList.ForEach(model => ModelsList.Add(model.SourceId, model.SourceLabel));
+                sourceList.ForEach(model => ModelsList.Add(model.SourceId, model.SourceName));
             }
             else
             {
-                await _context.Source.ForEachAsync(model => ModelsList.Add(model.SourceId, model.SourceLabel)).ConfigureAwait(false);
+                await _context.Sources.ForEachAsync(model => ModelsList.Add(model.SourceId, model.SourceName)).ConfigureAwait(false);
             }
 
             ViewData["ModelsList"] = ModelsList;
@@ -64,25 +68,25 @@ namespace WHVM_MVC.Controllers
         {
             ViewBag.modelId = id;
 
-            var currentSource = _context.Source.FirstOrDefault(m => m.SourceId == id);
+            var currentSource = _context.Sources.FirstOrDefault(m => m.SourceId == id);
             _context.Entry(currentSource ?? throw new InvalidOperationException()).Reference(s => s.SourceFormat).Load();
 
             ViewBag.modelSourceFormat =
-                SourceFormat.AllFormats.FirstOrDefault(c => c.SourceFormatId == currentSource.SourceFormatId);
+                ((List<SourceFormat>)ViewData["AllSourceFormats"]).FirstOrDefault(c => c.SourceFormatId == currentSource.SourceFormatId);
 
             ViewBag.modelID = id;
-            ViewBag.modelLabel = currentSource.SourceLabel;
+            ViewBag.modelLabel = currentSource.SourceName;
             ViewBag.modelDateCreated = currentSource.SourceDateCreated;
             ViewBag.modelDateImported = currentSource.SourceDateImported;
-            ViewBag.modelFormat = currentSource.SourceFormat.SourceFormatText;
+            ViewBag.modelFormat = currentSource.SourceFormat.SourceFormatName;
             ViewBag.modelController = "Sources";
 
             ViewBag.modelDataDictionary = new Dictionary<string, object>();
             ViewBag.modelDataDictionary.Add("ID", id);
-            ViewBag.modelDataDictionary.Add("Label", currentSource.SourceLabel);
+            ViewBag.modelDataDictionary.Add("Label", currentSource.SourceName);
             ViewBag.modelDataDictionary.Add("Date Created", currentSource.SourceDateCreated);
             ViewBag.modelDataDictionary.Add("Date Imported", currentSource.SourceDateImported);
-            ViewBag.modelDataDictionary.Add("Format", currentSource.SourceFormat.SourceFormatText);
+            ViewBag.modelDataDictionary.Add("Format", currentSource.SourceFormat.SourceFormatName);
             ViewBag.Controller = "Sources";
             return PartialView(modalName, currentSource);
         }
@@ -90,7 +94,7 @@ namespace WHVM_MVC.Controllers
         // GET: Sources/Create
         public IActionResult Create()
         {
-            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormat, "SourceFormatId", "SourceFormatId");
+            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormats, "SourceFormatId", "SourceFormatId");
             return View();
         }
 
@@ -100,9 +104,11 @@ namespace WHVM_MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("SourceId,SourceLabel,SourceDateCreated,SourceDateImported,SourceFormatId,SourceFilePath")]
+            [Bind("SourceId,SourceName,SourceDateCreated,SourceDateImported,SourceFormatId,SourceFilePath")]
             Source source)
         {
+            ViewData["AllSourceFormats"] = allSourceFormats;
+
             if (ModelState.IsValid)
             {
                 _context.Add(source);
@@ -110,7 +116,7 @@ namespace WHVM_MVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormat, "SourceFormatId", "SourceFormatId",
+            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormats, "SourceFormatId", "SourceFormatId",
                 source.SourceFormatId);
             return View(source);
         }
@@ -123,13 +129,15 @@ namespace WHVM_MVC.Controllers
                 return NotFound();
             }
 
-            var source = await _context.Source.FindAsync(id).ConfigureAwait(false);
+            ViewData["AllSourceFormats"] = allSourceFormats;
+
+            var source = await _context.Sources.FindAsync(id).ConfigureAwait(false);
             if (source == null)
             {
                 return NotFound();
             }
 
-            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormat, "SourceFormatId", "SourceFormatId",
+            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormats, "SourceFormatId", "SourceFormatId",
                 source.SourceFormatId);
             return View(source);
         }
@@ -140,13 +148,15 @@ namespace WHVM_MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,
-            [Bind("SourceId,SourceLabel,SourceDateCreated,SourceDateImported,SourceFormatId,SourceFilePath")]
+            [Bind("SourceId,SourceName,SourceDateCreated,SourceDateImported,SourceFormatId,SourceFilePath")]
             Source source)
         {
             if (id != source.SourceId)
             {
                 return NotFound();
             }
+
+            ViewData["AllSourceFormats"] = allSourceFormats;
 
             if (ModelState.IsValid)
             {
@@ -170,7 +180,7 @@ namespace WHVM_MVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormat, "SourceFormatId", "SourceFormatId",
+            ViewData["SourceFormatId"] = new SelectList(_context.SourceFormats, "SourceFormatId", "SourceFormatId",
                 source.SourceFormatId);
             return View(source);
         }
@@ -183,7 +193,9 @@ namespace WHVM_MVC.Controllers
                 return NotFound();
             }
 
-            var source = await _context.Source
+            ViewData["AllSourceFormats"] = allSourceFormats;
+
+            var source = await _context.Sources
                 .Include(s => s.SourceFormat)
                 .FirstOrDefaultAsync(m => m.SourceId == id)
                 .ConfigureAwait(false);
@@ -200,8 +212,8 @@ namespace WHVM_MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int? id, bool returnJson = false)
         {
-            var source = await _context.Source.FindAsync(id).ConfigureAwait(false);
-            _context.Source.Remove(source);
+            var source = await _context.Sources.FindAsync(id).ConfigureAwait(false);
+            _context.Sources.Remove(source);
             await _context.SaveChangesAsync().ConfigureAwait(false);
 
             if(returnJson) return Json(Url.Action("Index", "Sources"));
@@ -210,7 +222,7 @@ namespace WHVM_MVC.Controllers
 
         private bool SourceExists(int id)
         {
-            return _context.Source.Any(e => e.SourceId == id);
+            return _context.Sources.Any(e => e.SourceId == id);
         }
     }
 }

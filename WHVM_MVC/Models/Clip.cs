@@ -16,11 +16,14 @@ namespace WHVM_MVC.Models
         public TimeSpan ClipVidTimeLength { get; set; }
         public int ClipReviewerId { get; set; }
         public int ClipCameraOperatorId { get; set; }
-        public string ClipDescription { get; set; }
+        public string ClipName { get; set; }
         public string ClipFilePath { get; set; }
 
-        public virtual TagsPeople ClipCameraOperator { get; set; }
-        public virtual TagsPeople ClipReviewer { get; set; }
-        public virtual Source Source { get; set; }
+        public Person ClipCameraOperator { get; set; }
+        public Person ClipReviewer { get; set; }
+        public Source Source { get; set; }
+        public ICollection<ClipCollection> ClipCollections { get; set; }
+        public ICollection<ClipPerson> ClipPersons { get; set; }
+
     }
 }

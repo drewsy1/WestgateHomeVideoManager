@@ -8,12 +8,12 @@
     ViewData["JplistSortDataOrder"] = "asc";
     ViewData["JplistSortDataType"] = "number";
 
-    var maxClipCount = Model.Max(x => x.Clips.Count);
+    var maxClipCount = Model.Max(x => x.Clips.Count());
 }
 
 @section SidebarContent{
     <div>
-        <!--#region Filter - Radio - SourceFormat - Source-->
+        <!--#region Filter - Radio - SourcesFormat - Sources-->
         <div class="btn-group btn-group-toggle btn-group-sm col-12 px-0 py-1" id="sourceFormat-tag-filter-group">
             <label class="btn btn-secondary active px-1" id="sourceFormat-tag-filter-default-btn">
                 <input class=""
@@ -28,9 +28,9 @@
                        id="sourceFormat-tag-filter-default">
                 All
             </label>
-            @foreach (var format in SourceFormat.AllFormats)
+            @foreach (var format in (List<SourceFormat>)ViewData["AllSourceFormats"])
             {
-                <label class="btn btn-secondary px-1" id="sourceFormat-tag-filter-@(format.SourceFormatText)-btn">
+                <label class="btn btn-secondary px-1" id="sourceFormat-tag-filter-@(format.SourceFormatName)-btn">
                     <input class=""
                            type="radio"
                            data-jplist-control="radio-buttons-text-filter"
@@ -39,14 +39,14 @@
                            data-path=".sourceFormat"
                            name="sourceFormat-tag-filter"
                            data-id="format"
-                           value="@(format.SourceFormatText)"
-                           id="sourceFormat-tag-filter-@(format.SourceFormatText)" />
-                    @(format.SourceFormatText)
+                           value="@(format.SourceFormatName)"
+                           id="sourceFormat-tag-filter-@(format.SourceFormatName)" />
+                    @(format.SourceFormatName)
                 </label>
             }
         </div>
         <!--#endregion-->
-        <!--#region Filter - Text - SourceName - Source-->
+        <!--#region Filter - Text - SourcesName - Sources-->
         <div class="input-group input-group-sm py-1 py-lg-2">
             <input class="form-control form-control-sm"
                    data-jplist-control="textbox-filter"
@@ -64,7 +64,7 @@
             </div>
         </div>
         <!--#endregion-->
-        <!--#region Filter - Date - SourceDateMinimum - Source-->
+        <!--#region Filter - Date - SourcesDateMinimum - Sources-->
         <div class='input-group input-group-sm py-1 py-lg-2' id="datetimepickerMin">
             <div class="input-group-prepend">
                 <span class="input-group-text">Start Date</span>
@@ -81,7 +81,7 @@
                    data-mode="dateLower" />
         </div>
         <!--#endregion-->
-        <!--#region Filter - Date - SourceDateMaximum - Source-->
+        <!--#region Filter - Date - SourcesDateMaximum - Sources-->
         <div class='input-group input-group-sm py-1 py-lg-2' id="datetimepickerMax">
             <div class="input-group-prepend">
                 <span class="input-group-text">End Date</span>
@@ -100,13 +100,13 @@
             <div id="dateTimePickerError" class="invalid-feedback">Start date must come after end date.</div>
         </div>
         <!--#endregion-->
-        <!--#region Filter - Slider - SourceClipCount - Source -->
+        <!--#region Filter - Slider - SourcesClipsCount - Sources -->
         <div class='input-group input-group-sm py-1 py-lg-2' id="sourceClipCountRange">
             <span>Number of Clips</span>
             <div data-jplist-control="slider-range-filter"
                  data-group="@ViewData["JplistDataGroup"]"
-                 data-name="sourceClipCount-range-filter"
-                 data-path=".sourceClipCount"
+                 data-name="sourceClipsCount-range-filter"
+                 data-path=".sourceClipsCount"
                  data-id="clips"
                  id="sourceClipCountFilter"
                  data-min="0"
@@ -133,39 +133,41 @@
     <div data-jplist-group="sources" style="overflow: auto">
         @foreach (var item in Model)
         {
+            int itemClipCount = item.Clips.Count();
             <a asp-action="Details" asp-controller="Sources" asp-route-id="@item.SourceId" class="card" data-jplist-item style="text-decoration:none">
-                <span class="sourceDate" style="display: none">@(Html.DisplayFor(modelItem => item.SourceDates.SourceDateStart))</span>
-                <span class="sourceDate" style="display: none">@(Html.DisplayFor(modelItem => item.SourceDates.SourceDateEnd))</span>
-                <span class="sourceFormat" style="display: none">@(Html.DisplayFor(modelItem => item.SourceFormat.SourceFormatText))</span>
-                <span class="sourceClipCount" style="display: none">@(Html.DisplayFor(modelItem => item.Clips.Count))</span>
+                <span class="sourceDate" style="display: none">@(Html.DisplayFor(modelItem => item.SourceDateStart))</span>
+                <span class="sourceDate" style="display: none">@(Html.DisplayFor(modelItem => item.SourceDateEnd))</span>
+                <span class="sourceFormat" style="display: none">@(Html.DisplayFor(modelItem => item.SourceFormat.SourceFormatName))</span>
+                <span class="sourceClipsCount" style="display: none">@(Html.DisplayFor(modelItem => itemClipCount))</span>
                 <div class="row no-gutters">
                     <div class="col-3 col-lg-2 col-xl-1">
-                        <img src="~/images/@(item.SourceFormat.SourceFormatText)_logo.svg" class="img-fluid p-2 p-md-3" alt="@(item.SourceFormat.SourceFormatText)">
+                        <img src="~/images/@(item.SourceFormat.SourceFormatName)_logo.svg" class="img-fluid p-2 p-md-3" alt="@(item.SourceFormat.SourceFormatName)">
                     </div>
                     <div class="col-9 col-lg-10 col-xl-11">
                         <div class="card-body pl-0 pr-2 py-2 pl-md-0 pr-md-3 py-md-3">
                             <h3 class="card-title text-truncate sourceName">
-                                @(Html.DisplayFor(modelItem => item.SourceLabel))
+                                @(Html.DisplayFor(modelItem => item.SourceName))
                             </h3>
                             <p class="card-text">
-                                <span class="badge badge-info align-self-center mr-1 ">@(item.SourceFormat.SourceFormatText)</span>
-
-                                @{switch (item.Clips.Count)
-                                    {
-                                        case 0:
+                                <span class="badge badge-info align-self-center mr-1 ">@(item.SourceFormat.SourceFormatName)</span>
+                                @{
+                                    
+                                    switch (itemClipCount)
+                                        {
+                                            case 0:
                                             <span class="badge badge-danger align-self-center mr-1 ">0 clips</span>
                                             break;
                                         case 1:
-                                            <span class="badge badge-secondary align-self-center mr-1 ">@(item.Clips.Count) clip</span>
+                                            <span class="badge badge-secondary align-self-center mr-1 ">1 clip</span>
                                             break;
                                         default:
-                                            <span class="badge badge-secondary align-self-center mr-1 ">@(item.Clips.Count) clips</span>
+                                            <span class="badge badge-secondary align-self-center mr-1 ">@itemClipCount clips</span>
                                             break;
                                     } }
 
-                                @{if (item.SourceDates?.SourceDateStart != null)
+                                @{if (item.SourceDateStart != null)
                                     {
-                                        <span class="badge badge-secondary align-self-center mr-1 ">Start Date: @(Html.DisplayFor(modelItem => item.SourceDates.SourceDateStart))</span>
+                                        <span class="badge badge-secondary align-self-center mr-1 ">Start Date: @(Html.DisplayFor(modelItem => item.SourceDateStart))</span>
                                     }
                                     else
                                     {
@@ -173,9 +175,9 @@
                                     }
                                 }
 
-                                @{if (item.SourceDates?.SourceDateEnd != null)
+                                @{if (item.SourceDateEnd != null)
                                     {
-                                        <span class="badge badge-secondary align-self-center mr-1 ">End Date: @(Html.DisplayFor(modelItem => item.SourceDates.SourceDateEnd))</span>
+                                        <span class="badge badge-secondary align-self-center mr-1 ">End Date: @(Html.DisplayFor(modelItem => item.SourceDateEnd))</span>
                                     }
                                     else
                                     {

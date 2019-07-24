@@ -7,8 +7,8 @@ namespace WHVM.Database.Models
     {
         public int PersonId { get; set; }
         public string PersonName { get; set; }
-        public ICollection<Clip> ClipsAsCameraOperator { get; set; }
-        public ICollection<Clip> ClipsAsReviewer { get; set; }
-        public ICollection<ClipPerson> ClipPersons { get; set; }
+        public virtual IEnumerable<Clip> ClipsAsCameraOperator { get; set; }
+        public virtual IEnumerable<Clip> ClipsAsReviewer { get; set; }
+        public virtual IEnumerable<ClipPerson> ClipPersons { get; set; }
     }
 }

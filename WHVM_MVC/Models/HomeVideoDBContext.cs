@@ -15,13 +15,13 @@ namespace WHVM_MVC.Models
         {
         }
 
-        public virtual DbSet<Clip> Clip { get; set; }
-        public virtual DbSet<Source> Source { get; set; }
-        public virtual DbSet<SourceFormat> SourceFormat { get; set; }
-        public virtual DbSet<TagsCollections> TagsCollections { get; set; }
-        public virtual DbSet<TagsPeople> TagsPeople { get; set; }
-        public virtual DbSet<Clip_TagsPeople> Clip_TagsPeople { get; set; }
-        public virtual DbSet<Clip_TagsCollections> Clip_TagsCollections { get; set; }
+        public virtual DbSet<Clip> Clips { get; set; }
+        public virtual DbSet<Source> Sources { get; set; }
+        public virtual DbSet<SourceFormat> SourceFormats { get; set; }
+        public virtual DbSet<Collection> Collections { get; set; }
+        public virtual DbSet<Person> Persons { get; set; }
+        public virtual DbSet<ClipPerson> ClipPersons { get; set; }
+        public virtual DbSet<ClipCollection> ClipCollections { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -40,7 +40,7 @@ namespace WHVM_MVC.Models
 
                 entity.Property(e => e.ClipCameraOperatorId).HasColumnName("ClipCameraOperatorID");
 
-                entity.Property(e => e.ClipDescription).HasMaxLength(250);
+                entity.Property(e => e.ClipName).HasMaxLength(250);
 
                 entity.Property(e => e.ClipFilePath).HasMaxLength(300);
 
@@ -89,10 +89,10 @@ namespace WHVM_MVC.Models
 
                 entity.Property(e => e.SourceFormatId).HasColumnName("SourceFormatID");
 
-                entity.Property(e => e.SourceLabel).HasMaxLength(30);
+                entity.Property(e => e.SourceName).HasMaxLength(30);
 
                 entity.HasOne(d => d.SourceFormat)
-                    .WithMany(p => p.Source)
+                    .WithMany(p => p.Sources)
                     .HasForeignKey(d => d.SourceFormatId)
                     .HasConstraintName("FK_Source_SourceFormat");
             });
@@ -105,25 +105,25 @@ namespace WHVM_MVC.Models
 
                 entity.Property(e => e.SourceFormatLogoPath).HasMaxLength(30);
 
-                entity.Property(e => e.SourceFormatText).HasMaxLength(10);
+                entity.Property(e => e.SourceFormatName).HasMaxLength(10);
             });
 
-            modelBuilder.Entity<TagsCollections>(entity =>
+            modelBuilder.Entity<Collection>(entity =>
             {
-                entity.HasKey(e => e.CollectionsId);
+                entity.HasKey(e => e.CollectionId);
 
-                entity.Property(e => e.CollectionsId).HasColumnName("CollectionsID");
+                entity.Property(e => e.CollectionId).HasColumnName("CollectionsID");
 
-                entity.Property(e => e.CollectionsText).HasMaxLength(50);
+                entity.Property(e => e.CollectionName).HasMaxLength(50);
             });
 
-            modelBuilder.Entity<TagsPeople>(entity =>
+            modelBuilder.Entity<Person>(entity =>
             {
-                entity.HasKey(e => e.PeopleId);
+                entity.HasKey(e => e.PersonId);
 
-                entity.Property(e => e.PeopleId).HasColumnName("PeopleID");
+                entity.Property(e => e.PersonId).HasColumnName("PeopleID");
 
-                entity.Property(e => e.PeopleName).HasMaxLength(30);
+                entity.Property(e => e.PersonName).HasMaxLength(30);
             });
 
             modelBuilder.Entity<View_SourceDates>(entity =>
@@ -140,9 +140,9 @@ namespace WHVM_MVC.Models
                     .WithOne(p => p.SourceDates);
             });
 
-            modelBuilder.Entity<Clip_TagsPeople>().HasKey(tp => new {tp.ClipId, tp.PeopleId});
+            modelBuilder.Entity<ClipPerson>().HasKey(tp => new {tp.ClipId, tp.PeopleId});
 
-            modelBuilder.Entity<Clip_TagsCollections>().HasKey(tp => new { tp.ClipId, tp.CollectionsId });
+            modelBuilder.Entity<ClipCollection>().HasKey(tp => new { tp.ClipId, tp.CollectionsId });
         }
     }
 }

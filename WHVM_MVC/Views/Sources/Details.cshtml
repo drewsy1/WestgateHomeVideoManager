@@ -1,10 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Routing
-@model WHVM_MVC.Models.Source
+@model WHVM.Database.Models.Source
 
 @{
     Layout = "Layouts/_Layout_Sidebar_Details";
     ViewData["SidebarTitle"] = "Sources";
-    ViewData["BodyTitle"] = Model.SourceLabel;
+    ViewData["BodyTitle"] = Model.SourceName;
     ViewData["Title"] = ViewContext.RouteData.Values["controller"];
     ViewData["Subtitle"] = ViewContext.RouteData.Values["action"];
 }
@@ -42,7 +42,7 @@
             <hr />
             <dl class="row">
                 <dt class="col-sm-2">
-                    Source ID
+                    Sources ID
                 </dt>
                 <dd class="col-sm-10">
                     @Html.DisplayFor(model => model.SourceId)
@@ -63,7 +63,7 @@
                     Format
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.SourceFormat.SourceFormatText)
+                    @Html.DisplayFor(model => model.SourceFormat.SourceFormatName)
                 </dd>
             </dl>
         </div>

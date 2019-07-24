@@ -4,5 +4,7 @@
 			"path": "C:\\Users\\dreww\\src\\Git\\WestgateHomeVideoManager\\WHVM_MVC"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"search.usePCRE2": true
+	}
 }

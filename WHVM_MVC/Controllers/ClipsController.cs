@@ -6,26 +6,33 @@ using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using WHVM_MVC.Models;
+using WHVM.Database.Models;
 
 namespace WHVM_MVC.Controllers
 {
     public class ClipsController : Controller
     {
         private readonly HomeVideoDBContext _context;
+        private readonly List<Collection> allCollections;
+        private readonly List<Person> allPersons;
+        private readonly List<Source> allSources;
 
         public ClipsController(HomeVideoDBContext context)
         {
             _context = context;
-            TagsCollections.AllCollections = _context.TagsCollections.ToList();
-            TagsPeople.AllPeople = _context.TagsPeople.ToList();
-            Source.AllSources = _context.Source.ToList();
+            allCollections = _context.Collections.ToList();
+            allPersons = _context.Persons.ToList();
+            allSources = _context.Sources.ToList();
         }
 
         // GET: Clips
         public async Task<IActionResult> Index()
         {
-            var homeVideoDbContext = _context.Clip;
+            ViewData["AllCollections"] = allCollections;
+            ViewData["AllPersons"] = allPersons;
+            ViewData["AllSources"] = allSources;
+
+            var homeVideoDbContext = _context.Clips;
             return View(await homeVideoDbContext.ToListAsync().ConfigureAwait(false));
         }
 
@@ -37,11 +44,14 @@ namespace WHVM_MVC.Controllers
                 return NotFound();
             }
 
-            Clip currentClip = await _context.Clip
-                .Include(c => c.Source)
+            ViewData["AllCollections"] = allCollections;
+            ViewData["AllPersons"] = allPersons;
+            ViewData["AllSources"] = allSources;
+
+            Clip currentClip = await _context.Clips
                 .FirstOrDefaultAsync(m => m.ClipId == id)
                 .ConfigureAwait(false);
-            Source currentSource = await _context.Source
+            Source currentSource = await _context.Sources
                 .FirstOrDefaultAsync(m => m.SourceId == sourceId)
                 .ConfigureAwait(false);
 
@@ -50,12 +60,12 @@ namespace WHVM_MVC.Controllers
 
             if (!currentSource.Clips.Contains(currentClip))
             {
-                throw new InvalidOperationException("Source "+ currentSource.SourceId +" does not contain Clip "+ currentClip.ClipId);
+                throw new InvalidOperationException("Sources "+ currentSource.SourceId +" does not contain Clips "+ currentClip.ClipId);
                     ;
             }
 
             Dictionary<int, string> ModelsList = new Dictionary<int, string>();
-            currentSource.Clips.ToList().ForEach(model => ModelsList.Add(model.ClipId, model.ClipDescription));
+            currentSource.Clips.ToList().ForEach(model => ModelsList.Add(model.ClipId, model.ClipName));
 
             ViewData["ModelsList"] = ModelsList;
             ViewData["ModelID"] = currentClip.ClipId;
@@ -67,26 +77,26 @@ namespace WHVM_MVC.Controllers
         {
             ViewBag.modelId = id;
 
-            Clip currentClip = _context.Clip.FirstOrDefault(m => m.ClipId == id);
+            Clip currentClip = _context.Clips.FirstOrDefault(m => m.ClipId == id);
 
             string[] modalTitleParts =
             {
-                currentClip?.ClipDescription
+                currentClip?.ClipName
             };
 
             ViewBag.modalTitle = new HtmlString(string.Join("", modalTitleParts));
 
             ViewBag.modelDataDictionary = new Dictionary<string, object>();
             ViewBag.modelDataDictionary.Add("ID", currentClip?.ClipId);
-            ViewBag.modelDataDictionary.Add("Label", currentClip?.ClipDescription);
+            ViewBag.modelDataDictionary.Add("Label", currentClip?.ClipName);
             ViewBag.modelDataDictionary.Add("Camera Operator", currentClip?.ClipCameraOperatorId);
-            ViewBag.modelDataDictionary.Add("Clip Number", currentClip?.ClipNumber);
-            ViewBag.modelDataDictionary.Add("Clip Reviewer", currentClip?.ClipReviewerId);
+            ViewBag.modelDataDictionary.Add("Clips Number", currentClip?.ClipNumber);
+            ViewBag.modelDataDictionary.Add("Clips Reviewer", currentClip?.ClipReviewerId);
             ViewBag.modelDataDictionary.Add("Start (Timestamp)", currentClip?.ClipTimeStart);
             ViewBag.modelDataDictionary.Add("End (Timestamp)", currentClip?.ClipTimeEnd);
-            ViewBag.modelDataDictionary.Add("Start (Clip Timestamp)", currentClip?.ClipVidTimeStart);
-            ViewBag.modelDataDictionary.Add("End (Clip Timestamp)", currentClip?.ClipVidTimeEnd);
-            ViewBag.modelDataDictionary.Add("Clip Length", currentClip?.ClipVidTimeLength);
+            ViewBag.modelDataDictionary.Add("Start (Clips Timestamp)", currentClip?.ClipVidTimeStart);
+            ViewBag.modelDataDictionary.Add("End (Clips Timestamp)", currentClip?.ClipVidTimeEnd);
+            ViewBag.modelDataDictionary.Add("Clips Length", currentClip?.ClipVidTimeLength);
             ViewBag.Controller = "Clips";
         return PartialView(modalName, currentClip);
         }
@@ -94,7 +104,11 @@ namespace WHVM_MVC.Controllers
         // GET: Clips/Create
         public IActionResult Create()
         {
-            ViewData["SourceId"] = new SelectList(_context.Source, "SourceId", "SourceId");
+            ViewData["AllCollections"] = allCollections;
+            ViewData["AllPersons"] = allPersons;
+            ViewData["AllSources"] = allSources;
+
+            ViewData["SourceId"] = new SelectList(_context.Sources, "SourceId", "SourceId");
             return View();
         }
 
@@ -103,8 +117,12 @@ namespace WHVM_MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClipId,SourceId,ClipNumber,ClipTimeStart,ClipTimeEnd,ClipVidTimeStart,ClipVidTimeEnd,ClipVidTimeLength,ClipReviewerID,ClipCameraOperatorID,ClipDescription,ClipFilePath")] Clip clip)
+        public async Task<IActionResult> Create([Bind("ClipId,SourceId,ClipNumber,ClipTimeStart,ClipTimeEnd,ClipVidTimeStart,ClipVidTimeEnd,ClipVidTimeLength,ClipReviewerID,ClipCameraOperatorID,ClipName,ClipFilePath")] Clip clip)
         {
+            ViewData["AllCollections"] = allCollections;
+            ViewData["AllPersons"] = allPersons;
+            ViewData["AllSources"] = allSources;
+
             if (ModelState.IsValid)
             {
                 _context.Add(clip);
@@ -122,7 +140,11 @@ namespace WHVM_MVC.Controllers
                 return NotFound();
             }
 
-            var clip = await _context.Clip.FindAsync(id).ConfigureAwait(false);
+            ViewData["AllCollections"] = allCollections;
+            ViewData["AllPersons"] = allPersons;
+            ViewData["AllSources"] = allSources;
+
+            var clip = await _context.Clips.FindAsync(id).ConfigureAwait(false);
             if (clip == null)
             {
                 return NotFound();
@@ -135,12 +157,16 @@ namespace WHVM_MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClipId,SourceId,ClipNumber,ClipTimeStart,ClipTimeEnd,ClipVidTimeStart,ClipVidTimeEnd,ClipVidTimeLength,ClipReviewerID,ClipCameraOperatorID,ClipDescription,ClipFilePath")] Clip clip)
+        public async Task<IActionResult> Edit(int id, [Bind("ClipId,SourceId,ClipNumber,ClipTimeStart,ClipTimeEnd,ClipVidTimeStart,ClipVidTimeEnd,ClipVidTimeLength,ClipReviewerID,ClipCameraOperatorID,ClipName,ClipFilePath")] Clip clip)
         {
             if (id != clip.ClipId)
             {
                 return NotFound();
             }
+
+            ViewData["AllCollections"] = allCollections;
+            ViewData["AllPersons"] = allPersons;
+            ViewData["AllSources"] = allSources;
 
             if (ModelState.IsValid)
             {
@@ -173,7 +199,7 @@ namespace WHVM_MVC.Controllers
                 return NotFound();
             }
 
-            var clip = await _context.Clip
+            var clip = await _context.Clips
                 .Include(c => c.Source)
                 .FirstOrDefaultAsync(m => m.ClipId == id)
                 .ConfigureAwait(false);
@@ -190,15 +216,15 @@ namespace WHVM_MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var clip = await _context.Clip.FindAsync(id).ConfigureAwait(false);
-            _context.Clip.Remove(clip);
+            var clip = await _context.Clips.FindAsync(id).ConfigureAwait(false);
+            _context.Clips.Remove(clip);
             await _context.SaveChangesAsync().ConfigureAwait(false);
             return RedirectToAction(nameof(Index));
         }
 
         private bool ClipExists(int id)
         {
-            return _context.Clip.Any(e => e.ClipId == id);
+            return _context.Clips.Any(e => e.ClipId == id);
         }
     }
 }

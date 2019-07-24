@@ -21,7 +21,9 @@ namespace WHVM.Database
                 .Build();
             var optionsBuilder = new DbContextOptionsBuilder<HomeVideoDBContext>();
             string connectionString = configuration.GetConnectionString("DatabaseConnection");
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder
+                .UseLazyLoadingProxies()
+                .UseSqlServer(connectionString);
 
             return new HomeVideoDBContext(optionsBuilder.Options);
         }

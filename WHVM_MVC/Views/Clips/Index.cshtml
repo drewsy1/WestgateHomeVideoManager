@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WHVM_MVC.Models.Clip>
+﻿@model IEnumerable<WHVM.Database.Models.Clip>
 
 @{
     Layout = "Layouts/_Layout_Sidebar_Index";
@@ -89,18 +89,18 @@
                     <div class="card-body">
                         <ul style="list-style-type: none; margin: 0; margin-left: 1rem; padding: 0">
                             @{
-                                foreach (TagsPeople person in TagsPeople.AllPeople)
+                                foreach (Person person in (List<Person>)ViewData["AllPersons"])
                                 {
                                     <li class="my-1 custom-control custom-checkbox">
                                         <input type="checkbox"
                                                data-jplist-control="checkbox-path-filter"
-                                               data-path=".tag-person-@(person.PeopleId)"
+                                               data-path=".tag-person-@(person.PersonId)"
                                                data-group="@ViewData["JplistDataGroup"]"
                                                data-clear-btn-id="clipsPeopleFilterClear"
-                                               name="checkbox-person-@(person.PeopleId)"
-                                               id="tag-person-@(person.PeopleId)"
+                                               name="checkbox-person-@(person.PersonId)"
+                                               id="tag-person-@(person.PersonId)"
                                                class="custom-control-input" />
-                                        <label class="custom-control-label" for="tag-person-@(person.PeopleId)">@(person.PeopleName)</label>
+                                        <label class="custom-control-label" for="tag-person-@(person.PersonId)">@(person.PersonName)</label>
                                     </li>
                                 }
                             }
@@ -129,18 +129,18 @@
                     <div class="card-body">
                         <ul style="list-style-type: none; margin: 0; margin-left: 1rem; padding: 0">
                             @{
-                                foreach (TagsCollections collection in TagsCollections.AllCollections)
+                                foreach (Collection collection in (List<Collection>)ViewData["AllCollections"])
                                 {
                                     <li class="my-1 custom-control custom-checkbox">
                                         <input type="checkbox"
                                                data-jplist-control="checkbox-path-filter"
-                                               data-path=".tag-collection-@(collection.CollectionsId)"
+                                               data-path=".tag-collection-@(collection.CollectionId)"
                                                data-group="@ViewData["JplistDataGroup"]"
                                                data-clear-btn-id="clipsCollectionsFilterClear"
-                                               name="checkbox-collection-@(collection.CollectionsId)"
-                                               id="tag-collection-@(collection.CollectionsId)-cb"
+                                               name="checkbox-collection-@(collection.CollectionId)"
+                                               id="tag-collection-@(collection.CollectionId)-cb"
                                                class="custom-control-input" />
-                                        <label class="custom-control-label" for="tag-collection-@(collection.CollectionsId)-cb">@(collection.CollectionsText)</label>
+                                        <label class="custom-control-label" for="tag-collection-@(collection.CollectionId)-cb">@(collection.CollectionName)</label>
                                     </li>
                                 }
                             }
@@ -149,7 +149,7 @@
                 </div>
             </div>
             <!--#endregion-->
-            <!--#region Filter - Radio - ClipTagsPeopleReviewer - Clip-->
+            <!--#region Filter - Radio - ClipsPersonReviewer - Clips-->
             <div class="card" id="clipsPeopleReviewerFilter">
                 <div class="card-header d-flex align-items-center" id="clipsPeopleReviewerFilterHeader">
                     <button class="btn btn-link collapsed px-0 flex-shrink-0" data-toggle="collapse" data-target="#collapsePeopleReviewer" aria-expanded="false" aria-controls="collapsePeopleReviewer">
@@ -181,19 +181,19 @@
                                 <label class="custom-control-label" for="tag-person-default-reviewer">Any</label>
                             </li>
                             @{
-                                foreach (TagsPeople person in TagsPeople.AllPeople.Where(x => x.ClipsAsReviewer.Count > 0))
+                                foreach (Person person in ((List<Person>)ViewData["AllPersons"]).Where(x => x.ClipsAsReviewer.Any()))
                                 {
                                     <li class="my-1 custom-control custom-radio">
                                         <input type="radio"
                                                data-jplist-control="radio-buttons-path-filter"
-                                               data-path=".tag-person-@(person.PeopleId)-reviewer"
+                                               data-path=".tag-person-@(person.PersonId)-reviewer"
                                                data-group="@ViewData["JplistDataGroup"]"
                                                data-name="radio-person-reviewer"
                                                name="radio-person-reviewer"
-                                               id="tag-person-@(person.PeopleId)-reviewer"
-                                               value="@(person.PeopleName)"
+                                               id="tag-person-@(person.PersonId)-reviewer"
+                                               value="@(person.PersonName)"
                                                class="custom-control-input" />
-                                        <label class="custom-control-label" for="tag-person-@(person.PeopleId)-reviewer">@(person.PeopleName)</label>
+                                        <label class="custom-control-label" for="tag-person-@(person.PersonId)-reviewer">@(person.PersonName)</label>
                                     </li>
                                 }
                             }
@@ -202,7 +202,7 @@
                 </div>
             </div>
             <!--#endregion-->
-            <!--#region Filter - Radio - ClipTagsPeopleCamera - Clip-->
+            <!--#region Filter - Radio - ClipsPersonCamera - Clips-->
             <div class="card" id="clipsPeopleCameraFilter">
                 <div class="card-header d-flex align-items-center" id="clipsPeopleCameraFilterHeader">
                     <button class="btn btn-link collapsed px-0 flex-shrink-0" data-toggle="collapse" data-target="#collapsePeopleCamera" aria-expanded="false" aria-controls="collapsePeopleCamera">
@@ -234,19 +234,19 @@
                                 <label class="custom-control-label" for="tag-person-default-camera">Any</label>
                             </li>
                             @{
-                                foreach (TagsPeople person in TagsPeople.AllPeople.Where(x => x.ClipsAsCameraOperator.Count > 0))
+                                foreach (Person person in ((List<Person>)ViewData["AllPersons"]).Where(x => x.ClipsAsCameraOperator.Any()))
                                 {
                                     <li class="my-1 custom-control custom-radio">
                                         <input type="radio"
                                                data-jplist-control="radio-buttons-path-filter"
-                                               data-path=".tag-person-@(person.PeopleId)-camera"
+                                               data-path=".tag-person-@(person.PersonId)-camera"
                                                data-group="@ViewData["JplistDataGroup"]"
                                                data-name="radio-person-camera"
                                                name="radio-person-camera"
-                                               id="tag-person-@(person.PeopleId)-camera"
-                                               value="@(person.PeopleName)"
+                                               id="tag-person-@(person.PersonId)-camera"
+                                               value="@(person.PersonName)"
                                                class="custom-control-input" />
-                                        <label class="custom-control-label" for="tag-person-@(person.PeopleId)-camera">@(person.PeopleName)</label>
+                                        <label class="custom-control-label" for="tag-person-@(person.PersonId)-camera">@(person.PersonName)</label>
                                     </li>
                                 }
                             }
@@ -287,7 +287,7 @@
                                 <label class="custom-control-label" for="tag-default-source">Any</label>
                             </li>
                             @{
-                                foreach (Source source in Source.AllSources)
+                                foreach (Source source in (List<Source>)ViewData["AllSources"])
                                 {
                                     <li class="my-1 custom-control custom-radio">
                                         <input type="radio"
@@ -297,9 +297,9 @@
                                                data-name="radio-source"
                                                name="radio-source"
                                                id="tag-source-@(source.SourceId)"
-                                               value="@(source.SourceLabel)"
+                                               value="@(source.SourceName)"
                                                class="custom-control-input" />
-                                        <label class="custom-control-label" for="tag-source-@(source.SourceId)">@(source.SourceLabel)</label>
+                                        <label class="custom-control-label" for="tag-source-@(source.SourceId)">@(source.SourceName)</label>
                                     </li>
                                 }
                             }
@@ -331,7 +331,7 @@
                             <div class="card-body pl-0 pr-2 py-2 pl-md-0 pr-md-3 py-md-3">
 
                                 <h3 class=" stretched-link card-title text-truncate clipName">
-                                    @(Html.DisplayFor(modelItem => item.ClipDescription))
+                                    @(Html.DisplayFor(modelItem => item.ClipName))
                                 </h3>
                                 <p class="card-text">
                                     <span class="badge badge-pink align-self-center mr-1 ">Clip ID: @(item.ClipId)</span>
@@ -360,38 +360,38 @@
 
                                     <br />Clip Reviewer:
                                     @{
-                                        if (item.ClipReviewer?.PeopleName != null)
+                                        if (item.ClipReviewer?.PersonName != null)
                                         {
-                                            <span class="badge badge-secondary align-self-center mr-1 tag-person-@(item.ClipReviewer.PeopleId) tag-person-@(item.ClipReviewer.PeopleId)-reviewer">@(item.ClipReviewer.PeopleName)</span>
+                                            <span class="badge badge-secondary align-self-center mr-1 tag-person-@(item.ClipReviewer.PersonId) tag-person-@(item.ClipReviewer.PersonId)-reviewer">@(item.ClipReviewer.PersonName)</span>
                                         }
                                     }
 
                                     <br />Camera Operator:
                                     @{
-                                        if (item.ClipCameraOperator?.PeopleName != null)
+                                        if (item.ClipCameraOperator?.PersonName != null)
                                         {
-                                            <span class="badge badge-secondary align-self-center mr-1 tag-person-@(item.ClipCameraOperator.PeopleId) tag-person-@(item.ClipCameraOperator.PeopleId)-camera">@(item.ClipCameraOperator.PeopleName)</span>
+                                            <span class="badge badge-secondary align-self-center mr-1 tag-person-@(item.ClipCameraOperator.PersonId) tag-person-@(item.ClipCameraOperator.PersonId)-camera">@(item.ClipCameraOperator.PersonName)</span>
                                         }
                                     }
 
                                     <br />People:
                                     @{
-                                        if (item.ClipTagsPeople.Count > 0)
+                                        if (item.ClipPersons.Any())
                                         {
-                                            foreach (var clipTagsPeople in item.ClipTagsPeople)
+                                            foreach (var clipTagsPeople in item.ClipPersons)
                                             {
-                                                <span class="badge badge-secondary align-self-center mr-1 tag-person-@(clipTagsPeople.Person.PeopleId)"> @(clipTagsPeople.Person.PeopleName)</span>
+                                                <span class="badge badge-secondary align-self-center mr-1 tag-person-@(clipTagsPeople.Person.PersonId)"> @(clipTagsPeople.Person.PersonName)</span>
                                             }
                                         }
                                     }
 
                                     <br />Collections:
                                     @{
-                                        if (item.ClipTagsCollections.Count > 0)
+                                        if (item.ClipCollections.Any())
                                         {
-                                            foreach (var clipTagsCollections in item.ClipTagsCollections)
+                                            foreach (var clipTagsCollections in item.ClipCollections)
                                             {
-                                                <span class="badge badge-secondary align-self-center mr-1 tag-collection-@(clipTagsCollections.Collection.CollectionsId)"> @(clipTagsCollections.Collection.CollectionsText)</span>
+                                                <span class="badge badge-secondary align-self-center mr-1 tag-collection-@(clipTagsCollections.Collection.CollectionId)"> @(clipTagsCollections.Collection.CollectionName)</span>
                                             }
                                         }
                                     }

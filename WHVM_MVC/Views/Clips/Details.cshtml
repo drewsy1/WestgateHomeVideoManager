@@ -1,9 +1,9 @@
-﻿@model WHVM_MVC.Models.Clip
+﻿@model WHVM.Database.Models.Clip
 
 @{
     Layout = "Layouts/_Layout_Sidebar_Details";
-    ViewData["SidebarTitle"] = Html.Raw("<a asp-action=\"Details\" asp-controller=\"Sources\" asp-route-id=\"" + Model.SourceId + "\" id=\"source-details\">" + Model.Source.SourceLabel + "</a>");
-    ViewData["BodyTitle"] = Model.ClipDescription;
+    ViewData["SidebarTitle"] = Html.Raw("<a asp-action=\"Details\" asp-controller=\"Sources\" asp-route-id=\"" + Model.SourceId + "\" id=\"source-details\">" + Model.Source.SourceName + "</a>");
+    ViewData["BodyTitle"] = Model.ClipName;
     ViewData["Title"] = ViewContext.RouteData.Values["controller"];
     ViewData["Subtitle"] = ViewContext.RouteData.Values["action"];
 }
@@ -13,7 +13,7 @@
 }
 
 @section SidebarTitle{
-    <a asp-action="Details" asp-controller="Sources" asp-route-id="@Model.SourceId" id="source-details">@Model.Source.SourceLabel</a>
+    <a asp-action="Details" asp-controller="Sources" asp-route-id="@Model.SourceId" id="source-details">@Model.Source.SourceName</a>
 }
 @section Body{
 
@@ -44,7 +44,7 @@
         <hr />
         <dl class="row">
             <dt class="col-lg-2">
-                Clip Number
+                Clips Number
             </dt>
             <dd class="col-lg-10">
                 @Html.DisplayFor(model => model.ClipNumber)
@@ -80,22 +80,22 @@
                 @Html.DisplayFor(model => model.ClipVidTimeLength)
             </dd>
             <dt class="col-lg-2">
-                Clip Reviewer
+                Clips Reviewer
             </dt>
             <dd class="col-lg-10">
-                @Html.DisplayFor(model => model.ClipReviewer.PeopleName)
+                @Html.DisplayFor(model => model.ClipReviewer.PersonName)
             </dd>
             <dt class="col-lg-2">
                 Camera Operator
             </dt>
             <dd class="col-lg-10">
-                @Html.DisplayFor(model => model.ClipCameraOperator.PeopleName)
+                @Html.DisplayFor(model => model.ClipCameraOperator.PersonName)
             </dd>
             <dt class="col-lg-2">
                 Description
             </dt>
             <dd class="col-lg-10">
-                @Html.DisplayFor(model => model.ClipDescription)
+                @Html.DisplayFor(model => model.ClipName)
             </dd>
             <dt class="col-lg-2">
                 File Path
@@ -104,10 +104,10 @@
                 @Html.DisplayFor(model => model.ClipFilePath)
             </dd>
             <dt class="col-lg-2">
-                Source
+                Sources
             </dt>
             <dd class="col-lg-10">
-                @Html.DisplayFor(model => model.Source.SourceLabel)
+                @Html.DisplayFor(model => model.Source.SourceName)
             </dd>
         </dl>
     </div>
