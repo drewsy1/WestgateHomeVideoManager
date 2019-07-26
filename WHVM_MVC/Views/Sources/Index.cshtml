@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Source>
+﻿@using WHVM_MVC.Helpers
+@model IEnumerable<Source>
 
 @{
     Layout = "Layouts/_Layout_Sidebar_Index";
@@ -47,58 +48,41 @@
         </div>
         <!--#endregion-->
         <!--#region Filter - Text - SourcesName - Sources-->
-        <div class="input-group input-group-sm py-1 py-lg-2">
-            <input class="form-control form-control-sm"
-                   data-jplist-control="textbox-filter"
-                   data-group="@ViewData["JplistDataGroup"]"
-                   data-name="sourceName-text-filter"
-                   data-path=".sourceName"
-                   data-id="name"
-                   type="text"
-                   value=""
-                   id="textFilterInput"
-                   data-clear-btn-id="name-clear-btn"
-                   placeholder="Filter by Name" />
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="name-clear-btn">Clear</button>
-            </div>
-        </div>
+        @JplistFilterHelpers.WHVMTextFilter(
+            "text-name-filter-input-group",
+            (string)ViewData["JplistDataGroup"],
+            "sourceName-text-filter",
+            ".sourceName",
+            "name",
+            null,
+            "text-name-filter-input",
+            elementPlaceholder: "Filter by Name",
+            elementDataClearBtnId: "name-clear-btn"
+            )
         <!--#endregion-->
         <!--#region Filter - Date - SourcesDateMinimum - Sources-->
-        <div class='input-group input-group-sm py-1 py-lg-2' id="datetimepickerMin">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Start Date</span>
-            </div>
-            <input class="form-control form-control-sm"
-                   data-jplist-control="textbox-filter"
-                   data-group="@ViewData["JplistDataGroup"]"
-                   data-name="sourceDate-text-filter"
-                   data-path=".sourceDate"
-                   data-id="min-date"
-                   type="date"
-                   value=""
-                   id="dateTimePickerMinText"
-                   data-mode="dateLower" />
-        </div>
+        @JplistFilterHelpers.WHVMDateFilter(
+            "date-min-filter-input-group",
+            "Start Date",
+            (string) ViewData["JplistDataGroup"],
+            "sourceDate-text-filter",
+            ".sourceDate",
+            "min-date",
+            "",
+            "date-min-filter-input",
+            JplistFilterHelpers.JplistDateFilterDataMode.dateLower)
         <!--#endregion-->
         <!--#region Filter - Date - SourcesDateMaximum - Sources-->
-        <div class='input-group input-group-sm py-1 py-lg-2' id="datetimepickerMax">
-            <div class="input-group-prepend">
-                <span class="input-group-text">End Date</span>
-            </div>
-            <input class="form-control form-control-sm"
-                   data-jplist-control="textbox-filter"
-                   data-group="@ViewData["JplistDataGroup"]"
-                   data-name="sourceDate-text-filter"
-                   data-path=".sourceDate"
-                   data-id="max-date"
-                   type="date"
-                   value=""
-                   id="dateTimePickerMaxText"
-                   data-mode="dateUpper" />
-
-            <div id="dateTimePickerError" class="invalid-feedback">Start date must come after end date.</div>
-        </div>
+        @JplistFilterHelpers.WHVMDateFilter(
+            "date-max-filter-input-group",
+            "End Date",
+            (string) ViewData["JplistDataGroup"],
+            "sourceDate-text-filter",
+            ".sourceDate",
+            "max-date",
+            "",
+            "date-max-filter-input",
+            JplistFilterHelpers.JplistDateFilterDataMode.dateUpper)
         <!--#endregion-->
         <!--#region Filter - Slider - SourcesClipsCount - Sources -->
         <div class='input-group input-group-sm py-1 py-lg-2' id="sourceClipCountRange">

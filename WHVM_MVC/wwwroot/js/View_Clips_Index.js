@@ -1,17 +1,17 @@
 ﻿/* global document,jplist */
 
 //#region Constant Variables
-const clipsPeopleFilterElement = $('#clipsPeopleFilter');
-const clipsPeopleReviewerFilterElement = $('#clipsPeopleReviewerFilter');
-const clipsPeopleCameraFilterElement = $('#clipsPeopleCameraFilter');
-const clipsCollectionsFilterElement = $('#clipsCollectionsFilter');
-const clipsSourceFilterElement = $('#clipsSourceFilter');
+const clipsPeopleFilterElement = $('#clips-persons-filter');
+const clipsPeopleReviewerFilterElement = $('#clips-persons-reviewer-filter');
+const clipsPeopleCameraFilterElement = $('#clips-persons-camera-filter');
+const clipsCollectionsFilterElement = $('#clips-collections-filter');
+const clipsSourceFilterElement = $('#clips-source-filter');
 const clipsPeopleFilter = clipsPeopleFilterElement.find('input');
 const clipsPeopleReviewerFilter = clipsPeopleReviewerFilterElement.find('input');
 const clipsPeopleCameraFilter = clipsPeopleCameraFilterElement.find('input');
 const clipsCollectionsFilter = clipsCollectionsFilterElement.find('input');
 const clipsSourceFilter = clipsSourceFilterElement.find('input');
-const filterAccordionObjects = $('#FilterAccordion');
+const filterAccordionObjects = $('#filter-accordion');
 const filterAccordionButtonObjects = filterAccordionObjects.find('.collapse');
 const CheckboxCollections = [
     {
@@ -105,7 +105,7 @@ function radioFilterClear(dataNameAttr){
 //#endregion
 
 //#region Event Listeners
-document.getElementById('textFilterInput').addEventListener('jplist.state', function () {
+document.getElementById('text-name-filter-input').addEventListener('jplist.state', function () {
     refreshCheckboxFilterHighlights();
 });
 
@@ -121,15 +121,15 @@ $(filterAccordionButtonObjects).on('hide.bs.collapse', function () {
     thisIcon.toggleClass("mi-ChevronRight", true)
 });
 
-$("#clipsPeopleReviewerFilterClear").click(function(){
+$("#clips-persons-reviewer-filter-clear").click(function(){
     radioFilterClear('radio-person-reviewer');
 })
 
-$("#clipsPeopleCameraFilterClear").click(function(){
+$("#clips-persons-camera-filter-clear").click(function(){
     radioFilterClear('radio-person-camera');
 })
 
-$("#clipsSourceFilterClear").click(function(){
+$("#clips-source-filter-clear").click(function(){
     radioFilterClear('radio-source');
 })
 

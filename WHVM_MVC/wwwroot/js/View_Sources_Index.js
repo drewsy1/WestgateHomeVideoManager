@@ -1,8 +1,8 @@
 // Realtime form validation https://www.sitepoint.com/instant-validation/
 // #region Page Variables
-const dateTimePickerMinText = $("#dateTimePickerMinText");
-const dateTimePickerMaxText = $("#dateTimePickerMaxText");
-const dateTimePickerError = $("#dateTimePickerError");
+const dateTimePickerMinText = $("#date-min-filter-input");
+const dateTimePickerMaxText = $("#date-max-filter-input");
+const dateTimePickerError = $("#date-filter-error");
 const sourceFormatFilterGroup = $("#sourceFormat-tag-filter-group");
 const sourceFormatFilterInputs = sourceFormatFilterGroup.find("input");
 //#endregion

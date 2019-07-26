@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<WHVM.Database.Models.Clip>
+@using WHVM_MVC.Helpers
 
 @{
     Layout = "Layouts/_Layout_Sidebar_Index";
@@ -12,304 +13,118 @@
 @section SidebarContent{
     <div>
         <!--#region Filter - Text - ClipName - Clip-->
-        <div class="input-group input-group-sm py-1 py-lg-2">
-            <input class="form-control form-control-sm"
-                   data-jplist-control="textbox-filter"
-                   data-group="@ViewData["JplistDataGroup"]"
-                   data-name="clipName-text-filter"
-                   data-path=".clipName"
-                   data-id="name"
-                   type="text"
-                   value=""
-                   id="textFilterInput"
-                   data-clear-btn-id="name-clear-btn"
-                   placeholder="Filter by Name" />
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="name-clear-btn">Clear</button>
-            </div>
-        </div>
+        @JplistFilterHelpers.WHVMTextFilter(
+            "text-name-filter-input-group",
+            (string) ViewData["JplistDataGroup"],
+            "clipName-text-filter",
+            ".clipName",
+            "name",
+            null,
+            "text-name-filter-input",
+            elementPlaceholder: "Filter by Name",
+            elementDataClearBtnId: "name-clear-btn"
+            )
         <!--#endregion-->
         <!--#region Filter - Date - ClipDateMinimum - Clip-->
-        <div class='input-group input-group-sm py-1 py-lg-2' id="datetimepickerMin">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Start Date</span>
-            </div>
-            <input class="form-control form-control-sm"
-                   data-jplist-control="textbox-filter"
-                   data-group="@ViewData["JplistDataGroup"]"
-                   data-name="clipDate-text-filter"
-                   data-path=".clipDate"
-                   data-id="min-date"
-                   type="date"
-                   value=""
-                   id="datetimepickerMinText"
-                   data-mode="dateLower" />
-        </div>
+        @JplistFilterHelpers.WHVMDateFilter(
+            "date-min-filter-input-group",
+            "Start Date",
+            (string) ViewData["JplistDataGroup"],
+            "clipDate-text-filter",
+            ".clipDate",
+            "min-date",
+            "",
+            "date-min-filter-input",
+            JplistFilterHelpers.JplistDateFilterDataMode.dateLower)
         <!--#endregion-->
         <!--#region Filter - Date - ClipDateMaximum - Clip-->
-        <div class='input-group input-group-sm py-1 py-lg-2' id="datetimepickerMax">
-            <div class="input-group-prepend">
-                <span class="input-group-text">End Date</span>
-            </div>
-            <input class="form-control form-control-sm"
-                   data-jplist-control="textbox-filter"
-                   data-group="@ViewData["JplistDataGroup"]"
-                   data-name="clipDate-text-filter"
-                   data-path=".clipDate"
-                   data-id="max-date"
-                   type="date"
-                   value=""
-                   id="datetimepickerMaxText"
-                   data-mode="dateUpper" />
+        @JplistFilterHelpers.WHVMDateFilter(
+            "date-max-filter-input-group",
+            "End Date",
+            (string) ViewData["JplistDataGroup"],
+            "clipDate-text-filter",
+            ".clipDate",
+            "max-date",
+            "",
+            "date-max-filter-input",
+            JplistFilterHelpers.JplistDateFilterDataMode.dateUpper)
 
-            <div id="datetimepickerError" class="invalid-feedback">Start date must come after end date.</div>
-        </div>
+        <div id="date-filter-error" class="invalid-feedback">Start date must come after end date.</div>
         <!--#endregion-->
         <!--#region Accordion - Filters - Clip-->
-        <div class="accordion py-1 py-lg-2" id="FilterAccordion">
-            <!--#region Filter - Checkboxes - ClipTagsPeople - Clip-->
-            <div class="card" id="clipsPeopleFilter">
-                <div class="card-header d-flex align-items-center" id="clipsPeopleFilterHeader">
-                    <button class="btn btn-link collapsed px-0" data-toggle="collapse" data-target="#collapsePeople" aria-expanded="false" aria-controls="collapsePeople">
-                        <div class="d-flex">
-                            <i class="mi mi-ChevronRight"></i>
-                            <div class="mx-1">People</div>
-                        </div>
-                    </button>
-                    <div class="p-1 flex-grow-0 badge badge-primary badge-pill d-none text-truncate mx-1" data-toggle="tooltip"></div>
-                    <div class="ml-auto">
-                        <a href="#" class="btn btn-sm btn-link disabled p-0" role="button" id="clipsPeopleFilterClear">
-                            <i class="mi mi-Clear"></i>
-                        </a>
-                    </div>
-
-
-                </div>
-                <div id="collapsePeople" class="collapse" aria-labelledby="clipsPeopleFilterHeader" data-parent="#FilterAccordion">
-                    <div class="card-body">
-                        <ul style="list-style-type: none; margin: 0; margin-left: 1rem; padding: 0">
-                            @{
-                                foreach (Person person in (List<Person>)ViewData["AllPersons"])
-                                {
-                                    <li class="my-1 custom-control custom-checkbox">
-                                        <input type="checkbox"
-                                               data-jplist-control="checkbox-path-filter"
-                                               data-path=".tag-person-@(person.PersonId)"
-                                               data-group="@ViewData["JplistDataGroup"]"
-                                               data-clear-btn-id="clipsPeopleFilterClear"
-                                               name="checkbox-person-@(person.PersonId)"
-                                               id="tag-person-@(person.PersonId)"
-                                               class="custom-control-input" />
-                                        <label class="custom-control-label" for="tag-person-@(person.PersonId)">@(person.PersonName)</label>
-                                    </li>
-                                }
-                            }
-                        </ul>
-                    </div>
-                </div>
+        <div class="accordion py-1 py-lg-2" id="filter-accordion">
+            <div class="card" id="clips-persons-filter">
+                @JplistFilterHelpers.WHVMSidebarAccordionCardHeader("clips-persons-filter", "collapse-persons", "clips-persons-filter-clear", "People")
+                @{
+                    var checkboxPersonsList = JplistFilterHelpers.WHVMSidebarAccordionCardBodyListCheckbox(
+                        (string) (ViewData["JplistDataGroup"]),
+                        "checkbox-person-",
+                        "clips-persons-filter-clear",
+                        "PersonId",
+                        "PersonName",
+                        "tag-person-",
+                        (List<Person>) ViewData["AllPersons"]
+                        );
+                }
+                @JplistFilterHelpers.WHVMSidebarAccordionCardBody("clips-persons-filter", "collapse-persons", "filter-accordion", checkboxPersonsList)
             </div>
-            <!--#endregion-->
-            <!--#region Filter - Checkboxes - ClipTagsCollections - Clip-->
-            <div class="card" id="clipsCollectionsFilter">
-                <div class="card-header d-flex align-items-center" id="clipsCollectionsHeading">
-                    <button class="btn btn-link collapsed px-0" data-toggle="collapse" data-target="#collapseCollections" aria-expanded="false" aria-controls="collapseCollections">
-                        <div class="d-flex">
-                            <i class="mi mi-ChevronRight"></i>
-                            <div class="ml-1">Collections</div>
-                        </div>
-                    </button>
-                    <div class="p-1 flex-grow-0 badge badge-primary badge-pill d-none text-truncate mx-1" data-toggle="tooltip"></div>
-                    <div class="ml-auto">
-                        <a href="#" class="btn btn-sm btn-link disabled p-0" role="button" id="clipsCollectionsFilterClear">
-                            <i class="mi mi-Clear"></i>
-                        </a>
-                    </div>
-                </div>
-                <div id="collapseCollections" class="collapse" aria-labelledby="headingCollections" data-parent="#FilterAccordion">
-                    <div class="card-body">
-                        <ul style="list-style-type: none; margin: 0; margin-left: 1rem; padding: 0">
-                            @{
-                                foreach (Collection collection in (List<Collection>)ViewData["AllCollections"])
-                                {
-                                    <li class="my-1 custom-control custom-checkbox">
-                                        <input type="checkbox"
-                                               data-jplist-control="checkbox-path-filter"
-                                               data-path=".tag-collection-@(collection.CollectionId)"
-                                               data-group="@ViewData["JplistDataGroup"]"
-                                               data-clear-btn-id="clipsCollectionsFilterClear"
-                                               name="checkbox-collection-@(collection.CollectionId)"
-                                               id="tag-collection-@(collection.CollectionId)-cb"
-                                               class="custom-control-input" />
-                                        <label class="custom-control-label" for="tag-collection-@(collection.CollectionId)-cb">@(collection.CollectionName)</label>
-                                    </li>
-                                }
-                            }
-                        </ul>
-                    </div>
-                </div>
+            <div class="card" id="clips-collections-filter">
+                @JplistFilterHelpers.WHVMSidebarAccordionCardHeader("clips-collections-filter", "collapse-collections", "clips-collections-filter-clear", "Collections")
+                @{
+                    var checkboxCollectionsList = JplistFilterHelpers.WHVMSidebarAccordionCardBodyListCheckbox(
+                        (string) (ViewData["JplistDataGroup"]),
+                        "checkbox-collection-",
+                        "clips-collections-filter-clear",
+                        "CollectionId",
+                        "CollectionName",
+                        "tag-collection-",
+                        (List<Collection>) ViewData["AllCollections"]
+                        );
+                }
+                @JplistFilterHelpers.WHVMSidebarAccordionCardBody("clips-collections-filter", "collapse-collections", "filter-accordion", checkboxCollectionsList)
             </div>
-            <!--#endregion-->
-            <!--#region Filter - Radio - ClipsPersonReviewer - Clips-->
-            <div class="card" id="clipsPeopleReviewerFilter">
-                <div class="card-header d-flex align-items-center" id="clipsPeopleReviewerFilterHeader">
-                    <button class="btn btn-link collapsed px-0 flex-shrink-0" data-toggle="collapse" data-target="#collapsePeopleReviewer" aria-expanded="false" aria-controls="collapsePeopleReviewer">
-                        <div class="d-flex">
-                            <i class="mr-1 mi mi-ChevronRight"></i>
-                            <span class="text-truncate">Clip Reviewer</span>
-                        </div>
-                    </button>
-                    <div class="p-1 flex-grow-0 badge badge-primary badge-pill d-none text-truncate mx-1" data-toggle="tooltip"></div>
-                    <div class="ml-auto ">
-                        <a href="#" class="btn btn-sm btn-link disabled p-0" role="button" id="clipsPeopleReviewerFilterClear">
-                            <i class="mi mi-Clear"></i>
-                        </a>
-                    </div>
-                </div>
-                <div id="collapsePeopleReviewer" class="collapse" aria-labelledby="clipsPeopleReviewerFilterHeader" data-parent="#FilterAccordion">
-                    <div class="card-body">
-                        <ul style="list-style-type: none; margin: 0; margin-left: 1rem; padding: 0">
-                            <li class="my-1 custom-control custom-radio">
-                                <input type="radio"
-                                       data-jplist-control="radio-buttons-path-filter"
-                                       data-path="default"
-                                       data-group="@ViewData["JplistDataGroup"]"
-                                       data-name="radio-person-reviewer"
-                                       name="radio-person-reviewer"
-                                       id="tag-person-default-reviewer"
-                                       checked
-                                       class="custom-control-input jplist-selected" />
-                                <label class="custom-control-label" for="tag-person-default-reviewer">Any</label>
-                            </li>
-                            @{
-                                foreach (Person person in ((List<Person>)ViewData["AllPersons"]).Where(x => x.ClipsAsReviewer.Any()))
-                                {
-                                    <li class="my-1 custom-control custom-radio">
-                                        <input type="radio"
-                                               data-jplist-control="radio-buttons-path-filter"
-                                               data-path=".tag-person-@(person.PersonId)-reviewer"
-                                               data-group="@ViewData["JplistDataGroup"]"
-                                               data-name="radio-person-reviewer"
-                                               name="radio-person-reviewer"
-                                               id="tag-person-@(person.PersonId)-reviewer"
-                                               value="@(person.PersonName)"
-                                               class="custom-control-input" />
-                                        <label class="custom-control-label" for="tag-person-@(person.PersonId)-reviewer">@(person.PersonName)</label>
-                                    </li>
-                                }
-                            }
-                        </ul>
-                    </div>
-                </div>
+            <div class="card" id="clips-persons-reviewer-filter">
+                @JplistFilterHelpers.WHVMSidebarAccordionCardHeader("clips-persons-reviewer-filter", "collapse-persons-reviewer", "clips-persons-reviewer-filter-clear", "Clip Reviewer")
+                @{
+                    var radioPersonsReviewerList = JplistFilterHelpers.WHVMSidebarAccordionCardBodyListRadio(
+                        (string) (ViewData["JplistDataGroup"]),
+                        "radio-person-reviewer",
+                        "PersonId",
+                        "PersonName",
+                        "tag-person-reviewer-",
+                        ((List<Person>) ViewData["AllPersons"]).Where(x => x.ClipsAsReviewer.Any())
+                        );
+                }
+                @JplistFilterHelpers.WHVMSidebarAccordionCardBody("clips-persons-reviewer-filter", "collapse-persons-reviewer", "filter-accordion", radioPersonsReviewerList)
             </div>
-            <!--#endregion-->
-            <!--#region Filter - Radio - ClipsPersonCamera - Clips-->
-            <div class="card" id="clipsPeopleCameraFilter">
-                <div class="card-header d-flex align-items-center" id="clipsPeopleCameraFilterHeader">
-                    <button class="btn btn-link collapsed px-0 flex-shrink-0" data-toggle="collapse" data-target="#collapsePeopleCamera" aria-expanded="false" aria-controls="collapsePeopleCamera">
-                        <div class="d-flex">
-                            <i class="mr-1 mi mi-ChevronRight"></i>
-                            <span>Camera Operator</span>
-                        </div>
-                    </button>
-                    <div class="p-1 flex-grow-0 badge badge-primary badge-pill d-none text-truncate mx-1" data-toggle="tooltip"></div>
-                    <div class="ml-auto">
-                        <a href="#" class="btn btn-sm btn-link disabled p-0" role="button" id="clipsPeopleCameraFilterClear">
-                            <i class="mi mi-Clear"></i>
-                        </a>
-                    </div>
-                </div>
-                <div id="collapsePeopleCamera" class="collapse" aria-labelledby="clipsPeopleCameraFilterHeader" data-parent="#FilterAccordion">
-                    <div class="card-body">
-                        <ul style="list-style-type: none; margin: 0; margin-left: 1rem; padding: 0">
-                            <li class="my-1 custom-control custom-radio">
-                                <input type="radio"
-                                       data-jplist-control="radio-buttons-path-filter"
-                                       data-path="default"
-                                       data-group="@ViewData["JplistDataGroup"]"
-                                       data-name="radio-person-camera"
-                                       name="radio-person-camera"
-                                       id="tag-person-default-camera"
-                                       checked
-                                       class="custom-control-input jplist-selected" />
-                                <label class="custom-control-label" for="tag-person-default-camera">Any</label>
-                            </li>
-                            @{
-                                foreach (Person person in ((List<Person>)ViewData["AllPersons"]).Where(x => x.ClipsAsCameraOperator.Any()))
-                                {
-                                    <li class="my-1 custom-control custom-radio">
-                                        <input type="radio"
-                                               data-jplist-control="radio-buttons-path-filter"
-                                               data-path=".tag-person-@(person.PersonId)-camera"
-                                               data-group="@ViewData["JplistDataGroup"]"
-                                               data-name="radio-person-camera"
-                                               name="radio-person-camera"
-                                               id="tag-person-@(person.PersonId)-camera"
-                                               value="@(person.PersonName)"
-                                               class="custom-control-input" />
-                                        <label class="custom-control-label" for="tag-person-@(person.PersonId)-camera">@(person.PersonName)</label>
-                                    </li>
-                                }
-                            }
-                        </ul>
-                    </div>
-                </div>
+            <div class="card" id="clips-persons-camera-filter">
+                @JplistFilterHelpers.WHVMSidebarAccordionCardHeader("clips-persons-camera-filter", "collapse-persons-camera", "clips-persons-camera-filter-clear", "Camera Operator")
+                @{
+                    var radioPersonCameraList = JplistFilterHelpers.WHVMSidebarAccordionCardBodyListRadio(
+                        (string) (ViewData["JplistDataGroup"]),
+                        "radio-person-camera",
+                        "PersonId",
+                        "PersonName",
+                        "tag-person-camera-",
+                        ((List<Person>) ViewData["AllPersons"]).Where(x => x.ClipsAsCameraOperator.Any())
+                        );
+                }
+                @JplistFilterHelpers.WHVMSidebarAccordionCardBody("clips-persons-camera-filter", "collapse-persons-camera", "filter-accordion", radioPersonCameraList)
             </div>
-            <!--#endregion-->
-            <!--#region Filter - Radio - ClipSource - Clip-->
-            <div class="card" id="clipsSourceFilter">
-                <div class="card-header d-flex align-items-center" id="clipsSourceFilterHeader">
-                    <button class="btn btn-link collapsed px-0 flex-shrink-0" data-toggle="collapse" data-target="#collapseSourceFilter" aria-expanded="false" aria-controls="collapsePeopleCamera">
-                        <div class="d-flex">
-                            <i class="mr-1 mi mi-ChevronRight"></i>
-                            <span>Source</span>
-                        </div>
-                    </button>
-                    <div class="p-1 flex-grow-0 badge badge-primary badge-pill d-none text-truncate mx-1" data-toggle="tooltip"></div>
-                    <div class="ml-auto">
-                        <a href="#" class="btn btn-sm btn-link disabled p-0" role="button" id="clipsSourceFilterClear">
-                            <i class="mi mi-Clear"></i>
-                        </a>
-                    </div>
-                </div>
-                <div id="collapseSourceFilter" class="collapse" aria-labelledby="clipsSourceFilterHeader" data-parent="#FilterAccordion">
-                    <div class="card-body">
-                        <ul style="list-style-type: none; margin: 0; margin-left: 1rem; padding: 0">
-                            <li class="my-1 custom-control custom-radio">
-                                <input type="radio"
-                                       data-jplist-control="radio-buttons-path-filter"
-                                       data-path="default"
-                                       data-group="@ViewData["JplistDataGroup"]"
-                                       data-name="radio-source"
-                                       name="radio-source"
-                                       id="tag-default-source"
-                                       checked
-                                       class="custom-control-input jplist-selected" />
-                                <label class="custom-control-label" for="tag-default-source">Any</label>
-                            </li>
-                            @{
-                                foreach (Source source in (List<Source>)ViewData["AllSources"])
-                                {
-                                    <li class="my-1 custom-control custom-radio">
-                                        <input type="radio"
-                                               data-jplist-control="radio-buttons-path-filter"
-                                               data-path=".tag-source-@(source.SourceId)"
-                                               data-group="@ViewData["JplistDataGroup"]"
-                                               data-name="radio-source"
-                                               name="radio-source"
-                                               id="tag-source-@(source.SourceId)"
-                                               value="@(source.SourceName)"
-                                               class="custom-control-input" />
-                                        <label class="custom-control-label" for="tag-source-@(source.SourceId)">@(source.SourceName)</label>
-                                    </li>
-                                }
-                            }
-                        </ul>
-                    </div>
-                </div>
+            <div class="card" id="clips-source-filter">
+                @JplistFilterHelpers.WHVMSidebarAccordionCardHeader("clips-source-filter", "collapse-source", "clips-source-filter-clear", "Source")
+                @{
+                    var radioSourceList = JplistFilterHelpers.WHVMSidebarAccordionCardBodyListRadio(
+                        (string) (ViewData["JplistDataGroup"]),
+                        "radio-source",
+                        "SourceId",
+                        "SourceName",
+                        "tag-source-",
+                        (List<Source>) ViewData["AllSources"]
+                        );
+                }
+                @JplistFilterHelpers.WHVMSidebarAccordionCardBody("clips-source-filter", "collapse-source", "filter-accordion", radioSourceList)
             </div>
-            <!--#endregion-->
-
-
         </div>
         <!--#endregion-->
 
@@ -317,12 +132,11 @@
 }
 
 @section Body{
-    <div data-jplist-group="clips" style="overflow: auto ">
+    <div data-jplist-group="clips" style="overflow: auto">
         @foreach (var item in Model)
         {
-
             <div class="card" data-jplist-item>
-                <a asp-action="Details" asp-controller="Clips" asp-route-id="@item.ClipId" style="text-decoration:none">
+                <a asp-action="Details" asp-controller="Clips" asp-route-id="@item.ClipId" style="text-decoration: none">
                     <div class="row no-gutters">
                         <div class="col-3 col-lg-2 col-xl-1">
                             @*<img src="~/images/@(item.SourceFormat.SourceFormatText)_logo.svg" class="img-fluid p-2 p-md-3" alt="@(item.SourceFormat.SourceFormatText)">*@
@@ -335,7 +149,7 @@
                                 </h3>
                                 <p class="card-text">
                                     <span class="badge badge-pink align-self-center mr-1 ">Clip ID: @(item.ClipId)</span>
-                                    <span class="badge badge-cyan align-self-center mr-1 tag-source-@(item.Source.SourceId)">Source: @(item.Source.SourceLabel)</span>
+                                    <span class="badge badge-cyan align-self-center mr-1 tag-source-@(item.Source.SourceId)">Source: @(item.Source.SourceName)</span>
 
                                     @{
                                         if (item.ClipTimeStart != null)
@@ -358,23 +172,23 @@
                                         }
                                     }
 
-                                    <br />Clip Reviewer:
+                                    <br/>Clip Reviewer:
                                     @{
                                         if (item.ClipReviewer?.PersonName != null)
                                         {
-                                            <span class="badge badge-secondary align-self-center mr-1 tag-person-@(item.ClipReviewer.PersonId) tag-person-@(item.ClipReviewer.PersonId)-reviewer">@(item.ClipReviewer.PersonName)</span>
+                                            <span class="badge badge-secondary align-self-center mr-1 tag-person-@(item.ClipReviewer.PersonId) tag-person-reviewer-@(item.ClipReviewer.PersonId)">@(item.ClipReviewer.PersonName)</span>
                                         }
                                     }
 
-                                    <br />Camera Operator:
+                                    <br/>Camera Operator:
                                     @{
                                         if (item.ClipCameraOperator?.PersonName != null)
                                         {
-                                            <span class="badge badge-secondary align-self-center mr-1 tag-person-@(item.ClipCameraOperator.PersonId) tag-person-@(item.ClipCameraOperator.PersonId)-camera">@(item.ClipCameraOperator.PersonName)</span>
+                                            <span class="badge badge-secondary align-self-center mr-1 tag-person-@(item.ClipCameraOperator.PersonId) tag-person-camera-@(item.ClipCameraOperator.PersonId)">@(item.ClipCameraOperator.PersonName)</span>
                                         }
                                     }
 
-                                    <br />People:
+                                    <br/>People:
                                     @{
                                         if (item.ClipPersons.Any())
                                         {
@@ -385,7 +199,7 @@
                                         }
                                     }
 
-                                    <br />Collections:
+                                    <br/>Collections:
                                     @{
                                         if (item.ClipCollections.Any())
                                         {
@@ -402,7 +216,6 @@
                     </div>
                 </a>
             </div>
-
         }
     </div>
 }
