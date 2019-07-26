@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "WHVM_MVC": {
+    "WHVM.Web": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

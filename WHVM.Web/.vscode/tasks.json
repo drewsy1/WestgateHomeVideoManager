@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/WHVM_MVC.csproj"
+                "${workspaceFolder}/WHVM.Web.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -17,7 +17,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/WHVM_MVC.csproj"
+                "${workspaceFolder}/WHVM.Web.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -28,7 +28,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/WHVM_MVC.csproj"
+                "${workspaceFolder}/WHVM.Web.csproj"
             ],
             "problemMatcher": "$tsc"
         }

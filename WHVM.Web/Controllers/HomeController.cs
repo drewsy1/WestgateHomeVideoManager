@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WHVM.Database.Models;
 
-namespace WHVM_MVC.Controllers
+namespace WHVM.Web.Controllers
 {
     public class HomeController : Controller
     {

@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WHVM.Database.Models;
 
-namespace WHVM_MVC
+namespace WHVM.Web
 {
     public class Startup
     {

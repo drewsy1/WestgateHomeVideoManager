@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WHVM.Database.Models;
 
-namespace WHVM_MVC.Controllers
+namespace WHVM.Web.Controllers
 {
     public class ClipsController : Controller
     {

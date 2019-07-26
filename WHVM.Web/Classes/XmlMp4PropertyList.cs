@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Xml;
 using Castle.Core.Internal;
 
-namespace WHVM_MVC.Classes
+namespace WHVM.Web.Classes
 {
     public class XmlMp4PropertyList
     {

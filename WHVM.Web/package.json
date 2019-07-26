@@ -1,5 +1,5 @@
 {
-  "name": "whvm_mvc",
+  "name": "whvm.web",
   "version": "1.0.0",
   "description": "Westgate Home Video Manager",
   "main": "webpack.config.js",

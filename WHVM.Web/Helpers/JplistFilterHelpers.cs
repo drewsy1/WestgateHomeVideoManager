@@ -9,7 +9,7 @@ using Castle.Core.Internal;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace WHVM_MVC.Helpers
+namespace WHVM.Web.Helpers
 {
     public class JplistFilterHelpers
     {
