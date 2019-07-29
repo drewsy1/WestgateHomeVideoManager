@@ -1,8 +1,9 @@
-﻿@using WHVM.Web.Helpers
+﻿@using System.Globalization
+@using WHVM.Web.Helpers
 @model IEnumerable<Source>
 
 @{
-    Layout = "Layouts/_Layout_Sidebar_Index";
+    Layout = "Layouts/_Layout_Sidebar";
     ViewData["SidebarTitle"] = ViewContext.RouteData.Values["controller"];
     ViewData["JplistDataGroup"] = "sources";
     ViewData["JplistSortDataPath"] = ".sourceID";
@@ -13,170 +14,97 @@
 }
 
 @section SidebarContent{
-    <div uk-grid class="uk-grid-collapse uk-child-width-1-1">
-        <div class="uk-flex uk-flex-nowrap uk-flex-wrap-stretch uk-child-width-1-5">
-            <div uk-filter-control="filter: [data-source-format-id]; group: data-source-format-id"><button class="uk-button uk-button-default uk-padding-remove-horizontal uk-width-expand">All</button></div>
-            @foreach (var sourceFormat in (List<SourceFormat>)ViewData["AllSourceFormats"])
-            {
-                <div uk-filter-control="filter: [data-source-format-id='@(@sourceFormat.SourceFormatId)']; group: data-source-format-id"><button class="uk-button uk-button-default uk-padding-remove-horizontal uk-width-expand uk-text-truncate">@(sourceFormat.SourceFormatName)</button></div>
-            }
-        </div>
-        
-        <form class="uk-inline uk-margin uk-search uk-search-default">
-            <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: close" onclick="$('#filter-source-name-search').val('')"></a>
-            <input class="uk-search-input" type="search" id="filter-source-name-search" data-filter-name="data-source-name" data-filter-group="filter-source-grid" placeholder="Search...">
-        </form>
-    </div>
-        @*<!--#region Filter - Radio - SourcesFormat - Sources-->
-        <div class="btn-group btn-group-toggle btn-group-sm col-12 px-0 py-1" id="sourceFormat-tag-filter-group">
-            <label class="btn btn-secondary active px-1" id="sourceFormat-tag-filter-default-btn">
-                <input class=""
-                       type="radio"
-                       data-jplist-control="radio-buttons-text-filter"
-                       data-group="@ViewData["JplistDataGroup"]"
-                       data-name="sourceFormat-tag-filter"
-                       data-path="default"
-                       name="sourceFormat-tag-filter"
-                       data-id="format"
-                       value=""
-                       id="sourceFormat-tag-filter-default">
-                All
-            </label>
-            @foreach (var format in (List<SourceFormat>)ViewData["AllSourceFormats"])
-            {
-                <label class="btn btn-secondary px-1" id="sourceFormat-tag-filter-@(format.SourceFormatName)-btn">
-                    <input class=""
-                           type="radio"
-                           data-jplist-control="radio-buttons-text-filter"
-                           data-group="@ViewData["JplistDataGroup"]"
-                           data-name="sourceFormat-tag-filter"
-                           data-path=".sourceFormat"
-                           name="sourceFormat-tag-filter"
-                           data-id="format"
-                           value="@(format.SourceFormatName)"
-                           id="sourceFormat-tag-filter-@(format.SourceFormatName)" />
-                    @(format.SourceFormatName)
-                </label>
-            }
-        </div>
-        <!--#endregion-->
-        <!--#region Filter - Text - SourcesName - Sources-->
-        @JplistFilterHelpers.WHVMTextFilter(
-            "text-name-filter-input-group",
-            (string)ViewData["JplistDataGroup"],
-            "sourceName-text-filter",
-            ".sourceName",
-            "name",
-            null,
-            "text-name-filter-input",
-            elementPlaceholder: "Filter by Name",
-            elementDataClearBtnId: "name-clear-btn"
-            )
-        <!--#endregion-->
-        <!--#region Filter - Date - SourcesDateMinimum - Sources-->
-        @JplistFilterHelpers.WHVMDateFilter(
-            "date-min-filter-input-group",
-            "Start Date",
-            (string) ViewData["JplistDataGroup"],
-            "sourceDate-text-filter",
-            ".sourceDate",
-            "min-date",
-            "",
-            "date-min-filter-input",
-            JplistFilterHelpers.JplistDateFilterDataMode.dateLower)
-        <!--#endregion-->
-        <!--#region Filter - Date - SourcesDateMaximum - Sources-->
-        @JplistFilterHelpers.WHVMDateFilter(
-            "date-max-filter-input-group",
-            "End Date",
-            (string) ViewData["JplistDataGroup"],
-            "sourceDate-text-filter",
-            ".sourceDate",
-            "max-date",
-            "",
-            "date-max-filter-input",
-            JplistFilterHelpers.JplistDateFilterDataMode.dateUpper)
-        <!--#endregion-->
-        <!--#region Filter - Slider - SourcesClipsCount - Sources -->
-        <div class='input-group input-group-sm py-1 py-lg-2' id="sourceClipCountRange">
-            <span>Number of Clips</span>
-            <div data-jplist-control="slider-range-filter"
-                 data-group="@ViewData["JplistDataGroup"]"
-                 data-name="sourceClipsCount-range-filter"
-                 data-path=".sourceClipsCount"
-                 data-id="clips"
-                 id="sourceClipCountFilter"
-                 data-min="0"
-                 data-from="0"
-                 data-to="@maxClipCount"
-                 data-max="@maxClipCount">
-
-                <div class="jplist-slider" data-type="slider"></div>
-
-                <div class="jplist-slider-values">
-                    <b>Min:</b> <span data-type="min"></span>,
-                    <b>Current Min:</b> <span data-type="value-1"></span>,
-                    <b>Current Max:</b> <span data-type="value-2"></span>,
-                    <b>Max:</b> <span data-type="max"></span>
-                </div>
+    <h2 class="uk-heading-line uk-text-center"><span>@ViewData["SidebarTitle"]</span></h2>
+    <div>
+        <div uk-grid class="uk-grid-collapse uk-child-width-1-1">
+            <div class="uk-flex uk-flex-nowrap uk-flex-wrap-stretch uk-child-width-1-5">
+                <div uk-filter-control="filter: [data-source-format-id]; group: data-source-format-id"><button class="uk-button uk-button-default uk-padding-remove-horizontal uk-width-expand">All</button></div>
+                @foreach (var sourceFormat in (List<SourceFormat>)ViewData["AllSourceFormats"])
+                {
+                    <div uk-filter-control="filter: [data-source-format-id='@(@sourceFormat.SourceFormatId)']; group: data-source-format-id"><button class="uk-button uk-button-default uk-padding-remove-horizontal uk-width-expand uk-text-truncate">@(sourceFormat.SourceFormatName)</button></div>
+                }
             </div>
+
+            <form class="uk-inline uk-search uk-search-default uk-margin-top">
+                <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: close" onclick="$('#filter-source-name-search').val('')"></a>
+                <input class="uk-search-input" type="search" id="filter-source-name-search" data-filter-name="data-source-name" data-filter-group="filter-source-grid" placeholder="Search...">
+            </form>
+
+            <form class="uk-inline uk-search uk-search-default uk-margin-top uk-form-stacked">
+                <div>
+                    <label class="uk-form-label" for="filter-source-date-start">Start Date</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="date" id="filter-source-date-start" data-filter-name="data-source-date-start" data-filter-group="filter-source-grid" data-filter-operator=">=" placeholder="Start date...">
+                    </div>
+                </div>
+            </form>
+
+            <form class="uk-inline uk-search uk-search-default uk-margin-top uk-form-stacked">
+                <div>
+                    <label class="uk-form-label" for="filter-source-date-end">End Date</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="date" id="filter-source-date-end" data-filter-name="data-source-date-end" data-filter-group="filter-source-grid" data-filter-operator="<=" placeholder="End date...">
+                    </div>
+                </div>
+            </form>
         </div>
-        <!--#endregion-->*@
-    }
+    </div>
+}
 
-    @section Body{
-        @*<div data-jplist-group="sources" style="overflow: auto">*@
-        <div class="uk-grid uk-width-expand uk-padding-small uk-grid-small uk-child-width-1-1 js-filter" id="filter-source-grid" uk-grid>
-            @foreach (var item in Model)
-            {
-                int itemClipCount = item.Clips.Count();
-                string sourceDates = "";
-                sourceDates += item.SourceDateStart.HasValue ? ((DateTime)item.SourceDateStart).ToString("s") + " " : "";
-                sourceDates += item.SourceDateEnd.HasValue ? ((DateTime)item.SourceDateEnd).ToString("s") + " " : "";
+@section Body{
+    @*<div data-jplist-group="sources" style="overflow: auto">*@
+    <div class="uk-grid uk-width-expand uk-padding-small uk-grid-small uk-child-width-1-1 js-filter" id="filter-source-grid" uk-grid>
+        @foreach (var item in Model)
+        {
+            int itemClipCount = item.Clips.Count();
+            string sourceDates = "";
+            sourceDates += item.SourceDateStart.HasValue ? ((DateTime)item.SourceDateStart).ToString("O") + " " : "";
+            sourceDates += item.SourceDateEnd.HasValue ? ((DateTime)item.SourceDateEnd).ToString("O") + " " : "";
 
-                <div class="uk-card uk-card-small uk-card-hover uk-card-default "
-                     data-source-name="@(item.SourceName)"
-                     data-source-id="@(item.SourceId)"
-                     data-source-date="@sourceDates"
-                     data-source-format-id="@(item.SourceFormat.SourceFormatId)"
-                     data-source-clip-count="@itemClipCount">
-                    @*<div class="uk-card-media-left">
+            <div class="uk-card uk-card-small uk-card-hover uk-card-default "
+                 data-source-name="@(item.SourceName)"
+                 data-source-id="@(item.SourceId)"
+                 data-source-date-start="@(item.SourceDateStart.HasValue ? ((DateTime)item.SourceDateStart).Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds.ToString(CultureInfo.InvariantCulture) : "")"
+                 data-source-date-end="@(item.SourceDateEnd.HasValue ? ((DateTime)item.SourceDateEnd).Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds.ToString(CultureInfo.InvariantCulture) : "")"
+                 data-source-format-id="@(item.SourceFormat.SourceFormatId)"
+                 data-source-clip-count="@itemClipCount">
+                @*<div class="uk-card-media-left">
                         <img src="~/images/@(item.SourceFormat.SourceFormatName)_logo.svg" uk-cover alt="@(item.SourceFormat.SourceFormatName)">
                         <canvas width="100" height="100"></canvas>
                     </div>*@
-                    <div class="uk-card-body">
-                        <h3 class="uk-card-title">
-                            @(Html.DisplayFor(modelItem => item.SourceName)) <span class="uk-label">@itemClipCount clips</span>
-                        </h3>
-                        <div class="uk-column-1-2@xs uk-column-1-3@s uk-column-1-4@m uk-column-1-5@l uk-column-1-6@xl">
-                            <dl>
-                                <dt>Format</dt>
-                                <dd>@(item.SourceFormat.SourceFormatName)</dd>
-                            </dl>
-                            <dl>
-                                <dt>Start Date</dt>
-                                <dd>@(item.SourceDateStart.HasValue ? item.SourceDateStart.ToString() : "No start date!")</dd>
-                            </dl>
-                            <dl>
-                                <dt>End Date</dt>
-                                <dd>@(item.SourceDateEnd.HasValue ? item.SourceDateEnd.ToString() : "No end date!")</dd>
-                            </dl>
-                            <dl>
-                                <dt>Date Created</dt>
-                                <dd>@(item.SourceDateCreated.HasValue ? item.SourceDateCreated.ToString() : "No date created!")</dd>
-                            </dl>
-                            <dl>
-                                <dt>Date Imported</dt>
-                                <dd>@(item.SourceDateImported.HasValue ? item.SourceDateImported.ToString() : "No date imported!")</dd>
-                            </dl>
-                        </div>
+                <div class="uk-card-body">
+                    <h3 class="uk-card-title">
+                        @(Html.DisplayFor(modelItem => item.SourceName)) <span class="uk-label">@itemClipCount clips</span>
+                    </h3>
+                    <div class="uk-column-1-2@xs uk-column-1-3@s uk-column-1-4@m uk-column-1-5@l uk-column-1-6@xl">
+                        <dl>
+                            <dt>Format</dt>
+                            <dd>@(item.SourceFormat.SourceFormatName)</dd>
+                        </dl>
+                        <dl>
+                            <dt>Start Date</dt>
+                            <dd>@(item.SourceDateStart.HasValue ? item.SourceDateStart.ToString() : "No start date!")</dd>
+                        </dl>
+                        <dl>
+                            <dt>End Date</dt>
+                            <dd>@(item.SourceDateEnd.HasValue ? item.SourceDateEnd.ToString() : "No end date!")</dd>
+                        </dl>
+                        <dl>
+                            <dt>Date Created</dt>
+                            <dd>@(item.SourceDateCreated.HasValue ? item.SourceDateCreated.ToString() : "No date created!")</dd>
+                        </dl>
+                        <dl>
+                            <dt>Date Imported</dt>
+                            <dd>@(item.SourceDateImported.HasValue ? item.SourceDateImported.ToString() : "No date imported!")</dd>
+                        </dl>
                     </div>
                 </div>
-            }
-        </div>
-    }
+            </div>
+        }
+    </div>
+}
 
-    @section Scripts
+@section Scripts
 {
-        <script type="text/javascript" src="~/js/View_Sources_Index.js" defer></script>
-    }
+    <script type="text/javascript" src="~/js/View_Sources_Index.js" defer></script>
+}

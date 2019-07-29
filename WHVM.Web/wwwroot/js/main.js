@@ -33018,6 +33018,41 @@ Popper.Defaults = Defaults;
 
 /***/ }),
 
+/***/ "./node_modules/uikit/dist/css/uikit.css":
+/*!***********************************************!*\
+  !*** ./node_modules/uikit/dist/css/uikit.css ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
+
+/***/ }),
+
+/***/ "./node_modules/uikit/dist/js/uikit-icons.js":
+/*!***************************************************!*\
+  !*** ./node_modules/uikit/dist/js/uikit-icons.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "js/uikit-icons.js";
+
+/***/ }),
+
+/***/ "./node_modules/uikit/dist/js/uikit.js":
+/*!*********************************************!*\
+  !*** ./node_modules/uikit/dist/js/uikit.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "js/uikit.js";
+
+/***/ }),
+
 /***/ "./node_modules/webpack/buildin/global.js":
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -33129,36 +33164,38 @@ class View_Layout_Global {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var popper_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var jquery_validation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery-validation */ "./node_modules/jquery-validation/dist/jquery.validate.js");
-/* harmony import */ var jquery_validation__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery_validation__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var jquery_validation_unobtrusive__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jquery-validation-unobtrusive */ "./node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js");
-/* harmony import */ var jquery_validation_unobtrusive__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jquery_validation_unobtrusive__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _View_Layout_Global__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./View_Layout_Global */ "./src/js/View_Layout_Global.js");
-﻿/* global $, window */
+/* harmony import */ var uikit_dist_css_uikit_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! uikit/dist/css/uikit.css */ "./node_modules/uikit/dist/css/uikit.css");
+/* harmony import */ var uikit_dist_css_uikit_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(uikit_dist_css_uikit_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var uikit_dist_js_uikit_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! uikit/dist/js/uikit.js */ "./node_modules/uikit/dist/js/uikit.js");
+/* harmony import */ var uikit_dist_js_uikit_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(uikit_dist_js_uikit_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var uikit_dist_js_uikit_icons_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! uikit/dist/js/uikit-icons.js */ "./node_modules/uikit/dist/js/uikit-icons.js");
+/* harmony import */ var uikit_dist_js_uikit_icons_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(uikit_dist_js_uikit_icons_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var jquery_validation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery-validation */ "./node_modules/jquery-validation/dist/jquery.validate.js");
+/* harmony import */ var jquery_validation__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery_validation__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var jquery_validation_unobtrusive__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery-validation-unobtrusive */ "./node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js");
+/* harmony import */ var jquery_validation_unobtrusive__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery_validation_unobtrusive__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _View_Layout_Global__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./View_Layout_Global */ "./src/js/View_Layout_Global.js");
+﻿/* global window */
 
 //import "jplist-es6/dist/1.2.0/jplist.styles.css";
 
-// import "bootstrap/dist/js/bootstrap.js";
-// import "uikit";
-//import "uikit/src/scss/uikit.scss"
-// import "uikit/dist/css/uikit.css"
-// import "uikit/dist/js/uikit-icons.js"
+
+
+
 // import "../scss/whvm/whvm.scss";
-//import "@icon/micon/micon.css";
 
 
 
-//import "jquery-validation-unobtrusive-bootstrap";
 
 //import "jplist-es6";
 
 
 // import $ from 'jquery';
-window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_1___default.a; window.$ = jquery__WEBPACK_IMPORTED_MODULE_1___default.a;
+window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_4___default.a; window.$ = jquery__WEBPACK_IMPORTED_MODULE_4___default.a;
 
 /***/ })
 

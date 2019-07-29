@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@(ViewContext.RouteData.Values["controller"] + " - " + ViewContext.RouteData.Values["action"] + " | " + Startup.Configuration.GetSection("SiteVariables:SiteName").Value)</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/css/uikit.min.css" />
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/css/uikit.css" />*@
     <link rel="stylesheet" type="text/css" href="~/css/main.css" />
 </head>
 
@@ -44,14 +44,15 @@
     @RenderBody()
 
 
-    <environment names="Development">
-        <script src="~/js/main.js"></script>
-    </environment>
+<environment names="Development">
+    
+</environment>
     <environment names="Staging,Production">
-        <script src="~/js/main.js" asp-append-version="true"></script>
     </environment>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit-icons.min.js"></script>
+<script src="~/js/main.js"></script>
+<script src="~/js/uikit.js"></script>
+<script src="~/js/uikit-icons.js"></script>
+    
     @*<script src="~/js/View_Layout_Global.js" defer></script>*@
 
     <script>

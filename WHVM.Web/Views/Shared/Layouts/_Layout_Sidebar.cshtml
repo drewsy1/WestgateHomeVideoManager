@@ -34,9 +34,9 @@
     </div>
 
 @section LayoutScripts{
-    @if (IsSectionDefined("LayoutSidebarScripts"))
+    @if (IsSectionDefined("Scripts"))
     {
-        await RenderSectionAsync("LayoutSidebarScripts").ConfigureAwait(false);
+        await RenderSectionAsync("Scripts").ConfigureAwait(false);
     }
     else
     {

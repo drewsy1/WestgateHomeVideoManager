@@ -62,7 +62,7 @@ sourceFormatFilterInputs.change(
     toggleFilterButtons
 );
 
-$(".uk-search-input").keyup(function(event){
+$("#filter-source-name-search").keyup(function(event){
     var filterName = $(event.target).attr('data-filter-name');
     var filterGridId = $(event.target).attr('data-filter-group');
     var filterGrid = $('#'+filterGridId);
@@ -81,7 +81,28 @@ $(".uk-search-input").keyup(function(event){
     filterGrid.click();
 })
 
-$(".uk-search-input").siblings('a').click(function(event){
-    $(".uk-search-input").keyup();
+$("#filter-source-name-search").siblings('a').click(function(){
+    $("#filter-source-name-search").keyup();
+})
+
+$(".uk-input[type=date]").change(function(event){
+    var filterName = $(event.target).attr('data-filter-name');
+    var filterOperator = $(event.target).attr('data-filter-operator');
+    var filterGridId = $(event.target).attr('data-filter-group');
+    var filterGrid = $('#'+filterGridId);
+    
+    if ( $(event.target).val() == "" )
+    {
+        filterGrid.attr( 'uk-filter-control', 'filter: ['+filterName+']; group: '+filterName );
+    }
+
+    else
+    {
+        let filterData = Date.parse($(event.target).val()).valueOf();
+        filterGrid.attr( 'uk-filter-control', 'filter: ['+filterName+filterOperator + filterData + ']; group: '+filterName );
+    }
+
+    
+    filterGrid.click();
 })
 //#endregion
