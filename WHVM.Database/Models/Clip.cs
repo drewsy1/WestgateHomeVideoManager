@@ -19,7 +19,6 @@ namespace WHVM.Database.Models
         public int? ClipReviewerId { get; set; }
         public int? ClipCameraOperatorId { get; set; }
         public string ClipName { get; set; }
-        public string ClipFilePath { get; set; }
         public virtual Person ClipCameraOperator { get; set; }
         public virtual Person ClipReviewer { get; set; }
         public virtual Source Source { get; set; }

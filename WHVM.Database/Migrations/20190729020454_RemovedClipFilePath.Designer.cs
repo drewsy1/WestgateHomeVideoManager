@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WHVM.Database.Models;
 
 namespace WHVM.Database.Migrations
 {
     [DbContext(typeof(HomeVideoDBContext))]
-    partial class HomeVideoDBContextModelSnapshot : ModelSnapshot
+    [Migration("20190729020454_RemovedClipFilePath")]
+    partial class RemovedClipFilePath
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
