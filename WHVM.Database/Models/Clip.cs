@@ -24,6 +24,7 @@ namespace WHVM.Database.Models
         public virtual Source Source { get; set; }
         public virtual IEnumerable<ClipCollection> ClipCollections { get; set; }
         public virtual IEnumerable<ClipPerson> ClipPersons { get; set; }
+        public virtual IEnumerable<File> Files { get; set; }
 
     }
 }

@@ -17,6 +17,7 @@ namespace WHVM.Database.Models
         public string SourceFilePath { get; set; }
         public virtual SourceFormat SourceFormat { get; set; }
         public virtual IEnumerable<Clip> Clips { get; set; }
+        public virtual IEnumerable<File> Files { get; set; }
 
         [NotMapped]
         public DateTime? SourceDateStart => (DateTime?) Clips.Min(clip => clip.ClipTimeStart);

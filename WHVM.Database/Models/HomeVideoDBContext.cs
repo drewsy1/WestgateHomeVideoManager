@@ -18,6 +18,10 @@ namespace WHVM.Database.Models
         public virtual DbSet<Person> Persons { get; set; }
         public virtual DbSet<ClipPerson> ClipPersons { get; set; }
         public virtual DbSet<ClipCollection> ClipCollections { get; set; }
+        public virtual DbSet<File> Files { get; set; }
+        public virtual DbSet<FileFormat> FileFormats { get; set; }
+        public virtual DbSet<FileCategory> FileCategories { get; set; }
+        public virtual DbSet<FileFileCategory> FileFileCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -62,7 +66,46 @@ namespace WHVM.Database.Models
                 .HasForeignKey(s => s.SourceFormatId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<File>()
+                .HasOne(f => f.Clip)
+                .WithMany(c => c.Files)
+                .HasForeignKey(f => f.ClipId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<File>()
+                .HasOne(f => f.Source)
+                .WithMany(s => s.Files)
+                .HasForeignKey(f => f.SourceId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<File>()
+                .HasOne(f => f.FileFormat)
+                .WithMany(ff => ff.Files)
+                .HasForeignKey(f => f.FileFormatId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<FileFileCategory>()
+                .HasKey(ffc => new { ffc.FileId, ffc.FileCategoryId });
+            modelBuilder.Entity<FileFileCategory>()
+                .HasOne(ffc => ffc.File)
+                .WithMany(f => f.FileFileCategories)
+                .HasForeignKey(ffc => ffc.FileId);
+            modelBuilder.Entity<FileFileCategory>()
+                .HasOne(ffc => ffc.FileCategory)
+                .WithMany(fc => fc.FileFileCategories)
+                .HasForeignKey(ffc => ffc.FileCategoryId);
 #if DEBUG
+            modelBuilder.Entity<FileCategory>().HasData(
+                new FileCategory() { FileCategoryId = 1, FileCategoryName = "Original"},
+                new FileCategory() { FileCategoryId = 2, FileCategoryName = "Split" },
+                new FileCategory() { FileCategoryId = 3, FileCategoryName = "Converted" },
+                new FileCategory() { FileCategoryId = 4, FileCategoryName = "Public" }
+            );
+
+            modelBuilder.Entity<FileFormat>().HasData(
+                new FileFormat() { FileFormatId = 1, FileFormatName = "mp4" },
+                new FileFormat() { FileFormatId = 2, FileFormatName = "avi" },
+                new FileFormat() { FileFormatId = 3, FileFormatName = "mov" }
+            );
+
             modelBuilder.Entity<Collection>().HasData(
                 new Collection() {CollectionId = 1, CollectionName = "Baby Moments"},
                 new Collection() {CollectionId = 2, CollectionName = "Birthday"},
