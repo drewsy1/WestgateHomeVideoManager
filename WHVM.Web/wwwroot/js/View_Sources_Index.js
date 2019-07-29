@@ -60,4 +60,28 @@ dateTimePickerMaxText.change(function (e) {
 
 sourceFormatFilterInputs.change(
     toggleFilterButtons
-);//#endregion
+);
+
+$(".uk-search-input").keyup(function(event){
+    var filterName = $(event.target).attr('data-filter-name');
+    var filterGridId = $(event.target).attr('data-filter-group');
+    var filterGrid = $('#'+filterGridId);
+    
+    if ( $(event.target).val() == "" )
+    {
+        filterGrid.attr( 'uk-filter-control', 'filter: ['+filterName+']; group: '+filterName );
+    }
+
+    else
+    {
+        filterGrid.attr( 'uk-filter-control', 'filter: ['+filterName+'*=\'' + $(event.target).val() + '\']; group: '+filterName );
+    }
+
+    
+    filterGrid.click();
+})
+
+$(".uk-search-input").siblings('a').click(function(event){
+    $(".uk-search-input").keyup();
+})
+//#endregion

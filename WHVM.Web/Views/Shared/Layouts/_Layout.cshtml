@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@(ViewContext.RouteData.Values["controller"] + " - " + ViewContext.RouteData.Values["action"] + " | " + Startup.Configuration.GetSection("SiteVariables:SiteName").Value)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/css/uikit.min.css" />
     <link rel="stylesheet" type="text/css" href="~/css/main.css" />
 </head>
 
@@ -13,49 +14,52 @@
 }
 
 <body style="overflow-y: scroll">
-    <header class="navbar navbar-expand-md navbar-dark bg-primary whvm-navbar ">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@(Startup.Configuration.GetSection("SiteVariables:SiteName").Value)</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <i class="mi mi-GlobalNavigationButton"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarMain">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Sources" asp-action="Index">Sources</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Clips" asp-action="Index">Clips</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                </li>
-            </ul>
-        </div>
-    </header>
-    <div class="container-fluid">
-        <partial name="_CookieConsentPartial" />
-        @RenderBody()
-    </div>
-    
-    
-<environment names="Development">
-    <script src="~/js/main.js"></script>
-</environment>
-<environment names="Staging,Production">
-    <script src="~/js/main.js" asp-append-version="true"></script>
-</environment>
-@*<script src="~/js/View_Layout_Global.js" defer></script>*@
+    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+        <nav class="uk-navbar-container" uk-navbar id="navbar-main">
+            <div class="uk-navbar-left uk-text-truncate">
+                <a class="uk-navbar-item uk-logo" asp-area="" asp-controller="Home" asp-action="Index">@(Startup.Configuration.GetSection("SiteVariables:SiteName").Value)</a>
+            </div>
+            <div class="uk-navbar-right">
+                <ul class="uk-navbar-nav uk-visible@m">
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Sources" asp-action="Index">Sources</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Clips" asp-action="Index">Clips</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+                </ul>
 
-<script>
+            </div>
+            <a class="uk-navbar-toggle uk-hidden@m uk-icon uk-navbar-toggle-icon" uk-navbar-toggle-icon="" href="#offcanvas" uk-toggle=""></a>
+        </nav>
+    </div>
+
+    <partial name="_CookieConsentPartial" />
+    @RenderBody()
+
+
+    <environment names="Development">
+        <script src="~/js/main.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/js/main.js" asp-append-version="true"></script>
+    </environment>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit-icons.min.js"></script>
+    @*<script src="~/js/View_Layout_Global.js" defer></script>*@
+
+    <script>
     //Render the token in a property readable from your client JavaScript
     var antiforgeryToken = @Json.Serialize(antiforgeryRequestToken);
-</script>
+    </script>
 
-@if (IsSectionDefined("LayoutScripts"))
+    @if (IsSectionDefined("LayoutScripts"))
     {
         await RenderSectionAsync("LayoutScripts").ConfigureAwait(false);
     }

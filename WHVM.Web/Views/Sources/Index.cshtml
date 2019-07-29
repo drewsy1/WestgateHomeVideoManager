@@ -13,8 +13,21 @@
 }
 
 @section SidebarContent{
-    <div>
-        <!--#region Filter - Radio - SourcesFormat - Sources-->
+    <div uk-grid class="uk-grid-collapse uk-child-width-1-1">
+        <div class="uk-flex uk-flex-nowrap uk-flex-wrap-stretch uk-child-width-1-5">
+            <div uk-filter-control="filter: [data-source-format-id]; group: data-source-format-id"><button class="uk-button uk-button-default uk-padding-remove-horizontal uk-width-expand">All</button></div>
+            @foreach (var sourceFormat in (List<SourceFormat>)ViewData["AllSourceFormats"])
+            {
+                <div uk-filter-control="filter: [data-source-format-id='@(@sourceFormat.SourceFormatId)']; group: data-source-format-id"><button class="uk-button uk-button-default uk-padding-remove-horizontal uk-width-expand uk-text-truncate">@(sourceFormat.SourceFormatName)</button></div>
+            }
+        </div>
+        
+        <form class="uk-inline uk-margin uk-search uk-search-default">
+            <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: close" onclick="$('#filter-source-name-search').val('')"></a>
+            <input class="uk-search-input" type="search" id="filter-source-name-search" data-filter-name="data-source-name" data-filter-group="filter-source-grid" placeholder="Search...">
+        </form>
+    </div>
+        @*<!--#region Filter - Radio - SourcesFormat - Sources-->
         <div class="btn-group btn-group-toggle btn-group-sm col-12 px-0 py-1" id="sourceFormat-tag-filter-group">
             <label class="btn btn-secondary active px-1" id="sourceFormat-tag-filter-default-btn">
                 <input class=""
@@ -108,98 +121,62 @@
                 </div>
             </div>
         </div>
-        <!--#endregion-->
+        <!--#endregion-->*@
+    }
 
-    </div>
-}
+    @section Body{
+        @*<div data-jplist-group="sources" style="overflow: auto">*@
+        <div class="uk-grid uk-width-expand uk-padding-small uk-grid-small uk-child-width-1-1 js-filter" id="filter-source-grid" uk-grid>
+            @foreach (var item in Model)
+            {
+                int itemClipCount = item.Clips.Count();
+                string sourceDates = "";
+                sourceDates += item.SourceDateStart.HasValue ? ((DateTime)item.SourceDateStart).ToString("s") + " " : "";
+                sourceDates += item.SourceDateEnd.HasValue ? ((DateTime)item.SourceDateEnd).ToString("s") + " " : "";
 
-@section Body{
-    <div data-jplist-group="sources" style="overflow: auto">
-        @foreach (var item in Model)
-        {
-            int itemClipCount = item.Clips.Count();
-            <a asp-action="Details" asp-controller="Sources" asp-route-id="@item.SourceId" class="card" data-jplist-item style="text-decoration:none">
-                <span class="sourceDate" style="display: none">@(Html.DisplayFor(modelItem => item.SourceDateStart))</span>
-                <span class="sourceDate" style="display: none">@(Html.DisplayFor(modelItem => item.SourceDateEnd))</span>
-                <span class="sourceFormat" style="display: none">@(Html.DisplayFor(modelItem => item.SourceFormat.SourceFormatName))</span>
-                <span class="sourceClipsCount" style="display: none">@(Html.DisplayFor(modelItem => itemClipCount))</span>
-                <div class="row no-gutters">
-                    <div class="col-3 col-lg-2 col-xl-1">
-                        <img src="~/images/@(item.SourceFormat.SourceFormatName)_logo.svg" class="img-fluid p-2 p-md-3" alt="@(item.SourceFormat.SourceFormatName)">
-                    </div>
-                    <div class="col-9 col-lg-10 col-xl-11">
-                        <div class="card-body pl-0 pr-2 py-2 pl-md-0 pr-md-3 py-md-3">
-                            <h3 class="card-title text-truncate sourceName">
-                                @(Html.DisplayFor(modelItem => item.SourceName))
-                            </h3>
-                            <p class="card-text">
-                                <span class="badge badge-info align-self-center mr-1 ">@(item.SourceFormat.SourceFormatName)</span>
-                                @{
-                                    
-                                    switch (itemClipCount)
-                                        {
-                                            case 0:
-                                            <span class="badge badge-danger align-self-center mr-1 ">0 clips</span>
-                                            break;
-                                        case 1:
-                                            <span class="badge badge-secondary align-self-center mr-1 ">1 clip</span>
-                                            break;
-                                        default:
-                                            <span class="badge badge-secondary align-self-center mr-1 ">@itemClipCount clips</span>
-                                            break;
-                                    } }
-
-                                @{if (item.SourceDateStart != null)
-                                    {
-                                        <span class="badge badge-secondary align-self-center mr-1 ">Start Date: @(Html.DisplayFor(modelItem => item.SourceDateStart))</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-danger align-self-center mr-1 ">No start date!</span>
-                                    }
-                                }
-
-                                @{if (item.SourceDateEnd != null)
-                                    {
-                                        <span class="badge badge-secondary align-self-center mr-1 ">End Date: @(Html.DisplayFor(modelItem => item.SourceDateEnd))</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-danger align-self-center mr-1 ">No end date!</span>
-                                    }
-                                }
-
-                                @{if (item.SourceDateCreated != null)
-                                    {
-                                        <span class="badge badge-secondary align-self-center mr-1 ">Date Created: @(Html.DisplayFor(modelItem => item.SourceDateCreated))</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-danger align-self-center mr-1 ">No date created!</span>
-                                    }
-                                }
-
-                                @{if (item.SourceDateImported != null)
-                                    {
-                                        <span class="badge badge-secondary align-self-center mr-1 ">Date Imported: @(Html.DisplayFor(modelItem => item.SourceDateImported))</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-danger align-self-center mr-1 ">No date imported!</span>
-                                    }
-                                }
-
-
-                            </p>
+                <div class="uk-card uk-card-small uk-card-hover uk-card-default "
+                     data-source-name="@(item.SourceName)"
+                     data-source-id="@(item.SourceId)"
+                     data-source-date="@sourceDates"
+                     data-source-format-id="@(item.SourceFormat.SourceFormatId)"
+                     data-source-clip-count="@itemClipCount">
+                    @*<div class="uk-card-media-left">
+                        <img src="~/images/@(item.SourceFormat.SourceFormatName)_logo.svg" uk-cover alt="@(item.SourceFormat.SourceFormatName)">
+                        <canvas width="100" height="100"></canvas>
+                    </div>*@
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">
+                            @(Html.DisplayFor(modelItem => item.SourceName)) <span class="uk-label">@itemClipCount clips</span>
+                        </h3>
+                        <div class="uk-column-1-2@xs uk-column-1-3@s uk-column-1-4@m uk-column-1-5@l uk-column-1-6@xl">
+                            <dl>
+                                <dt>Format</dt>
+                                <dd>@(item.SourceFormat.SourceFormatName)</dd>
+                            </dl>
+                            <dl>
+                                <dt>Start Date</dt>
+                                <dd>@(item.SourceDateStart.HasValue ? item.SourceDateStart.ToString() : "No start date!")</dd>
+                            </dl>
+                            <dl>
+                                <dt>End Date</dt>
+                                <dd>@(item.SourceDateEnd.HasValue ? item.SourceDateEnd.ToString() : "No end date!")</dd>
+                            </dl>
+                            <dl>
+                                <dt>Date Created</dt>
+                                <dd>@(item.SourceDateCreated.HasValue ? item.SourceDateCreated.ToString() : "No date created!")</dd>
+                            </dl>
+                            <dl>
+                                <dt>Date Imported</dt>
+                                <dd>@(item.SourceDateImported.HasValue ? item.SourceDateImported.ToString() : "No date imported!")</dd>
+                            </dl>
                         </div>
                     </div>
                 </div>
-            </a>
-        }
-    </div>
-}
+            }
+        </div>
+    }
 
-@section Scripts
+    @section Scripts
 {
-    <script type="text/javascript" src="~/js/View_Sources_Index.js" defer></script>
-}
+        <script type="text/javascript" src="~/js/View_Sources_Index.js" defer></script>
+    }
