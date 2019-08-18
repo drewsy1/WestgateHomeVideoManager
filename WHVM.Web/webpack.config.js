@@ -50,15 +50,15 @@ module.exports = [{
                 }]
             },
             {
-                test: /uikit(-icons)?\.js$/,
+                test: /uikit(?:-icons)?(?:\.min)?\.js$/,
                 use: [{
                     loader: 'file-loader',
                     options: {
                         name: '[name].[ext]',
-                        outputPath: 'js/'    // where the fonts will go
+                        outputPath: 'js/'
                     }
                 }]
-            },
+            }
         ]
     },
     resolve: {

@@ -6,11 +6,19 @@
    "configurations": [
        {
            "type": "chrome",
+           "request": "launch",
+           "name": "Launch Chrome",
+           "url": "http://localhost:5000",
+           "webRoot": "${workspaceFolder}/wwwroot"
+       },
+       {
+           "type": "chrome",
            "request": "attach",
            "name": "Attach to Chrome",
            "port": 9222,
            "webRoot": "${workspaceFolder}/wwwroot"
        },
+
         {
             "name": ".NET Core Launch (web)",
             "type": "coreclr",

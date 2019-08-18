@@ -8748,10 +8748,18 @@
                         var selectorValue = parseInt(selectorArray[1]);
 
                         children.forEach(function (el) {
-                            var childSelector = el.getAttribute(selectorArray[0]);
-                            var childSelVal = parseInt(childSelector);
+                            var childSelector = el.getAttribute(selectorArray[0]).trim().split(/\s/gi);
+                            childSelector.forEach(function(value,index,array){
+                                array[index] = parseInt(value);
+                            });
+                            var childSelectorMax = childSelector.reduce(function(a,b){
+                                return Math.max(a,b);
+                            });
+                            var childSelectorMin = childSelector.reduce(function(a,b){
+                                return Math.min(a,b);
+                            });
 
-                            var compareSelectors = selector.match(/\<\=/gi) ? childSelVal <= selectorValue : childSelVal >= selectorValue;
+                            var compareSelectors = selector.match(/\<\=/gi) !== null ? childSelectorMin <= selectorValue : childSelectorMax >= selectorValue;
 
                             return css(el, 'display', selector && !compareSelectors ? 'none' : '')
                         });

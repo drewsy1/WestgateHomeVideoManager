@@ -1,7 +1,7 @@
 ﻿@model WHVM.Database.Models.Clip
 
 @{
-    Layout = "Layouts/_Layout_Sidebar_Details";
+    Layout = "Layouts/_Layout_Sidebar";
     ViewData["SidebarTitle"] = Html.Raw("<a asp-action=\"Details\" asp-controller=\"Sources\" asp-route-id=\"" + Model.SourceId + "\" id=\"source-details\">" + Model.Source.SourceName + "</a>");
     ViewData["BodyTitle"] = Model.ClipName;
     ViewData["Title"] = ViewContext.RouteData.Values["controller"];
@@ -12,9 +12,6 @@
 
 }
 
-@section SidebarTitle{
-    <a asp-action="Details" asp-controller="Sources" asp-route-id="@Model.SourceId" id="source-details">@Model.Source.SourceName</a>
-}
 @section Body{
 
     <div>

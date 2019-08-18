@@ -49,7 +49,10 @@ function toggleFilterButtons(filterButtonPressed) {
 }
 //#endregion
 
-//#region Page Event Listeners
+
+
+/*
+ //#region Page Event Listeners
 dateTimePickerMinText.change(function (e) {
     instantValidation($(e.currentTarget));
 });
@@ -63,46 +66,48 @@ sourceFormatFilterInputs.change(
 );
 
 $("#filter-source-name-search").keyup(function(event){
-    var filterName = $(event.target).attr('data-filter-name');
-    var filterGridId = $(event.target).attr('data-filter-group');
-    var filterGrid = $('#'+filterGridId);
+    var filterName = $(event.target).attr("data-filter-name");
+    var filterGridId = $(event.target).attr("data-filter-group");
+    var filterGrid = $("#"+filterGridId);
     
     if ( $(event.target).val() == "" )
     {
-        filterGrid.attr( 'uk-filter-control', 'filter: ['+filterName+']; group: '+filterName );
+        filterGrid.attr( "uk-filter-control", "filter: ["+filterName+"]; group: "+filterName );
     }
 
     else
     {
-        filterGrid.attr( 'uk-filter-control', 'filter: ['+filterName+'*=\'' + $(event.target).val() + '\']; group: '+filterName );
+        filterGrid.attr( "uk-filter-control", "filter: ["+filterName+"*='" + $(event.target).val() + "']; group: "+filterName );
     }
 
     
     filterGrid.click();
 })
 
-$("#filter-source-name-search").siblings('a').click(function(){
+$("#filter-source-name-search").siblings("a").click(function(){
     $("#filter-source-name-search").keyup();
 })
 
 $(".uk-input[type=date]").change(function(event){
-    var filterName = $(event.target).attr('data-filter-name');
-    var filterOperator = $(event.target).attr('data-filter-operator');
-    var filterGridId = $(event.target).attr('data-filter-group');
-    var filterGrid = $('#'+filterGridId);
+    var filterId = $(event.target).attr("id")
+    var filterName = $(event.target).attr("data-filter-name");
+    var filterOperator = $(event.target).attr("data-filter-operator");
+    var filterGridId = $(event.target).attr("data-filter-group");
+    var filterGrid = $("#"+filterGridId);
     
-    if ( $(event.target).val() == "" )
+    if ( $(event.target).val() === "" )
     {
-        filterGrid.attr( 'uk-filter-control', 'filter: ['+filterName+']; group: '+filterName );
+        filterGrid.attr( "uk-filter-control", `filter: [${filterName}]; group: ${filterName}` );
     }
 
     else
     {
         let filterData = Date.parse($(event.target).val()).valueOf();
-        filterGrid.attr( 'uk-filter-control', 'filter: ['+filterName+filterOperator + filterData + ']; group: '+filterName );
+        filterGrid.attr( "uk-filter-control", "filter: ["+filterName+filterOperator + filterData + "]; group: "+filterName );
     }
 
     
     filterGrid.click();
 })
 //#endregion
+*/

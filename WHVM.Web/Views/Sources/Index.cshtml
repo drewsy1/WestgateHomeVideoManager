@@ -1,4 +1,5 @@
 ﻿@using System.Globalization
+@using Castle.Core.Internal
 @using WHVM.Web.Helpers
 @model IEnumerable<Source>
 
@@ -17,11 +18,11 @@
     <h2 class="uk-heading-line uk-text-center"><span>@ViewData["SidebarTitle"]</span></h2>
     <div>
         <div uk-grid class="uk-grid-collapse uk-child-width-1-1">
-            <div class="uk-flex uk-flex-nowrap uk-flex-wrap-stretch uk-child-width-1-5">
-                <div uk-filter-control="filter: [data-source-format-id]; group: data-source-format-id"><button class="uk-button uk-button-default uk-padding-remove-horizontal uk-width-expand">All</button></div>
+            <div class="uk-flex uk-flex-nowrap uk-flex-wrap-stretch uk-child-width-1-5 js-fafi-toggle-group" data-fantafilter-group="sourcesGroup" data-fantafilter-comparer="value" data-fantafilter-operator="===" data-fantafilter-selector="source-format-id">
+                <button class="uk-button uk-button-default uk-padding-remove-horizontal uk-width-expand" value="">All</button>
                 @foreach (var sourceFormat in (List<SourceFormat>)ViewData["AllSourceFormats"])
                 {
-                    <div uk-filter-control="filter: [data-source-format-id='@(@sourceFormat.SourceFormatId)']; group: data-source-format-id"><button class="uk-button uk-button-default uk-padding-remove-horizontal uk-width-expand uk-text-truncate">@(sourceFormat.SourceFormatName)</button></div>
+                    <button class="uk-button uk-button-default uk-padding-remove-horizontal uk-width-expand uk-text-truncate" value="@(sourceFormat.SourceFormatId)">@(sourceFormat.SourceFormatName)</button>
                 }
             </div>
 
@@ -34,7 +35,7 @@
                 <div>
                     <label class="uk-form-label" for="filter-source-date-start">Start Date</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" type="date" id="filter-source-date-start" data-filter-name="data-source-date-start" data-filter-group="filter-source-grid" data-filter-operator=">=" placeholder="Start date...">
+                        <input class="uk-input" type="date" id="filter-source-date-start" data-filter-name="data-source-dates" data-filter-group="filter-source-grid" data-filter-operator=">=" placeholder="Start date...">
                     </div>
                 </div>
             </form>
@@ -43,7 +44,7 @@
                 <div>
                     <label class="uk-form-label" for="filter-source-date-end">End Date</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" type="date" id="filter-source-date-end" data-filter-name="data-source-date-end" data-filter-group="filter-source-grid" data-filter-operator="<=" placeholder="End date...">
+                        <input class="uk-input" type="date" id="filter-source-date-end" data-filter-name="data-source-dates" data-filter-group="filter-source-grid" data-filter-operator="<=" placeholder="End date...">
                     </div>
                 </div>
             </form>
@@ -53,21 +54,21 @@
 
 @section Body{
     @*<div data-jplist-group="sources" style="overflow: auto">*@
-    <div class="uk-grid uk-width-expand uk-padding-small uk-grid-small uk-child-width-1-1 js-filter" id="filter-source-grid" uk-grid>
+    <div class="uk-grid uk-width-expand uk-padding-small uk-grid-small uk-child-width-1-1 js-fafi-parent" id="filter-source-grid" uk-grid data-fantafilter-group="sourcesGroup">
         @foreach (var item in Model)
         {
             int itemClipCount = item.Clips.Count();
-            string sourceDates = "";
-            sourceDates += item.SourceDateStart.HasValue ? ((DateTime)item.SourceDateStart).ToString("O") + " " : "";
-            sourceDates += item.SourceDateEnd.HasValue ? ((DateTime)item.SourceDateEnd).ToString("O") + " " : "";
-
-            <div class="uk-card uk-card-small uk-card-hover uk-card-default "
-                 data-source-name="@(item.SourceName)"
-                 data-source-id="@(item.SourceId)"
-                 data-source-date-start="@(item.SourceDateStart.HasValue ? ((DateTime)item.SourceDateStart).Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds.ToString(CultureInfo.InvariantCulture) : "")"
-                 data-source-date-end="@(item.SourceDateEnd.HasValue ? ((DateTime)item.SourceDateEnd).Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds.ToString(CultureInfo.InvariantCulture) : "")"
-                 data-source-format-id="@(item.SourceFormat.SourceFormatId)"
-                 data-source-clip-count="@itemClipCount">
+            string[] sourceDates = new string[2] {
+                item.SourceDateStart?.ToString("s"),
+                item.SourceDateEnd?.ToString("s")
+            };
+            sourceDates = sourceDates.Where(date => !date.IsNullOrEmpty()).ToArray();
+            <div class="uk-card uk-card-small uk-card-hover uk-card-default js-fafi-item"
+                 data-fantafilter-source-name="@(item.SourceName)"
+                 data-fantafilter-source-id="@(item.SourceId)"
+                 data-fantafilter-source-dates="@(string.Join(';', sourceDates))"
+                 data-fantafilter-source-format-id="@(item.SourceFormat.SourceFormatId)"
+                 data-fantafilter-source-clip-count="@itemClipCount">
                 @*<div class="uk-card-media-left">
                         <img src="~/images/@(item.SourceFormat.SourceFormatName)_logo.svg" uk-cover alt="@(item.SourceFormat.SourceFormatName)">
                         <canvas width="100" height="100"></canvas>
@@ -106,5 +107,10 @@
 
 @section Scripts
 {
+    <script type="text/javascript" defer>
+        window.onload = () => {
+            const fantaFilterCurrent = fantaFilter.init();
+        };
+    </script>
     <script type="text/javascript" src="~/js/View_Sources_Index.js" defer></script>
 }
