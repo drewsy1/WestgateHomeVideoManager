@@ -1,6 +1,6 @@
 {
-  "name": "client-app",
-  "version": "0.0.0",
+  "name": "westgate-home-video-manager",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
