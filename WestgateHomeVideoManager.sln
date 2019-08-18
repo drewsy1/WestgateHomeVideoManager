@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WHVM.Web", "WHVM.Web\WHVM.Web.csproj", "{3585B5D0-5D3F-4876-8ADA-70E6E0E957B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WHVM.Web.Old", "WHVM.Web.Old\WHVM.Web.Old.csproj", "{3585B5D0-5D3F-4876-8ADA-70E6E0E957B7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WHVM.Database", "WHVM.Database\WHVM.Database.csproj", "{A4AE1BF0-F352-4271-A662-7793C2D4A222}"
 EndProject
