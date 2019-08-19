@@ -22,11 +22,11 @@ namespace WHVM.Database
                 .Build();
             var optionsBuilder = new DbContextOptionsBuilder<HomeVideoDBContext>();
             string connectionString = configuration.GetConnectionString("DatabaseConnection");
-			optionsBuilder.UseLazyLoadingProxies();
+            optionsBuilder.UseLazyLoadingProxies();
 #if DEBUG
             optionsBuilder.UseSqlite("Data Source=HomeVideoDB.db");
 #else
-			optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseSqlServer(connectionString);
 #endif
             return new HomeVideoDBContext(optionsBuilder.Options);
         }

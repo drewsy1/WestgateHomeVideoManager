@@ -39,10 +39,9 @@ namespace WHVM.WebAPI
             {
                 options.UseLazyLoadingProxies(false);
 #if DEBUG
-                string sqlFile = Path.GetFullPath("../../../../WHVM.Database/HomeVideoDB.db");
-                options.UseSqlite("Data Source="+ sqlFile);
+                options.UseSqlite("Data Source=HomeVideoDB.db");
 #else
-			options.UseSqlServer(connectionString);
+            options.UseSqlServer(connectionString);
 #endif
             });
     }

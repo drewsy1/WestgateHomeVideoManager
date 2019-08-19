@@ -1,11 +1,7 @@
-using System;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.AspNetCore.Hosting;
-using Xunit;
 using System.Net.Http;
-using System.Net;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore;
 
 namespace WHVM.WebAPI.Tests
 {
@@ -13,7 +9,7 @@ namespace WHVM.WebAPI.Tests
     {
         private readonly HttpClient _client;
 
-        public WebAPITests()
+        protected WebAPITests()
         {
             var webHost = Program.CreateWebHostBuilder(new string[0])
                 .UseEnvironment("Development");
