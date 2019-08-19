@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WHVM.Database.Models;
@@ -10,22 +9,19 @@ using WHVM.Database.Models;
 namespace WHVM.Database.Migrations
 {
     [DbContext(typeof(HomeVideoDBContext))]
-    [Migration("20190729020454_RemovedClipFilePath")]
-    partial class RemovedClipFilePath
+    [Migration("20190819030142_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
             modelBuilder.Entity("WHVM.Database.Models.Clip", b =>
                 {
                     b.Property<int>("ClipId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("ClipCameraOperatorId");
 
@@ -5876,8 +5872,7 @@ namespace WHVM.Database.Migrations
             modelBuilder.Entity("WHVM.Database.Models.Collection", b =>
                 {
                     b.Property<int>("CollectionId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("CollectionName");
 
@@ -6008,11 +6003,114 @@ namespace WHVM.Database.Migrations
                         });
                 });
 
+            modelBuilder.Entity("WHVM.Database.Models.File", b =>
+                {
+                    b.Property<int>("FileId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("ClipId");
+
+                    b.Property<int>("FileFormatId");
+
+                    b.Property<string>("FileName");
+
+                    b.Property<string>("FileNotes");
+
+                    b.Property<string>("FilePath");
+
+                    b.Property<int?>("SourceId");
+
+                    b.HasKey("FileId");
+
+                    b.HasIndex("ClipId");
+
+                    b.HasIndex("FileFormatId");
+
+                    b.HasIndex("SourceId");
+
+                    b.ToTable("Files");
+                });
+
+            modelBuilder.Entity("WHVM.Database.Models.FileCategory", b =>
+                {
+                    b.Property<int>("FileCategoryId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("FileCategoryName");
+
+                    b.HasKey("FileCategoryId");
+
+                    b.ToTable("FileCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            FileCategoryId = 1,
+                            FileCategoryName = "Original"
+                        },
+                        new
+                        {
+                            FileCategoryId = 2,
+                            FileCategoryName = "Split"
+                        },
+                        new
+                        {
+                            FileCategoryId = 3,
+                            FileCategoryName = "Converted"
+                        },
+                        new
+                        {
+                            FileCategoryId = 4,
+                            FileCategoryName = "Public"
+                        });
+                });
+
+            modelBuilder.Entity("WHVM.Database.Models.FileFileCategory", b =>
+                {
+                    b.Property<int>("FileId");
+
+                    b.Property<int>("FileCategoryId");
+
+                    b.HasKey("FileId", "FileCategoryId");
+
+                    b.HasIndex("FileCategoryId");
+
+                    b.ToTable("FileFileCategories");
+                });
+
+            modelBuilder.Entity("WHVM.Database.Models.FileFormat", b =>
+                {
+                    b.Property<int>("FileFormatId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("FileFormatName");
+
+                    b.HasKey("FileFormatId");
+
+                    b.ToTable("FileFormats");
+
+                    b.HasData(
+                        new
+                        {
+                            FileFormatId = 1,
+                            FileFormatName = "mp4"
+                        },
+                        new
+                        {
+                            FileFormatId = 2,
+                            FileFormatName = "avi"
+                        },
+                        new
+                        {
+                            FileFormatId = 3,
+                            FileFormatName = "mov"
+                        });
+                });
+
             modelBuilder.Entity("WHVM.Database.Models.Person", b =>
                 {
                     b.Property<int>("PersonId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("PersonName");
 
@@ -6086,8 +6184,7 @@ namespace WHVM.Database.Migrations
             modelBuilder.Entity("WHVM.Database.Models.Source", b =>
                 {
                     b.Property<int>("SourceId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("SourceDateCreated");
 
@@ -6279,8 +6376,7 @@ namespace WHVM.Database.Migrations
             modelBuilder.Entity("WHVM.Database.Models.SourceFormat", b =>
                 {
                     b.Property<int>("SourceFormatId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("SourceFormatLogoPath");
 
@@ -6355,6 +6451,37 @@ namespace WHVM.Database.Migrations
                     b.HasOne("WHVM.Database.Models.Person", "Person")
                         .WithMany("ClipPersons")
                         .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("WHVM.Database.Models.File", b =>
+                {
+                    b.HasOne("WHVM.Database.Models.Clip", "Clip")
+                        .WithMany("Files")
+                        .HasForeignKey("ClipId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("WHVM.Database.Models.FileFormat", "FileFormat")
+                        .WithMany("Files")
+                        .HasForeignKey("FileFormatId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("WHVM.Database.Models.Source", "Source")
+                        .WithMany("Files")
+                        .HasForeignKey("SourceId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("WHVM.Database.Models.FileFileCategory", b =>
+                {
+                    b.HasOne("WHVM.Database.Models.FileCategory", "FileCategory")
+                        .WithMany("FileFileCategories")
+                        .HasForeignKey("FileCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("WHVM.Database.Models.File", "File")
+                        .WithMany("FileFileCategories")
+                        .HasForeignKey("FileId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

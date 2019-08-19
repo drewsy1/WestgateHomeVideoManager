@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,10 +36,15 @@ namespace WHVM.WebAPI
             );
 
             services.AddDbContext<HomeVideoDBContext>(options =>
-                options
-                    .UseLazyLoadingProxies(false)
-                    .UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
-        }
+            {
+                options.UseLazyLoadingProxies(false);
+#if DEBUG
+                options.UseSqlite("Data Source=HomeVideoDB.db");
+#else
+			options.UseSqlServer(connectionString);
+#endif
+            });
+    }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -48,14 +54,14 @@ namespace WHVM.WebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                mediaStoragePath = Path.Join(Directory.GetParent(Directory.GetCurrentDirectory()).FullName,
-                    "MediaStorage_Dev");
+                mediaStoragePath = Directory.CreateDirectory(Path.Join(Directory.GetParent(Directory.GetCurrentDirectory()).FullName,
+                    "MediaStorage_Dev")).FullName;
             }
             else
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-                mediaStoragePath = Path.GetFullPath(Configuration.GetValue<string>("SiteVariables:MediaStorePath"));
+                //app.UseHsts();
+                mediaStoragePath = Directory.CreateDirectory(Path.GetFullPath(Configuration.GetValue<string>("SiteVariables:MediaStorePath"))).FullName;
             }
 
             app.UseFileServer(new FileServerOptions
@@ -65,7 +71,7 @@ namespace WHVM.WebAPI
                 EnableDirectoryBrowsing = true
             });
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

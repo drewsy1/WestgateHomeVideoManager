@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
@@ -21,10 +22,12 @@ namespace WHVM.Database
                 .Build();
             var optionsBuilder = new DbContextOptionsBuilder<HomeVideoDBContext>();
             string connectionString = configuration.GetConnectionString("DatabaseConnection");
-            optionsBuilder
-                .UseLazyLoadingProxies()
-                .UseSqlServer(connectionString);
-
+			optionsBuilder.UseLazyLoadingProxies();
+#if DEBUG
+            optionsBuilder.UseSqlite("Data Source=HomeVideoDB.db");
+#else
+			optionsBuilder.UseSqlServer(connectionString);
+#endif
             return new HomeVideoDBContext(optionsBuilder.Options);
         }
     }

@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WHVM.Database.Models;
 
@@ -15,15 +14,12 @@ namespace WHVM.Database.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
             modelBuilder.Entity("WHVM.Database.Models.Clip", b =>
                 {
                     b.Property<int>("ClipId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("ClipCameraOperatorId");
 
@@ -5874,8 +5870,7 @@ namespace WHVM.Database.Migrations
             modelBuilder.Entity("WHVM.Database.Models.Collection", b =>
                 {
                     b.Property<int>("CollectionId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("CollectionName");
 
@@ -6009,8 +6004,7 @@ namespace WHVM.Database.Migrations
             modelBuilder.Entity("WHVM.Database.Models.File", b =>
                 {
                     b.Property<int>("FileId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("ClipId");
 
@@ -6038,8 +6032,7 @@ namespace WHVM.Database.Migrations
             modelBuilder.Entity("WHVM.Database.Models.FileCategory", b =>
                 {
                     b.Property<int>("FileCategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("FileCategoryName");
 
@@ -6086,8 +6079,7 @@ namespace WHVM.Database.Migrations
             modelBuilder.Entity("WHVM.Database.Models.FileFormat", b =>
                 {
                     b.Property<int>("FileFormatId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("FileFormatName");
 
@@ -6116,8 +6108,7 @@ namespace WHVM.Database.Migrations
             modelBuilder.Entity("WHVM.Database.Models.Person", b =>
                 {
                     b.Property<int>("PersonId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("PersonName");
 
@@ -6191,8 +6182,7 @@ namespace WHVM.Database.Migrations
             modelBuilder.Entity("WHVM.Database.Models.Source", b =>
                 {
                     b.Property<int>("SourceId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("SourceDateCreated");
 
@@ -6384,8 +6374,7 @@ namespace WHVM.Database.Migrations
             modelBuilder.Entity("WHVM.Database.Models.SourceFormat", b =>
                 {
                     b.Property<int>("SourceFormatId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("SourceFormatLogoPath");
 

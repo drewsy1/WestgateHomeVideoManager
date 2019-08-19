@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace WHVM.Database.Models
 {
-    public partial class HomeVideoDBContext : DbContext
+    public class HomeVideoDBContext : DbContext
     {
         public HomeVideoDBContext(DbContextOptions<HomeVideoDBContext> options)
             : base(options)
