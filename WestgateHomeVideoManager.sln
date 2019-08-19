@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WHVM.Web", "WHVM.Web\WHVM.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WHVM.WebAPI", "WHVM.WebAPI\WHVM.WebAPI.csproj", "{7CAAE0EE-2067-4E8A-803E-27A8F87CEA2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WHVM.WebAPI.Tests", "WHVM.WebAPI.Tests\WHVM.WebAPI.Tests.csproj", "{16D500EA-D4F4-447A-847B-7790639A2DDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{7CAAE0EE-2067-4E8A-803E-27A8F87CEA2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CAAE0EE-2067-4E8A-803E-27A8F87CEA2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CAAE0EE-2067-4E8A-803E-27A8F87CEA2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16D500EA-D4F4-447A-847B-7790639A2DDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16D500EA-D4F4-447A-847B-7790639A2DDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16D500EA-D4F4-447A-847B-7790639A2DDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16D500EA-D4F4-447A-847B-7790639A2DDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
