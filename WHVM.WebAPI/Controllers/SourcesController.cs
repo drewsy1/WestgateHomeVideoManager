@@ -24,14 +24,20 @@ namespace WHVM.WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Source>>> GetSources()
         {
-            return await _context.Sources.ToListAsync();
+            List<Source> sourcesList = await _context.Sources
+                .Include(source => source.Clips)
+                .Include(source => source.SourceFormat)
+                .ToListAsync();
+            return sourcesList;
         }
 
         // GET: api/Sources/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Source>> GetSource(int id)
         {
-            var source = await _context.Sources.FindAsync(id);
+            var source = await _context.Sources
+                .Include(s => s.Clips)
+                .Include(s => s.SourceFormat).FirstAsync(s => s.SourceId == id);
 
             if (source == null)
             {
@@ -78,7 +84,7 @@ namespace WHVM.WebAPI.Controllers
             _context.Sources.Add(source);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSource", new { id = source.SourceId }, source);
+            return CreatedAtAction("GetSource", new {id = source.SourceId}, source);
         }
 
         // DELETE: api/Sources/5
