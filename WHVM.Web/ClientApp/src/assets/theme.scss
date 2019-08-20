@@ -1,0 +1,34 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+// define 3 theme color
+// mat-palette accepts $palette-name, main, lighter and darker variants
+$whvm-theme-primary: mat-palette($mat-indigo, 700, 300, 900);
+$whvm-theme-accent: mat-palette($mat-light-blue);
+$whvm-theme-warn: mat-palette($mat-deep-orange, A200);
+
+// create theme (use mat-dark-theme for themes with dark backgrounds)
+$whvm-theme-Light: mat-light-theme(
+    $whvm-theme-primary,
+    $whvm-theme-accent,
+    $whvm-theme-warn
+);
+
+$whvm-theme-Dark: mat-dark-theme(
+    $whvm-theme-primary,
+    $whvm-theme-accent,
+    $whvm-theme-warn
+);
+
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+$dark-warn:    mat-palette($mat-deep-orange);
+$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+.whvm-theme-Light {
+    @include angular-material-theme($whvm-theme-Light);
+}
+
+.whvm-theme-Dark {
+    @include angular-material-theme($dark-theme);
+}
