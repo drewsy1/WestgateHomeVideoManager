@@ -17,15 +17,17 @@ namespace WHVM.Database
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
 #if DEBUG
-                .AddJsonFile("appsettings.Development.json", optional:true)
+                .AddJsonFile("appsettings.Development.json", optional: true)
 #endif
                 .Build();
             var optionsBuilder = new DbContextOptionsBuilder<HomeVideoDBContext>();
-            string connectionString = configuration.GetConnectionString("DatabaseConnection");
+
             optionsBuilder.UseLazyLoadingProxies();
 #if DEBUG
+
             optionsBuilder.UseSqlite("Data Source=HomeVideoDB.db");
 #else
+            string connectionString = configuration.GetConnectionString("DatabaseConnection");
             optionsBuilder.UseSqlServer(connectionString);
 #endif
             return new HomeVideoDBContext(optionsBuilder.Options);

@@ -1,10 +1,13 @@
+using System.IO;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WHVM.Database.Models;
 
 namespace WHVM.Web
 {
@@ -20,7 +23,22 @@ namespace WHVM.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            string homeVideoDBLocation = Path.Join(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                "HomeVideoDB.db");
+            services.AddDbContext<HomeVideoDBContext>(options =>
+            {
+                options.UseLazyLoadingProxies(false);
+#if DEBUG
+                options.UseSqlite("Data Source=" + homeVideoDBLocation);
+#else
+                options.UseSqlServer(connectionString);
+#endif
+            });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(
+                options => options.SerializerSettings.ReferenceLoopHandling =
+                    Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
