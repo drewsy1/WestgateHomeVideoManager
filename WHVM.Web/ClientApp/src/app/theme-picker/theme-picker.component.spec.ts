@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
+import { ThemePickerComponent } from './theme-picker.component';
 
-describe('HomeComponent', () => {
-    let component: HomeComponent;
-    let fixture: ComponentFixture<HomeComponent>;
+describe('ThemePickerComponent', () => {
+    let component: ThemePickerComponent;
+    let fixture: ComponentFixture<ThemePickerComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [HomeComponent]
+            declarations: [ThemePickerComponent]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(HomeComponent);
+        fixture = TestBed.createComponent(ThemePickerComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

@@ -16,13 +16,13 @@ describe('AppComponent', () => {
         TestBed.configureTestingModule({
             declarations: [AppComponent],
             imports: [
-            NoopAnimationsModule,
-            LayoutModule,
-            MatButtonModule,
-            MatIconModule,
-            MatListModule,
-            MatSidenavModule,
-            MatToolbarModule,
+                NoopAnimationsModule,
+                LayoutModule,
+                MatButtonModule,
+                MatIconModule,
+                MatListModule,
+                MatSidenavModule,
+                MatToolbarModule
             ]
         }).compileComponents();
     }));
@@ -31,7 +31,7 @@ describe('AppComponent', () => {
         fixture = TestBed.createComponent(AppComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-      });
+    });
 
     it('should compile', () => {
         expect(component).toBeTruthy();
@@ -42,9 +42,11 @@ describe('AppComponent', () => {
         expect(app.title).toEqual('ClientApp');
     });
 
-    it('should render title in a span tag', () => {
+    it('should render siteTitle in a span tag', () => {
         fixture.detectChanges();
         const compiled = fixture.debugElement.nativeElement;
-        expect(compiled.getElementById('title').textContent).toContain('ClientApp');
+        expect(compiled.getElementById('siteTitle').textContent).toContain(
+            'ClientApp'
+        );
     });
 });
