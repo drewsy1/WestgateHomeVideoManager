@@ -17,7 +17,6 @@ import { NavBaseComponent } from './nav-base/nav-base.component';
 import { HomeComponent } from './home/home.component';
 import { ThemePickerComponent } from './nav-base/theme-picker/theme-picker.component';
 import { ThemePickerMobileComponent } from './nav-base/theme-picker/theme-picker-mobile/theme-picker-mobile.component';
-import { SourcesComponent } from './sources/sources.component';
 import { LibraryComponent } from './library/library.component';
 import { CookieManagerService } from './cookie-manager.service';
 import { ThemeService } from './theme.service';
@@ -29,7 +28,6 @@ import { ThemeService } from './theme.service';
         HomeComponent,
         ThemePickerComponent,
         ThemePickerMobileComponent,
-        SourcesComponent,
         LibraryComponent
     ],
     providers: [
