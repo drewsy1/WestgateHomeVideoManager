@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ThemeService } from '../theme.service';
+import { ThemeService } from '../../theme.service';
 
 @Component({
     selector: 'app-theme-picker',
@@ -7,20 +7,20 @@ import { ThemeService } from '../theme.service';
     styleUrls: ['./theme-picker.component.scss']
 })
 export class ThemePickerComponent implements OnInit {
-    private _currentTheme: string = 'whvm-theme-Light';
+    private currentTheme = 'whvm-theme-Light';
 
     constructor(private themeService: ThemeService) {
-        themeService.themeChanged$.subscribe(theme => {
-            this._currentTheme = theme;
+      themeService.themeChanged$.subscribe(theme => {
+            this.currentTheme = theme;
         });
     }
 
     toggleTheme() {
-        this._currentTheme =
-            this._currentTheme == 'whvm-theme-Light'
+        this.currentTheme =
+            this.currentTheme === 'whvm-theme-Light'
                 ? 'whvm-theme-Dark'
                 : 'whvm-theme-Light';
-        this.changeTheme(this._currentTheme);
+        this.changeTheme(this.currentTheme);
     }
 
     changeTheme(theme: string) {

@@ -1,7 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { map, share } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+
+interface SiteSection {
+    name: string;
+    link: string;
+}
 
 @Component({
     selector: 'app-nav-base',
@@ -11,13 +16,11 @@ import { map, share } from 'rxjs/operators';
 export class NavBaseComponent {
     @Input() siteTitle: string;
 
+    siteSections: SiteSection[] = [{ name: 'Sources', link: 'Sources' }];
+
     isHandset$: Observable<boolean> = this.breakpointObserver
         .observe(Breakpoints.Handset)
-        .pipe(
-            map(result => result.matches),
-            share()
-        );
+        .pipe(map(result => result.matches));
 
-    constructor(private breakpointObserver: BreakpointObserver) {
-    }
+    constructor(private breakpointObserver: BreakpointObserver) {}
 }

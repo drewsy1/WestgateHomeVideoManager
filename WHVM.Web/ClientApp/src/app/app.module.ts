@@ -14,14 +14,16 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NavBaseComponent } from './nav-base/nav-base.component';
 import { HomeComponent } from './home/home.component';
-import { ThemePickerComponent } from './theme-picker/theme-picker.component';
+import { ThemePickerComponent } from './nav-base/theme-picker/theme-picker.component';
+import { ThemePickerMobileComponent } from './nav-base/theme-picker/theme-picker-mobile/theme-picker-mobile.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavBaseComponent,
         HomeComponent,
-        ThemePickerComponent
+        ThemePickerComponent,
+        ThemePickerMobileComponent
     ],
     providers: [],
     imports: [

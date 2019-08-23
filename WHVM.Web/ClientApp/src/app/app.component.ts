@@ -12,21 +12,6 @@ import { ThemeService } from './theme.service';
     providers: [ThemeService]
 })
 export class AppComponent implements OnInit {
-    siteTitle = 'Westgate Home Video Manager';
-
-    @HostBinding('class') componentCssClass;
-
-    onSetTheme(theme) {
-        this.overlayContainer.getContainerElement().classList.add(theme);
-        this.componentCssClass = `${theme} mat-app-background`;
-    }
-
-    isHandset$: Observable<boolean> = this.breakpointObserver
-        .observe(Breakpoints.Handset)
-        .pipe(
-            map(result => result.matches),
-            share()
-        );
 
     constructor(
         private breakpointObserver: BreakpointObserver,
@@ -36,6 +21,21 @@ export class AppComponent implements OnInit {
         themeService.themeChanged$.subscribe(theme => {
             this.onSetTheme(theme);
         });
+    }
+    siteTitle = 'Westgate Home Video Manager';
+
+    @HostBinding('class') componentCssClass;
+
+    isHandset$: Observable<boolean> = this.breakpointObserver
+        .observe(Breakpoints.Handset)
+        .pipe(
+            map(result => result.matches),
+            share()
+        );
+
+    onSetTheme(theme) {
+        this.overlayContainer.getContainerElement().classList.add(theme);
+        this.componentCssClass = `${theme} mat-app-background`;
     }
 
     ngOnInit(): void {

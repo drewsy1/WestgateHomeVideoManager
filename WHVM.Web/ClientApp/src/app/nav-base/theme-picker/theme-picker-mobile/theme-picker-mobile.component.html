@@ -1,0 +1,17 @@
+<a
+  mat-list-item
+  href="#"
+  (click)="toggleTheme()"
+  aria-haspopup="true"
+  matTooltip="Switch to {{ currentTheme.match('Dark') ? 'Light' : 'Dark'}} theme"
+>
+
+  <mat-icon
+    matListIcon
+    class="mat-icon material-icons mat-icon-no-color"
+    role="img"
+    aria-hidden="true"
+  >format_color_fill</mat-icon
+  >
+  <p>Switch Theme</p>
+</a>

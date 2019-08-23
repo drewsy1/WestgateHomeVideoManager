@@ -13,7 +13,7 @@
 .mat-toolbar.mat-primary {
     position: sticky;
     top: 0;
-    z-index: 2;
+    z-index: 1;
     padding: 0;
     left: 0;
     right: 0;
@@ -29,4 +29,18 @@
 
 .flex-spacer {
     flex-grow: 1;
+}
+
+.title-text {
+    display: inline-flex;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.mat-toolbar-single-row {
+    height: auto;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
 }
