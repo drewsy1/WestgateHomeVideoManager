@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CookieService } from 'ngx-cookie-service';
 
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -16,6 +17,10 @@ import { NavBaseComponent } from './nav-base/nav-base.component';
 import { HomeComponent } from './home/home.component';
 import { ThemePickerComponent } from './nav-base/theme-picker/theme-picker.component';
 import { ThemePickerMobileComponent } from './nav-base/theme-picker/theme-picker-mobile/theme-picker-mobile.component';
+import { SourcesComponent } from './sources/sources.component';
+import { LibraryComponent } from './library/library.component';
+import { CookieManagerService } from './cookie-manager.service';
+import { ThemeService } from './theme.service';
 
 @NgModule({
     declarations: [
@@ -23,9 +28,15 @@ import { ThemePickerMobileComponent } from './nav-base/theme-picker/theme-picker
         NavBaseComponent,
         HomeComponent,
         ThemePickerComponent,
-        ThemePickerMobileComponent
+        ThemePickerMobileComponent,
+        SourcesComponent,
+        LibraryComponent
     ],
-    providers: [],
+    providers: [
+        CookieService,
+        CookieManagerService,
+        ThemeService
+    ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,

@@ -16,7 +16,7 @@ interface SiteSection {
 export class NavBaseComponent {
     @Input() siteTitle: string;
 
-    siteSections: SiteSection[] = [{ name: 'Sources', link: 'Sources' }];
+    siteSections: SiteSection[] = [{ name: 'Library', link: 'library' }];
 
     isHandset$: Observable<boolean> = this.breakpointObserver
         .observe(Breakpoints.Handset)

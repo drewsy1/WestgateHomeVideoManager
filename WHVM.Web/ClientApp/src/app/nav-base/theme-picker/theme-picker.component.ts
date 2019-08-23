@@ -7,10 +7,10 @@ import { ThemeService } from '../../theme.service';
     styleUrls: ['./theme-picker.component.scss']
 })
 export class ThemePickerComponent implements OnInit {
-    private currentTheme = 'whvm-theme-Light';
+    private currentTheme = '';
 
     constructor(private themeService: ThemeService) {
-      themeService.themeChanged$.subscribe(theme => {
+        themeService.themeChanged$.subscribe(theme => {
             this.currentTheme = theme;
         });
     }

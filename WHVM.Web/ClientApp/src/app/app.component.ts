@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
         themeService.themeChanged$.subscribe(theme => {
             this.onSetTheme(theme);
         });
+        themeService.setFromCookieTheme();
     }
     siteTitle = 'Westgate Home Video Manager';
 
@@ -39,6 +40,5 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.componentCssClass = 'mat-app-background';
     }
 }
