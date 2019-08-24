@@ -1,7 +1,5 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, share } from 'rxjs/operators';
+import { Component, HostBinding } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { ThemeService } from './theme.service';
 
@@ -11,34 +9,19 @@ import { ThemeService } from './theme.service';
     styleUrls: ['./app.component.scss'],
     providers: [ThemeService]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
+    siteTitle = 'Westgate Home Video Manager';
+
+    @HostBinding('class') componentCssClass;
 
     constructor(
         private breakpointObserver: BreakpointObserver,
         private overlayContainer: OverlayContainer,
         private themeService: ThemeService
     ) {
+        themeService.changeTheme(themeService.getCookieTheme());
         themeService.themeChanged$.subscribe(theme => {
-            this.onSetTheme(theme);
+            this.componentCssClass = `${theme} mat-app-background`;
         });
-        themeService.setFromCookieTheme();
-    }
-    siteTitle = 'Westgate Home Video Manager';
-
-    @HostBinding('class') componentCssClass;
-
-    isHandset$: Observable<boolean> = this.breakpointObserver
-        .observe(Breakpoints.Handset)
-        .pipe(
-            map(result => result.matches),
-            share()
-        );
-
-    onSetTheme(theme) {
-        this.overlayContainer.getContainerElement().classList.add(theme);
-        this.componentCssClass = `${theme} mat-app-background`;
-    }
-
-    ngOnInit(): void {
     }
 }

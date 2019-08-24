@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { IsHandsetService } from '../is-handset.service';
 
 interface SiteSection {
     name: string;
@@ -18,9 +16,9 @@ export class NavBaseComponent {
 
     siteSections: SiteSection[] = [{ name: 'Library', link: 'library' }];
 
-    isHandset$: Observable<boolean> = this.breakpointObserver
-        .observe(Breakpoints.Handset)
-        .pipe(map(result => result.matches));
+    private isHandset;
 
-    constructor(private breakpointObserver: BreakpointObserver) {}
+    constructor(private isHandsetService: IsHandsetService) {
+        isHandsetService.isHandset$.subscribe(ih => (this.isHandset = ih));
+    }
 }

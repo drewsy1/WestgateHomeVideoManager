@@ -20,6 +20,7 @@ import { ThemePickerMobileComponent } from './nav-base/theme-picker/theme-picker
 import { LibraryComponent } from './library/library.component';
 import { CookieManagerService } from './cookie-manager.service';
 import { ThemeService } from './theme.service';
+import { IsHandsetService } from './is-handset.service';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { ThemeService } from './theme.service';
     providers: [
         CookieService,
         CookieManagerService,
+        IsHandsetService,
         ThemeService
     ],
     imports: [

@@ -1,10 +1,10 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav
-        #drawer
-        class="sidenav"
-        fixedInViewport
-        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      #drawer
+      class="sidenav"
+      fixedInViewport
+      [attr.role]="isHandset ? 'dialog' : 'navigation'"
+      [mode]="isHandset ? 'over' : 'side'"
     >
         <mat-toolbar style="padding-top:8px">Menu</mat-toolbar>
         <mat-nav-list *ngFor="let siteSection of siteSections">
@@ -18,7 +18,7 @@
         <mat-toolbar color="primary" class="mat-elevation-z6">
             <nav
                 class="app-navbar-header"
-                *ngIf="isHandset$ | async; else elseBlock"
+                *ngIf="isHandset; else elseBlock"
             >
                 <button
                     type="button"

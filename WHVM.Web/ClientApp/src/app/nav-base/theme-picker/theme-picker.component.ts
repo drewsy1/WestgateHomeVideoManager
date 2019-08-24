@@ -10,6 +10,7 @@ export class ThemePickerComponent implements OnInit {
     private currentTheme = '';
 
     constructor(private themeService: ThemeService) {
+        this.currentTheme = themeService.getCookieTheme();
         themeService.themeChanged$.subscribe(theme => {
             this.currentTheme = theme;
         });
@@ -20,11 +21,7 @@ export class ThemePickerComponent implements OnInit {
             this.currentTheme === 'whvm-theme-Light'
                 ? 'whvm-theme-Dark'
                 : 'whvm-theme-Light';
-        this.changeTheme(this.currentTheme);
-    }
-
-    changeTheme(theme: string) {
-        this.themeService.changeTheme(theme);
+        this.themeService.changeTheme(this.currentTheme);
     }
 
     ngOnInit() {

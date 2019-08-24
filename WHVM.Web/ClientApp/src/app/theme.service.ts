@@ -6,6 +6,7 @@ import { CookieManagerService } from './cookie-manager.service';
     providedIn: 'root'
 })
 export class ThemeService {
+    public defaultTheme = 'whvm-theme-Light';
     private currentTheme = new Subject<string>();
 
     themeChanged$ = this.currentTheme.asObservable();
@@ -15,8 +16,8 @@ export class ThemeService {
         this.currentTheme.next(theme);
     }
 
-    setFromCookieTheme() {
-        this.changeTheme(this.cookieManagerService.displayTheme || 'whvm-theme-Light');
+    getCookieTheme() {
+        return this.cookieManagerService.displayTheme || this.defaultTheme;
     }
 
     constructor(private cookieManagerService: CookieManagerService) {
