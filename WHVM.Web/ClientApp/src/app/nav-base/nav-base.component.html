@@ -1,25 +1,24 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav
-      #drawer
-      class="sidenav"
-      fixedInViewport
-      [attr.role]="isHandset ? 'dialog' : 'navigation'"
-      [mode]="isHandset ? 'over' : 'side'"
+        #drawer
+        class="sidenav"
+        fixedInViewport
+        [attr.role]="isHandset ? 'dialog' : 'navigation'"
+        [mode]="isHandset ? 'over' : 'side'"
     >
         <mat-toolbar style="padding-top:8px">Menu</mat-toolbar>
         <mat-nav-list *ngFor="let siteSection of siteSections">
-            <a mat-list-item href="#" routerLink="{{siteSection.link}}">{{siteSection.name}}</a>
+            <a mat-list-item href="#" routerLink="{{ siteSection.link }}">{{
+                siteSection.name
+            }}</a>
         </mat-nav-list>
-      <mat-nav-list style="bottom:0; position: absolute">
-        <app-theme-picker-mobile></app-theme-picker-mobile>
-      </mat-nav-list>
+        <mat-nav-list style="bottom:0; position: absolute">
+            <app-theme-picker-mobile></app-theme-picker-mobile>
+        </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
         <mat-toolbar color="primary" class="mat-elevation-z6">
-            <nav
-                class="app-navbar-header"
-                *ngIf="isHandset; else elseBlock"
-            >
+            <nav class="app-navbar-header" *ngIf="isHandset; else elseBlock">
                 <button
                     type="button"
                     aria-label="Toggle sidenav"
@@ -57,14 +56,24 @@
                             <span>{{ siteTitle }}</span>
                         </div>
                     </a>
-                  <div *ngFor="let siteSection of siteSections">
-                    <a class="mat-button" aria-disabled="false" href="#" routerLink="{{siteSection.link}}">{{siteSection.name}}</a>
-                  </div>
+                    <div *ngFor="let siteSection of siteSections">
+                        <a
+                            class="mat-button"
+                            aria-disabled="false"
+                            href="#"
+                            routerLink="{{ siteSection.link }}"
+                            >{{ siteSection.name }}</a
+                        >
+                    </div>
                     <div class="flex-spacer"></div>
                     <app-theme-picker></app-theme-picker>
                 </nav>
             </ng-template>
         </mat-toolbar>
+        <app-page-header
+            *ngIf="pageTitle !== undefined"
+            [pageTitle]="pageTitle"
+        ></app-page-header>
         <ng-content></ng-content>
     </mat-sidenav-content>
 </mat-sidenav-container>

@@ -10,6 +10,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,9 +19,12 @@ import { HomeComponent } from './home/home.component';
 import { ThemePickerComponent } from './nav-base/theme-picker/theme-picker.component';
 import { ThemePickerMobileComponent } from './nav-base/theme-picker/theme-picker-mobile/theme-picker-mobile.component';
 import { LibraryComponent } from './library/library.component';
+import { PageHeaderComponent } from './nav-base/page-header/page-header.component';
 import { CookieManagerService } from './cookie-manager.service';
-import { ThemeService } from './theme.service';
 import { IsHandsetService } from './is-handset.service';
+import { ThemeService } from './theme.service';
+import { PageDataService} from './page-data.service';
+
 
 @NgModule({
     declarations: [
@@ -29,12 +33,14 @@ import { IsHandsetService } from './is-handset.service';
         HomeComponent,
         ThemePickerComponent,
         ThemePickerMobileComponent,
-        LibraryComponent
+        LibraryComponent,
+        PageHeaderComponent
     ],
     providers: [
         CookieService,
         CookieManagerService,
         IsHandsetService,
+        PageDataService,
         ThemeService
     ],
     imports: [
@@ -47,7 +53,8 @@ import { IsHandsetService } from './is-handset.service';
         MatIconModule,
         MatListModule,
         AppRoutingModule,
-        MatTooltipModule
+        MatTooltipModule,
+        FlexLayoutModule
     ],
     bootstrap: [AppComponent]
 })

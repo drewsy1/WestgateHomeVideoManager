@@ -1,0 +1,28 @@
+@import '../../../../node_modules/@angular/material/theming';
+@import '../../../assets/theme';
+
+@mixin page-header-theme($theme){
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $text: mat-color($primary, default-contrast);
+
+    .component-page-header {
+        display: flex;
+        align-items: center;
+
+        &.library-page-header {
+            padding-left: 2rem;
+            background: mat-color($primary);
+            color: mat-color($primary, default-contrast);
+
+            h1 {
+                font-weight: 300;
+                font-size: 20px;
+                padding: 28px 0;
+                margin:0;
+            }
+        }
+    }
+}
+
+@include page-header-theme($whvm-theme-Light);
