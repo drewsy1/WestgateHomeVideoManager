@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemePickerComponent} from '../theme-picker.component';
-import { ThemeService } from '../../../theme.service';
+import { ThemeService } from '../../../services/theme.service';
 
 @Component({
   selector: 'app-theme-picker-mobile',

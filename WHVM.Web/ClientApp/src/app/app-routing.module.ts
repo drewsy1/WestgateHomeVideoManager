@@ -6,6 +6,11 @@ import { LibraryComponent } from './library/library.component';
 const routes: Routes = [
     {
         path: '',
+        pathMatch: 'full',
+        redirectTo: 'home'
+    },
+    {
+        path: 'home',
         component: HomeComponent
     },
     {
@@ -16,7 +21,10 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [],
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(
+        routes,
+        { enableTracing: true } // <-- debugging purposes only
+    )],
     exports: [RouterModule]
 })
 export class AppRoutingModule {}

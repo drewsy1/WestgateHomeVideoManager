@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {PageDataService} from '../page-data.service';
+import { PageDataService } from '../services/page-data.service';
 
 @Component({
     selector: 'app-home',

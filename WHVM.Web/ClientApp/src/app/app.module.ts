@@ -1,9 +1,19 @@
+// Angular
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { AppRoutingModule } from './app-routing.module';
 
+// Angular Material
 import { LayoutModule } from '@angular/cdk/layout';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -12,19 +22,21 @@ import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+// Components
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
 import { NavBaseComponent } from './nav-base/nav-base.component';
 import { HomeComponent } from './home/home.component';
 import { ThemePickerComponent } from './nav-base/theme-picker/theme-picker.component';
 import { ThemePickerMobileComponent } from './nav-base/theme-picker/theme-picker-mobile/theme-picker-mobile.component';
 import { LibraryComponent } from './library/library.component';
 import { PageHeaderComponent } from './nav-base/page-header/page-header.component';
-import { CookieManagerService } from './cookie-manager.service';
-import { IsHandsetService } from './is-handset.service';
-import { ThemeService } from './theme.service';
-import { PageDataService} from './page-data.service';
 
+// Services
+import { CookieManagerService } from './services/cookie-manager.service';
+import { IsHandsetService } from './services/is-handset.service';
+import { ThemeService } from './services/theme.service';
+import { PageDataService } from './services/page-data.service';
+import { ApiManagerService } from './services/api-manager.service';
 
 @NgModule({
     declarations: [
@@ -41,10 +53,15 @@ import { PageDataService} from './page-data.service';
         CookieManagerService,
         IsHandsetService,
         PageDataService,
-        ThemeService
+        ThemeService,
+        ApiManagerService
     ],
     imports: [
         BrowserModule,
+        HttpClientModule,
+        // environment.production
+        //     ? HttpClientInMemoryWebApiModule.forRoot(InMemHeroService, { delay: 100 }) : [],
+        AppRoutingModule,
         BrowserAnimationsModule,
         LayoutModule,
         MatToolbarModule,
@@ -52,9 +69,14 @@ import { PageDataService} from './page-data.service';
         MatSidenavModule,
         MatIconModule,
         MatListModule,
-        AppRoutingModule,
         MatTooltipModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        MatCardModule,
+        MatTableModule,
+        MatButtonToggleModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule
     ],
     bootstrap: [AppComponent]
 })

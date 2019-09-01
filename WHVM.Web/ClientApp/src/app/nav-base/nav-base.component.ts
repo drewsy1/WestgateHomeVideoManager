@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { IsHandsetService } from '../is-handset.service';
-import { PageDataService } from '../page-data.service';
+import { IsHandsetService } from '../services/is-handset.service';
+import { PageDataService } from '../services/page-data.service';
 
 interface SiteSection {
     name: string;
