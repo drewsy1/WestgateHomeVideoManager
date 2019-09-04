@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Generate" type="js.build_tools.npm" folderName="API Test Server">
+    <package-json value="$PROJECT_DIR$/../server/package.json" />
+    <command value="run" />
+    <scripts>
+      <script value="generate" />
+    </scripts>
+    <node-interpreter value="project" />
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>

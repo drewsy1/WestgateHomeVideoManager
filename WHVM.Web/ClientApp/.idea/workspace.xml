@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4ed1cd46-6ff7-4f9a-9458-4e872302f9e5" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="ClientApp" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Drew Westgate &lt;drew.westgate@outlook.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="ProjectId" id="1PnRUBHMcuma7jZ2rwkRxKnKY7n" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.karma.karma_node_package_dir" value="" />
+    <property name="last_opened_file_path" value="C:/Program Files/PowerShell/6/pwsh.exe" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/node_modules/protractor" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\dreww\AppData\Roaming\npm\node_modules\prettier" />
+    <property name="settings.editor.selected.configurable" value="preferences.externalTools" />
+    <property name="ts.external.directory.path" value="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp\node_modules\typescript\lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp\src\app\services" />
+      <recent name="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp" />
+      <recent name="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp\src\app\library" />
+      <recent name="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp\src\app\nav-base" />
+      <recent name="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp\src\assets\img\icons" />
+    </key>
+  </component>
+  <component name="RestClientSettings">
+    <option name="REQUEST_HISTORY">
+      <list>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:5000/api/sources" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:5000/api/sources" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+      </list>
+    </option>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="npm.Angular CLI Server">
+    <list>
+      <item itemvalue="JavaScript Debug.Angular Application" />
+      <item itemvalue="JavaScript Debug.Angular Application (.NET)" />
+      <item itemvalue="Karma.Tests (ClientApp)" />
+      <item itemvalue="npm.Generate" />
+      <item itemvalue="npm.serve" />
+      <item itemvalue="npm.Angular CLI Server" />
+      <item itemvalue="Protractor.E2E Tests (ClientApp)" />
+    </list>
+  </component>
+  <component name="SshConsoleOptionsProvider">
+    <option name="myEncoding" value="UTF-8" />
+    <option name="myConnectionType" value="NONE" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4ed1cd46-6ff7-4f9a-9458-4e872302f9e5" name="Default Changelist" comment="" />
+      <created>1566507886315</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1566507886315</updated>
+      <workItem from="1566507889557" duration="77000" />
+      <workItem from="1566507982035" duration="11994000" />
+      <workItem from="1566588634493" duration="370000" />
+      <workItem from="1566593182983" duration="2975000" />
+      <workItem from="1566596233056" duration="903000" />
+      <workItem from="1566597157207" duration="745000" />
+      <workItem from="1566597921587" duration="146000" />
+      <workItem from="1566598090743" duration="7824000" />
+      <workItem from="1567114438684" duration="54000" />
+      <workItem from="1567114508854" duration="10357000" />
+      <workItem from="1567290825334" duration="6303000" />
+      <workItem from="1567297160128" duration="2732000" />
+      <workItem from="1567299917429" duration="7625000" />
+      <workItem from="1567307725407" duration="1384000" />
+      <workItem from="1567555410479" duration="18165000" />
+      <workItem from="1567620189412" duration="49000" />
+    </task>
+    <task id="LOCAL-00001" summary="Created CookieManager service. Theme now stored as cookie. Created Library component.">
+      <created>1566603132995</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1566603132996</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Fixed leftover broken import.">
+      <created>1566603764856</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1566603764856</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Moved responsiveness test to separate service">
+      <created>1566605909842</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1566605909842</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Got HTTP requests working. Began work on library page design.">
+      <created>1567309054523</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1567309054523</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/main.js.map" />
+        <option value="$PROJECT_DIR$/src/main.js" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Created CookieManager service. Theme now stored as cookie. Created Library component." />
+    <MESSAGE value="Fixed leftover broken import." />
+    <MESSAGE value="Moved responsiveness test to separate service" />
+    <MESSAGE value="Got HTTP requests working. Began work on library page design." />
+    <option name="LAST_COMMIT_MESSAGE" value="Got HTTP requests working. Began work on library page design." />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+</project>
