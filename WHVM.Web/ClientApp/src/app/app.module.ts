@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -30,6 +30,7 @@ import { ThemePickerComponent } from './nav-base/theme-picker/theme-picker.compo
 import { ThemePickerMobileComponent } from './nav-base/theme-picker/theme-picker-mobile/theme-picker-mobile.component';
 import { LibraryComponent } from './library/library.component';
 import { PageHeaderComponent } from './nav-base/page-header/page-header.component';
+import { LibrarySidebarComponent } from './library/library-sidebar/library-sidebar.component';
 
 // Services
 import { CookieManagerService } from './services/cookie-manager.service';
@@ -37,6 +38,10 @@ import { IsHandsetService } from './services/is-handset.service';
 import { ThemeService } from './services/theme.service';
 import { PageDataService } from './services/page-data.service';
 import { ApiManagerService } from './services/api-manager.service';
+import { SearchFieldComponent } from './components/search-field/search-field.component';
+import { LibraryFilteringService } from './library/library-filtering.service';
+import { ButtonToggleGroupComponent } from './components/button-toggle-group/button-toggle-group.component';
+
 
 @NgModule({
     declarations: [
@@ -46,7 +51,10 @@ import { ApiManagerService } from './services/api-manager.service';
         ThemePickerComponent,
         ThemePickerMobileComponent,
         LibraryComponent,
-        PageHeaderComponent
+        PageHeaderComponent,
+        LibrarySidebarComponent,
+        SearchFieldComponent,
+        ButtonToggleGroupComponent
     ],
     providers: [
         CookieService,
@@ -54,13 +62,12 @@ import { ApiManagerService } from './services/api-manager.service';
         IsHandsetService,
         PageDataService,
         ThemeService,
-        ApiManagerService
+        ApiManagerService,
+        LibraryFilteringService
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
-        // environment.production
-        //     ? HttpClientInMemoryWebApiModule.forRoot(InMemHeroService, { delay: 100 }) : [],
         AppRoutingModule,
         BrowserAnimationsModule,
         LayoutModule,
@@ -76,7 +83,8 @@ import { ApiManagerService } from './services/api-manager.service';
         MatButtonToggleModule,
         MatFormFieldModule,
         MatInputModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FormsModule
     ],
     bootstrap: [AppComponent]
 })

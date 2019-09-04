@@ -3,8 +3,25 @@ import { ThemeService } from '../../services/theme.service';
 
 @Component({
     selector: 'app-theme-picker',
-    templateUrl: './theme-picker.component.html',
-    styleUrls: ['./theme-picker.component.scss']
+    template: `
+        <button
+                class="mat-icon-button"
+                (click)="toggleTheme()"
+                aria-haspopup="true"
+                mat-icon-button
+                matTooltip="Toggle dark theme"
+                tabindex="-1"
+                style="touch-action: none; user-select: none"
+        >
+            <mat-icon
+                    class="mat-icon material-icons mat-icon-no-color"
+                    role="img"
+                    aria-hidden="true"
+            >format_color_fill</mat-icon
+            >
+        </button>
+    `,
+    styles: [':host {padding: 0 16px}']
 })
 export class ThemePickerComponent implements OnInit {
     private currentTheme = '';

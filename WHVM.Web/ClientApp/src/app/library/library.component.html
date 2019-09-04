@@ -1,36 +1,23 @@
-<mat-sidenav-container style="height:100%;">
-    <mat-sidenav mode="side" opened>
-        <div class="sidebar-content" fxLayout="column">
-            <h3>Sources</h3>
-            <mat-divider style="margin-bottom:.5rem"></mat-divider>
+<mat-drawer-container style="height:100%;">
+    <mat-drawer mode="side" opened>
+        <app-library-sidebar></app-library-sidebar>
+    </mat-drawer>
+    <mat-drawer position="end" mode="side">End</mat-drawer>
+    <mat-drawer-content>
+        <section style="margin:1rem">
+            <table>
+                <tr
+                    *ngFor="
+                        let source of this.libraryFilteringService
+                            .sourcesFiltered
+                    "
+                >
+                    <td>{{ source.sourceId }}</td>
+                    <td>{{ source.sourceName }}</td>
+                    <td>{{ source.sourceFormatId }}</td>
+                </tr>
+            </table>
 
-            <mat-form-field>
-                <label>
-                    <input matInput placeholder="Search" type="text" [formControl]="sourceSearch">
-                </label>
-                <button mat-icon-button matSuffix (click)="sourceSearch.reset()" [attr.aria-label]="'Clear search'">
-                    <mat-icon>{{'clear'}}</mat-icon>
-                </button>
-            </mat-form-field>
-
-            <mat-button-toggle-group name="sourceFormat" aria-label="Source Format">
-                <mat-button-toggle value="all" checked>All</mat-button-toggle>
-                <mat-button-toggle value="dvd">DVD</mat-button-toggle>
-                <mat-button-toggle value="hi8">Hi8</mat-button-toggle>
-                <mat-button-toggle value="digital8">Digital8</mat-button-toggle>
-                <mat-button-toggle value="vhs">VHS</mat-button-toggle>
-            </mat-button-toggle-group>
-
-
-        </div>
-    </mat-sidenav>
-    <mat-sidenav position="end" mode="side">End</mat-sidenav>
-    <section style="margin:1rem">
-        <table>
-            <tr *ngFor="let source of sourcesFiltered">
-                <td [innerText]="source.sourceId"></td>
-                <td [innerText]="source.sourceName"></td>
-            </tr>
-        </table>
-        <br/><br/><br/><br/><br/></section>
-</mat-sidenav-container>
+            <br /><br /><br /><br /><br /></section
+    ></mat-drawer-content>
+</mat-drawer-container>

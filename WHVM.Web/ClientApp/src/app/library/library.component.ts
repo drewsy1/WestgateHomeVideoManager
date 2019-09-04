@@ -1,7 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    OnDestroy,
+    ViewChild,
+    AfterViewInit,
+    AfterViewChecked
+} from '@angular/core';
 import { PageDataService } from '../services/page-data.service';
-import { FormControl } from '@angular/forms';
-import { Source } from '../../interfaces/Source';
+import { LibraryFilteringService } from './library-filtering.service';
+import { MatDrawerContainer } from '@angular/material';
+import { SourceFormat } from '../../interfaces/SourceFormat';
 import { ApiManagerService } from '../services/api-manager.service';
 
 @Component({
@@ -10,39 +18,24 @@ import { ApiManagerService } from '../services/api-manager.service';
     styleUrls: ['./library.component.scss']
 })
 export class LibraryComponent implements OnInit, OnDestroy {
-    sourceSearch = new FormControl('');
-    sources: Source[];
-    sourcesFiltered: Source[] = this.sources;
-
-    sourceSearchChanges = this.sourceSearch.valueChanges.subscribe(
-        (newData: string) =>
-            (this.sourcesFiltered =
-                newData === '' || newData === null
-                    ? this.sources
-                    : this.sources.filter(
-                    (hero: Source) =>
-                        !!hero.sourceName
-                            .toLowerCase()
-                            .includes(newData.toLowerCase())
-                    ))
-    );
+    @ViewChild(MatDrawerContainer, { static: false })
+    drawerContainer: MatDrawerContainer;
 
     constructor(
         private pageDataService: PageDataService,
+        private libraryFilteringService: LibraryFilteringService,
         private apiManagerService: ApiManagerService
     ) {
-    }
-
-    fetchData() {
-        this.apiManagerService.getSources().subscribe((data: Source[]) => {
-            this.sources = data;
-            this.sourceSearch.reset();
-        });
+        this.apiManagerService.refreshSources.subscribe(
+            (x) => this.drawerContainer.updateContentMargins()
+        );
     }
 
     ngOnInit() {
         this.pageDataService.changePageTitle('Library');
-        this.fetchData();
+        // this.libraryFilteringService.fetchData();
+        // this.drawerContainer.updateContentMargins();
+
     }
 
     ngOnDestroy(): void {
