@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ed1cd46-6ff7-4f9a-9458-4e872302f9e5" name="Default Changelist" comment="" />
+    <list default="true" id="4ed1cd46-6ff7-4f9a-9458-4e872302f9e5" name="Default Changelist" comment="Got search and filtering working (as a start).">
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Run_NET_Server__macOS_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classes/SourceFormat.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WHVM.API/WHVM.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../WHVM.API/WHVM.API.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/dreww.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/dreww.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Angular_Application___NET_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Angular_Application___NET_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/button-toggle-group/button-toggle-group.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/button-toggle-group/button-toggle-group.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/button-toggle-group/button-toggle-group.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/button-toggle-group/button-toggle-group.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/search-field/search-field.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/search-field/search-field.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library-filtering.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-filtering.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/api-manager.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/api-manager.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/Source.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/ISource.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/SourceFormat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/ISourceFormat.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WHVM.Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../WHVM.Web.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../run-server.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/../run-server.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WestgateHomeVideoManager.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../WestgateHomeVideoManager.sln" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +61,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TypeScript" />
     <property name="javascript.karma.karma_node_package_dir" value="" />
     <property name="last_opened_file_path" value="C:/Program Files/PowerShell/6/pwsh.exe" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -46,9 +71,10 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/node_modules/protractor" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\dreww\AppData\Roaming\npm\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="preferences.externalTools" />
-    <property name="ts.external.directory.path" value="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp\node_modules\typescript\lib" />
+    <property name="prettierjs.PrettierConfiguration.NodeInterpreter" value="project" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="/usr/local/lib/node_modules/prettier" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -119,7 +145,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.Angular CLI Server">
+  <component name="RunManager" selected="JavaScript Debug.Angular Application (.NET)">
     <list>
       <item itemvalue="JavaScript Debug.Angular Application" />
       <item itemvalue="JavaScript Debug.Angular Application (.NET)" />
@@ -128,6 +154,7 @@
       <item itemvalue="npm.serve" />
       <item itemvalue="npm.Angular CLI Server" />
       <item itemvalue="Protractor.E2E Tests (ClientApp)" />
+      <item itemvalue="Shell Script.Run NET Server (macOS)" />
     </list>
   </component>
   <component name="SshConsoleOptionsProvider">
@@ -160,6 +187,9 @@
       <workItem from="1567307725407" duration="1384000" />
       <workItem from="1567555410479" duration="18165000" />
       <workItem from="1567620189412" duration="49000" />
+      <workItem from="1567620324312" duration="15987000" />
+      <workItem from="1567674576392" duration="287000" />
+      <workItem from="1567802121123" duration="8353000" />
     </task>
     <task id="LOCAL-00001" summary="Created CookieManager service. Theme now stored as cookie. Created Library component.">
       <created>1566603132995</created>
@@ -220,7 +250,20 @@
     <MESSAGE value="Fixed leftover broken import." />
     <MESSAGE value="Moved responsiveness test to separate service" />
     <MESSAGE value="Got HTTP requests working. Began work on library page design." />
-    <option name="LAST_COMMIT_MESSAGE" value="Got HTTP requests working. Began work on library page design." />
+    <MESSAGE value="Got search and filtering working (as a start)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Got search and filtering working (as a start)." />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.html</url>
+          <line>3</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

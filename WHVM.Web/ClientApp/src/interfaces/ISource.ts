@@ -1,4 +1,4 @@
-export interface Source {
+export interface ISource {
     sourceId: number;
     sourceName: string;
     sourceDateCreated: string;

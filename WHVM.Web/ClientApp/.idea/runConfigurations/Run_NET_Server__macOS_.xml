@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run NET Server (macOS)" type="ShConfigurationType">
+    <option name="SCRIPT_PATH" value="$PROJECT_DIR$/../run-server.sh" />
+    <option name="SCRIPT_OPTIONS" value="" />
+    <option name="INTERPRETER_PATH" value="/bin/zsh" />
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <method v="2" />
+  </configuration>
+</component>

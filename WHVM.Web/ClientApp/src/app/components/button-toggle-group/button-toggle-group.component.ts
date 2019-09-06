@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 export interface ButtonToggle {
     value: string;
@@ -14,10 +14,12 @@ export interface ButtonToggle {
 export class ButtonToggleGroupComponent implements OnInit {
     @Input() name: string;
     @Input() buttons: ButtonToggle[];
+    @Output() valueChanges: EventEmitter<number> = new EventEmitter<number>();
 
-    value = '';
+    value: number = null;
 
-    constructor() {}
+    constructor() {
+    }
 
     ngOnInit() {
     }

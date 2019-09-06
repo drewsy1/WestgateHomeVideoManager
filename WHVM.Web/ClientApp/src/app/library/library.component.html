@@ -6,6 +6,11 @@
     <mat-drawer-content>
         <section style="margin:1rem">
             <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Format</th>
+                </tr>
                 <tr
                     *ngFor="
                         let source of this.libraryFilteringService
@@ -14,7 +19,7 @@
                 >
                     <td>{{ source.sourceId }}</td>
                     <td>{{ source.sourceName }}</td>
-                    <td>{{ source.sourceFormatId }}</td>
+                    <td>{{ sourceFormatClass.sourceFormatFromId(source.sourceFormatId, this.apiManagerService.sourceFormats).sourceFormatName }}</td>
                 </tr>
             </table>
 

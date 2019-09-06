@@ -1,11 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { SearchFieldComponent } from '../../components/search-field/search-field.component';
-import { Source } from '../../../interfaces/Source';
 import { LibraryFilteringService } from '../library-filtering.service';
 import { ButtonToggle } from '../../components/button-toggle-group/button-toggle-group.component';
-import { SourceFormat } from '../../../interfaces/SourceFormat';
 import { ApiManagerService } from '../../services/api-manager.service';
-import { tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-library-sidebar',
@@ -24,36 +22,38 @@ export class LibrarySidebarComponent implements AfterViewInit, OnInit {
         private libraryFilteringService: LibraryFilteringService,
         private apiManagerService: ApiManagerService
     ) {
-        this.apiManagerService.refreshSourceFormats.subscribe(
-            newSourceFormats =>
-                newSourceFormats.forEach((sourceFormat: SourceFormat) =>
-                    this.sourceFormatButtons.push({
-                        value: sourceFormat.sourceFormatId.toString(),
-                        name: sourceFormat.sourceFormatName
-                    })
-                )
-        );
+        this.apiManagerService.getSourceFormatsSubject
+            .pipe(
+                map(newSourceFormat => ({
+                    value: newSourceFormat.sourceFormatId.toString(),
+                    name: newSourceFormat.sourceFormatName
+                }))
+            )
+            .subscribe(newSourceFormats =>
+                this.sourceFormatButtons.push(newSourceFormats)
+            );
 
-        this.apiManagerService.refreshSources.subscribe(newSources => {
-            libraryFilteringService.sources = newSources;
+        this.apiManagerService.getSourcesSubject.subscribe(() => {
             this.searchField.searchControl.reset();
+        });
+    }
+
+    updateFilter(
+        filterName,
+        filterValue,
+        filterComparer,
+        filterComparisonValue
+    ) {
+        this.libraryFilteringService.updateFilters({
+            name: filterName,
+            value: filterValue,
+            comparer: filterComparer,
+            comparisonValue: filterComparisonValue
         });
     }
 
     ngOnInit(): void {}
 
     ngAfterViewInit(): void {
-        this.searchField.searchControl.valueChanges.subscribe(
-            (newData: string) =>
-                (this.libraryFilteringService.sourcesFiltered =
-                    newData === '' || newData === null
-                        ? this.libraryFilteringService.sources
-                        : this.libraryFilteringService.sources.filter(
-                              (source: Source) =>
-                                  !!source.sourceName
-                                      .toLowerCase()
-                                      .includes(newData.toLowerCase())
-                          ))
-        );
     }
 }
