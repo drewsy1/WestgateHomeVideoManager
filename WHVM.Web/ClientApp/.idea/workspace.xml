@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ed1cd46-6ff7-4f9a-9458-4e872302f9e5" name="Default Changelist" comment="Got search and filtering working (as a start).">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Run_NET_Server__macOS_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/classes/SourceFormat.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../WHVM.API/WHVM.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../WHVM.API/WHVM.API.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/dreww.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/dreww.xml" afterDir="false" />
+    <list default="true" id="4ed1cd46-6ff7-4f9a-9458-4e872302f9e5" name="Default Changelist" comment="Got chips on source cards.">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Run_NET_Server__Windows_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/source-card/source-card.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/source-card/source-card.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/source-card/source-card.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/source-card/source-card.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classes/Source.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interfaces/ICollection.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interfaces/IPerson.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WHVM.API/Controllers/SourcesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../WHVM.API/Controllers/SourcesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WHVM.API/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../WHVM.API/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WHVM.Database/HomeVideoDBContextFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../WHVM.Database/HomeVideoDBContextFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WHVM.Database/Models/Clip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../WHVM.Database/Models/Clip.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WHVM.Database/Models/Collection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../WHVM.Database/Models/Collection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WHVM.Database/Models/Person.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../WHVM.Database/Models/Person.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WHVM.Database/Models/Source.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../WHVM.Database/Models/Source.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Angular_Application___NET_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Angular_Application___NET_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/button-toggle-group/button-toggle-group.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/button-toggle-group/button-toggle-group.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/button-toggle-group/button-toggle-group.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/button-toggle-group/button-toggle-group.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/search-field/search-field.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/search-field/search-field.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library-filtering.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-filtering.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/library/library.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/nav-base/nav-base.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/nav-base/nav-base.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/nav-base/nav-base.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/nav-base/nav-base.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/services/api-manager.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/api-manager.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/Source.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/ISource.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/SourceFormat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/ISourceFormat.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WHVM.Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../WHVM.Web.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/ISource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/ISource.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Controllers/SourcesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Controllers/SourcesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../run-server.bat" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../run-server.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/../run-server.ps1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../WestgateHomeVideoManager.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../WestgateHomeVideoManager.sln" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,18 +73,21 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TypeScript" />
     <property name="javascript.karma.karma_node_package_dir" value="" />
-    <property name="last_opened_file_path" value="C:/Program Files/PowerShell/6/pwsh.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/interfaces" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/node_modules/protractor" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.NodeInterpreter" value="project" />
-    <property name="prettierjs.PrettierConfiguration.Package" value="/usr/local/lib/node_modules/prettier" />
-    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp\node_modules\prettier" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.HTML" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp\src\interfaces" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp\src\app\services" />
       <recent name="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp" />
@@ -145,8 +156,12 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.Angular Application (.NET)">
+  <component name="RunManager" selected="Shell Script.Run NET Server (Windows)">
+    <configuration name="rest-api_1#1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/rest-api_1.http">
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="HTTP Request.rest-api_1#1" />
       <item itemvalue="JavaScript Debug.Angular Application" />
       <item itemvalue="JavaScript Debug.Angular Application (.NET)" />
       <item itemvalue="Karma.Tests (ClientApp)" />
@@ -154,8 +169,14 @@
       <item itemvalue="npm.serve" />
       <item itemvalue="npm.Angular CLI Server" />
       <item itemvalue="Protractor.E2E Tests (ClientApp)" />
+      <item itemvalue="Shell Script.Run NET Server (Windows)" />
       <item itemvalue="Shell Script.Run NET Server (macOS)" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.rest-api_1#1" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SshConsoleOptionsProvider">
     <option name="myEncoding" value="UTF-8" />
@@ -190,6 +211,8 @@
       <workItem from="1567620324312" duration="15987000" />
       <workItem from="1567674576392" duration="287000" />
       <workItem from="1567802121123" duration="8353000" />
+      <workItem from="1567879694756" duration="11435000" />
+      <workItem from="1568135623622" duration="3527000" />
     </task>
     <task id="LOCAL-00001" summary="Created CookieManager service. Theme now stored as cookie. Created Library component.">
       <created>1566603132995</created>
@@ -251,17 +274,18 @@
     <MESSAGE value="Moved responsiveness test to separate service" />
     <MESSAGE value="Got HTTP requests working. Began work on library page design." />
     <MESSAGE value="Got search and filtering working (as a start)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Got search and filtering working (as a start)." />
+    <MESSAGE value="Got chips on source cards." />
+    <option name="LAST_COMMIT_MESSAGE" value="Got chips on source cards." />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.html</url>
-          <line>3</line>
+          <url>file://$PROJECT_DIR$/src/app/components/source-card/source-card.component.ts</url>
+          <line>12</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="55" />
+          <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

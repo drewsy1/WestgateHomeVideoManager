@@ -27,7 +27,7 @@ namespace WHVM.Web
                 "HomeVideoDB.db");
             services.AddDbContext<HomeVideoDBContext>(options =>
             {
-                options.UseLazyLoadingProxies(false);
+                //options.UseLazyLoadingProxies(false);
 #if DEBUG
                 options.UseSqlite("Data Source=" + homeVideoDBLocation);
 #else
@@ -36,9 +36,11 @@ namespace WHVM.Web
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(
-                options => options.SerializerSettings.ReferenceLoopHandling =
-                    Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            );
+                options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling =
+                        Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

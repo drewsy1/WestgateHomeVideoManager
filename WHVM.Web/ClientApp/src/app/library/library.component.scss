@@ -1,0 +1,18 @@
+mat-drawer-container {
+    &.mat-drawer-container {
+        width: 100vw;
+        height: 100vh;
+        background: transparent;
+        position: fixed;
+    }
+
+    & > mat-drawer {
+        width: auto;
+        min-width: 200px !important;
+        z-index: 3;
+    }
+
+    .content {
+        padding: 10px;
+    }
+}

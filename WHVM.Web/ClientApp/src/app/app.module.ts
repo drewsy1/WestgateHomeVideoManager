@@ -41,6 +41,8 @@ import { ApiManagerService } from './services/api-manager.service';
 import { SearchFieldComponent } from './components/search-field/search-field.component';
 import { LibraryFilteringService } from './library/library-filtering.service';
 import { ButtonToggleGroupComponent } from './components/button-toggle-group/button-toggle-group.component';
+import { SourceCardComponent } from './components/source-card/source-card.component';
+import { MatChipsModule } from '@angular/material';
 
 
 @NgModule({
@@ -54,7 +56,8 @@ import { ButtonToggleGroupComponent } from './components/button-toggle-group/but
         PageHeaderComponent,
         LibrarySidebarComponent,
         SearchFieldComponent,
-        ButtonToggleGroupComponent
+        ButtonToggleGroupComponent,
+        SourceCardComponent
     ],
     providers: [
         CookieService,
@@ -84,7 +87,8 @@ import { ButtonToggleGroupComponent } from './components/button-toggle-group/but
         MatFormFieldModule,
         MatInputModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        MatChipsModule
     ],
     bootstrap: [AppComponent]
 })

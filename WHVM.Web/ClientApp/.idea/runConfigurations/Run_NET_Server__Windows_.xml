@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run NET Server (Windows)" type="ShConfigurationType">
+    <option name="SCRIPT_PATH" value="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\run-server.ps1" />
+    <option name="SCRIPT_OPTIONS" value="" />
+    <option name="INTERPRETER_PATH" value="" />
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <method v="2" />
+  </configuration>
+</component>

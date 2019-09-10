@@ -1,28 +1,16 @@
-<mat-drawer-container style="height:100%;">
+<mat-drawer-container>
     <mat-drawer mode="side" opened>
         <app-library-sidebar></app-library-sidebar>
     </mat-drawer>
     <mat-drawer position="end" mode="side">End</mat-drawer>
     <mat-drawer-content>
-        <section style="margin:1rem">
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Format</th>
-                </tr>
-                <tr
-                    *ngFor="
-                        let source of this.libraryFilteringService
-                            .sourcesFiltered
-                    "
-                >
-                    <td>{{ source.sourceId }}</td>
-                    <td>{{ source.sourceName }}</td>
-                    <td>{{ sourceFormatClass.sourceFormatFromId(source.sourceFormatId, this.apiManagerService.sourceFormats).sourceFormatName }}</td>
-                </tr>
-            </table>
-
-            <br /><br /><br /><br /><br /></section
+        <section fxLayout="column" fxLayoutGap="1rem" style="margin:1rem; padding-bottom:56px">
+            <app-source-card
+                *ngFor="
+                    let source of this.libraryFilteringService.sourcesFiltered
+                "
+                [source]="source"
+            ></app-source-card>
+        </section
     ></mat-drawer-content>
 </mat-drawer-container>

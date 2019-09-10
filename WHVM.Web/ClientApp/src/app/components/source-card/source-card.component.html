@@ -1,0 +1,29 @@
+<mat-card>
+    <mat-card-title>{{ source.sourceName }}</mat-card-title>
+    <mat-card-subtitle>{{
+      source.sourceFormat.sourceFormatName
+        }}</mat-card-subtitle>
+    <mat-card-content>
+        <div gdGap="1rem" gdColumns="auto 1fr">
+            <h4 style="margin:4px 0">People:</h4>
+            <mat-chip-list [selectable]="true" [multiple]="true">
+                <mat-chip
+                    *ngFor="let person of source.sourcePersons"
+                    [value]="person.personId"
+                >
+                    {{ person.personName }}
+                </mat-chip>
+            </mat-chip-list>
+            <h4 style="margin:4px 0">Collections:</h4>
+            <mat-chip-list [selectable]="true" [multiple]="true">
+                <mat-chip
+                    *ngFor="let collection of source.sourceCollections"
+                    [value]="collection.collectionId"
+                >
+                    {{ collection.collectionName }}
+                </mat-chip>
+            </mat-chip-list>
+        </div>
+
+    </mat-card-content>
+</mat-card>

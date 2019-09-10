@@ -23,9 +23,11 @@ namespace WHVM.Web.Controllers
         public async Task<ActionResult<IEnumerable<Source>>> GetSources()
         {
             List<Source> sourcesList = await _context.Sources
-                .Include(source => source.Clips)
+                .Include(source => source.Clips).ThenInclude(c => c.ClipPersons).ThenInclude(cp => cp.Person)
+                .Include(source => source.Clips).ThenInclude(c => c.ClipCollections).ThenInclude(cc => cc.Collection)
                 .Include(source => source.SourceFormat)
                 .ToListAsync();
+
             return sourcesList;
         }
 
@@ -34,8 +36,9 @@ namespace WHVM.Web.Controllers
         public async Task<ActionResult<Source>> GetSource(int id)
         {
             var source = await _context.Sources
-                .Include(s => s.Clips)
-                .Include(s => s.SourceFormat).FirstAsync(s => s.SourceId == id);
+                .Include(s => s.Clips).ThenInclude(c => c.ClipPersons).ThenInclude(cp => cp.Person)
+                .Include(s => s.SourceFormat)
+                .FirstAsync(s => s.SourceId == id);
 
             if (source == null)
             {

@@ -22,7 +22,7 @@ namespace WHVM.Database
                 .Build();
             var optionsBuilder = new DbContextOptionsBuilder<HomeVideoDBContext>();
 
-            optionsBuilder.UseLazyLoadingProxies();
+            optionsBuilder.UseLazyLoadingProxies(true);
 #if DEBUG
 
             optionsBuilder.UseSqlite("Data Source=HomeVideoDB.db");

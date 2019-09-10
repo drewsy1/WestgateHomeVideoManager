@@ -1,12 +1,11 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container>
     <mat-sidenav
         #drawer
-        class="sidenav"
         fixedInViewport
         [attr.role]="isHandset ? 'dialog' : 'navigation'"
         [mode]="isHandset ? 'over' : 'side'"
     >
-        <mat-toolbar style="padding-top:8px">Menu</mat-toolbar>
+        <mat-toolbar style="">Menu</mat-toolbar>
         <mat-nav-list *ngFor="let siteSection of siteSections">
             <a mat-list-item href="#" routerLink="{{ siteSection.link }}">{{
                 siteSection.name
@@ -17,8 +16,8 @@
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-        <mat-toolbar color="primary" class="mat-elevation-z6">
-            <nav class="app-navbar-header" *ngIf="isHandset; else elseBlock">
+        <mat-toolbar color="primary" class="mat-elevation-z3">
+            <nav *ngIf="isHandset; else elseBlock">
                 <button
                     type="button"
                     aria-label="Toggle sidenav"
@@ -37,7 +36,7 @@
                 </a>
             </nav>
             <ng-template #elseBlock>
-                <nav class="app-navbar-header">
+                <nav>
                     <a
                         class="mat-button"
                         routerLink="/"
@@ -70,10 +69,10 @@
                 </nav>
             </ng-template>
         </mat-toolbar>
-        <app-page-header
-            *ngIf="pageTitle !== undefined"
-            [pageTitle]="pageTitle"
-        ></app-page-header>
+        <!--        <app-page-header-->
+        <!--            *ngIf="pageTitle !== undefined"-->
+        <!--            [pageTitle]="pageTitle"-->
+        <!--        ></app-page-header>-->
         <ng-content></ng-content>
     </mat-sidenav-content>
 </mat-sidenav-container>

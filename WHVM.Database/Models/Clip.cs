@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using Newtonsoft.Json;
 
 namespace WHVM.Database.Models
 {
@@ -21,10 +24,20 @@ namespace WHVM.Database.Models
         public string ClipName { get; set; }
         public virtual Person ClipCameraOperator { get; set; }
         public virtual Person ClipReviewer { get; set; }
+
+        [JsonIgnore]
         public virtual Source Source { get; set; }
+
+        [JsonIgnore]
         public virtual IEnumerable<ClipCollection> ClipCollections { get; set; }
+
+        [JsonIgnore]
         public virtual IEnumerable<ClipPerson> ClipPersons { get; set; }
         public virtual IEnumerable<File> Files { get; set; }
+
+        [NotMapped] public IEnumerable<object> Persons => ClipPersons?.Select(cp => cp.Person);
+
+        [NotMapped] public IEnumerable<object> Collections => ClipCollections?.Select(cc => cc.Collection);
 
     }
 }

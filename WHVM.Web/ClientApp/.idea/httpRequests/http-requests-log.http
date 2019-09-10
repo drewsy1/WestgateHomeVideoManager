@@ -3,6 +3,24 @@ Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
 
+<> 2019-09-07T023102.200.json
+
+###
+
+GET http://localhost:5000/api/sources
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+<> 2019-09-07T022511.200.json
+
+###
+
+GET http://localhost:5000/api/sources
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
 <> 2019-08-31T102146.200.json
 
 ###

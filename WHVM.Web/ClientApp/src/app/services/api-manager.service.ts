@@ -4,7 +4,6 @@ import { from, Observable, Subject } from 'rxjs';
 import { ISource } from '../../interfaces/ISource';
 import { ISourceFormat } from '../../interfaces/ISourceFormat';
 import { distinctUntilKeyChanged, mergeMap, tap } from 'rxjs/operators';
-import { SourceFormat } from '../../classes/SourceFormat';
 
 @Injectable({
     providedIn: 'root'
@@ -50,10 +49,10 @@ export class ApiManagerService {
         );
     }
 
-    getSourceFormats(): Observable<SourceFormat> {
+    getSourceFormats(): Observable<ISourceFormat> {
         const formatsURL = `${this.apiURL}sourceformats/`;
-        return this.http.get<SourceFormat[]>(formatsURL).pipe(
-            mergeMap((sourceFormatsArray: SourceFormat[]) =>
+        return this.http.get<ISourceFormat[]>(formatsURL).pipe(
+            mergeMap((sourceFormatsArray: ISourceFormat[]) =>
                 from(sourceFormatsArray).pipe(
                     distinctUntilKeyChanged('sourceFormatId'),
                     tap(
@@ -71,4 +70,10 @@ export class ApiManagerService {
             )
         );
     }
+
+    // getSourceFormatFromId(sourceFormatId) {
+    //     return this.sourceFormats.find(
+    //         format => format.sourceFormatId === sourceFormatId
+    //     );
+    // }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Castle.Core.Internal;
 
 namespace WHVM.Database.Models
 {
@@ -24,5 +25,11 @@ namespace WHVM.Database.Models
 
         [NotMapped]
         public DateTime? SourceDateEnd => (DateTime?)Clips.Max(clip => clip.ClipTimeEnd);
+
+        [NotMapped]
+        public IEnumerable<object> SourcePersons => Clips.Where(clip => !clip.Persons.IsNullOrEmpty()).SelectMany(clip => clip.Persons).Distinct();
+
+        [NotMapped]
+        public IEnumerable<object> SourceCollections => Clips.Where(clip => !clip.Collections.IsNullOrEmpty()).SelectMany(clip => clip.Collections).Distinct();
     }
 }

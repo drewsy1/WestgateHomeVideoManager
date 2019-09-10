@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Angular Application (.NET)" type="JavascriptDebugType" engineId="dd90eec4-a323-4a8b-9df3-7aa968ff4b83" uri="http://localhost:5000">
+  <configuration default="false" name="Angular Application (.NET)" type="JavascriptDebugType" uri="http://localhost:5000">
     <method v="2" />
   </configuration>
 </component>
