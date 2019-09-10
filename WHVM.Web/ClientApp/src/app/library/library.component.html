@@ -7,7 +7,7 @@
         <section fxLayout="column" fxLayoutGap="1rem" style="margin:1rem; padding-bottom:56px">
             <app-source-card
                 *ngFor="
-                    let source of this.libraryFilteringService.sourcesFiltered
+                    let source of this.libraryFilteringService.sourcesFiltered | async
                 "
                 [source]="source"
             ></app-source-card>

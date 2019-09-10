@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -7,14 +7,10 @@ import { FormControl } from '@angular/forms';
     styleUrls: ['./search-field.component.scss']
 })
 export class SearchFieldComponent implements OnInit {
-    @Output() valueChanges: EventEmitter<any> = new EventEmitter<any>();
     searchControl = new FormControl('');
+    @Output() valueChanges = this.searchControl.valueChanges;
 
     constructor() {
-        this.searchControl.valueChanges.subscribe(
-            (newData: string) =>
-                this.valueChanges.emit(newData)
-        );
     }
 
     ngOnInit() {

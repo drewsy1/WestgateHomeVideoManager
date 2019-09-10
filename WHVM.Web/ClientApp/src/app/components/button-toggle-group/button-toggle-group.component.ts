@@ -14,9 +14,9 @@ export interface ButtonToggle {
 export class ButtonToggleGroupComponent implements OnInit {
     @Input() name: string;
     @Input() buttons: ButtonToggle[];
-    @Output() valueChanges: EventEmitter<number> = new EventEmitter<number>();
+    @Output() valueChanges: EventEmitter<string> = new EventEmitter<string>();
 
-    value: number = null;
+    value = '';
 
     constructor() {
     }

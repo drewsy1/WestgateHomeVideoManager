@@ -1,13 +1,7 @@
-import {
-    Component,
-    OnInit,
-    OnDestroy,
-    ViewChild
-} from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { PageDataService } from '../services/page-data.service';
 import { LibraryFilteringService } from './library-filtering.service';
 import { MatDrawerContainer } from '@angular/material';
-import { SourceFormat } from '../../classes/SourceFormat';
 import { ApiManagerService } from '../services/api-manager.service';
 
 @Component({
@@ -18,7 +12,6 @@ import { ApiManagerService } from '../services/api-manager.service';
 export class LibraryComponent implements OnInit, OnDestroy {
     @ViewChild(MatDrawerContainer, { static: false })
     drawerContainer: MatDrawerContainer;
-    private sourceFormatClass = SourceFormat;
 
     constructor(
         private pageDataService: PageDataService,
@@ -34,8 +27,6 @@ export class LibraryComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.pageDataService.changePageTitle('Library');
-        // this.libraryFilteringService.fetchData();
-        // this.drawerContainer.updateContentMargins();
     }
 
     ngOnDestroy(): void {
