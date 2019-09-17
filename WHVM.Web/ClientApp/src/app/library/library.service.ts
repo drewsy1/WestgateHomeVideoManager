@@ -4,7 +4,6 @@ import { ApiManagerService } from '../services/api-manager.service';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { delay, map, startWith } from 'rxjs/operators';
 import { intersectionBy } from 'lodash';
-import { ISourceFormat } from '../../interfaces/ISourceFormat';
 
 interface Filter {
     comparer: string;
@@ -24,8 +23,6 @@ const filterOperations = {
     providedIn: 'root'
 })
 export class LibraryService {
-    allSources: ISource[] = [];
-    allSourceFormats: ISourceFormat[] = [];
     sourcesFiltered: Observable<ISource[]>;
 
     filterSourcesSearchSubject: Subject<string> = new Subject<string>();
@@ -34,7 +31,7 @@ export class LibraryService {
         comparisonField: 'sourceName',
         filtered: combineLatest(
             this.filterSourcesSearchSubject.pipe(startWith('')),
-            this.apiManagerService.getSources().pipe(startWith(this.allSources))
+            this.apiManagerService.getSources().pipe(startWith(this.apiManagerService.sources))
         ).pipe(
             map(source =>
                 source[0]
@@ -50,7 +47,7 @@ export class LibraryService {
         comparisonField: 'sourceFormatId',
         filtered: combineLatest(
             this.filterSourcesFormatSubject.pipe(startWith('')),
-            this.apiManagerService.getSources().pipe(startWith(this.allSources))
+            this.apiManagerService.getSources().pipe(startWith(this.apiManagerService.sources))
         ).pipe(
             map(source =>
                 source[0]
@@ -61,7 +58,7 @@ export class LibraryService {
     };
 
     applyFilter(filter: Filter, filterValue?: any) {
-        return this.allSources.filter((source: ISource) =>
+        return this.apiManagerService.sources.filter((source: ISource) =>
             filterOperations[filter.comparer](
                 filterValue,
                 source[filter.comparisonField]
@@ -72,14 +69,6 @@ export class LibraryService {
     getLibraryData() {
         this.apiManagerService.getSources().subscribe();
         this.apiManagerService.getSourceFormats().subscribe();
-
-        this.apiManagerService.getSourcesSubject.subscribe(
-            newSources => (this.allSources = newSources)
-        );
-
-        this.apiManagerService.getSourceFormatsSubject.subscribe(
-            newSourceFormats => (this.allSourceFormats = newSourceFormats)
-        );
 
         this.filterSourcesSearchSubject.next('');
         this.filterSourcesFormatSubject.next('');

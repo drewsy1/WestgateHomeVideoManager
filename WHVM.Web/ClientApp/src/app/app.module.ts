@@ -39,7 +39,6 @@ import { SearchFieldComponent } from './components/search-field/search-field.com
 import { LibrarySidebarComponent } from './library/library-sidebar/library-sidebar.component';
 import { ButtonToggleGroupComponent } from './components/button-toggle-group/button-toggle-group.component';
 import { SourceCardComponent } from './components/source-card/source-card.component';
-import { DatePickerComponent } from './components/date-picker/date-picker.component';
 import { DateRangePickerComponent } from './components/date-range-picker/date-range-picker.component';
 import { FilterButtonGroupComponent } from './library/library-sidebar/filter-button-group/filter-button-group.component';
 // Services
@@ -64,7 +63,6 @@ import { LibraryService } from './library/library.service';
         SearchFieldComponent,
         ButtonToggleGroupComponent,
         SourceCardComponent,
-        DatePickerComponent,
         DateRangePickerComponent,
         FilterButtonGroupComponent
     ],

@@ -15,7 +15,7 @@ export class LibrarySidebarComponent implements AfterViewInit, OnInit {
     private searchField: SearchFieldComponent;
 
     @ViewChild(FilterButtonGroupComponent, { static: false })
-    private sourceFormatFilterButtons: SearchFieldComponent;
+    private sourceFormatFilterButtons: FilterButtonGroupComponent;
 
     filterSourcesSearchSubject: Subject<string> = this.libraryFilteringService
         .filterSourcesSearchSubject;
@@ -23,10 +23,7 @@ export class LibrarySidebarComponent implements AfterViewInit, OnInit {
     filterSourcesFormatSubject: Subject<string> = this.libraryFilteringService
         .filterSourcesFormatSubject;
 
-    constructor(
-        private libraryFilteringService: LibraryService
-    ) {
-
+    constructor(private libraryFilteringService: LibraryService) {
     }
 
     ngOnInit(): void {

@@ -19,9 +19,9 @@ export class AppComponent {
         private overlayContainer: OverlayContainer,
         private themeService: ThemeService
     ) {
-        themeService.changeTheme(themeService.getCookieTheme());
         themeService.themeChanged$.subscribe(theme => {
             this.componentCssClass = `${theme} mat-app-background`;
         });
+        themeService.changeTheme(themeService.getCookieTheme());
     }
 }

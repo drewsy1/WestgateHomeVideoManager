@@ -21,6 +21,7 @@ import { startWith } from 'rxjs/operators';
             ></mat-datepicker-toggle>
             <mat-datepicker #startDatePicker></mat-datepicker>
         </mat-form-field>
+        <br />
         <mat-form-field>
             <label>
                 <input
