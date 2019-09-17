@@ -1,10 +1,10 @@
 <h3>Library</h3>
 <mat-divider style="margin-bottom:.5rem"></mat-divider>
+
+<app-filter-button-group (valueChanges)="filterSourcesFormatSubject.next($event)"></app-filter-button-group>
+
 <app-search-field
     (valueChanges)="filterSourcesSearchSubject.next($event)"
 ></app-search-field>
-<app-button-toggle-group
-    name="sourceFormats"
-    [buttons]="sourceFormatButtons"
-    (valueChanges)="filterSourcesFormatSubject.next($event)"
-></app-button-toggle-group>
+
+<app-date-range-picker></app-date-range-picker>

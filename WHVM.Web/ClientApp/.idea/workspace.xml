@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ed1cd46-6ff7-4f9a-9458-4e872302f9e5" name="Default Changelist" comment="Reworked filtering to use more async/RxJS stuff.">
+    <list default="true" id="4ed1cd46-6ff7-4f9a-9458-4e872302f9e5" name="Default Changelist" comment="Cleaned up initial data loading and some components.">
+      <change afterPath="$PROJECT_DIR$/src/app/components/date-picker/date-picker.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/date-picker/date-picker.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/date-range-picker/date-range-picker.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/date-range-picker/date-range-picker.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/date-range-picker/date-range-picker.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-sidebar/filter-button-group/filter-button-group.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-sidebar/filter-button-group/filter-button-group.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-sidebar/filter-button-group/filter-button-group.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-sidebar/filter-button-group/filter-button-group.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library.guard.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library.guard.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/button-toggle-group/button-toggle-group.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/button-toggle-group/button-toggle-group.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/date-range-picker/date-range-picker.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/button-toggle-group/button-toggle-group.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/button-toggle-group/button-toggle-group.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/search-field/search-field.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/search-field/search-field.component.scss" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/search-field/search-field.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/search-field/search-field.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library-filtering.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-filtering.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library-filtering.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.service.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library-filtering.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/library/library.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/library/library.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/api-manager.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/api-manager.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -138,7 +152,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Shell Script.Run NET Server (Windows)">
+  <component name="RunManager" selected="JavaScript Debug.Angular Application (.NET)">
     <configuration name="rest-api_1#1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/rest-api_1.http">
       <method v="2" />
     </configuration>
@@ -194,7 +208,8 @@
       <workItem from="1567674576392" duration="287000" />
       <workItem from="1567802121123" duration="8353000" />
       <workItem from="1567879694756" duration="11435000" />
-      <workItem from="1568135623622" duration="18979000" />
+      <workItem from="1568135623622" duration="19022000" />
+      <workItem from="1568683074786" duration="22055000" />
     </task>
     <task id="LOCAL-00001" summary="Created CookieManager service. Theme now stored as cookie. Created Library component.">
       <created>1566603132995</created>
@@ -231,7 +246,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568139175847</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Reworked filtering to use more async/RxJS stuff.">
+      <created>1568154652336</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1568154652336</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -265,16 +287,16 @@
     <MESSAGE value="Got search and filtering working (as a start)." />
     <MESSAGE value="Got chips on source cards." />
     <MESSAGE value="Reworked filtering to use more async/RxJS stuff." />
-    <option name="LAST_COMMIT_MESSAGE" value="Reworked filtering to use more async/RxJS stuff." />
+    <MESSAGE value="Cleaned up initial data loading and some components." />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up initial data loading and some components." />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
+        <line-breakpoint type="javascript">
           <url>file://$PROJECT_DIR$/src/app/components/source-card/source-card.component.ts</url>
           <line>12</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
