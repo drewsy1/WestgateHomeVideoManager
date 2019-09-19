@@ -17,7 +17,8 @@ import { ThemeService } from '../../services/theme.service';
                     class="mat-icon material-icons mat-icon-no-color"
                     role="img"
                     aria-hidden="true"
-            >format_color_fill</mat-icon
+            >format_color_fill
+            </mat-icon
             >
         </button>
     `,

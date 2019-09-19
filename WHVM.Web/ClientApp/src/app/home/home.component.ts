@@ -7,13 +7,13 @@ import { PageDataService } from '../services/page-data.service';
     styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-    constructor(private pageDataService: PageDataService) {}
+    constructor(private pageDataService: PageDataService) {
+    }
 
     ngOnInit() {
-        this.pageDataService.changePageTitle('Home');
+        this.pageDataService.setPageTitle('Home');
     }
 
     ngOnDestroy(): void {
-        this.pageDataService.changePageTitle(undefined);
     }
 }

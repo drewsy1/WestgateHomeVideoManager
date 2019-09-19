@@ -2,21 +2,32 @@ import { Injectable } from '@angular/core';
 import { ISource } from '../../interfaces/ISource';
 import { ApiManagerService } from '../services/api-manager.service';
 import { combineLatest, Observable, Subject } from 'rxjs';
-import { delay, map, startWith } from 'rxjs/operators';
+import { map, startWith, tap } from 'rxjs/operators';
 import { intersectionBy } from 'lodash';
-
-interface Filter {
-    comparer: string;
-    comparisonField: string;
-    filtered: Observable<ISource[]>;
-}
+import { IFilter } from '../../interfaces/IFilter';
+import moment from 'moment';
 
 const filterOperations = {
     match: (value, comparisonValue) =>
         !!comparisonValue.toLowerCase().match(value.toLowerCase()),
     '===': (value, comparisonValue) =>
-        (typeof comparisonValue === 'number' ? parseInt(value, 10) : value) ===
-        comparisonValue
+        moment.isMoment(value) && moment.isMoment(comparisonValue)
+            ? value.isSame(comparisonValue)
+            : (typeof comparisonValue === 'number'
+            ? parseInt(value, 10)
+            : value) === comparisonValue,
+    '<=': (value, comparisonValue) =>
+        moment.isMoment(value) && moment.isMoment(comparisonValue)
+            ? comparisonValue.isSameOrBefore(value)
+            : (typeof comparisonValue === 'number'
+            ? parseInt(value, 10)
+            : value) <= comparisonValue,
+    '>=': (value, comparisonValue) =>
+        moment.isMoment(value) && moment.isMoment(comparisonValue)
+            ? comparisonValue.isSameOrAfter(value)
+            : (typeof comparisonValue === 'number'
+            ? parseInt(value, 10)
+            : value) >= comparisonValue
 };
 
 @Injectable({
@@ -24,45 +35,41 @@ const filterOperations = {
 })
 export class LibraryService {
     sourcesFiltered: Observable<ISource[]>;
+    activeFilters: IFilter[];
+    activeFilters$: Subject<IFilter[]> = new Subject<IFilter[]>();
 
-    filterSourcesSearchSubject: Subject<string> = new Subject<string>();
-    filterSourcesSearch: Filter = {
-        comparer: 'match',
-        comparisonField: 'sourceName',
-        filtered: combineLatest(
-            this.filterSourcesSearchSubject.pipe(startWith('')),
-            this.apiManagerService.getSources().pipe(startWith(this.apiManagerService.sources))
-        ).pipe(
-            map(source =>
-                source[0]
-                    ? this.applyFilter(this.filterSourcesSearch, source[0])
-                    : source[1].slice()
-            )
-        )
-    };
+    loadedContent$: Subject<boolean> = new Subject<boolean>();
 
-    filterSourcesFormatSubject: Subject<string> = new Subject<string>();
-    filterSourcesFormat: Filter = {
-        comparer: '===',
-        comparisonField: 'sourceFormatId',
-        filtered: combineLatest(
-            this.filterSourcesFormatSubject.pipe(startWith('')),
-            this.apiManagerService.getSources().pipe(startWith(this.apiManagerService.sources))
-        ).pipe(
-            map(source =>
-                source[0]
-                    ? this.applyFilter(this.filterSourcesFormat, source[0])
-                    : source[1].slice()
-            )
-        )
-    };
+    updateFilters(updatedFilters: IFilter[]) {
+        this.activeFilters$.next(updatedFilters);
+    }
 
-    applyFilter(filter: Filter, filterValue?: any) {
+    updateFilteredItems(newFilters: IFilter[]) {
+        return newFilters.map(filter =>
+            Object.assign(filter, {
+                filtered: filter.value
+                    ? this.applyFilter(filter, filter.value)
+                    : this.apiManagerService.sources.slice()
+            })
+        );
+    }
+
+    applyFilter(filter: IFilter, filterValue?: any) {
         return this.apiManagerService.sources.filter((source: ISource) =>
-            filterOperations[filter.comparer](
-                filterValue,
-                source[filter.comparisonField]
-            )
+            typeof filter.comparisonField === 'string'
+                ? source[filter.comparisonField] &&
+                filterOperations[filter.comparer](
+                    filterValue,
+                    source[filter.comparisonField]
+                )
+                : filter.comparisonField.some(
+                cf =>
+                    source[cf] &&
+                    filterOperations[filter.comparer](
+                        filterValue,
+                        source[cf]
+                    )
+                )
         );
     }
 
@@ -70,17 +77,35 @@ export class LibraryService {
         this.apiManagerService.getSources().subscribe();
         this.apiManagerService.getSourceFormats().subscribe();
 
-        this.filterSourcesSearchSubject.next('');
-        this.filterSourcesFormatSubject.next('');
-
-        const activeFilteredSources = [
-            this.filterSourcesSearch.filtered,
-            this.filterSourcesFormat.filtered
-        ];
-        this.sourcesFiltered = combineLatest(activeFilteredSources).pipe(
-            delay(0),
-            map(source => intersectionBy(...source, 'sourceId'))
+        this.sourcesFiltered = combineLatest(
+            this.activeFilters$.pipe(
+                startWith([
+                    {
+                        comparer: 'match',
+                        comparisonField: 'sourceName',
+                        filtered: null
+                    }
+                ])
+            ),
+            this.apiManagerService
+                .getSources()
+                .pipe(startWith(this.apiManagerService.sources))
+        ).pipe(
+            map(x => this.updateFilteredItems(x[0])),
+            tap(x => (this.activeFilters = x)),
+            map(filters =>
+                intersectionBy(
+                    ...filters.map(filter => filter.filtered),
+                    'sourceId'
+                )
+            )
         );
+
+        // const activeFilteredSources = this.activeFilters.map(x => x.filtered);
+        // this.sourcesFiltered = combineLatest(...activeFilteredSources).pipe(
+        //     delay(0),
+        //     map(source => intersectionBy(...source, 'sourceId'))
+        // );
 
         this.sourcesFiltered.subscribe();
 

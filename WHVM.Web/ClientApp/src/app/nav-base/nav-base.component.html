@@ -1,15 +1,15 @@
 <mat-sidenav-container>
     <mat-sidenav
-        #drawer
-        fixedInViewport
-        [attr.role]="isHandset ? 'dialog' : 'navigation'"
-        [mode]="isHandset ? 'over' : 'side'"
+      #drawer
+      fixedInViewport
+      [attr.role]="isHandset ? 'dialog' : 'navigation'"
+      [mode]="isHandset ? 'over' : 'side'"
     >
         <mat-toolbar style="">Menu</mat-toolbar>
         <mat-nav-list *ngFor="let siteSection of siteSections">
             <a mat-list-item href="#" routerLink="{{ siteSection.link }}">{{
-                siteSection.name
-            }}</a>
+              siteSection.name
+                }}</a>
         </mat-nav-list>
         <mat-nav-list style="bottom:0; position: absolute">
             <app-theme-picker-mobile></app-theme-picker-mobile>
@@ -50,7 +50,8 @@
                                 aria-hidden="true"
                                 style="margin-right:4px;"
                             >
-                                video_library_fill</mat-icon
+                                video_library_fill
+                            </mat-icon
                             >
                             <span>{{ siteTitle }}</span>
                         </div>
@@ -61,7 +62,7 @@
                             aria-disabled="false"
                             href="#"
                             routerLink="{{ siteSection.link }}"
-                            >{{ siteSection.name }}</a
+                        >{{ siteSection.name }}</a
                         >
                     </div>
                     <div class="flex-spacer"></div>

@@ -30,7 +30,6 @@ export class ButtonToggleGroupComponent implements OnInit {
     @Input() name: string;
     @Input() buttons: ButtonToggle[];
     @Output() valueChanges: EventEmitter<string> = new EventEmitter<string>();
-
     value = '';
 
     constructor() {

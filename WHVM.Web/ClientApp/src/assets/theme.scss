@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+
 @include mat-core();
 
 // define 3 theme color
@@ -9,15 +10,15 @@ $whvm-theme-warn: mat-palette($mat-red, A400);
 
 // create theme (use mat-dark-theme for themes with dark backgrounds)
 $whvm-theme-Light: mat-light-theme(
-    $whvm-theme-primary,
-    $whvm-theme-accent,
-    $whvm-theme-warn
+        $whvm-theme-primary,
+        $whvm-theme-accent,
+        $whvm-theme-warn
 );
 
 $whvm-theme-Dark: mat-dark-theme(
-    $whvm-theme-primary,
-    $whvm-theme-accent,
-    $whvm-theme-warn
+        $whvm-theme-primary,
+        $whvm-theme-accent,
+        $whvm-theme-warn
 );
 
 @include angular-material-theme($whvm-theme-Light);
@@ -27,5 +28,5 @@ $whvm-theme-Dark: mat-dark-theme(
 }
 
 .whvm-theme-Dark {
-  @include angular-material-theme($whvm-theme-Dark);
+    @include angular-material-theme($whvm-theme-Dark);
 }

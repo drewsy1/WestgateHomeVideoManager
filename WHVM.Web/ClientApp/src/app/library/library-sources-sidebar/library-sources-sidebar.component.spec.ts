@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ThemePickerMobileComponent } from './theme-picker-mobile.component';
+import { LibrarySourcesSidebarComponent } from './library-sources-sidebar.component';
 
-describe('ThemePickerMobileComponent', () => {
-    let component: ThemePickerMobileComponent;
-    let fixture: ComponentFixture<ThemePickerMobileComponent>;
+describe('LibrarySourcesSidebarComponent', () => {
+    let component: LibrarySourcesSidebarComponent;
+    let fixture: ComponentFixture<LibrarySourcesSidebarComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ThemePickerMobileComponent]
+            declarations: [LibrarySourcesSidebarComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ThemePickerMobileComponent);
+        fixture = TestBed.createComponent(LibrarySourcesSidebarComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

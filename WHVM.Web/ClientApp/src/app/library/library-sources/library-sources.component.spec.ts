@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FilterButtonGroupComponent } from './filter-button-group.component';
+import { LibrarySourcesComponent } from './library-sources.component';
 
-describe('FilterButtonGroupComponent', () => {
-    let component: FilterButtonGroupComponent;
-    let fixture: ComponentFixture<FilterButtonGroupComponent>;
+describe('LibrarySourcesComponent', () => {
+    let component: LibrarySourcesComponent;
+    let fixture: ComponentFixture<LibrarySourcesComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [FilterButtonGroupComponent]
+            declarations: [LibrarySourcesComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(FilterButtonGroupComponent);
+        fixture = TestBed.createComponent(LibrarySourcesComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

@@ -1,0 +1,26 @@
+<div
+    *ngIf="
+                this.libraryFilteringService.sourcesFiltered
+                    | async as sourcesFiltered;
+                else loading
+            "
+>
+    <ng-container *ngIf="sourcesFiltered.length; else noItems">
+        <section
+            fxLayout="column"
+            fxLayoutGap="1rem"
+            style="margin:1rem; padding-bottom:56px"
+        >
+            <app-source-card
+                *ngFor="let source of sourcesFiltered"
+                [source]="source"
+            ></app-source-card>
+        </section>
+    </ng-container>
+    <ng-template #noItems>No Items!</ng-template>
+</div>
+<ng-template #loading>
+    <mat-progress-spinner style="margin:2rem auto"
+                          mode="indeterminate"
+    ></mat-progress-spinner>
+</ng-template>

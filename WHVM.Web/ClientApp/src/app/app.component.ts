@@ -2,6 +2,7 @@ import { Component, HostBinding } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { ThemeService } from './services/theme.service';
+import { PageDataService } from './services/page-data.service';
 
 @Component({
     selector: 'app-root',
@@ -17,8 +18,10 @@ export class AppComponent {
     constructor(
         private breakpointObserver: BreakpointObserver,
         private overlayContainer: OverlayContainer,
-        private themeService: ThemeService
+        private themeService: ThemeService,
+        private pageDataService: PageDataService
     ) {
+        pageDataService.setSiteTitle(this.siteTitle.match(/(?:^\w)|(?:(?<=\s)\w)/g).join(''));
         themeService.themeChanged$.subscribe(theme => {
             this.componentCssClass = `${theme} mat-app-background`;
         });

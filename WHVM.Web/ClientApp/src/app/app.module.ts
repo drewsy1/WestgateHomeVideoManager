@@ -9,11 +9,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 // Angular Material
 import {
+    DateAdapter,
+    MAT_DATE_FORMATS,
+    MAT_DATE_LOCALE,
     MatChipsModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTabsModule
 } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -27,6 +31,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
 // Components
 import { AppComponent } from './app.component';
 import { NavBaseComponent } from './nav-base/nav-base.component';
@@ -36,11 +41,10 @@ import { ThemePickerMobileComponent } from './nav-base/theme-picker/theme-picker
 import { LibraryComponent } from './library/library.component';
 import { PageHeaderComponent } from './nav-base/page-header/page-header.component';
 import { SearchFieldComponent } from './components/search-field/search-field.component';
-import { LibrarySidebarComponent } from './library/library-sidebar/library-sidebar.component';
 import { ButtonToggleGroupComponent } from './components/button-toggle-group/button-toggle-group.component';
 import { SourceCardComponent } from './components/source-card/source-card.component';
 import { DateRangePickerComponent } from './components/date-range-picker/date-range-picker.component';
-import { FilterButtonGroupComponent } from './library/library-sidebar/filter-button-group/filter-button-group.component';
+import { LibrarySourcesComponent } from './library/library-sources/library-sources.component';
 // Services
 import { CookieManagerService } from './services/cookie-manager.service';
 import { IsHandsetService } from './services/is-handset.service';
@@ -48,6 +52,7 @@ import { ThemeService } from './services/theme.service';
 import { PageDataService } from './services/page-data.service';
 import { ApiManagerService } from './services/api-manager.service';
 import { LibraryService } from './library/library.service';
+import { LibrarySourcesSidebarComponent } from './library/library-sources-sidebar/library-sources-sidebar.component';
 
 
 @NgModule({
@@ -59,14 +64,17 @@ import { LibraryService } from './library/library.service';
         ThemePickerMobileComponent,
         LibraryComponent,
         PageHeaderComponent,
-        LibrarySidebarComponent,
         SearchFieldComponent,
         ButtonToggleGroupComponent,
         SourceCardComponent,
         DateRangePickerComponent,
-        FilterButtonGroupComponent
+        LibrarySourcesComponent,
+        LibrarySourcesSidebarComponent
     ],
     providers: [
+        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+        { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+        MatMomentDateModule,
         CookieService,
         CookieManagerService,
         IsHandsetService,
@@ -99,7 +107,8 @@ import { LibraryService } from './library/library.service';
         MatChipsModule,
         MatProgressSpinnerModule,
         MatProgressBarModule,
-        MatDatepickerModule
+        MatDatepickerModule,
+        MatTabsModule
     ],
     bootstrap: [AppComponent]
 })

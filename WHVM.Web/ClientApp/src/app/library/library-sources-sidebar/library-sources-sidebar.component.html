@@ -1,0 +1,68 @@
+<mat-button-toggle-group
+    name="sourceFormatFilter"
+    [formControl]="sourceFormatFilterButtons"
+    [value]="formatFilterButtonValue"
+>
+    <mat-button-toggle [value]="''" [checked]="true">All</mat-button-toggle>
+    <mat-button-toggle
+        *ngFor="let button of sourceFormatButtons"
+        [value]="button.value"
+    >{{ button.name }}</mat-button-toggle
+    >
+</mat-button-toggle-group>
+<br/>
+<mat-form-field>
+    <label>
+        <input
+            matInput
+            placeholder="Search"
+            type="text"
+            [formControl]="sourceSearchField"
+            [value]="sourceSearchFieldValue"
+        />
+    </label>
+    <button
+        mat-icon-button
+        matSuffix
+        (click)="sourceSearchField.reset()"
+        [attr.aria-label]="'Clear search'"
+    >
+        <mat-icon>{{ 'clear' }}</mat-icon>
+    </button>
+</mat-form-field>
+<br/>
+<mat-form-field>
+    <label>
+        <input
+            matInput
+            [matDatepicker]="
+                startDatePicker //noinspection InvalidExpressionResultType
+            "
+            placeholder="Start Date"
+            [formControl]="sourceDatePickerStart"
+        />
+    </label>
+    <mat-datepicker-toggle
+        matSuffix
+        [for]="startDatePicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #startDatePicker></mat-datepicker>
+</mat-form-field>
+<br/>
+<mat-form-field>
+    <label>
+        <input
+            matInput
+            [matDatepicker]="
+                endDatePicker //noinspection InvalidExpressionResultType
+            "
+            placeholder="End Date"
+            [formControl]="sourceDatePickerEnd"
+        />
+    </label>
+    <mat-datepicker-toggle
+        matSuffix
+        [for]="endDatePicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #endDatePicker></mat-datepicker>
+</mat-form-field>

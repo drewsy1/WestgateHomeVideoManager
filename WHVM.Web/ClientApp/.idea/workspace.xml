@@ -1,17 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ed1cd46-6ff7-4f9a-9458-4e872302f9e5" name="Default Changelist" comment="">
+    <list default="true" id="4ed1cd46-6ff7-4f9a-9458-4e872302f9e5" name="Default Changelist" comment="Got date-based filtering working. Also got named routing outlets for library view functioning.">
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-sources-sidebar/library-sources-sidebar.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-sources-sidebar/library-sources-sidebar.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-sources-sidebar/library-sources-sidebar.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-sources/library-sources.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-sources/library-sources.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interfaces/IFilter.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/date-picker/date-picker.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/date-picker/date-picker.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/date-range-picker/date-range-picker.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/date-range-picker/date-range-picker.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/button-toggle-group/button-toggle-group.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/button-toggle-group/button-toggle-group.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/source-card/source-card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/source-card/source-card.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/home.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/filter-button-group/filter-button-group.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/filter-button-group/filter-button-group.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-sources-sidebar/library-sources-sidebar.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/filter-button-group/filter-button-group.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/filter-button-group/filter-button-group.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-sources/library-sources.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library.guard.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.guard.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.service.spec.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/library/library.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/nav-base/nav-base.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/nav-base/nav-base.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/services/api-manager.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/api-manager.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/page-data.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/page-data.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/ISource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/ISource.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,15 +89,15 @@
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp\src\interfaces" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp\src\app\services" />
       <recent name="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp" />
       <recent name="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp\src\app\library" />
       <recent name="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp\src\app\nav-base" />
       <recent name="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp\src\assets\img\icons" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp\src\interfaces" />
     </key>
   </component>
   <component name="RestClientSettings">
@@ -194,7 +218,7 @@
       <workItem from="1567879694756" duration="11435000" />
       <workItem from="1568135623622" duration="19022000" />
       <workItem from="1568683074786" duration="22085000" />
-      <workItem from="1568741812301" duration="2525000" />
+      <workItem from="1568741812301" duration="26942000" />
     </task>
     <task id="LOCAL-00001" summary="Created CookieManager service. Theme now stored as cookie. Created Library component.">
       <created>1566603132995</created>
@@ -245,7 +269,21 @@
       <option name="project" value="LOCAL" />
       <updated>1568705169055</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Fixed library sidebar formatting and theme loading.">
+      <created>1568744406787</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1568744406787</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Got date-based filtering working. Also got named routing outlets for library view functioning.">
+      <created>1568933278040</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1568933278040</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,7 +318,9 @@
     <MESSAGE value="Got chips on source cards." />
     <MESSAGE value="Reworked filtering to use more async/RxJS stuff." />
     <MESSAGE value="Cleaned up initial data loading and some components." />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up initial data loading and some components." />
+    <MESSAGE value="Fixed library sidebar formatting and theme loading." />
+    <MESSAGE value="Got date-based filtering working. Also got named routing outlets for library view functioning." />
+    <option name="LAST_COMMIT_MESSAGE" value="Got date-based filtering working. Also got named routing outlets for library view functioning." />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

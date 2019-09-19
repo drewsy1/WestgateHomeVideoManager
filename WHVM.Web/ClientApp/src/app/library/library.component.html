@@ -1,38 +1,14 @@
 <mat-drawer-container>
     <mat-drawer mode="side" opened>
-        <app-library-sidebar *ngIf="
-                this.libraryFilteringService.sourcesFiltered
-                    | async;
-                else loading
-            "></app-library-sidebar>
+        <mat-tab-group style="margin-bottom:20px" [selectedIndex]="tabCurrent">
+            <mat-tab *ngFor="let tab of tabs" [label]="tab"></mat-tab>
+        </mat-tab-group>
+        <router-outlet name="sidebar"></router-outlet>
+        <app-library-sources-sidebar
+            (filterChanges)="this.libraryFilteringService.updateFilters($event)"></app-library-sources-sidebar>
     </mat-drawer>
     <mat-drawer position="end" mode="side">End</mat-drawer>
     <mat-drawer-content>
-        <div
-            *ngIf="
-                this.libraryFilteringService.sourcesFiltered
-                    | async as sourcesFiltered;
-                else loading
-            "
-        >
-            <ng-container *ngIf="sourcesFiltered.length; else loading">
-                <section
-                    fxLayout="column"
-                    fxLayoutGap="1rem"
-                    style="margin:1rem; padding-bottom:56px"
-                >
-                    <app-source-card
-                        *ngFor="let source of sourcesFiltered"
-                        [source]="source"
-                    ></app-source-card>
-                </section>
-            </ng-container>
-            <ng-template #noItems>No Items!</ng-template>
-        </div>
-        <ng-template #loading>
-            <mat-progress-spinner style="margin:2rem auto"
-                                  mode="indeterminate"
-            ></mat-progress-spinner>
-        </ng-template>
+        <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>
