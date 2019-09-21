@@ -6,6 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 import { IFilter } from '../../../interfaces/IFilter';
 
 import moment from 'moment';
+import { LibrarySourcesService } from '../library-sources.service';
 
 @Component({
     selector: 'app-library-sources-sidebar',
@@ -68,7 +69,7 @@ export class LibrarySourcesSidebarComponent implements OnInit {
 
     sourceFormatButtons;
 
-    constructor(private apiManagerService: ApiManagerService) {
+    constructor(private apiManagerService: ApiManagerService, private librarySourcesService: LibrarySourcesService) {
         this.apiManagerService.getSourceFormats().subscribe(
             () =>
                 (this.sourceFormatButtons = this.apiManagerService.sourceFormats.map(
@@ -79,7 +80,7 @@ export class LibrarySourcesSidebarComponent implements OnInit {
                 ))
         );
 
-        this.filterChangesInputs.subscribe(x => this.filterChanges.emit(x));
+        this.filterChangesInputs.subscribe(x => this.librarySourcesService.activeSourceFilters$.next(x));
     }
 
     ngOnInit() {

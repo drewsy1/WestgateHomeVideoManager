@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LibraryService } from '../library.service';
 import { first } from 'rxjs/operators';
 import { ApiManagerService } from '../../services/api-manager.service';
+import { LibrarySourcesService } from '../library-sources.service';
 
 @Component({
     selector: 'app-library-sources',
@@ -9,19 +9,19 @@ import { ApiManagerService } from '../../services/api-manager.service';
     styleUrls: ['./library-sources.component.scss']
 })
 export class LibrarySourcesComponent implements OnInit {
-
+    loadedContent$ = this.librarySourcesService.loadedContent$;
 
     constructor(
-        private libraryFilteringService: LibraryService,
+        private librarySourcesService: LibrarySourcesService,
         private apiManagerService: ApiManagerService
     ) {
         if (!this.apiManagerService.sources) {
-            this.libraryFilteringService.getLibraryData();
+            this.librarySourcesService.getLibrarySourcesData();
         }
 
         this.apiManagerService.getSourcesSubject
             .pipe(first())
-            .subscribe(() => this.libraryFilteringService.loadedContent$.next());
+            .subscribe(() => this.librarySourcesService.loadedContent$.next());
     }
 
     ngOnInit() {

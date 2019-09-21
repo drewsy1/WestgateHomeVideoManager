@@ -6,10 +6,16 @@
       [mode]="isHandset ? 'over' : 'side'"
     >
         <mat-toolbar style="">Menu</mat-toolbar>
-        <mat-nav-list *ngFor="let siteSection of siteSections">
-            <a mat-list-item href="#" routerLink="{{ siteSection.link }}">{{
-              siteSection.name
-                }}</a>
+        <mat-nav-list>
+            <a
+                mat-list-item
+                href="#"
+                [routerLink]="[
+                    { outlets: { primary: ['library'], sidebar: ['library'] } }
+                ]"
+            >
+                Library
+            </a>
         </mat-nav-list>
         <mat-nav-list style="bottom:0; position: absolute">
             <app-theme-picker-mobile></app-theme-picker-mobile>
@@ -51,8 +57,7 @@
                                 style="margin-right:4px;"
                             >
                                 video_library_fill
-                            </mat-icon
-                            >
+                            </mat-icon>
                             <span>{{ siteTitle }}</span>
                         </div>
                     </a>

@@ -1,14 +1,12 @@
 <mat-drawer-container>
     <mat-drawer mode="side" opened>
-        <mat-tab-group style="margin-bottom:20px" [selectedIndex]="tabCurrent">
+        <mat-tab-group style="margin-bottom:20px; height:50px" [selectedIndex]="tabCurrent">
             <mat-tab *ngFor="let tab of tabs" [label]="tab"></mat-tab>
         </mat-tab-group>
         <router-outlet name="sidebar"></router-outlet>
-        <app-library-sources-sidebar
-            (filterChanges)="this.libraryFilteringService.updateFilters($event)"></app-library-sources-sidebar>
     </mat-drawer>
     <mat-drawer position="end" mode="side">End</mat-drawer>
     <mat-drawer-content>
-        <router-outlet></router-outlet>
+        <router-outlet name="primary"></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>

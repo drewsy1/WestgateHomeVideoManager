@@ -2,40 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ed1cd46-6ff7-4f9a-9458-4e872302f9e5" name="Default Changelist" comment="Got date-based filtering working. Also got named routing outlets for library view functioning.">
-      <change afterPath="$PROJECT_DIR$/src/app/library/library-sources-sidebar/library-sources-sidebar.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/library/library-sources-sidebar/library-sources-sidebar.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/library/library-sources-sidebar/library-sources-sidebar.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/library/library-sources/library-sources.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/library/library-sources/library-sources.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interfaces/IFilter.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/clip-card/clip-card.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/clip-card/clip-card.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/clip-card/clip-card.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/components/clip-card/clip-card.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-clips-sidebar/library-clips-sidebar.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-clips-sidebar/library-clips-sidebar.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-clips-sidebar/library-clips-sidebar.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-clips-sidebar/library-clips-sidebar.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-clips.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-clips.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-clips/library-clips.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-clips/library-clips.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-clips/library-clips.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-clips/library-clips.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-sources.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/library/library-sources.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interfaces/IClip.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/button-toggle-group/button-toggle-group.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/button-toggle-group/button-toggle-group.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/components/source-card/source-card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/source-card/source-card.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/home.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/filter-button-group/filter-button-group.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/filter-button-group/filter-button-group.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-sources-sidebar/library-sources-sidebar.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/filter-button-group/filter-button-group.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/filter-button-group/filter-button-group.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-sources/library-sources.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library-sidebar/library-sidebar.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/source-card/source-card.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/source-card/source-card.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library-sources-sidebar/library-sources-sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-sources-sidebar/library-sources-sidebar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library-sources-sidebar/library-sources-sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-sources-sidebar/library-sources-sidebar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library-sources/library-sources.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-sources/library-sources.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/library/library-sources/library-sources.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library-sources/library-sources.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/library/library.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.component.spec.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/library/library.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library.guard.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.guard.spec.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/library/library.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.guard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/library/library.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.service.spec.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/library/library.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/library/library.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/nav-base/nav-base.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/nav-base/nav-base.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/nav-base/nav-base.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/nav-base/nav-base.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/services/api-manager.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/api-manager.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/page-data.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/page-data.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/ISource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/ISource.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/Source.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/SourceFormat.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/IFilter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/IFilter.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -84,8 +87,8 @@
     <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/node_modules/protractor" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.NodeInterpreter" value="project" />
-    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\dreww\src\Git\WestgateHomeVideoManager\WHVM.Web\ClientApp\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.EditorConfig" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
@@ -173,8 +176,8 @@
       <item itemvalue="npm.serve" />
       <item itemvalue="npm.Angular CLI Server" />
       <item itemvalue="Protractor.E2E Tests (ClientApp)" />
-      <item itemvalue="Shell Script.Run NET Server (Windows)" />
       <item itemvalue="Shell Script.Run NET Server (macOS)" />
+      <item itemvalue="Shell Script.Run NET Server (Windows)" />
     </list>
     <recent_temporary>
       <list>
@@ -219,6 +222,7 @@
       <workItem from="1568135623622" duration="19022000" />
       <workItem from="1568683074786" duration="22085000" />
       <workItem from="1568741812301" duration="26942000" />
+      <workItem from="1569026679069" duration="16602000" />
     </task>
     <task id="LOCAL-00001" summary="Created CookieManager service. Theme now stored as cookie. Created Library component.">
       <created>1566603132995</created>
@@ -330,6 +334,12 @@
           <url>file://$PROJECT_DIR$/src/app/components/source-card/source-card.component.ts</url>
           <line>12</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/app/library/library-sources/library-sources.component.ts</url>
+          <line>18</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

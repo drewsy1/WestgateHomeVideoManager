@@ -1,0 +1,9 @@
+<mat-card>
+    <mat-card-title>{{ clip.clipName }}</mat-card-title>
+    <mat-card-subtitle>
+        {{clip.clipTimeStart?.format('MM/DD/YYYY hh:mm:ss a')}}
+        {{clip.clipTimeStart && clip.clipTimeEnd ? ' - ' : ''}}
+        {{clip.clipTimeEnd?.format('MM/DD/YYYY hh:mm:ss a')}}
+    </mat-card-subtitle>
+    <mat-card-content></mat-card-content>
+</mat-card>

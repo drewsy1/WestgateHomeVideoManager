@@ -53,6 +53,9 @@ import { PageDataService } from './services/page-data.service';
 import { ApiManagerService } from './services/api-manager.service';
 import { LibraryService } from './library/library.service';
 import { LibrarySourcesSidebarComponent } from './library/library-sources-sidebar/library-sources-sidebar.component';
+import { LibraryClipsComponent } from './library/library-clips/library-clips.component';
+import { ClipCardComponent } from './components/clip-card/clip-card.component';
+import { LibraryClipsSidebarComponent } from './library/library-clips-sidebar/library-clips-sidebar.component';
 
 
 @NgModule({
@@ -69,7 +72,10 @@ import { LibrarySourcesSidebarComponent } from './library/library-sources-sideba
         SourceCardComponent,
         DateRangePickerComponent,
         LibrarySourcesComponent,
-        LibrarySourcesSidebarComponent
+        LibrarySourcesSidebarComponent,
+        LibraryClipsComponent,
+        ClipCardComponent,
+        LibraryClipsSidebarComponent
     ],
     providers: [
         { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

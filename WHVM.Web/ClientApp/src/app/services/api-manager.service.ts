@@ -5,6 +5,7 @@ import { ISource } from '../../interfaces/ISource';
 import { ISourceFormat } from '../../interfaces/ISourceFormat';
 import { map, tap } from 'rxjs/operators';
 import moment from 'moment';
+import { IClip } from '../../interfaces/IClip';
 
 @Injectable({
     providedIn: 'root'
@@ -14,9 +15,11 @@ export class ApiManagerService {
 
     sources: ISource[] = [];
     sourceFormats: ISourceFormat[] = [];
+    clips: IClip[] = [];
 
     getSourcesSubject = new Subject<ISource[]>();
     getSourceFormatsSubject = new Subject<ISourceFormat[]>();
+    getClipsSubject = new Subject<IClip[]>();
 
     constructor(private http: HttpClient) {
     }
@@ -33,7 +36,11 @@ export class ApiManagerService {
                         'sourceDateImported'
                     ].forEach(
                         dateField =>
-                            (source[dateField] = moment(source[dateField]).isValid() ? moment(source[dateField]) : null)
+                            (source[dateField] = moment(
+                                source[dateField]
+                            ).isValid()
+                                ? moment(source[dateField])
+                                : null)
                     );
 
                     return source;
@@ -51,6 +58,44 @@ export class ApiManagerService {
             tap(newSourceFormats =>
                 this.getSourceFormatsSubject.next(newSourceFormats)
             )
+        );
+    }
+
+    getClips(): Observable<IClip[]> {
+        const clipsURL = `${this.apiURL}clips/`;
+        return this.http.get<IClip[]>(clipsURL).pipe(
+            map(clips =>
+                clips.map(clip => {
+                    [
+                        'clipTimeStart',
+                        'clipTimeEnd'
+                    ].forEach(
+                        dateField =>
+                            (clip[dateField] = moment(
+                                clip[dateField]
+                            ).isValid()
+                                ? moment(clip[dateField])
+                                : null)
+                    );
+
+                    [
+                        'clipVidTimeStart',
+                        'clipVidTimeEnd',
+                        'clipVidTimeLength'
+                    ].forEach(
+                        dateField =>
+                            (clip[dateField] = moment.duration(
+                                clip[dateField]
+                            ).isValid()
+                                ? moment.duration(clip[dateField])
+                                : null)
+                    );
+
+                    return clip;
+                })
+            ),
+            tap(newClips => (this.clips = newClips)),
+            tap(newClips => this.getClipsSubject.next(newClips))
         );
     }
 }

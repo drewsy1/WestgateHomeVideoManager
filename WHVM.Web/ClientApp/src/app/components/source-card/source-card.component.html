@@ -1,8 +1,15 @@
 <mat-card>
-    <mat-card-title>{{ source.sourceName }}</mat-card-title>
-    <mat-card-subtitle *ngIf="source.sourceFormat">{{
-      source.sourceFormat.sourceFormatName
-        }}</mat-card-subtitle>
+    <mat-card-header>
+        <div mat-card-avatar *ngIf="source.sourceFormat" class="example-header-image">{{
+          source.sourceFormat.sourceFormatName
+            }}</div>
+        <mat-card-title>{{ source.sourceName }}</mat-card-title>
+        <mat-card-subtitle>
+            {{source.sourceDateStart?.format('MMMM Do YYYY')}}
+            {{source.sourceDateStart && source.sourceDateEnd ? ' - ' : ''}}
+            {{source.sourceDateEnd?.format('MMMM Do YYYY')}}
+        </mat-card-subtitle>
+    </mat-card-header>
     <mat-card-content>
         <div gdGap="1rem" gdColumns="auto 1fr">
             <h4 style="margin:4px 0">People:</h4>
@@ -23,23 +30,19 @@
                     {{ collection.collectionName }}
                 </mat-chip>
             </mat-chip-list>
+            <h4 *ngIf="source.sourceDateCreated" style="margin:4px 0">
+                Media Creation Date:
+            </h4>
+            <span *ngIf="source.sourceDateCreated" style="margin:4px 0">{{
+              source.sourceDateCreated.format('MMMM Do YYYY, h:mm:ss a')
+                }}</span>
 
-            <h4 *ngIf="source.sourceDateStart" style="margin:4px 0">Content Start Date:</h4>
-            <span *ngIf="source.sourceDateStart"
-                  style="margin:4px 0">{{source.sourceDateStart.format("MMMM Do YYYY, h:mm:ss a")}}</span>
-
-            <h4 *ngIf="source.sourceDateEnd" style="margin:4px 0">Content End Date:</h4>
-            <span *ngIf="source.sourceDateEnd"
-                  style="margin:4px 0">{{source.sourceDateEnd.format("MMMM Do YYYY, h:mm:ss a")}}</span>
-
-            <h4 *ngIf="source.sourceDateCreated" style="margin:4px 0">Media Creation Date:</h4>
-            <span *ngIf="source.sourceDateCreated"
-                  style="margin:4px 0">{{source.sourceDateCreated.format("MMMM Do YYYY, h:mm:ss a")}}</span>
-
-            <h4 *ngIf="source.sourceDateImported" style="margin:4px 0">Import Date:</h4>
-            <span *ngIf="source.sourceDateImported"
-                  style="margin:4px 0">{{source.sourceDateImported.format("MMMM Do YYYY, h:mm:ss a")}}</span>
+            <h4 *ngIf="source.sourceDateImported" style="margin:4px 0">
+                Import Date:
+            </h4>
+            <span *ngIf="source.sourceDateImported" style="margin:4px 0">{{
+              source.sourceDateImported.format('MMMM Do YYYY, h:mm:ss a')
+                }}</span>
         </div>
-
     </mat-card-content>
 </mat-card>

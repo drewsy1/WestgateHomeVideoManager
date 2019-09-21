@@ -21,7 +21,7 @@ export class AppComponent {
         private themeService: ThemeService,
         private pageDataService: PageDataService
     ) {
-        pageDataService.setSiteTitle(this.siteTitle.match(/(?:^\w)|(?:(?<=\s)\w)/g).join(''));
+        pageDataService.setSiteTitle(this.siteTitle.match(/(\b(\w))/g).join(''));
         themeService.themeChanged$.subscribe(theme => {
             this.componentCssClass = `${theme} mat-app-background`;
         });
