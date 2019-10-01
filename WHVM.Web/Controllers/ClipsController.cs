@@ -22,14 +22,20 @@ namespace WHVM.Web.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Clip>>> GetClips()
         {
-            return await _context.Clips.ToListAsync();
+            return await _context.Clips
+                .Include(c => c.ClipPersons).ThenInclude(cp => cp.Person)
+                .Include(c => c.ClipCollections).ThenInclude(cc => cc.Collection)
+                .ToListAsync();
         }
 
         // GET: api/Clips/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Clip>> GetClip(int id)
         {
-            var clip = await _context.Clips.FindAsync(id);
+            var clip = await _context.Clips
+                .Include(c => c.Persons)
+                .Include(c => c.Collections)
+                .FirstAsync(c => c.ClipId == id);
 
             if (clip == null)
             {

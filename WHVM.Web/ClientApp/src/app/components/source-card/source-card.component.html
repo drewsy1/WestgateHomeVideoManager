@@ -12,7 +12,7 @@
     </mat-card-header>
     <mat-card-content>
         <div gdGap="1rem" gdColumns="auto 1fr">
-            <h4 style="margin:4px 0">People:</h4>
+            <h4 style="margin:7px 0">People:</h4>
             <mat-chip-list [selectable]="true" [multiple]="true">
                 <mat-chip
                     *ngFor="let person of source.sourcePersons"
@@ -21,7 +21,7 @@
                     {{ person.personName }}
                 </mat-chip>
             </mat-chip-list>
-            <h4 style="margin:4px 0">Collections:</h4>
+            <h4 style="margin:7px 0">Collections:</h4>
             <mat-chip-list [selectable]="true" [multiple]="true">
                 <mat-chip
                     *ngFor="let collection of source.sourceCollections"
@@ -30,17 +30,17 @@
                     {{ collection.collectionName }}
                 </mat-chip>
             </mat-chip-list>
-            <h4 *ngIf="source.sourceDateCreated" style="margin:4px 0">
+            <h4 *ngIf="source.sourceDateCreated" style="margin:7px 0">
                 Media Creation Date:
             </h4>
-            <span *ngIf="source.sourceDateCreated" style="margin:4px 0">{{
+            <span *ngIf="source.sourceDateCreated" style="margin:7px 0">{{
               source.sourceDateCreated.format('MMMM Do YYYY, h:mm:ss a')
                 }}</span>
 
-            <h4 *ngIf="source.sourceDateImported" style="margin:4px 0">
+            <h4 *ngIf="source.sourceDateImported" style="margin:7px 0">
                 Import Date:
             </h4>
-            <span *ngIf="source.sourceDateImported" style="margin:4px 0">{{
+            <span *ngIf="source.sourceDateImported" style="margin:7px 0">{{
               source.sourceDateImported.format('MMMM Do YYYY, h:mm:ss a')
                 }}</span>
         </div>
