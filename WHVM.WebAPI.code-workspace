@@ -1,12 +1,15 @@
 {
 	"folders": [
-		{
-			"path": "WHVM.WebAPI"
-		},
-		{
-			"path": "WHVM.WebAPI.Tests"
-		}
-	],
+        {
+            "path": "WHVM.Web"
+        },
+        {
+            "path": "WHVM.API"
+        },
+        {
+            "path": "WHVM.Database"
+        }
+    ],
 	"settings": {
 		"workbench.colorCustomizations": {
 			"titleBar.activeBackground": "#6c71c4"
