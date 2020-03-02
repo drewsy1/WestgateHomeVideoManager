@@ -1,0 +1,40 @@
+﻿@page "/clips"
+@inject WHVM.Web.Blazor.Services.ApiService apiService
+@using WHVM.Database.Models
+
+<h3>Clips</h3>
+@if (clips == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var clip in clips)
+        {
+            <tr>
+                <td>@clip.ClipId</td>
+                <td>@clip.ClipName</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    List<Clip>
+    clips;
+
+    protected override async Task OnInitializedAsync()
+    {
+    clips = await apiService.GetClipsAsync();
+    }
+    }
+

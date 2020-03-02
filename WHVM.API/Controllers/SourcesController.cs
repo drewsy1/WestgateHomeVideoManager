@@ -22,12 +22,11 @@ namespace WHVM.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Source>>> GetSources()
         {
-            List<Source> sourcesList = await _context.Sources
+            return await _context.Sources
                 .Include(source => source.Clips).ThenInclude(c => c.ClipPersons).ThenInclude(cp => cp.Person)
+                .Include(source => source.Clips).ThenInclude(c => c.ClipCollections).ThenInclude(cc => cc.Collection)
                 .Include(source => source.SourceFormat)
                 .ToListAsync();
-
-            return sourcesList;
         }
 
         // GET: api/Sources/5

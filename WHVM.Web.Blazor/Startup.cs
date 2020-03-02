@@ -1,22 +1,17 @@
 using System;
-using System.IO;
-using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using WHVM.Database.Models;
-using Newtonsoft.Json;
+using WHVM.Web.Blazor.Data;
 
-namespace WHVM.API
+namespace WHVM.Web.Blazor
 {
     public class Startup
     {
@@ -28,27 +23,17 @@ namespace WHVM.API
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            string homeVideoDBLocation = Path.Join(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-    "HomeVideoDB.db");
-            services.AddDbContext<HomeVideoDBContext>(options =>
+            services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
+            services.AddRazorPages();
+            services.AddServerSideBlazor();
+            services.AddHttpClient<Services.ApiService>(client =>
             {
-                //options.UseLazyLoadingProxies(false);
-#if DEBUG
-                options.UseSqlite("Data Source=" + homeVideoDBLocation);
-#else
-                options.UseSqlServer(connectionString);
-#endif
+                client.BaseAddress = new Uri("http://localhost:5001");
             });
-
-            services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0).AddNewtonsoftJson(
-                options =>
-                {
-                    options.SerializerSettings.ReferenceLoopHandling =
-                        Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                });
-            services.AddControllers();
+            services.AddSingleton<WeatherForecastService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,16 +43,24 @@ namespace WHVM.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseMvcWithDefaultRoute();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/_Host");
             });
         }
     }
