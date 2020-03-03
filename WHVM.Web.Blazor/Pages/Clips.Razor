@@ -2,14 +2,22 @@
 @inject WHVM.Web.Blazor.Services.ApiService apiService
 @using WHVM.Database.Models
 
-<h3>Clips</h3>
 @if (clips == null)
 {
-    <p><em>Loading...</em></p>
+    <p>
+        <em>Loading...</em>
+    </p>
 }
 else
 {
-    <table class="table">
+    <RadzenGrid AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="15" AllowSorting="true" Data="@clips" TItem="Clip">
+        <Columns>
+            <RadzenGridColumn TItem="Clip" Property="ClipId" Title="ID" Width="56px" />
+            <RadzenGridColumn TItem="Clip" Property="ClipNumber" Title="#" Width="56px" />
+            <RadzenGridColumn TItem="Clip" Property="ClipName" Title="Name" />
+        </Columns>
+    </RadzenGrid>
+    @*<table class="table">
         <thead>
         <tr>
             <th>ID</th>
@@ -25,16 +33,17 @@ else
             </tr>
         }
         </tbody>
-    </table>
+    </table>*@
 }
 
 @code {
-    List<Clip>
+
+    IEnumerable<Clip>
     clips;
 
     protected override async Task OnInitializedAsync()
     {
-    clips = await apiService.GetClipsAsync();
-    }
+        clips = await apiService.GetClipsAsync();
     }
 
+}

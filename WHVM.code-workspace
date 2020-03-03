@@ -1,18 +1,18 @@
 {
 	"folders": [
         {
-            "path": "WHVM.Web"
-        },
-        {
             "path": "WHVM.API"
         },
         {
             "path": "WHVM.Database"
+        },
+        {
+            "path": "WHVM.Web.Blazor"
         }
     ],
-	"settings": {
+	/* "settings": {
 		"workbench.colorCustomizations": {
 			"titleBar.activeBackground": "#6c71c4"
 		}
-	}
+	} */
 }

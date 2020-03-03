@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WHVM.Web.Blazor.Data;
 
 namespace WHVM.Web.Blazor
 {
@@ -33,7 +32,6 @@ namespace WHVM.Web.Blazor
             {
                 client.BaseAddress = new Uri("http://localhost:5001");
             });
-            services.AddSingleton<WeatherForecastService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
